@@ -10,6 +10,8 @@ import UIKit
 
 class FeedViewController: UITableViewController {
     
+    var reviews: [Review] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
