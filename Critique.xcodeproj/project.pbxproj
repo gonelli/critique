@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,12 @@
 		1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976822C197DC001A1B7A /* Main.storyboard */; };
 		1ACF976C22C197DD001A1B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976B22C197DD001A1B7A /* Assets.xcassets */; };
 		1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */; };
+		55672C1922CBDA09004A70A9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1822CBDA09004A70A9 /* FeedViewController.swift */; };
+		55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1A22CBDF56004A70A9 /* SearchViewController.swift */; };
+		55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1C22CBDF65004A70A9 /* AccountViewController.swift */; };
+		55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */; };
+		55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2022CBDF92004A70A9 /* SettingsViewController.swift */; };
+		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +30,12 @@
 		1ACF976B22C197DD001A1B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ACF976E22C197DD001A1B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ACF977022C197DD001A1B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55672C1822CBDA09004A70A9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		55672C1A22CBDF56004A70A9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		55672C1C22CBDF65004A70A9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		55672C2022CBDF92004A70A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -63,7 +75,13 @@
 			children = (
 				1ACF976422C197DC001A1B7A /* AppDelegate.swift */,
 				1ACF976622C197DC001A1B7A /* ViewController.swift */,
+				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
 				1ACF976822C197DC001A1B7A /* Main.storyboard */,
+				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
+				55672C1C22CBDF65004A70A9 /* AccountViewController.swift */,
+				55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */,
+				55672C2022CBDF92004A70A9 /* SettingsViewController.swift */,
+				55672C1822CBDA09004A70A9 /* FeedViewController.swift */,
 				1ACF976B22C197DD001A1B7A /* Assets.xcassets */,
 				1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */,
 				1ACF977022C197DD001A1B7A /* Info.plist */,
@@ -77,7 +95,6 @@
 				6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */,
 				15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -204,7 +221,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */,
 				1ACF976722C197DC001A1B7A /* ViewController.swift in Sources */,
+				55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */,
+				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
+				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
+				55672C1922CBDA09004A70A9 /* FeedViewController.swift in Sources */,
+				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
 				1ACF976522C197DC001A1B7A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
