@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FeedViewController: UITableViewController {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+        
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +22,31 @@ class FeedViewController: UITableViewController {
             target: self,
             action: Selector(("rightButtonAction:"))
         )
-        
         self.navigationItem.rightBarButtonItem = rightButtonItem
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 240
+
+
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath as IndexPath)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath.row == 4 ? nil : indexPath
     }
     
     
