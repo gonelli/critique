@@ -22,17 +22,11 @@
                                 <rect key="frame" x="0.0" y="500" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="gVt-aB-NUa" id="11n-Qi-oC5"/>
-                                </connections>
                             </searchBar>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="2wd-IM-HfM">
                                 <rect key="frame" x="0.0" y="240" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="gVt-aB-NUa" id="S29-k3-inE"/>
-                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -47,7 +41,6 @@
                 <searchDisplayController id="abx-gg-Hxa">
                     <connections>
                         <outlet property="delegate" destination="gVt-aB-NUa" id="9tc-9I-UbQ"/>
-                        <outlet property="searchBar" destination="2wd-IM-HfM" id="Lva-sr-pub"/>
                         <outlet property="searchContentsController" destination="gVt-aB-NUa" id="1GM-Ut-gly"/>
                         <outlet property="searchResultsDataSource" destination="gVt-aB-NUa" id="kxI-of-GWL"/>
                         <outlet property="searchResultsDelegate" destination="gVt-aB-NUa" id="Uac-F2-Ahp"/>
@@ -95,7 +88,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDR-iS-bvH">
                                             <rect key="frame" x="136" y="48" width="258" height="89"/>
-                                            <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, mauris ac feugiat facilisis, ipsum odio condimentum nisi, quis sodales diam odio quis leo. Donec sed augue justo. Duis aliquet et odio id tincidunt. In efficitur gravida faucibus. Nullam tempor erat a sollicitudin gravida. Proin dignissim, arcu non rutrum convallis, tellus turpis pellentesque elit, at blandit sapien libero a dolor. Aenean iaculis elit a porttitor blandit. Cras et convallis lacus. Nunc volutpat lorem at dolor ullamcorper vestibulum. Ut dignissim diam neque, eu tincidunt ex commodo in. Suspendisse et dignissim tellus. Nulla luctus vehicula nisi ac sollicitudin.</mutableString>
+                                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, mauris ac feugiat facilisis, ipsum odio condimentum nisi, quis sodales diam odio quis leo. Donec sed augue justo. Duis aliquet et odio id tincidunt. In efficitur gravida faucibus. Nullam tempor erat a sollicitudin gravida. Proin dignissim, arcu non rutrum convallis, tellus turpis pellentesque elit, at blandit sapien libero a dolor. Aenean iaculis elit a porttitor blandit. Cras et convallis lacus. Nunc volutpat lorem at dolor ullamcorper vestibulum. Ut dignissim diam neque, eu tincidunt ex commodo in. Suspendisse et dignissim tellus. Nulla luctus vehicula nisi ac sollicitudin.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -150,7 +143,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGQ-Vs-31b">
                                 <rect key="frame" x="136" y="122" width="258" height="354"/>
-                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, mauris ac feugiat facilisis, ipsum odio condimentum nisi, quis sodales diam odio quis leo. Donec sed augue justo. Duis aliquet et odio id tincidunt. In efficitur gravida faucibus. Nullam tempor erat a sollicitudin gravida. Proin dignissim, arcu non rutrum convallis, tellus turpis pellentesque elit, at blandit sapien libero a dolor. Aenean iaculis elit a porttitor blandit. Cras et convallis lacus. Nunc volutpat lorem at dolor ullamcorper vestibulum. Ut dignissim diam neque, eu tincidunt ex commodo in. Suspendisse et dignissim tellus. Nulla luctus vehicula nisi ac sollicitudin.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, mauris ac feugiat facilisis, ipsum odio condimentum nisi, quis sodales diam odio quis leo. Donec sed augue justo. Duis aliquet et odio id tincidunt. In efficitur gravida faucibus. Nullam tempor erat a sollicitudin gravida. Proin dignissim, arcu non rutrum convallis, tellus turpis pellentesque elit, at blandit sapien libero a dolor. Aenean iaculis elit a porttitor blandit. Cras et convallis lacus. Nunc volutpat lorem at dolor ullamcorper vestibulum. Ut dignissim diam neque, eu tincidunt ex commodo in. Suspendisse et dignissim tellus. Nulla luctus vehicula nisi ac sollicitudin.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -178,6 +171,101 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jrg-QU-wYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5023.188405797102" y="2476.3392857142858"/>
+        </scene>
+        <!--Movie Info View Controller-->
+        <scene sceneID="A6y-rB-uZn">
+            <objects>
+                <viewController id="9ia-IC-LqH" customClass="MovieInfoViewController" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Gy-Hj-pBh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrL-ES-zSE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Movie Title" id="y1S-IE-nsS">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="rewind" id="5ru-OP-FOS">
+                                            <connections>
+                                                <action selector="backPressed:" destination="9ia-IC-LqH" id="Nec-GX-taa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="90z-zl-gAe">
+                                            <connections>
+                                                <segue destination="bMU-PJ-DhP" kind="show" identifier="composeSegue" id="yq5-WV-WdM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Gqb-rG-syH"/>
+                    </view>
+                    <connections>
+                        <outlet property="navItem" destination="y1S-IE-nsS" id="DEj-th-beK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6ck-EI-jRU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4083" y="2474"/>
+        </scene>
+        <!--Compose Review View Controller-->
+        <scene sceneID="MdN-gB-orj">
+            <objects>
+                <viewController id="bMU-PJ-DhP" customClass="ComposeReviewViewController" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1mZ-VV-JDo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="raV-JC-AUq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Review: Movie Title" id="zZd-Tk-K3N">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="mi2-FY-NdF">
+                                            <connections>
+                                                <action selector="cancelPressed:" destination="bMU-PJ-DhP" id="Nzo-qh-RB7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Post" id="qWH-rg-KA6">
+                                            <connections>
+                                                <action selector="postPressed:" destination="bMU-PJ-DhP" id="HYt-U6-JEB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Your Score" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OdZ-V9-ZIt">
+                                <rect key="frame" x="0.0" y="111" width="414" height="39"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="29"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text=" Your Review" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hQt-bH-eES">
+                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OdZ-V9-ZIt" firstAttribute="leading" secondItem="BFr-Km-Y4i" secondAttribute="leading" id="NKo-fg-4bW"/>
+                            <constraint firstItem="BFr-Km-Y4i" firstAttribute="trailing" secondItem="OdZ-V9-ZIt" secondAttribute="trailing" id="dam-RC-on4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BFr-Km-Y4i"/>
+                    </view>
+                    <connections>
+                        <outlet property="navItem" destination="zZd-Tk-K3N" id="YnZ-HH-Q6e"/>
+                        <outlet property="reviewField" destination="hQt-bH-eES" id="QQe-rx-2Ho"/>
+                        <outlet property="scoreField" destination="OdZ-V9-ZIt" id="YhK-fn-0xI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tNc-ai-yOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4084.057971014493" y="3209.5982142857142"/>
         </scene>
         <!--Messages View Controller-->
         <scene sceneID="Ojk-Oe-Uav">
