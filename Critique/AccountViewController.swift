@@ -22,15 +22,24 @@ class AccountViewController: UIViewController {
     }
     
     func getMovieDict(imdbId: String, apiKey: String) {
-        if let url = URL(string: "http://www.omdbapi.com/?i=" + imdbId + "&apikey=" + apiKey) {
+        if let url = URL(string: "http://www.omdbapi.com/?s=" + imdbId + "&apikey=" + apiKey) {
             
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     if String(data: data, encoding: .utf8) != nil {
                         do {
-                            let movieDict : NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
+                            let movieNSDict : NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
                             DispatchQueue.main.async {
-                                self.accountTextView.text = movieDict["Plot"] as? String
+                                if let movieDict = movieNSDict as? [String: Any] {
+                                    let search: Array<Dictionary<String, String>> = movieDict["Search"] as! Array<Dictionary<String, String>>
+                                    let index: Dictionary<String, String> = search[0]
+                                    let title = index["Title"]
+                                    self.accountTextView.text = title
+
+                                }
+                                
+                                print(movieNSDict)
+//                                self.accountTextView.text = movieNSDict["Title"] as! String
                             }
                         }
                         catch {
@@ -45,7 +54,7 @@ class AccountViewController: UIViewController {
     }
     
     @IBAction func accountButtonPressed(_ sender: Any) {
-        self.getMovieDict(imdbId: "tt3896198", apiKey: "7cc21a66")
+        self.getMovieDict(imdbId: "Avengers", apiKey: "7cc21a66")
     }
 
 }
