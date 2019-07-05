@@ -20,6 +20,7 @@
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
 		55D74C2B22CE630600434B69 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2A22CE630600434B69 /* Movie.swift */; };
 		55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */; };
+		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55D74C2A22CE630600434B69 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieResultsViewController.swift; sourceTree = "<group>"; };
+		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 				1ACF976822C197DC001A1B7A /* Main.storyboard */,
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
 				55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */,
+				55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */,
 				55672C1C22CBDF65004A70A9 /* AccountViewController.swift */,
 				55D74C2A22CE630600434B69 /* Movie.swift */,
 				55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */,
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */,
+				55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */,
 				1ACF976722C197DC001A1B7A /* ViewController.swift in Sources */,
 				55D74C2B22CE630600434B69 /* Movie.swift in Sources */,
 				55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */,

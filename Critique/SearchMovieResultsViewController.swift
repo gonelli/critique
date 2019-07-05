@@ -11,14 +11,16 @@ import UIKit
 class SearchMovieResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let cellIdentifier = "movieSearchResultCell"
-    let segueIdentifier = "searchToMovieInfoSegue"
-    
-    var searchResults: [(String, String)] = []
+    let segueIdentifier = "movieDetailsSegue"
+    let group = DispatchGroup()
+
+    var searchResults: [(String, Movie)] = []
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Results"
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -35,19 +37,21 @@ class SearchMovieResultsViewController: UIViewController, UITableViewDelegate, U
         
         cell.textLabel?.text = searchResults[row].0
         
+        
         return cell
     }
-    /*
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier {
+
             let infoVC = segue.destination as! MovieInfoViewController
             let selectedRow = tableView.indexPathForSelectedRow!
             infoVC.movieTitle = searchResults[selectedRow.row].0
-            
+            infoVC.movieObject = self.searchResults[selectedRow.row].1
             // later need code to populate movie info page using info from using OMDB for movie with IMDB id searchResults[selectedRow.row].1
             
             tableView.deselectRow(at: selectedRow, animated: true)
         }
-    }*/
+    }
     
 }

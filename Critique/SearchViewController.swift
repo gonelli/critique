@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
 
     @IBOutlet var movieSearchButton: UIButton!
     @IBOutlet var movieSearchBar: UISearchBar!
-    var movieList:Array<(String, String)> = Array<(String, String)>() {
+    var movieList:Array<(String, Movie)> = Array<(String, Movie)>() {
         didSet {
         }
     }
@@ -67,17 +67,16 @@ class SearchViewController: UIViewController {
                                 if let movieDict = movieNSDict as? [String: Any] {
                                     let search: Array<Dictionary<String, Any>> = movieDict["Search"] as? Array<Dictionary<String, Any>> ?? Array<Dictionary<String, Any>>()
                                     
-                                    var titleList = Array<(String, String)>()
+                                    var titleList = Array<(String, Movie)>()
                                     for movie in search {
                                         let mediaType: String = movie["Type"]! as! String
                                         if mediaType != "movie" {
                                             continue
                                         }
-                                        titleList.append((movie["Title"]! as! String, movie["imdbID"]! as! String))
+                                        titleList.append((movie["Title"]! as! String, Movie(imdbId: movie["imdbID"] as! String)))
                                     }
                                     self.movieList = titleList
                                 }
-                                print("before", self.movieList[0])
                                 self.group.leave()  // async done, i.e. sema down
                             }
                         }
