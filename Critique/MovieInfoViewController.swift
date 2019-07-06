@@ -12,6 +12,11 @@ class MovieInfoViewController: UIViewController {
     
     let composeSegue = "composeSegue"
     
+    @IBOutlet var plotLabel: UILabel!
+    @IBOutlet var directorLabel: UILabel!
+    @IBOutlet var yearLabel: UILabel!
+    @IBOutlet var genreLabel: UILabel!
+    
     @IBOutlet var updateButton: UIButton!
     @IBOutlet var posterImage: UIImageView!
     var movieTitle: String!
@@ -19,8 +24,12 @@ class MovieInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = movieTitle
         posterImage.image = movieObject.poster
-        
+        genreLabel.text = "Genre: \( movieObject.movieData["Genre"]!)"
+        yearLabel.text = "Year: \( movieObject.movieData["Year"]!)"
+        directorLabel.text = "Director: \( movieObject.movieData["Director"]!)"
+        plotLabel.text = "Plot: \( movieObject.movieData["Plot"]!)"
     }
     
     @IBAction func updateButtonPressed(_ sender: Any) {

@@ -6,8 +6,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Cq-App-iconx60.png",
       "scale" : "3x"
     },
     {
@@ -16,8 +17,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Cq-App-iconx87.png",
       "scale" : "3x"
     },
     {
@@ -36,8 +38,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Cq-App-iconx180.png",
       "scale" : "3x"
     },
     {
@@ -86,8 +89,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ios-marketing",
       "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Cq-App-icon.png",
       "scale" : "1x"
     }
   ],
