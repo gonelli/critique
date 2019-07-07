@@ -41,9 +41,10 @@ class CreateAccountTableViewController: UITableViewController {
           changeRequest?.commitChanges(completion: nil)
           Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
           
-          self.db.collection("users").addDocument(data: [
+          self.db.collection("users").document((user?.user.uid)!).setData([
             "isPublic" : true
             ])
+          
           self.dismiss(animated: true, completion: {
             // code for refrshing on sign in
             let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
