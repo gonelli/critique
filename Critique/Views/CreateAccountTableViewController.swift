@@ -41,7 +41,9 @@ class CreateAccountTableViewController: UITableViewController {
           
           self.db.collection("users").document((user?.user.uid)!).setData([
             "isPublic" : true,
-            "name" : self.usernameTF.text as Any
+            "name" : self.usernameTF.text!,
+            "following": [] as [String],
+            "blocked": [] as [String],
             ]
             , completion: { (error) in
             Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)

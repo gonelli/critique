@@ -26,7 +26,7 @@ class FeedTableViewController: UITableViewController {
     super.viewDidLoad()
 //    try! Auth.auth().signOut()
     addRefreshView()
-    intalizeFirestore()
+    initializeFirestore()
     if (Auth.auth().currentUser != nil) {
       getReviews()
     }
@@ -49,7 +49,7 @@ class FeedTableViewController: UITableViewController {
     refresh.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
   }
   
-  func intalizeFirestore() {
+  func initializeFirestore() {
     let settings = FirestoreSettings()
     Firestore.firestore().settings = settings
     db = Firestore.firestore()
@@ -72,7 +72,6 @@ class FeedTableViewController: UITableViewController {
             self.tableView.refreshControl?.endRefreshing()
           })
         }
-      } else {
         self.tableView.refreshControl?.endRefreshing()
       }
     }

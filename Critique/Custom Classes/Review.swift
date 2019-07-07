@@ -8,7 +8,9 @@
 
 import Foundation
 import UIKit
-import Firebase
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 class Review {
 
