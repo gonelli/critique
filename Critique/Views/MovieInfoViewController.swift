@@ -30,7 +30,19 @@ class MovieInfoViewController: UIViewController {
         yearLabel.text = "Year: \( movieObject.movieData["Year"]!)"
         directorLabel.text = "Director: \( movieObject.movieData["Director"]!)"
         plotLabel.text = "Plot: \( movieObject.movieData["Plot"]!)"
+      
+      let post = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
+      
+      
+      self.navigationItem.rightBarButtonItem = post
+      
+//      self.navigationController?.navigationBar.topItem?.rightBarButtonItem = post
+      
     }
+  
+  @objc func post() {
+    performSegue(withIdentifier: "toCompose", sender: self)
+  }
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         posterImage.image = movieObject.poster
@@ -41,14 +53,10 @@ class MovieInfoViewController: UIViewController {
         navItem.title = movieTitle
     }*/
     
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == composeSegue {
-            let composeVC = segue.destination as! ComposeReviewViewController
-            composeVC.movieTitle = self.movieTitle
-        }
-    }*/
-    
-
-    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toCompose" {
+      let composeVC = (segue.destination as! UINavigationController).viewControllers.first as! ComposeTableViewController
+      composeVC.imdbID = self.movieObject.imdbID
+    }
+  }
 }

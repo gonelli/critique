@@ -15,8 +15,10 @@ class Movie {
     var movieData: Dictionary<String, Any>!
     var poster: UIImage = UIImage()
     let group = DispatchGroup()
+    var imdbID: String!
     
     init (imdbId: String) { //tt0848228
+      self.imdbID = imdbId
         self.group.enter()
         
         DispatchQueue.main.async {
@@ -26,6 +28,10 @@ class Movie {
             self.getMoviePoster(photoString: (self.movieData["Poster"] as? String)!)
         }
     }
+  
+  
+  
+  
     
     func getMoviePoster(photoString: String) {
         // SOURCE: (thank you Andy Ibanez) https://stackoverflow.com/questions/39813497/swift-3-display-image-from-url/39813761
@@ -48,10 +54,11 @@ class Movie {
                 if let res = response as? HTTPURLResponse {
                     print("Downloaded picture with response code \(res.statusCode)")
                     if let imageData = data {
-                        // Finally convert that Data into an image and do what you wish with it.
-                        self.poster = UIImage(data: imageData)!
+                      // Finally convert that Data into an image and do what you wish with it.
+                      if let image = UIImage(data: imageData) {
+                        self.poster = image
                         print("Got image")
-                        // Do something with your image.
+                      }
                     } else {
                         print("Couldn't get image: Image is nil")
                     }
