@@ -55,18 +55,17 @@ class CreateAccountTableViewController: UITableViewController {
             parent.getReviews()
           })
         } else {
-          print("================================\n", "Error: ",error as Any, "\n================================")
-          let alert = UIAlertController(title: "Unknown Error", message: (error as! String?) ?? "nil", preferredStyle: .alert)
+          let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
           self.present(alert, animated: true)
         }
       }
     } else if passwordTF.text == confirmPasswordTF.text {
-      let alert = UIAlertController(title: "Missing requited fields", message: "Make sure all required text fields are filled.", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Error", message: "Fill in all required fields.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
       self.present(alert, animated: true)
     } else {
-      let alert = UIAlertController(title: "Passwords do not match", message: "Make sure that Password and ConfirmPassword match.", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Error", message: "Passwords do not match.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
       self.present(alert, animated: true)
     }

@@ -76,6 +76,9 @@ class SettingsViewController: UITableViewController {
             performSegue(withIdentifier: "blockedSegue", sender: self)
         case 2:
             changeAccountPrivacy()
+        case 3:
+            try! Auth.auth().signOut()
+            (self.parent?.parent as! UITabBarController).selectedIndex = 0
         default:
             fatalError("Unknown row pressed")
         }
@@ -86,7 +89,6 @@ class SettingsViewController: UITableViewController {
     @IBAction func publicSwitchPressed(_ sender: Any) {
         changeAccountPrivacy()
     }
-    
     
     func changeAccountPrivacy() {
         let doc = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
@@ -100,4 +102,5 @@ class SettingsViewController: UITableViewController {
             }
         }
     }
+    
 }
