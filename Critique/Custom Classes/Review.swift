@@ -15,9 +15,11 @@ class Review {
   var body: String!
   var score: NSNumber!
   
-  var name: String!
+  var name: String! = "Test"
   var poster: UIImage!
   var title: String!
+  
+  var db: Firestore!
   
   
   init(imdbID: String, criticID: String, body: String, score: NSNumber) {
@@ -31,7 +33,9 @@ class Review {
     
     self.poster = UIImage(named: "icon-account")
     self.title = "imdb title"
-    self.name = getName(for: criticID)
+    getName(for: criticID)
+    
+
 
   }
   
@@ -44,8 +48,15 @@ class Review {
     return Movie(imdbId: "tt1825683").title
   }
   
-  func getName(for criticID: String) -> String {
-    return Auth.auth().currentUser!.displayName!
+  func getName(for criticID: String) {
+    
+    let settings = FirestoreSettings()
+    Firestore.firestore().settings = settings
+    db = Firestore.firestore()
+    
+    db.collection("users").document(criticID).getDocument { (user, error) in
+      self.name = (user?.data()!["name"] as! String)
+    }
   }
 
 }

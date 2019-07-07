@@ -36,14 +36,16 @@ class CreateAccountTableViewController: UITableViewController {
       Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
         user, error in
         if error == nil {
-          let changeRequest = user?.user.createProfileChangeRequest()
-          changeRequest?.displayName = self.usernameTF.text
-          changeRequest?.commitChanges(completion: nil)
-          Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
+          
+          
           
           self.db.collection("users").document((user?.user.uid)!).setData([
-            "isPublic" : true
-            ])
+            "isPublic" : true,
+            "name" : self.usernameTF.text as Any
+            ]
+            , completion: { (error) in
+            Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
+          })
           
           self.dismiss(animated: true, completion: {
             // code for refrshing on sign in

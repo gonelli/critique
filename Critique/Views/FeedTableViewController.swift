@@ -24,6 +24,7 @@ class FeedTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+//    try! Auth.auth().signOut()
     addRefreshView()
     intalizeFirestore()
     if (Auth.auth().currentUser != nil) {
@@ -63,7 +64,9 @@ class FeedTableViewController: UITableViewController {
             for review in snapshot!.documents {
               let body = review.data()["body"] as! String
               let score = review.data()["score"] as! NSNumber
-              reviews.append(Review(imdbID: "todo", criticID: "todo", body: body, score: score))
+              let criticID = review.data()["criticID"] as! String
+              let imdbID = review.data()["imdbID"] as! String
+              reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
             }
             self.reviews = reviews
             self.tableView.refreshControl?.endRefreshing()
