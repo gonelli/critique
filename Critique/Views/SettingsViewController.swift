@@ -45,47 +45,42 @@ class SettingsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            let controller = UIAlertController(
-                title: "Change Name",
-                message: "Please enter a new name.",
-                preferredStyle: .alert)
-            
-            controller.addTextField(configurationHandler: {
-                (textField:UITextField!) in textField.placeholder = "New Name"
-            })
-            
-            controller.addAction(UIAlertAction(
-                title: "Confirm",
-                style: .default,
-                handler: {
-                    (paramAction:UIAlertAction!) in
-                    if let textFields = controller.textFields {
-                        let theTextFields = textFields as [UITextField]
-                        let enteredText = theTextFields[0].text!
-                        self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
-                    }
-            }
-            ))
-            
-            controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            present(controller,animated:true,completion:nil)
-        case 1:
-            performSegue(withIdentifier: "blockedSegue", sender: self)
-        case 2:
-            changeAccountPrivacy()
-        case 3:
-            try! Auth.auth().signOut()
-            (self.parent?.parent as! UITabBarController).selectedIndex = 0
-        default:
-            fatalError("Unknown row pressed")
-        }
+      
+      if (indexPath.section == 0 && indexPath.row == 0) {
+        let controller = UIAlertController(
+          title: "Change Name",
+          message: "Please enter a new name.",
+          preferredStyle: .alert)
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        controller.addTextField(configurationHandler: {
+          (textField:UITextField!) in textField.placeholder = "New Name"
+        })
+        
+        controller.addAction(UIAlertAction(
+          title: "Confirm",
+          style: .default,
+          handler: {
+            (paramAction:UIAlertAction!) in
+            if let textFields = controller.textFields {
+              let theTextFields = textFields as [UITextField]
+              let enteredText = theTextFields[0].text!
+              self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
+            }
+        }
+        ))
+        controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(controller,animated:true,completion:nil)
+      } else if (indexPath.section == 0 && indexPath.row == 1) {
+        performSegue(withIdentifier: "blockedSegue", sender: self)
+      } else if (indexPath.section == 0 && indexPath.row == 2) {
+        changeAccountPrivacy()
+      } else if (indexPath.section == 1 && indexPath.row == 0) {
+        try! Auth.auth().signOut()
+        (self.parent?.parent as! UITabBarController).selectedIndex = 0
+      }
+      tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+  
     @IBAction func publicSwitchPressed(_ sender: Any) {
         changeAccountPrivacy()
     }

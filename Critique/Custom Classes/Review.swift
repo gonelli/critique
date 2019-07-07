@@ -8,56 +8,62 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
-import FirebaseCore
-import FirebaseFirestore
+import Firebase
+import Alamofire
 
 class Review {
 
   var body: String!
   var score: NSNumber!
   
-  var name: String! = "Test"
-  var poster: UIImage!
-  var title: String!
-  
   var db: Firestore!
   
+  var imdbID: String!
+  
+  var movieData: [String : Any]?
+  
+  var criticID: String!
   
   init(imdbID: String, criticID: String, body: String, score: NSNumber) {
-    
     self.body = body
     self.score = score
-    
-//    self.poster = getPoster(for: imdbID)
-//    self.title = getTitle(for: imdbID)
-//    self.name = getName(for: criticID)
-    
-    self.poster = UIImage(named: "icon-account")
-    self.title = "imdb title"
-    getName(for: criticID)
-    
-
-
-  }
-  
-  func getPoster(for imdbID: String) -> UIImage {
-    return Movie(imdbId: "tt1825683").poster
-  }
-  
-  func getTitle(for imdbID: String) -> String {
-    //fix with a closure!
-    return Movie(imdbId: "tt1825683").title
-  }
-  
-  func getName(for criticID: String) {
-    
+    self.imdbID = imdbID
+    self.criticID = criticID
     let settings = FirestoreSettings()
     Firestore.firestore().settings = settings
     db = Firestore.firestore()
-    
-    db.collection("users").document(criticID).getDocument { (user, error) in
-      self.name = (user?.data()!["name"] as! String)
+  }
+  
+  func getMovieData(completion: @escaping ([String : Any]) -> Void) {
+    if let movieData = movieData {
+      completion(movieData)
+    } else {
+      if let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID ?? "")&apikey=7cc21a66") {
+        AF.request(url).responseJSON { (response) in
+          if let json = response.result.value as? [String : Any] {
+            self.movieData = json as! [String : Any]
+            completion(json)
+          }
+        }
+      }
+    }
+  }
+  
+  func getTitle(completion: @escaping (String) -> Void) {
+    getMovieData { (data) in
+      completion(data["Title"] as! String)
+    }
+  }
+  
+  func getPosterURL(completion: @escaping (String) -> Void) {
+    getMovieData { (data) in
+      completion(data["Poster"] as! String)
+    }
+  }
+  
+  func getCritic(completion: @escaping (String) -> Void) {
+    db.collection("users").document(self.criticID).getDocument { (snapshot, error) in
+      completion(snapshot?.data()!["name"] as! String)
     }
   }
 
