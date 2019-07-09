@@ -8,21 +8,24 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let group = DispatchGroup()
-
+    let cellIdentifier = "movieSearchResultCell"
+    let segueIdentifier = "movieInfoSegue"
+    
     @IBOutlet var movieSearchButton: UIButton!
     @IBOutlet var movieSearchBar: UISearchBar!
-    var movieList:Array<(String, Movie)> = Array<(String, Movie)>() {
-        didSet {
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
+    
+    let group = DispatchGroup()
+    
+    var movieList:Array<(String, Movie)> = Array<(String, Movie)>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
-//        getMovieList(movieQuery: "star wars")
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     @IBAction func movieSearchPressed(_ sender: Any) {
@@ -30,15 +33,46 @@ class SearchViewController: UIViewController {
         self.getMovieList(movieQuery: self.movieSearchBar.text!)
         group.notify(queue: .main) { // Wait for dispatch after async
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "movieSearchSegue", sender: sender)
+                //                self.performSegue(withIdentifier: "movieSearchSegue", sender: sender)
+                self.tableView.reloadData()
             }
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movieList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
+        let row = indexPath.row
+        
+        cell.textLabel?.text = movieList[row].0
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: segueIdentifier, sender: self)
+    }
+    
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "movieSearchSegue" {
+    //            let resultVC = segue.destination as! SearchMovieResultsViewController
+    //            resultVC.searchResults = self.movieList
+    //        }
+    //    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "movieSearchSegue" {
-            let resultVC = segue.destination as! SearchMovieResultsViewController
-            resultVC.searchResults = self.movieList
+        if segue.identifier == segueIdentifier {
+            
+            let infoVC = segue.destination as! MovieInfoViewController
+            let selectedRow = tableView.indexPathForSelectedRow!
+            infoVC.movieTitle = self.movieList[selectedRow.row].0
+            infoVC.movieObject = self.movieList[selectedRow.row].1
+            // later need code to populate movie info page using info from using OMDB for movie with IMDB id searchResults[selectedRow.row].1
+            
+            tableView.deselectRow(at: selectedRow, animated: true)
         }
     }
     
@@ -87,7 +121,7 @@ class SearchViewController: UIViewController {
                 else {
                     print("Data nil")
                 }
-            }.resume()
+                }.resume()
         }
     }
 }

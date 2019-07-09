@@ -51,13 +51,13 @@ class Movie {
             } else {
                 // No errors found.
                 // It would be weird if we didn't have a response, so check for that too.
-                if let res = response as? HTTPURLResponse {
-                    print("Downloaded picture with response code \(res.statusCode)")
+                if (response as? HTTPURLResponse) != nil {
+//                    print("Downloaded picture with response code \(res.statusCode)")
                     if let imageData = data {
                       // Finally convert that Data into an image and do what you wish with it.
                       if let image = UIImage(data: imageData) {
                         self.poster = image
-                        print("Got image")
+//                        print("Got image")
                       }
                     } else {
                         print("Couldn't get image: Image is nil")
