@@ -17,8 +17,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
     
-    @IBOutlet var movieSearchButton: UIButton!
-    @IBOutlet var movieSearchBar: UISearchBar!
+    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -37,16 +36,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func searchPressed(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             self.group.enter()  // i.e. semaphore up
-            self.getMovieList(movieQuery: self.movieSearchBar.text!)
+            self.getMovieList(movieQuery: self.searchBar.text!)
             group.notify(queue: .main) { // Wait for dispatch after async
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
         } else {
-            if movieSearchBar.text! != "" {
+            if searchBar.text! != "" {
                 self.criticList = []
-                client.index(withName: "users").search(Query(query: movieSearchBar.text!)) { (content, error) in
+                client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
                     if error == nil {
                         guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
                         for hit in hits {

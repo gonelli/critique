@@ -25,7 +25,6 @@
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
 		55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */; };
 		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
-		632C417D22D520EF0085CF09 /* DummySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C417C22D520EF0085CF09 /* DummySearch.swift */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +50,6 @@
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieResultsViewController.swift; sourceTree = "<group>"; };
 		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
-		632C417C22D520EF0085CF09 /* DummySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySearch.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,7 +97,6 @@
 		1AFF494922D11D6800E06200 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				632C417B22D520CF0085CF09 /* Dummy */,
 				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
 				1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */,
 				1A4BB78322D15E090027E606 /* FeedTableViewController.swift */,
@@ -135,14 +132,6 @@
 				1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */,
 			);
 			path = Required;
-			sourceTree = "<group>";
-		};
-		632C417B22D520CF0085CF09 /* Dummy */ = {
-			isa = PBXGroup;
-			children = (
-				632C417C22D520EF0085CF09 /* DummySearch.swift */,
-			);
-			path = Dummy;
 			sourceTree = "<group>";
 		};
 		9001164946C0062C676EC24C /* Pods */ = {
@@ -290,7 +279,6 @@
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
-				632C417D22D520EF0085CF09 /* DummySearch.swift in Sources */,
 				1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */,
 				1ACF976522C197DC001A1B7A /* AppDelegate.swift in Sources */,
 			);

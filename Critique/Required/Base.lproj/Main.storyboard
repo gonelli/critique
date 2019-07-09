@@ -75,8 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="uJV-cU-k7e"/>
                     <connections>
-                        <outlet property="movieSearchBar" destination="2wd-IM-HfM" id="ree-5V-be5"/>
-                        <outlet property="movieSearchButton" destination="bb3-bf-IEs" id="skJ-OH-bRj"/>
+                        <outlet property="searchBar" destination="2wd-IM-HfM" id="Xwm-FH-ecx"/>
                         <outlet property="searchDisplayController" destination="abx-gg-Hxa" id="o8w-SO-eD9"/>
                         <outlet property="segmentedControl" destination="O2V-u0-75k" id="Pp6-KG-ksy"/>
                         <outlet property="tableView" destination="Wqp-I2-s6g" id="lfD-aB-wCN"/>
@@ -846,21 +845,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxI-iA-0FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4126" y="2510"/>
-        </scene>
-        <!--Dummy Search-->
-        <scene sceneID="tq9-pe-zWk">
-            <objects>
-                <viewController id="UHy-Hf-XBE" customClass="DummySearch" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8wX-VN-2gH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="B7z-sr-1AZ"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oNF-GG-ezN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3184" y="2507"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lkc-vu-aqm">
