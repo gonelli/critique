@@ -31,15 +31,10 @@ class MovieInfoViewController: UIViewController {
         yearLabel.text = " \( movieObject.movieData["Year"]!)"
         yearLabel.textColor = UIColor.gray
 
-//        genreLabel.text = "Genre: \( movieObject.movieData["Genre"]!)"
-//        directorLabel.text = "Director: \( movieObject.movieData["Director"]!)"
-//        plotLabel.text = "Plot: \( movieObject.movieData["Plot"]!)"
-      
       let post = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
       
       
       self.navigationItem.rightBarButtonItem = post
-      
 //      self.navigationController?.navigationBar.topItem?.rightBarButtonItem = post
       
     }
