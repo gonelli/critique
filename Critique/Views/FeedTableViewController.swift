@@ -21,6 +21,9 @@ class FeedTableViewController: UITableViewController {
       self.tableView.reloadData()
     }
   }
+    
+  // SegueIDs
+  let expandedReviewSegueID = "expandedReviewSegueID"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -85,6 +88,13 @@ class FeedTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
     cell.review = reviews[indexPath.row]
     return cell
+  }
+    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == expandedReviewSegueID, let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
+      nextVC.deligate = self
+      nextVC.expanedReview = reviews[reviewIndex]
+    }
   }
   
 }
