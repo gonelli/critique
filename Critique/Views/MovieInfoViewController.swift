@@ -30,11 +30,8 @@ class MovieInfoViewController: UIViewController {
         posterImage.layer.borderColor = UIColor.lightGray.cgColor
         yearLabel.text = " \( movieObject.movieData["Year"]!)"
         yearLabel.textColor = UIColor.gray
-
-      let post = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
       
-      
-      self.navigationItem.rightBarButtonItem = post
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
 //      self.navigationController?.navigationBar.topItem?.rightBarButtonItem = post
       
     }
