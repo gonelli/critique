@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,18 +33,30 @@
                                     <segment title="Movie"/>
                                     <segment title="Critic"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="gVt-aB-NUa" eventType="valueChanged" id="A4O-k1-Og5"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wqp-I2-s6g">
                                 <rect key="frame" x="0.0" y="205" width="414" height="608"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieSearchResultCell" id="DTp-xg-AxG">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResultCell" textLabel="pOf-4S-mtB" style="IBUITableViewCellStyleDefault" id="DTp-xg-AxG">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DTp-xg-AxG" id="Bl4-hb-1CO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pOf-4S-mtB">
+                                                    <rect key="frame" x="20" y="0.0" width="356" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -54,7 +66,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search"/>
                                 <connections>
-                                    <action selector="movieSearchPressed:" destination="gVt-aB-NUa" eventType="touchUpInside" id="jFl-kO-4us"/>
+                                    <action selector="searchPressed:" destination="gVt-aB-NUa" eventType="touchUpInside" id="nEo-Nz-YtZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -66,8 +78,10 @@
                         <outlet property="movieSearchBar" destination="2wd-IM-HfM" id="ree-5V-be5"/>
                         <outlet property="movieSearchButton" destination="bb3-bf-IEs" id="skJ-OH-bRj"/>
                         <outlet property="searchDisplayController" destination="abx-gg-Hxa" id="o8w-SO-eD9"/>
+                        <outlet property="segmentedControl" destination="O2V-u0-75k" id="Pp6-KG-ksy"/>
                         <outlet property="tableView" destination="Wqp-I2-s6g" id="lfD-aB-wCN"/>
                         <segue destination="Db6-gs-pth" kind="show" identifier="movieInfoSegue" id="6HJ-bD-fjt"/>
+                        <segue destination="Fq4-Js-ghB" kind="show" identifier="criticProfileSegue" id="8Ob-Zd-y7p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Cx-XN-5DJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -833,6 +847,21 @@
             </objects>
             <point key="canvasLocation" x="-4126" y="2510"/>
         </scene>
+        <!--Dummy Search-->
+        <scene sceneID="tq9-pe-zWk">
+            <objects>
+                <viewController id="UHy-Hf-XBE" customClass="DummySearch" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8wX-VN-2gH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="B7z-sr-1AZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oNF-GG-ezN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3184" y="2507"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lkc-vu-aqm">
             <objects>
@@ -964,7 +993,6 @@
         <!--Navigation Controller-->
         <scene sceneID="4WP-V9-jwA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i3W-xs-I8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l6n-6E-d2H" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="khJ-Ro-H9i">
@@ -976,15 +1004,19 @@
                         <segue destination="eQH-Wl-eC1" kind="relationship" relationship="rootViewController" id="4t3-oV-RZD"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i3W-xs-I8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4126" y="3230"/>
         </scene>
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
-        <image name="icon-account" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-messages" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-movie" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="icon-account" width="26" height="26"/>
+        <image name="icon-messages" width="26" height="26"/>
+        <image name="icon-movie" width="26" height="26"/>
+        <image name="icon-settings" width="26" height="26"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="8Ob-Zd-y7p"/>
+    </inferredMetricsTieBreakers>
 </document>

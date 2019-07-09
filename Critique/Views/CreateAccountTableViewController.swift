@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import InstantSearchClient
 
 class CreateAccountTableViewController: UITableViewController {
   
@@ -36,17 +37,15 @@ class CreateAccountTableViewController: UITableViewController {
       Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
         user, error in
         if error == nil {
-          
-          
-          
           self.db.collection("users").document((user?.user.uid)!).setData([
             "isPublic" : true,
             "name" : self.usernameTF.text!,
             "following": [] as [String],
             "blocked": [] as [String],
-            ]
-            , completion: { (error) in
-            Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
+            ], completion: { (error) in
+                let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+                client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
+                Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
           })
           
           self.dismiss(animated: true, completion: {

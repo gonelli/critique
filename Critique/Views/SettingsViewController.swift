@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import InstantSearchClient
 
 class SettingsViewController: UITableViewController {
     
@@ -19,6 +20,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var publicSwitch: UISwitch!
     
     var db: Firestore!
+    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,12 +61,12 @@ class SettingsViewController: UITableViewController {
         controller.addAction(UIAlertAction(
           title: "Confirm",
           style: .default,
-          handler: {
-            (paramAction:UIAlertAction!) in
+          handler: { (paramAction:UIAlertAction!) in
             if let textFields = controller.textFields {
-              let theTextFields = textFields as [UITextField]
-              let enteredText = theTextFields[0].text!
-              self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
+                let theTextFields = textFields as [UITextField]
+                let enteredText = theTextFields[0].text!
+                self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
+                self.client.index(withName: "users").partialUpdateObject(["name": enteredText], withID: "\(Auth.auth().currentUser!.uid)")
             }
         }
         ))

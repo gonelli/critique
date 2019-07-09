@@ -12,7 +12,9 @@ import Foundation
 class AccountViewController: UIViewController {
     
     @IBOutlet var accountTabLabel: UILabel!
-    var accountName = "Unknown Name"
+    
+    var accountName = "Profile"
+    var accountID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
