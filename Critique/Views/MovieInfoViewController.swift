@@ -12,11 +12,8 @@ class MovieInfoViewController: UIViewController {
     
     let composeSegue = "composeSegue"
     
-    @IBOutlet var plotLabel: UILabel!
-    @IBOutlet var directorLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
-    @IBOutlet var genreLabel: UILabel!
-    
+    @IBOutlet var synopsisTextView: UITextView!
     @IBOutlet var updateButton: UIButton!
     @IBOutlet var posterImage: UIImageView!
     var movieTitle: String!
@@ -26,16 +23,15 @@ class MovieInfoViewController: UIViewController {
         super.viewDidLoad()
         self.title = movieTitle
         posterImage.image = movieObject.poster
-        genreLabel.text = "Genre: \( movieObject.movieData["Genre"]!)"
-        yearLabel.text = "Year: \( movieObject.movieData["Year"]!)"
-        directorLabel.text = "Director: \( movieObject.movieData["Director"]!)"
-        plotLabel.text = "Plot: \( movieObject.movieData["Plot"]!)"
+        synopsisTextView.text = movieObject.movieData["Plot"]! as? String
+        synopsisTextView.isEditable = false
+        posterImage.layer.masksToBounds = true
+        posterImage.layer.borderWidth = 1.5
+        posterImage.layer.borderColor = UIColor.lightGray.cgColor
+        yearLabel.text = " \( movieObject.movieData["Year"]!)"
+        yearLabel.textColor = UIColor.gray
       
-      let post = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
-      
-      
-      self.navigationItem.rightBarButtonItem = post
-      
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
 //      self.navigationController?.navigationBar.topItem?.rightBarButtonItem = post
       
     }
