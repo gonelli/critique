@@ -77,7 +77,7 @@ class AccountViewController: UIViewController {
             title: "Block",
             style: .destructive,
             handler:  {(alert) in
-                let ref = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
+                let ref = self.db.collection("users").document(Auth.auth().currentUser!.uid)
                 ref.getDocument { (document, error) in
                     if error == nil {
                         // When blocked button pressed
@@ -87,6 +87,12 @@ class AccountViewController: UIViewController {
                         following.removeAll { $0 == self.accountID }
                         ref.setData(["blocked": blocked], merge: true)
                         ref.setData(["following": following], merge: true)
+                        let refBlocked = self.db.collection("users").document(self.accountID)
+                        refBlocked.getDocument() { (document, error) in
+                            following = document!.data()!["following"] as! [String]
+                            following.removeAll { $0 == Auth.auth().currentUser!.uid }
+                            refBlocked.setData(["following": following], merge: true)
+                        }
                     }
                     else {
                         fatalError(error!.localizedDescription)
