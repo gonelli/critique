@@ -12,8 +12,11 @@ import FirebaseFirestore
 
 class FollowsTableViewController: UITableViewController {
     
+    @IBOutlet weak var titleLabel: UINavigationItem!
+    
     var db: Firestore!
     var lookupType: String = "Following"
+    var user: String = Auth.auth().currentUser!.uid
     var critics: [String] = [] {
         didSet {
             self.tableView.reloadData()
@@ -23,12 +26,15 @@ class FollowsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if user == "" {
+            user = Auth.auth().currentUser!.uid
+        }
         addRefreshView()
         initializeFirestore()
         if (Auth.auth().currentUser != nil) {
             getCritics()
         }
+        titleLabel.title = lookupType
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,19 +68,29 @@ class FollowsTableViewController: UITableViewController {
     func getCritics() {
         var critics: [String] = []
         if lookupType == "Following" {
-            db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
                     for followed in following {
-                        self.db.collection("users").document(followed).getDocument(){ (snapshot, _) in
+                        self.db.collection("users").document(followed).getDocument{ (snapshot, _) in
                             critics.append(snapshot?.data()?["name"] as! String)
+                            self.critics = critics
                         }
                     }
-                    self.critics = critics
                     self.tableView.refreshControl?.endRefreshing()
                 }
             }
         } else {
-            
+            db.collection("users").getDocuments{ (snapshot, _) in
+                for critic in snapshot!.documents {
+                    for following in critic.data()["following"] as! [String] {
+                        if following == self.user {
+                            critics.append( critic.data()["name"] as! String )
+                        }
+                    }
+                }
+                self.critics = critics
+                self.tableView.refreshControl?.endRefreshing()
+            }
         }
     }
     
@@ -82,13 +98,6 @@ class FollowsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
         cell.textLabel?.text = critics[indexPath.row]
         return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == expandedReviewSegueID, let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
-//            nextVC.deligate = self
-//            nextVC.expanedReview = reviews[reviewIndex]
-//        }
-    }
+    }s
 
 }

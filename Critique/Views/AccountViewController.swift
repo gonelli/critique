@@ -19,6 +19,8 @@ class AccountViewController: UIViewController {
     
     var accountName = ""
     var accountID = ""
+    let followersSegue = "followersSegue"
+    let followingSegue = "followingSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,6 +173,18 @@ class AccountViewController: UIViewController {
             else {
                 fatalError(error!.localizedDescription)
             }
+        }
+        
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let nextVC = segue.destination as! FollowsTableViewController
+            
+            if segue.identifier == followersSegue {
+                nextVC.lookupType = "Followers"
+            } else if segue.identifier == followingSegue {
+                nextVC.lookupType = "Following"
+            }
+            
+            nextVC.user = accountID
         }
         
         controller.addAction(cancelAction)
