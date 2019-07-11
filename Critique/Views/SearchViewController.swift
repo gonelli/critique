@@ -130,6 +130,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.endEditing(true)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+
+    
     func getMovieList(movieQuery: String) {
         let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=" + "7cc21a66"
         let allowedUrlString = unallowedUrlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)

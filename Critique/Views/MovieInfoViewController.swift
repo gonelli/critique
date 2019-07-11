@@ -51,7 +51,7 @@ class MovieInfoViewController: UIViewController {
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toCompose" {
-      let composeVC = (segue.destination as! UINavigationController).viewControllers.first as! ComposeTableViewController
+      let composeVC = segue.destination as! ComposeTableViewController
       composeVC.imdbID = self.movieObject.imdbID
     }
   }
