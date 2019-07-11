@@ -40,7 +40,7 @@ class CreateAccountTableViewController: UITableViewController {
           self.db.collection("users").document((user?.user.uid)!).setData([
             "isPublic" : true,
             "name" : self.usernameTF.text!,
-            "following": [] as [String],
+            "following": [user!.user.uid] as [String],
             "blocked": [] as [String],
             ], completion: { (error) in
                 let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")

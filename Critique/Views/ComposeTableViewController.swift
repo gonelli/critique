@@ -28,13 +28,13 @@ class ComposeTableViewController: UITableViewController {
   
   @IBAction func post(_ sender: Any) {
     if let currentUser = Auth.auth().currentUser {
-      db.collection("reviews").document("\(currentUser.uid)_\(imdbID ?? "fucked")").setData([
+      db.collection("reviews").document("\(currentUser.uid)_\(imdbID!)").setData([
         "criticID" : currentUser.uid,
         "imdbID" : imdbID as Any,
         "body" : reviewTV.text as Any,
         "score" : Double(scoreTF.text!) as Any
         ])
-      self.dismiss(animated: true, completion: nil)
+        _ = navigationController?.popViewController(animated: true)
     }
   }
 }
