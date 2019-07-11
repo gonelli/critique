@@ -25,6 +25,7 @@
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
 		55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */; };
 		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
+		5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieResultsViewController.swift; sourceTree = "<group>"; };
 		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
+		5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewTableViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
 				1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */,
 				1A4BB78322D15E090027E606 /* FeedTableViewController.swift */,
+				5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */,
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
 				55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */,
 				1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */,
@@ -276,6 +279,7 @@
 				1ABE096522D29F4600279752 /* Movie.swift in Sources */,
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
+				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,

@@ -10,20 +10,14 @@ import UIKit
 
 
 class ExpandedReviewTableViewController: UITableViewController {
-
     
-    //    @IBOutlet weak var movieLabel: UILabel!
+    
     @IBOutlet weak var movieLabel: UILabel!
-    //    @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var reviewTextView: UITextView!
-    //    @IBOutlet weak var criticLabel: UILabel!
     @IBOutlet weak var criticLabel: UILabel!
-    //    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    //    @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var posterImage: UIImageView!
     
-    //@IBOutlet var tableView: UITableView!
     @IBOutlet weak var reviewCell: UITableViewCell!
     
     
@@ -32,9 +26,9 @@ class ExpandedReviewTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         reviewTextView.isScrollEnabled = false;
-
+        
         if let review = expanedReview {
             scoreLabel.text = "\(review.score ?? 0)"
             reviewTextView.text = review.body
