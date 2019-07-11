@@ -26,7 +26,7 @@ class MovieInfoViewController: UIViewController {
         synopsisTextView.text = movieObject.movieData["Plot"]! as? String
         synopsisTextView.isEditable = false
         posterImage.layer.masksToBounds = true
-        posterImage.layer.borderWidth = 1.5
+        posterImage.layer.borderWidth = 0
         posterImage.layer.borderColor = UIColor.lightGray.cgColor
         yearLabel.text = " \( movieObject.movieData["Year"]!)"
         yearLabel.textColor = UIColor.gray

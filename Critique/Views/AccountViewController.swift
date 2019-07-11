@@ -27,11 +27,14 @@ class AccountViewController: UIViewController {
         // TODO: set name to Firebase username
         // TODO: Popup action for Follow, Block, & Message.
         // Since the "..." would be covered on the left side by back button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         initializeFirestore()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        if accountName == "" {
-            accountID = "\(Auth.auth().currentUser!.uid)"
+        if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
+            accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
@@ -42,6 +45,7 @@ class AccountViewController: UIViewController {
             }
         } else {
             self.title = accountName
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
     }
     
@@ -49,6 +53,18 @@ class AccountViewController: UIViewController {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! FollowsTableViewController
+        
+        if segue.identifier == followersSegue {
+            nextVC.lookupType = "Followers"
+        } else if segue.identifier == followingSegue {
+            nextVC.lookupType = "Following"
+        }
+        
+        nextVC.user = accountID
     }
 
     @objc func accountAction() {
@@ -156,10 +172,10 @@ class AccountViewController: UIViewController {
             if error == nil {
                 let following = document!.data()!["following"] as! [String]
                 let blocked = document!.data()!["blocked"] as! [String]
-                if following.contains(self.accountID) && self.accountID != Auth.auth().currentUser!.uid {
+                if following.contains(self.accountID) {
                     controller.addAction(unfollowAction)
                 }
-                else if (self.accountID != Auth.auth().currentUser!.uid) {
+                else if !blocked.contains(self.accountID) {
                     controller.addAction(followAction)
                 }
                 controller.addAction(messageAction)
@@ -173,18 +189,6 @@ class AccountViewController: UIViewController {
             else {
                 fatalError(error!.localizedDescription)
             }
-        }
-        
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let nextVC = segue.destination as! FollowsTableViewController
-            
-            if segue.identifier == followersSegue {
-                nextVC.lookupType = "Followers"
-            } else if segue.identifier == followingSegue {
-                nextVC.lookupType = "Following"
-            }
-            
-            nextVC.user = accountID
         }
         
         controller.addAction(cancelAction)

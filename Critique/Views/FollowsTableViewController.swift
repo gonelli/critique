@@ -16,7 +16,7 @@ class FollowsTableViewController: UITableViewController {
     
     var db: Firestore!
     var lookupType: String = "Following"
-    var user: String = Auth.auth().currentUser!.uid
+    var user: String!
     var critics: [String] = [] {
         didSet {
             self.tableView.reloadData()
@@ -26,9 +26,6 @@ class FollowsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if user == "" {
-            user = Auth.auth().currentUser!.uid
-        }
         addRefreshView()
         initializeFirestore()
         if (Auth.auth().currentUser != nil) {
@@ -98,6 +95,6 @@ class FollowsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
         cell.textLabel?.text = critics[indexPath.row]
         return cell
-    }s
+    }
 
 }

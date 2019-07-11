@@ -39,6 +39,8 @@ class FeedTableViewController: UITableViewController {
     super.viewDidAppear(animated)
     if (Auth.auth().currentUser == nil) {
       self.performSegue(withIdentifier: "toCreateAccount", sender: self)
+    } else {
+        getReviews()
     }
   }
   

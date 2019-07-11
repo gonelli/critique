@@ -43,7 +43,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         } else {
-            if searchBar.text! != "" {
+            // if searchBar.text! != "" {
                 self.criticList = []
                 client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
                     if error == nil {
@@ -56,7 +56,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         fatalError(error!.localizedDescription)
                     }
                 }
-            }
+            // }
         }
     }
     
