@@ -22,7 +22,7 @@ class AccountViewController: UIViewController {
         self.title = accountName
         // TODO: Popup action for Follow, Block, & Message.
         // Since the "..." would be covered on the left side by back button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .done, target: self, action: #selector(self.accountAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
     }
     
     @objc func accountAction() {
