@@ -13,7 +13,7 @@ class AccountViewController: UIViewController {
     
     @IBOutlet var accountTabLabel: UILabel!
     
-    var accountName = "Profile"
+    var accountName = "(Account Name)"
     var accountID = ""
     
     override func viewDidLoad() {
@@ -26,7 +26,43 @@ class AccountViewController: UIViewController {
     }
     
     @objc func accountAction() {
-        // When follow button pressed
+        let controller = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet)
+        
+        let blockAction = UIAlertAction(
+            title: "Block",
+            style: .destructive
+        )
+        
+        let messageAction = UIAlertAction(
+            title: "Message",
+            style: .default
+        )
+        
+        let followAction = UIAlertAction(
+            title: "Follow",
+            style: .default
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: { (action) in print("Cancel Action")}
+        )
+        
+        messageAction.setValue(UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0), forKey: "titleTextColor")
+        followAction.setValue(UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0), forKey: "titleTextColor")
+        cancelAction.setValue(UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0), forKey: "titleTextColor")
+        
+        
+        controller.addAction(followAction)
+        controller.addAction(messageAction)
+        controller.addAction(blockAction)
+        controller.addAction(cancelAction)
+        
+        present(controller, animated: true, completion: nil)
     }
     
     
