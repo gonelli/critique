@@ -98,6 +98,6 @@ class FollowsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
         cell.textLabel?.text = critics[indexPath.row]
         return cell
-    }s
+    }
 
 }
