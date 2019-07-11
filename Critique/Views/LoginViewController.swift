@@ -35,6 +35,22 @@ class LoginViewController: UITableViewController {
     }
     
     @IBAction func forgotPasswordPressed(_ sender: Any) {
+        // Fill in dialog with email from TF
+        var emailAddress:String? = ""
+        let alert = UIAlertController(title: "Forgot Password", message: "Fill out the email below.  If there is an account with given email address, a new password will be sent.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Send", style: .default) {
+            (alertAction) in emailAddress = alert.textFields![0].text;
+            if emailAddress != nil && emailAddress != "" {
+                // Pass email back from dialog
+                Auth.auth().sendPasswordReset(withEmail: emailAddress!) { error in
+                    print("================================\n", "Forgot Password Error: ", error as Any, "\n================================")
+                }
+            }
+        }
+        alert.addTextField { (textField) in textField.text = self.emailField.text; textField.placeholder = "Enter your email";}
+        alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
