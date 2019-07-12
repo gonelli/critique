@@ -2,12 +2,14 @@
 
 Ameya Joshi (30%)
 - Firebase accounts
-- Movie feed
-- User search
+- Feed
+- User Search
+- Settings
+- Following and Blocking
 
 James Jackson (30%)
 - Firebase accounts
-- Movie feed
+- Feed
 - Critique login screen
 
 Andrew Cramer (20%)
