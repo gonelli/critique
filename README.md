@@ -12,6 +12,7 @@ James Jackson (30%)
 
 Andrew Cramer (20%)
 - Firebase setup
+- Firebase login backend
 - Expanded movie review
 - Followers / Following
 
