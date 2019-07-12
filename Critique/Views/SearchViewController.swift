@@ -11,20 +11,18 @@ import InstantSearchClient
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
-    
-    let cellIdentifier = "searchResultCell"
-    let movieInfoSegue = "movieInfoSegue"
-    let criticProfileSegue = "criticProfileSegue"
     
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    let group = DispatchGroup()
-    
     var movieList:Array<(String, Movie)> = Array<(String, Movie)>()
     var criticList: [(String, String)] = []
+    let group = DispatchGroup()
+    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    let cellIdentifier = "searchResultCell"
+    let movieInfoSegue = "movieInfoSegue"
+    let criticProfileSegue = "criticProfileSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,28 +40,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.tableView.reloadData()
                 }
             }
-        } else {
-            // if searchBar.text! != "" {
-                self.criticList = []
-                client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
-                    if error == nil {
-                        guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
-                        for hit in hits {
-                            self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
-                        }
-                        self.tableView.reloadData()
-                    } else {
-                        fatalError(error!.localizedDescription)
+        }
+        else {
+            self.criticList = []
+            client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
+                if error == nil {
+                    guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
+                    for hit in hits {
+                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
                     }
+                    self.tableView.reloadData()
                 }
-            // }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
             return self.movieList.count
-        } else {
+        }
+        else {
             return self.criticList.count
         }
     }
@@ -74,7 +73,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if segmentedControl.selectedSegmentIndex == 0 {
             cell.textLabel?.text = movieList[row].0
-        } else {
+        }
+        else {
             cell.textLabel?.text = criticList[row].0
         }
         
@@ -84,7 +84,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segmentedControl.selectedSegmentIndex == 0 {
             performSegue(withIdentifier: movieInfoSegue, sender: self)
-        } else {
+        }
+        else {
             performSegue(withIdentifier: criticProfileSegue, sender: self)
         }
     }
@@ -92,7 +93,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func segmentChanged(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             criticList = []
-        } else {
+        }
+        else {
             movieList = Array<(String, Movie)>()
         }
         searchPressed(segmentedControl!)
@@ -107,20 +109,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // later need code to populate movie info page using info from using OMDB for movie with IMDB id searchResults[selectedRow.row].1
             
             tableView.deselectRow(at: selectedRow, animated: true)
-        } else if segue.identifier == criticProfileSegue {
+        }
+        else if segue.identifier == criticProfileSegue {
             let profileVC = segue.destination as! AccountViewController
             let selectedRow = tableView.indexPathForSelectedRow!
             profileVC.accountName = self.criticList[selectedRow.row].0
             profileVC.accountID = self.criticList[selectedRow.row].1
             
             tableView.deselectRow(at: selectedRow, animated: true)
-        } else {
+        }
+        else {
             fatalError("Unknown segue identifier")
         }
     }
     
     // code to dismiss keyboard when user clicks on background
-    
     func textFieldShouldReturn(textField:UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -169,7 +172,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 else {
                     print("Data nil")
                 }
-                }.resume()
+            }.resume()
         }
     }
 }

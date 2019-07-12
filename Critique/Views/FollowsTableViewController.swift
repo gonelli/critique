@@ -23,7 +23,6 @@ class FollowsTableViewController: UITableViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshView()
@@ -76,7 +75,8 @@ class FollowsTableViewController: UITableViewController {
                     self.tableView.refreshControl?.endRefreshing()
                 }
             }
-        } else {
+        }
+        else {
             db.collection("users").getDocuments{ (snapshot, _) in
                 for critic in snapshot!.documents {
                     for following in critic.data()["following"] as! [String] {
@@ -101,7 +101,6 @@ class FollowsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showFollowCritic", sender: self)
     }
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFollowCritic" {
@@ -113,7 +112,8 @@ class FollowsTableViewController: UITableViewController {
             print(self.critics[selectedRow.row].1)
             
             tableView.deselectRow(at: selectedRow, animated: true)
-        } else {
+        }
+        else {
             fatalError("Unknown segue identifier")
         }
     }

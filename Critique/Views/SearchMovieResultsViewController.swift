@@ -10,11 +10,11 @@ import UIKit
 
 class SearchMovieResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var searchResults: [(String, Movie)] = []
     let cellIdentifier = "movieSearchResultCell"
     let segueIdentifier = "movieDetailsSegue"
     let group = DispatchGroup()
 
-    var searchResults: [(String, Movie)] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,17 +26,14 @@ class SearchMovieResultsViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return the size of the specified section (default "section 0"
+        // return the size of the specified section (default "section 0")
         return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
         let row = indexPath.row
-        
         cell.textLabel?.text = searchResults[row].0
-        
         
         return cell
     }
@@ -53,5 +50,4 @@ class SearchMovieResultsViewController: UIViewController, UITableViewDelegate, U
             tableView.deselectRow(at: selectedRow, animated: true)
         }
     }
-    
 }

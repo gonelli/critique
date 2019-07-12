@@ -10,11 +10,9 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 
-
 class BlockedTableViewController: UITableViewController {
     
     var blockList : [(String, String)] = []
-    
     var db: Firestore!
     
     override func viewDidLoad() {
@@ -28,12 +26,14 @@ class BlockedTableViewController: UITableViewController {
                         if error == nil {
                             self.blockList.append((document!.data()!["name"] as! String, blockedCritic))
                             self.tableView.reloadData()
-                        } else {
+                        }
+                        else {
                             fatalError(error!.localizedDescription)
                         }
                     }
                 }
-            } else {
+            }
+            else {
                 fatalError(error!.localizedDescription)
             }
         }
@@ -69,7 +69,8 @@ class BlockedTableViewController: UITableViewController {
             profileVC.accountID = self.blockList[selectedRow.row].1
             
             tableView.deselectRow(at: selectedRow, animated: true)
-        } else {
+        }
+        else {
             fatalError("Unknown segue identifier")
         }
     }

@@ -10,15 +10,16 @@ import UIKit
 
 class MovieInfoViewController: UIViewController {
     
-    let composeSegue = "composeSegue"
     
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var synopsisTextView: UITextView!
     @IBOutlet var updateButton: UIButton!
     @IBOutlet var posterImage: UIImageView!
+    
     var movieTitle: String!
     var movieObject: Movie!
-    
+    let composeSegue = "composeSegue"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = movieTitle
@@ -32,27 +33,20 @@ class MovieInfoViewController: UIViewController {
         yearLabel.textColor = UIColor.gray
       
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
-//      self.navigationController?.navigationBar.topItem?.rightBarButtonItem = post
-      
     }
   
-  @objc func post() {
-    performSegue(withIdentifier: "toCompose", sender: self)
-  }
+    @objc func post() {
+        performSegue(withIdentifier: "toCompose", sender: self)
+    }
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         posterImage.image = movieObject.poster
     }
-    
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        navItem.title = movieTitle
-    }*/
-    
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "toCompose" {
-      let composeVC = segue.destination as! ComposeTableViewController
-      composeVC.imdbID = self.movieObject.imdbID
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCompose" {
+            let composeVC = segue.destination as! ComposeTableViewController
+            composeVC.imdbID = self.movieObject.imdbID
+        }
     }
-  }
 }

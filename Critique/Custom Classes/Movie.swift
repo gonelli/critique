@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-
 class Movie {
+    
+    var imdbID: String!
     var title: String = "(blank movie title)"
     var movieData: Dictionary<String, Any>!
     var poster: UIImage = UIImage()
     let group = DispatchGroup()
-    var imdbID: String!
     
     init (imdbId: String) { //tt0848228
       self.imdbID = imdbId
@@ -28,10 +28,6 @@ class Movie {
             self.getMoviePoster(photoString: (self.movieData["Poster"] as? String)!)
         }
     }
-  
-  
-  
-  
     
     func getMoviePoster(photoString: String) {
         // SOURCE: (thank you Andy Ibanez) https://stackoverflow.com/questions/39813497/swift-3-display-image-from-url/39813761
@@ -48,21 +44,22 @@ class Movie {
             // The download has finished.
             if let e = error {
                 print("Error downloading picture: \(e)")
-            } else {
+            }
+            else {
                 // No errors found.
                 // It would be weird if we didn't have a response, so check for that too.
                 if (response as? HTTPURLResponse) != nil {
-//                    print("Downloaded picture with response code \(res.statusCode)")
                     if let imageData = data {
-                      // Finally convert that Data into an image and do what you wish with it.
-                      if let image = UIImage(data: imageData) {
-                        self.poster = image
-//                        print("Got image")
-                      }
-                    } else {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        if let image = UIImage(data: imageData) {
+                            self.poster = image
+                        }
+                    }
+                    else {
                         print("Couldn't get image: Image is nil")
                     }
-                } else {
+                }
+                else {
                     print("Couldn't get response code for some reason")
                 }
             }
@@ -72,7 +69,6 @@ class Movie {
     
     func getMovieDict(imdbId: String) {
         if let url = URL(string: "http://www.omdbapi.com/?i=" + imdbId + "&apikey=" + "7cc21a66") {
-            
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     if String(data: data, encoding: .utf8) != nil {
@@ -94,6 +90,4 @@ class Movie {
             }.resume()
         }
     }
-    
-
 }

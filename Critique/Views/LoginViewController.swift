@@ -26,7 +26,8 @@ class LoginViewController: UITableViewController {
                     let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
                     parent.getReviews()
                 })
-            } else {
+            }
+            else {
                 let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                 self.present(alert, animated: true)
@@ -56,5 +57,4 @@ class LoginViewController: UITableViewController {
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

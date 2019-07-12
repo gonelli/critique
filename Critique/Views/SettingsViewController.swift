@@ -59,9 +59,9 @@ class SettingsViewController: UITableViewController {
         })
         
         controller.addAction(UIAlertAction(
-          title: "Confirm",
-          style: .default,
-          handler: { (paramAction:UIAlertAction!) in
+        title: "Confirm",
+        style: .default,
+        handler: { (paramAction:UIAlertAction!) in
             if let textFields = controller.textFields {
                 let theTextFields = textFields as [UITextField]
                 let enteredText = theTextFields[0].text!
@@ -72,11 +72,14 @@ class SettingsViewController: UITableViewController {
         ))
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(controller,animated:true,completion:nil)
-      } else if (indexPath.section == 0 && indexPath.row == 1) {
+      }
+      else if (indexPath.section == 0 && indexPath.row == 1) {
         performSegue(withIdentifier: "blockedSegue", sender: self)
-      } else if (indexPath.section == 0 && indexPath.row == 2) {
+      }
+      else if (indexPath.section == 0 && indexPath.row == 2) {
         changeAccountPrivacy()
-      } else if (indexPath.section == 1 && indexPath.row == 0) {
+      }
+      else if (indexPath.section == 1 && indexPath.row == 0) {
         try! Auth.auth().signOut()
         (self.parent?.parent as! UITabBarController).selectedIndex = 0
       }
@@ -94,10 +97,10 @@ class SettingsViewController: UITableViewController {
             doc.setData(["isPublic": !oldVal], merge: true)
             if !oldVal {
                 self.publicSwitch.setOn(true, animated: true)
-            } else {
+            }
+            else {
                 self.publicSwitch.setOn(false, animated: true)
             }
         }
     }
-    
 }

@@ -12,29 +12,28 @@ import FirebaseCore
 import FirebaseFirestore
 
 class ComposeTableViewController: UITableViewController {
-  
-  var db: Firestore!
-  
-  var imdbID: String!
-  
-  @IBOutlet weak var scoreTF: UITextField!
-  @IBOutlet weak var reviewTV: UITextView!
-  
-  override func viewDidLoad() {
-    let settings = FirestoreSettings()
-    Firestore.firestore().settings = settings
-    db = Firestore.firestore()
-  }
-  
-  @IBAction func post(_ sender: Any) {
-    if let currentUser = Auth.auth().currentUser {
-      db.collection("reviews").document("\(currentUser.uid)_\(imdbID!)").setData([
-        "criticID" : currentUser.uid,
-        "imdbID" : imdbID as Any,
-        "body" : reviewTV.text as Any,
-        "score" : Double(scoreTF.text!) as Any
-        ])
-        _ = navigationController?.popViewController(animated: true)
+    
+    var db: Firestore!
+    var imdbID: String!
+    
+    @IBOutlet weak var scoreTF: UITextField!
+    @IBOutlet weak var reviewTV: UITextView!
+    
+    override func viewDidLoad() {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
     }
-  }
+    
+    @IBAction func post(_ sender: Any) {
+        if let currentUser = Auth.auth().currentUser {
+            db.collection("reviews").document("\(currentUser.uid)_\(imdbID!)").setData([
+                "criticID" : currentUser.uid,
+                "imdbID" : imdbID as Any,
+                "body" : reviewTV.text as Any,
+                "score" : Double(scoreTF.text!) as Any
+                ])
+                _ = navigationController?.popViewController(animated: true)
+        }
+    }
 }

@@ -14,9 +14,9 @@ import Foundation
 
 class AccountViewController: UIViewController {
     
-    var db: Firestore!
     @IBOutlet var accountTabLabel: UILabel!
     
+    var db: Firestore!
     var accountName = ""
     var accountID = ""
     let followersSegue = "followersSegue"
@@ -24,9 +24,6 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: set name to Firebase username
-        // TODO: Popup action for Follow, Block, & Message.
-        // Since the "..." would be covered on the left side by back button
         initializeFirestore()
     }
     
@@ -39,11 +36,13 @@ class AccountViewController: UIViewController {
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
                     self.title = self.accountName
-                } else {
+                }
+                else {
                     fatalError(error!.localizedDescription)
                 }
             }
-        } else {
+        }
+        else {
             self.title = accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
@@ -60,7 +59,8 @@ class AccountViewController: UIViewController {
         
         if segue.identifier == followersSegue {
             nextVC.lookupType = "Followers"
-        } else if segue.identifier == followingSegue {
+        }
+        else if segue.identifier == followingSegue {
             nextVC.lookupType = "Following"
         }
         
@@ -117,7 +117,7 @@ class AccountViewController: UIViewController {
                         fatalError(error!.localizedDescription)
                     }
                 }
-        }
+            }
         )
         
         let messageAction = UIAlertAction(
@@ -198,9 +198,7 @@ class AccountViewController: UIViewController {
         }
         
         controller.addAction(cancelAction)
-        
         present(controller, animated: true, completion: nil)
     }
-    
-    
+
 }
