@@ -42,4 +42,4 @@ Tony Gonelli (20%)
 
 - Messaging
 - Likes and dislikes on reviews
-- Links from review and following to movie info and profile
+- Links from a review to movie info and profile screens
