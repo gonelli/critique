@@ -340,10 +340,13 @@
                             <outlet property="delegate" destination="nBl-F5-t9Y" id="tG4-nd-GiZ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="Fq4-Js-ghB" kind="show" identifier="showBlockedCritic" id="Uaj-vh-Icn"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89O-NO-d3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-601" y="1828"/>
+            <point key="canvasLocation" x="-1410" y="2510"/>
         </scene>
         <!--Feed-->
         <scene sceneID="atS-aT-wHP">

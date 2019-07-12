@@ -45,6 +45,10 @@ class BlockedTableViewController: UITableViewController {
         self.db = Firestore.firestore()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showBlockedCritic", sender: self)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return blockList.count
     }
@@ -56,5 +60,19 @@ class BlockedTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBlockedCritic" {
+            let profileVC = segue.destination as! AccountViewController
+            let selectedRow = tableView.indexPathForSelectedRow!
+            profileVC.accountName = self.blockList[selectedRow.row].0
+            profileVC.accountID = self.blockList[selectedRow.row].1
+            
+            tableView.deselectRow(at: selectedRow, animated: true)
+        } else {
+            fatalError("Unknown segue identifier")
+        }
+    }
+
     
 }
