@@ -17,7 +17,7 @@ class FollowsTableViewController: UITableViewController {
     var db: Firestore!
     var lookupType: String = "Following"
     var user: String!
-    var critics: [String] = [] {
+    var critics: [(String, String)] = [] {
         didSet {
             self.tableView.reloadData()
         }
@@ -63,13 +63,13 @@ class FollowsTableViewController: UITableViewController {
     }
     
     func getCritics() {
-        var critics: [String] = []
+        var critics: [(String, String)] = []
         if lookupType == "Following" {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
                     for followed in following {
                         self.db.collection("users").document(followed).getDocument{ (snapshot, _) in
-                            critics.append(snapshot?.data()?["name"] as! String)
+                            critics.append((snapshot?.data()?["name"] as! String, followed))
                             self.critics = critics
                         }
                     }
@@ -81,7 +81,8 @@ class FollowsTableViewController: UITableViewController {
                 for critic in snapshot!.documents {
                     for following in critic.data()["following"] as! [String] {
                         if following == self.user {
-                            critics.append( critic.data()["name"] as! String )
+                            // TODO: 'following' is not the right id. Must get id from follower
+                            critics.append((critic.data()["name"] as! String, following))
                         }
                     }
                 }
@@ -93,8 +94,27 @@ class FollowsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
-        cell.textLabel?.text = critics[indexPath.row]
+        cell.textLabel?.text = critics[indexPath.row].0
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showFollowCritic", sender: self)
+    }
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFollowCritic" {
+            let profileVC = segue.destination as! AccountViewController
+            let selectedRow = tableView.indexPathForSelectedRow!
+            profileVC.accountName = self.critics[selectedRow.row].0
+            profileVC.accountID = self.critics[selectedRow.row].1
+            print(self.critics[selectedRow.row].0)
+            print(self.critics[selectedRow.row].1)
+            
+            tableView.deselectRow(at: selectedRow, animated: true)
+        } else {
+            fatalError("Unknown segue identifier")
+        }
+    }
 }
