@@ -20,6 +20,7 @@ class MovieInfoViewController: UIViewController {
     var movieObject: Movie!
     let composeSegue = "composeSegue"
 
+    // Load header - movie details, synopsis, average score, etc.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = movieTitle
@@ -43,6 +44,7 @@ class MovieInfoViewController: UIViewController {
         posterImage.image = movieObject.poster
     }
 
+    // Segue to Compose Review screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCompose" {
             let composeVC = segue.destination as! ComposeTableViewController

@@ -16,7 +16,7 @@ class FeedTableViewController: UITableViewController {
     var db: Firestore!
     var reviews: [Review] = [] {
         didSet {
-            self.tableView.reloadData()
+            self.tableView.reloadData() // Reload table after reviews are fetched
         }
     }
     let expandedReviewSegueID = "expandedReviewSegueID"
@@ -30,13 +30,14 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
+    // Either get reviews for valid user or direct them to create a new account
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (Auth.auth().currentUser == nil) {
             self.performSegue(withIdentifier: "toCreateAccount", sender: self)
         }
         else {
-                getReviews()
+            getReviews()
         }
     }
     
@@ -56,6 +57,7 @@ class FeedTableViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    // Fetches reviews of critics user is following and populates the feed
     func getReviews() {
         var reviews: [Review] = []
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
@@ -88,6 +90,7 @@ class FeedTableViewController: UITableViewController {
         return cell
     }
     
+    // If body of a review is touched, open an expanded view of it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == expandedReviewSegueID, let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
             nextVC.deligate = self

@@ -25,7 +25,7 @@ Tony Gonelli (20%)
 
 # Deviations
 
-- Our alpha submission offers nearly everything promised, aside from two of our settings; blocking and account privacy. These settings are tracked in the database, but do not yet affect user search. This was due to us not having planned to have user search in Alpha, but in Beta.
+- Our alpha submission offers nearly everything promised, aside from two of our settings; blocking and account privacy. These settings are tracked in the database, but do not yet affect user search. This was due to us not having planned to have user search in Alpha, but in Beta, so Ameya has not yet figured out how to filter in Algolia.
 - We went ahead to some of our beta features and have implemented movie info, movie search, and critic page. They accomplish their basic functions, and only need to have a few features added. We jumped ahead to them because our idea for the design led to us to realize that review posting and the feed would need them as middle grounds for navigation, which we hadn't noticed during the proposal.
 
 ## Things to fix:

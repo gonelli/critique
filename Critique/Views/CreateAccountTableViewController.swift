@@ -30,12 +30,14 @@ class CreateAccountTableViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    // Attempt to create an account for user, and automatically sign them in if successful
     @IBAction func signUp(_ sender: Any) {
         if emailTF.text != nil && emailTF.text != "" && passwordTF.text == confirmPasswordTF.text {
             emailTF.text = emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
                 user, error in
                 if error == nil {
+                    // Create a document for each user in the database
                     self.db.collection("users").document((user?.user.uid)!).setData([
                         "isPublic" : true,
                         "name" : self.usernameTF.text!,
@@ -46,25 +48,25 @@ class CreateAccountTableViewController: UITableViewController {
                             Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
                         }
                     )
-                    
                     self.dismiss(animated: true, completion: {
-                        // code for refrshing on sign in
+                        // code for refreshing on sign in
                         let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
                         parent.getReviews()
                     })
                 }
+                // Error on singing up
                 else {
                     let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     self.present(alert, animated: true)
                 }
             }
-        }
+        } // User did not fill sign up form
         else if passwordTF.text == confirmPasswordTF.text {
             let alert = UIAlertController(title: "Error", message: "Fill in all required fields.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(alert, animated: true)
-        }
+        } // Passwords do not match
         else {
             let alert = UIAlertController(title: "Error", message: "Passwords do not match.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))

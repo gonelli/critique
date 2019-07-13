@@ -17,6 +17,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var posterImage: UIImageView!
     
+    // A table cell in the Feed is defined by the Review it corresponds to
     var review: Review? {
         didSet {
             scoreLabel.text = "\(review!.score ?? 0)"

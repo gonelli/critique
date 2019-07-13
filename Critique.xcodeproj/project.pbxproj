@@ -24,10 +24,10 @@
 		55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */; };
 		55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2022CBDF92004A70A9 /* SettingsViewController.swift */; };
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
-		55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */; };
 		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
 		5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */; };
 		5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */; };
+		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,12 +52,12 @@
 		55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		55672C2022CBDF92004A70A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieResultsViewController.swift; sourceTree = "<group>"; };
 		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewTableViewController.swift; sourceTree = "<group>"; };
 		5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +75,7 @@
 		1ACF975822C197DC001A1B7A = {
 			isa = PBXGroup;
 			children = (
+				9DA2E47C22D985D500FFDA61 /* README.md */,
 				1ACF976322C197DC001A1B7A /* Critique */,
 				1ACF976222C197DC001A1B7A /* Products */,
 				9001164946C0062C676EC24C /* Pods */,
@@ -108,7 +109,6 @@
 				1A4BB78322D15E090027E606 /* FeedTableViewController.swift */,
 				5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */,
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
-				55D74C2C22CE935800434B69 /* SearchMovieResultsViewController.swift */,
 				1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */,
 				55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */,
 				55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */,
@@ -222,6 +222,7 @@
 			files = (
 				1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */,
 				1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */,
+				9DA2E47D22D985D500FFDA61 /* README.md in Resources */,
 				1ACF976C22C197DD001A1B7A /* Assets.xcassets in Resources */,
 				1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */,
 			);
@@ -289,7 +290,6 @@
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
 				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
-				55D74C2D22CE935800434B69 /* SearchMovieResultsViewController.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
 				1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */,
 				1ACF976522C197DC001A1B7A /* AppDelegate.swift in Sources */,

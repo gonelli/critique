@@ -11,13 +11,14 @@ import UIKit
 
 class Movie {
     
-    var imdbID: String!
+    var imdbID: String! // A unique identifier for a movie on IMDB
     var title: String = "(blank movie title)"
     var movieData: Dictionary<String, Any>!
     var poster: UIImage = UIImage()
     let group = DispatchGroup()
     
-    init (imdbId: String) { //tt0848228
+    // Initialize object using the IMDB ID
+    init (imdbId: String) {
       self.imdbID = imdbId
         self.group.enter()
         
@@ -29,6 +30,7 @@ class Movie {
         }
     }
     
+    // Load poster given a URL
     func getMoviePoster(photoString: String) {
         // SOURCE: (thank you Andy Ibanez) https://stackoverflow.com/questions/39813497/swift-3-display-image-from-url/39813761
         
@@ -67,6 +69,7 @@ class Movie {
         downloadPicTask.resume()
     }
     
+    // Fetch a movie's info in JSON format given an IMDB ID
     func getMovieDict(imdbId: String) {
         if let url = URL(string: "http://www.omdbapi.com/?i=" + imdbId + "&apikey=" + "7cc21a66") {
             URLSession.shared.dataTask(with: url) { data, response, error in

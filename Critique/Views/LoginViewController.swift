@@ -19,6 +19,7 @@ class LoginViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    // Attempt to sign in after button is pressed
     @IBAction func signInPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passField.text!) { (result, error) in
             if error == nil {
@@ -27,6 +28,7 @@ class LoginViewController: UITableViewController {
                     parent.getReviews()
                 })
             }
+            // Error while signing in
             else {
                 let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
@@ -35,6 +37,7 @@ class LoginViewController: UITableViewController {
         }
     }
     
+    // Send a password reset email if the user forgot their password
     @IBAction func forgotPasswordPressed(_ sender: Any) {
         // Fill in dialog with email from TF
         var emailAddress:String? = ""

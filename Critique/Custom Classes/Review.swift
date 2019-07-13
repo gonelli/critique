@@ -30,6 +30,7 @@ class Review {
         db = Firestore.firestore()
     }
     
+    // Fetch movie info in JSON format given an IMDB id
     func getMovieData(completion: @escaping ([String : Any]) -> Void) {
         if let movieData = movieData {
             completion(movieData)
@@ -38,7 +39,7 @@ class Review {
             if let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID ?? "")&apikey=7cc21a66") {
                 AF.request(url).responseJSON { (response) in
                     if let json = response.result.value as? [String : Any] {
-                        self.movieData = json as! [String : Any]
+                        self.movieData = json
                         completion(json)
                     }
                 }

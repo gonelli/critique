@@ -20,6 +20,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     var deligate: UIViewController?
     var expanedReview: Review? = nil
     
+    // Fill in review's elements - movie title, poster, and critic name
     override func viewDidLoad() {
         super.viewDidLoad()
         

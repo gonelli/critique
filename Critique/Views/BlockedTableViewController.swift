@@ -15,6 +15,7 @@ class BlockedTableViewController: UITableViewController {
     var blockList : [(String, String)] = []
     var db: Firestore!
     
+    // Fetch and populate table with list of blocked users
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeFirestore()
@@ -61,6 +62,7 @@ class BlockedTableViewController: UITableViewController {
         return cell
     }
     
+    // Segue to selected blocked critic's Profile page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showBlockedCritic" {
             let profileVC = segue.destination as! AccountViewController

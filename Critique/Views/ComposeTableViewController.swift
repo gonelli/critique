@@ -25,6 +25,7 @@ class ComposeTableViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    // Create a new review document in database after review is posted
     @IBAction func post(_ sender: Any) {
         if let currentUser = Auth.auth().currentUser {
             db.collection("reviews").document("\(currentUser.uid)_\(imdbID!)").setData([

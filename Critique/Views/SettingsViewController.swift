@@ -31,6 +31,7 @@ class SettingsViewController: UITableViewController {
         
         initializeFirestore()
         
+        // Set switch based on account privacy
         let doc = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
         doc.getDocument { (document, error) in
             let val = document!.data()!["isPublic"]! as! Bool
@@ -46,8 +47,9 @@ class SettingsViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    // Take action depending on what setting the user pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+      // Change Name
       if (indexPath.section == 0 && indexPath.row == 0) {
         let controller = UIAlertController(
           title: "Change Name",
@@ -73,12 +75,15 @@ class SettingsViewController: UITableViewController {
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(controller,animated:true,completion:nil)
       }
+      // Blocked
       else if (indexPath.section == 0 && indexPath.row == 1) {
         performSegue(withIdentifier: "blockedSegue", sender: self)
       }
+      // Account Privacy
       else if (indexPath.section == 0 && indexPath.row == 2) {
         changeAccountPrivacy()
       }
+      // Sign Out
       else if (indexPath.section == 1 && indexPath.row == 0) {
         try! Auth.auth().signOut()
         (self.parent?.parent as! UITabBarController).selectedIndex = 0
@@ -90,6 +95,7 @@ class SettingsViewController: UITableViewController {
         changeAccountPrivacy()
     }
     
+    // Store and flip switch
     func changeAccountPrivacy() {
         let doc = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
         doc.getDocument { (document, error) in

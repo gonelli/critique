@@ -16,10 +16,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    var movieList:Array<(String, Movie)> = Array<(String, Movie)>()
-    var criticList: [(String, String)] = []
+    var movieList:Array<(String, Movie)> = Array<(String, Movie)>() // list of movie results - tuple stores name and Movie object
+    var criticList: [(String, String)] = [] // list of critic results - tuple stores name and UID
     let group = DispatchGroup()
-    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b") // Algolia client
     let cellIdentifier = "searchResultCell"
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
@@ -31,7 +31,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
     }
     
+    // Get search results for the provided string
     @IBAction func searchPressed(_ sender: Any) {
+        // Search for movie
         if segmentedControl.selectedSegmentIndex == 0 {
             self.group.enter()  // i.e. semaphore up
             self.getMovieList(movieQuery: self.searchBar.text!)
@@ -41,6 +43,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
+        // Search for critic
         else {
             self.criticList = []
             client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
@@ -81,6 +84,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    // Take user to Movie Info or Profile page after they touch a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segmentedControl.selectedSegmentIndex == 0 {
             performSegue(withIdentifier: movieInfoSegue, sender: self)
@@ -90,6 +94,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // Reset search results and reload on a segment change
     @IBAction func segmentChanged(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             criticList = []
@@ -101,15 +106,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Segue to Movie Info page
         if segue.identifier == movieInfoSegue {
             let infoVC = segue.destination as! MovieInfoViewController
             let selectedRow = tableView.indexPathForSelectedRow!
             infoVC.movieTitle = self.movieList[selectedRow.row].0
             infoVC.movieObject = self.movieList[selectedRow.row].1
-            // later need code to populate movie info page using info from using OMDB for movie with IMDB id searchResults[selectedRow.row].1
             
             tableView.deselectRow(at: selectedRow, animated: true)
         }
+        // Segue to Profile page
         else if segue.identifier == criticProfileSegue {
             let profileVC = segue.destination as! AccountViewController
             let selectedRow = tableView.indexPathForSelectedRow!
@@ -137,7 +143,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.resignFirstResponder()
     }
 
-    
+    // Gets search results for a movie query using the OMDB API
     func getMovieList(movieQuery: String) {
         let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=" + "7cc21a66"
         let allowedUrlString = unallowedUrlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
@@ -146,6 +152,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if let data = data {
                     if String(data: data, encoding: .utf8) != nil {
                         do {
+                            // Results from OMDB are in JSON format
                             let movieNSDict : NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
                             
                             DispatchQueue.main.async {
@@ -155,7 +162,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     var titleList = Array<(String, Movie)>()
                                     for movie in search {
                                         let mediaType: String = movie["Type"]! as! String
-                                        if mediaType != "movie" {
+                                        if mediaType != "movie" { // Ignore TV shows
                                             continue
                                         }
                                         titleList.append((movie["Title"]! as! String, Movie(imdbId: movie["imdbID"] as! String)))

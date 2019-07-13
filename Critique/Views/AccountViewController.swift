@@ -27,9 +27,11 @@ class AccountViewController: UIViewController {
         initializeFirestore()
     }
     
+    // Fill in details of page based on whose Profile it is
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Looking at own profile
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
@@ -42,6 +44,7 @@ class AccountViewController: UIViewController {
                 }
             }
         }
+        // Looking at another critic's profile
         else {
             self.title = accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
@@ -54,6 +57,7 @@ class AccountViewController: UIViewController {
         db = Firestore.firestore()
     }
     
+    // Segue to Following/Followers screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! FollowsTableViewController
         
@@ -67,6 +71,7 @@ class AccountViewController: UIViewController {
         nextVC.user = accountID
     }
 
+    // Generate action screen for when user clicks on options button
     @objc func accountAction() {
         let controller = UIAlertController(
             title: nil,
@@ -108,7 +113,7 @@ class AccountViewController: UIViewController {
                 let ref = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
                 ref.getDocument { (document, error) in
                     if error == nil {
-                        // When blocked button pressed
+                        // When unblock pressed
                         var blocked = document!.data()!["blocked"] as! [String]
                         blocked.removeAll { $0 == self.accountID }
                         ref.setData(["blocked": blocked], merge: true)
@@ -133,7 +138,7 @@ class AccountViewController: UIViewController {
             handler: {(alert) in
                 ref.getDocument { (document, error) in
                     if error == nil {
-                        // When follow button pressed
+                        // When follow pressed
                         var following = document!.data()!["following"] as! [String]
                         following.append(self.accountID)
                         ref.setData(["following": following], merge: true)
@@ -151,7 +156,7 @@ class AccountViewController: UIViewController {
             handler: {(alert) in
                 ref.getDocument { (document, error) in
                     if error == nil {
-                        // When unfollow button pressed
+                        // When unfollow pressed
                         var following = document!.data()!["following"] as! [String]
                         following.removeAll { $0 == self.accountID }
                         ref.setData(["following": following], merge: true)
@@ -174,6 +179,7 @@ class AccountViewController: UIViewController {
         followAction.setValue(UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0), forKey: "titleTextColor")
         cancelAction.setValue(UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0), forKey: "titleTextColor")
         
+        // Selectively include options based on if they are blocked or followed
         ref.getDocument { (document, error) in
             if error == nil {
                 let following = document!.data()!["following"] as! [String]

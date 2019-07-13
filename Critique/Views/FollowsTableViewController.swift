@@ -61,8 +61,10 @@ class FollowsTableViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    // Get all the critics to populate the table
     func getCritics() {
         var critics: [(String, String)] = []
+        // Get all critics the user is following
         if lookupType == "Following" {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
@@ -76,6 +78,7 @@ class FollowsTableViewController: UITableViewController {
                 }
             }
         }
+        // Get all critics the user is followed by
         else {
             db.collection("users").getDocuments{ (snapshot, _) in
                 for critic in snapshot!.documents {
@@ -102,6 +105,7 @@ class FollowsTableViewController: UITableViewController {
         performSegue(withIdentifier: "showFollowCritic", sender: self)
     }
     
+    // Segue to selected critic's Profile
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFollowCritic" {
             let profileVC = segue.destination as! AccountViewController
