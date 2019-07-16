@@ -238,6 +238,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="9tA-IH-aHB"/>
                     <connections>
+                        <outlet property="followersButtonOutlet" destination="ZVu-uU-5Iy" id="ioc-6i-l5D"/>
+                        <outlet property="followingButtonOutlet" destination="w0g-DD-Wpu" id="z3C-Gu-XCi"/>
                         <outlet property="tableView" destination="2yr-yb-0Wp" id="0Y2-dm-LBj"/>
                     </connections>
                 </viewController>
@@ -1260,7 +1262,7 @@
         <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DtX-qp-0oM"/>
+        <segue reference="Awe-wV-vO5"/>
         <segue reference="tYd-WL-nvm"/>
         <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>

@@ -16,6 +16,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var accountTabLabel: UILabel!
+    @IBOutlet weak var followersButtonOutlet: UIButton!
+    @IBOutlet weak var followingButtonOutlet: UIButton!
     
     var db: Firestore!
     var accountName = ""
@@ -65,6 +67,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func refresh() {
         getReviews()
+        //getFollowNumbers()
     }
     
     func addRefreshView() {
@@ -97,6 +100,20 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             })
         }
     }
+    
+//    func getFollowNumbers() {
+//        // Number of Followers
+//        db.collection("users").getDocuments{ (snapshot, _) in
+//            for critic in snapshot!.documents {
+//                for following in critic.data()["following"] as! [String] {
+//                    if following == self.user {
+//                        critics.append((critic.data()["name"] as! String, critic.documentID))
+//                    }
+//                }
+//            }
+//            self.tableView.
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.reviews.count
