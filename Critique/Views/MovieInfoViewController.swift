@@ -13,7 +13,8 @@ import FirebaseFirestore
 
 class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    @IBOutlet var segmentChanged: UISegmentedControl!
+    @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var yearLabel: UILabel!
@@ -25,6 +26,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var movieObject: Movie!
     var db: Firestore!
     var reviews: [Review] = [] {
+        didSet {
+            self.tableView.reloadData() // Reload table after reviews are fetched
+        }
+    }
+    var followingReviews: [Review] = [] {
         didSet {
             self.tableView.reloadData() // Reload table after reviews are fetched
         }
@@ -66,7 +72,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc func refresh() {
-        getReviews()
+        if segmentedControl.selectedSegmentIndex == 0 {
+            getReviews()
+        }
+        else {
+            getFollowingReviews()
+        }
     }
     
     func addRefreshView() {
@@ -111,14 +122,63 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func getFollowingReviews() {
+        var followingReviews: [Review] = []
+        let currentMovieID = movieObject.movieData["imdbID"] as! String
+        
+        db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            if let following = document?.data()?["following"] as? [String] {
+                for followed in following {
+                    self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in
+                        for review in snapshot!.documents {
+                            let body = review.data()["body"] as! String
+                            let score = review.data()["score"] as! NSNumber
+                            let criticID = review.data()["criticID"] as! String
+                            let imdbID = review.data()["imdbID"] as! String
+                            
+                            if imdbID == currentMovieID {
+                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                            }
+                        }
+                        self.followingReviews = followingReviews
+                        self.tableView.refreshControl?.endRefreshing()
+                    })
+                }
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            self.reviews = []
+        }
+        else {
+            self.followingReviews = []
+        }
+        refresh()
+
+    }
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.reviews.count
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return self.reviews.count
+        }
+        else {
+            return self.followingReviews.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieInfoCell", for: indexPath) as! FeedTableViewCell
-        cell.review = self.reviews[indexPath.row]
+        if segmentedControl.selectedSegmentIndex == 0 {
+            cell.review = self.reviews[indexPath.row]
+        }
+        else {
+            cell.review = self.followingReviews[indexPath.row]
+        }
         return cell
+
     }
 
     // Segue to Compose Review screen
@@ -129,7 +189,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if segue.identifier == "movieInfoExpandSegue", let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
             nextVC.deligate = self
-            nextVC.expanedReview = reviews[reviewIndex]
+            if segmentedControl.selectedSegmentIndex == 0 {
+                nextVC.expanedReview = reviews[reviewIndex]
+            }
+            else {
+                nextVC.expanedReview = followingReviews[reviewIndex]
+            }
         }
 
     }

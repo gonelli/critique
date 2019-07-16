@@ -69,12 +69,10 @@ class FollowsTableViewController: UITableViewController {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
                     for followed in following {
-                        if followed != Auth.auth().currentUser!.uid {
                             self.db.collection("users").document(followed).getDocument{ (snapshot, _) in
                                 critics.append((snapshot?.data()?["name"] as! String, followed))
                                 self.critics = critics
                             }
-                        }
                     }
                     self.tableView.refreshControl?.endRefreshing()
                 }
@@ -85,9 +83,8 @@ class FollowsTableViewController: UITableViewController {
             db.collection("users").getDocuments{ (snapshot, _) in
                 for critic in snapshot!.documents {
                     for following in critic.data()["following"] as! [String] {
-                        if following == self.user { // && following != Auth.auth().currentUser!.uid
-                            // TODO: 'following' is not the right id. Must get id from follower
-                            critics.append((critic.data()["name"] as! String, following))
+                        if following == self.user {
+                            critics.append((critic.data()["name"] as! String, critic.documentID))
                         }
                     }
                 }

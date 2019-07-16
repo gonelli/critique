@@ -238,6 +238,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="9tA-IH-aHB"/>
                     <connections>
+                        <outlet property="followersButtonOutlet" destination="ZVu-uU-5Iy" id="ioc-6i-l5D"/>
+                        <outlet property="followingButtonOutlet" destination="w0g-DD-Wpu" id="z3C-Gu-XCi"/>
                         <outlet property="tableView" destination="2yr-yb-0Wp" id="0Y2-dm-LBj"/>
                     </connections>
                 </viewController>
@@ -923,6 +925,9 @@
                                     <segment title="Following"/>
                                 </segments>
                                 <color key="tintColor" red="0.89226299519999996" green="0.15754258630000001" blue="0.079005636269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="Db6-gs-pth" eventType="valueChanged" id="ENQ-Ds-kFL"/>
+                                </connections>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7mx-tG-OpA">
                                 <rect key="frame" x="178" y="108" width="216" height="144"/>
@@ -977,6 +982,7 @@
                     <connections>
                         <outlet property="posterImage" destination="cIr-y9-6hU" id="Xvs-1P-rVr"/>
                         <outlet property="scoreLabel" destination="hgi-Mv-GQB" id="hGM-TL-1PH"/>
+                        <outlet property="segmentedControl" destination="WM1-pV-CpP" id="mIt-RK-36G"/>
                         <outlet property="synopsisTextView" destination="7mx-tG-OpA" id="Tit-dx-EIc"/>
                         <outlet property="tableView" destination="0SB-bn-vJ6" id="zTN-rd-tSD"/>
                         <outlet property="yearLabel" destination="Mku-32-Uwl" id="8lK-kd-62G"/>
@@ -1256,7 +1262,7 @@
         <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DtX-qp-0oM"/>
+        <segue reference="Awe-wV-vO5"/>
         <segue reference="tYd-WL-nvm"/>
         <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
