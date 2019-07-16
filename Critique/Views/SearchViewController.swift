@@ -9,7 +9,7 @@
 import UIKit
 import InstantSearchClient
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     
     @IBOutlet var searchBar: UISearchBar!
@@ -29,36 +29,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.title = "Search"
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    // Get search results for the provided string
-    @IBAction func searchPressed(_ sender: Any) {
-        // Search for movie
-        if segmentedControl.selectedSegmentIndex == 0 {
-            self.group.enter()  // i.e. semaphore up
-            self.getMovieList(movieQuery: self.searchBar.text!)
-            group.notify(queue: .main) { // Wait for dispatch after async
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        // Search for critic
-        else {
-            self.criticList = []
-            client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
-                if error == nil {
-                    guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
-                    for hit in hits {
-                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
-                    }
-                    self.tableView.reloadData()
-                }
-                else {
-                    fatalError(error!.localizedDescription)
-                }
-            }
-        }
+        searchBar.delegate = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,7 +73,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         else {
             movieList = Array<(String, Movie)>()
         }
-        searchPressed(segmentedControl!)
+        searchBarSearchButtonClicked(searchBar)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -141,6 +112,32 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        // Search for movie
+        if segmentedControl.selectedSegmentIndex == 0 {
+            self.group.enter()  // i.e. semaphore up
+            self.getMovieList(movieQuery: self.searchBar.text!)
+            group.notify(queue: .main) { // Wait for dispatch after async
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+            // Search for critic
+        else {
+            self.criticList = []
+            client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
+                if error == nil {
+                    guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
+                    for hit in hits {
+                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
+                    }
+                    self.tableView.reloadData()
+                }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
+        }
     }
 
     // Gets search results for a movie query using the OMDB API
