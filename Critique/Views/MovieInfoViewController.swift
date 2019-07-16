@@ -65,7 +65,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         posterImage.image = movieObject.poster
     }
     
-    // Fetches reviews of critics user is following and populates the feed
+    // Fetches reviews of critics user is following and populates the movie review page
     func getReviews() {
         var reviews: [Review] = []
         let currentMovieID = movieObject.movieData["imdbID"]!

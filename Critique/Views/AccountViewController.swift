@@ -12,19 +12,30 @@ import FirebaseFirestore
 import UIKit
 import Foundation
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var accountTabLabel: UILabel!
     
     var db: Firestore!
     var accountName = ""
     var accountID = ""
+    var reviews: [Review] = [] {
+        didSet {
+            self.tableView.reloadData() // Reload table after reviews are fetched
+        }
+    }
     let followersSegue = "followersSegue"
     let followingSegue = "followingSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         initializeFirestore()
+        getReviews()
+        // Brings up table behind overlapping tab bar
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 77, right: 0)
     }
     
     // Fill in details of page based on whose Profile it is
@@ -57,18 +68,53 @@ class AccountViewController: UIViewController {
         db = Firestore.firestore()
     }
     
-    // Segue to Following/Followers screen
+    // Fetches reviews of critics user is following and populates the account page
+    func getReviews() {
+        let currentUserID = Auth.auth().currentUser!.uid
+        var reviews: [Review] = []
+//        let currentMovieID = movieObject.movieData["imdbID"]!
+        db.collection("reviews").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            self.db.collection("reviews").whereField("criticID", isEqualTo: currentUserID).getDocuments(completion: { (snapshot, _) in
+                //TODO: custom MovieInfoCell, not FeedTableViewCell
+                for review in snapshot!.documents {
+                    let body = review.data()["body"] as! String
+                    let score = review.data()["score"] as! NSNumber
+                    let criticID = review.data()["criticID"] as! String
+                    let imdbID = review.data()["imdbID"] as! String
+                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                }
+                self.reviews = reviews
+                self.tableView.refreshControl?.endRefreshing()
+            })
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.reviews.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "accountReviewCell", for: indexPath) as! FeedTableViewCell
+        cell.review = self.reviews[indexPath.row]
+        return cell
+    }
+
+    // Segue to Following/Followers/Expanded screens
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextVC = segue.destination as! FollowsTableViewController
-        
         if segue.identifier == followersSegue {
+            let nextVC = segue.destination as! FollowsTableViewController
             nextVC.lookupType = "Followers"
+            nextVC.user = accountID
         }
         else if segue.identifier == followingSegue {
+            let nextVC = segue.destination as! FollowsTableViewController
             nextVC.lookupType = "Following"
+            nextVC.user = accountID
         }
-        
-        nextVC.user = accountID
+        else if segue.identifier == "accountMovieExpandSegue", let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
+            nextVC.deligate = self
+            nextVC.expanedReview = reviews[reviewIndex]
+        }
     }
 
     // Generate action screen for when user clicks on options button
