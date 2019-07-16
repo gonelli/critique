@@ -14,6 +14,7 @@ import FirebaseFirestore
 class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var synopsisTextView: UITextView!
@@ -24,6 +25,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var movieObject: Movie!
     var db: Firestore!
     var reviews: [Review] = [] {
+        didSet {
+            self.tableView.reloadData() // Reload table after reviews are fetched
+        }
+    }
+    var scores: [Double] = [] {
         didSet {
             self.tableView.reloadData() // Reload table after reviews are fetched
         }
@@ -87,6 +93,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 for review in snapshot!.documents {
                     let body = review.data()["body"] as! String
                     let score = review.data()["score"] as! NSNumber
+                    self.scores.append(Double(truncating: score))
+                    let avgScore = ((self.scores.reduce(0, +) / Double(self.scores.count)) * pow(10.0, Double(2))
+                        ).rounded() / pow(10.0, Double(2))
+                    self.scoreLabel.text = String(avgScore) + " / 10"
+                    
                     let criticID = review.data()["criticID"] as! String
                     let imdbID = review.data()["imdbID"] as! String
                     reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
@@ -94,6 +105,9 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.reviews = reviews
                 self.tableView.refreshControl?.endRefreshing()
             })
+        }
+        if (scores.count == 0) {
+            self.scoreLabel.text = "No scores"
         }
     }
     

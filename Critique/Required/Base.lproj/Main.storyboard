@@ -948,7 +948,7 @@
                                     <constraint firstAttribute="width" constant="50" id="enr-X7-n0I"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgi-Mv-GQB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgi-Mv-GQB">
                                 <rect key="frame" x="240" y="259" width="109" height="35"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                 <nil key="textColor"/>
@@ -975,6 +975,7 @@
                     </view>
                     <connections>
                         <outlet property="posterImage" destination="cIr-y9-6hU" id="Xvs-1P-rVr"/>
+                        <outlet property="scoreLabel" destination="hgi-Mv-GQB" id="hGM-TL-1PH"/>
                         <outlet property="synopsisTextView" destination="7mx-tG-OpA" id="Tit-dx-EIc"/>
                         <outlet property="tableView" destination="0SB-bn-vJ6" id="zTN-rd-tSD"/>
                         <outlet property="yearLabel" destination="Mku-32-Uwl" id="8lK-kd-62G"/>
@@ -1253,7 +1254,7 @@
         <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m0R-vf-5JF"/>
+        <segue reference="DtX-qp-0oM"/>
         <segue reference="tYd-WL-nvm"/>
         <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
