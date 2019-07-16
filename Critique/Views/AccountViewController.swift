@@ -72,7 +72,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.accountID = ""
+//        self.accountID = ""
     }
     
     @objc func refresh() {
