@@ -27,7 +27,17 @@ class ComposeTableViewController: UITableViewController {
     
     // Create a new review document in database after review is posted
     @IBAction func post(_ sender: Any) {
-        if let currentUser = Auth.auth().currentUser {
+        if (Double(scoreTF.text!) == nil || reviewTV.text == "") {
+            let alert = UIAlertController(title: "All Fields Required", message: "Fill in the score and review fields", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        else if (Double(scoreTF.text!)! > 10  || Double(scoreTF.text!)! < 0) {
+            let alert = UIAlertController(title: "Enter a Valid Score", message: "Scores can be any number from 0-10", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        else if let currentUser = Auth.auth().currentUser {
             db.collection("reviews").document("\(currentUser.uid)_\(imdbID!)").setData([
                 "criticID" : currentUser.uid,
                 "imdbID" : imdbID as Any,
