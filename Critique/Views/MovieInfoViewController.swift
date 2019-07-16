@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
-class MovieInfoViewController: UIViewController {
+class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var synopsisTextView: UITextView!
     @IBOutlet var updateButton: UIButton!
@@ -18,6 +22,12 @@ class MovieInfoViewController: UIViewController {
     
     var movieTitle: String!
     var movieObject: Movie!
+    var db: Firestore!
+    var reviews: [Review] = [] {
+        didSet {
+            self.tableView.reloadData() // Reload table after reviews are fetched
+        }
+    }
     let composeSegue = "composeSegue"
 
     // Load header - movie details, synopsis, average score, etc.
@@ -34,6 +44,17 @@ class MovieInfoViewController: UIViewController {
         yearLabel.textColor = UIColor.gray
       
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(self.post))
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        initializeFirestore()
+        getReviews()
+    }
+    
+    func initializeFirestore() {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
     }
   
     @objc func post() {
@@ -42,6 +63,36 @@ class MovieInfoViewController: UIViewController {
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         posterImage.image = movieObject.poster
+    }
+    
+    // Fetches reviews of critics user is following and populates the feed
+    func getReviews() {
+        var reviews: [Review] = []
+        let currentMovieID = movieObject.movieData["imdbID"]!
+        db.collection("reviews").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            self.db.collection("reviews").whereField("imdbID", isEqualTo: currentMovieID).getDocuments(completion: { (snapshot, _) in
+                //TODO: custom MovieInfoCell, not FeedTableViewCell
+                for review in snapshot!.documents {
+                    let body = review.data()["body"] as! String
+                    let score = review.data()["score"] as! NSNumber
+                    let criticID = review.data()["criticID"] as! String
+                    let imdbID = review.data()["imdbID"] as! String
+                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                }
+                self.reviews = reviews
+                self.tableView.refreshControl?.endRefreshing()
+            })
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.reviews.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieInfoCell", for: indexPath) as! FeedTableViewCell
+        cell.review = self.reviews[indexPath.row]
+        return cell
     }
 
     // Segue to Compose Review screen
