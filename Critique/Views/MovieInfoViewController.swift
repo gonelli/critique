@@ -116,6 +116,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                             if (document!.data()!["isPublic"] as! Bool) {
                                 // TO-DO: Block around reviews
                                 reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                                self.reviews = reviews
                             }
                         }
                         else {

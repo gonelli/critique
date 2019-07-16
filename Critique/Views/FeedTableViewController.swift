@@ -30,6 +30,11 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.reviews = []
+    }
+    
     // Either get reviews for valid user or direct them to create a new account
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -59,6 +64,7 @@ class FeedTableViewController: UITableViewController {
     
     // Fetches reviews of critics user is following and populates the feed
     func getReviews() {
+        self.reviews = []
         var reviews: [Review] = []
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if let following = document?.data()?["following"] as? [String] {
