@@ -30,8 +30,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("--viewDidLoad--")
-        
         tableView.delegate = self
         tableView.dataSource = self
         addRefreshView()
@@ -43,7 +41,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // Fill in details of page based on whose Profile it is
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)        
+        super.viewWillAppear(animated)
         // Looking at own profile
         reviews = []
         tableView.reloadData()
@@ -68,6 +66,10 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.navigationItem.title = self.accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
     @objc func refresh() {
@@ -110,7 +112,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getFollowNumbers() {
-        print("\nCrash0--\(accountID)\n")
         // Number of Following
         db.collection("users").document(accountID).getDocument { (document, error) in
             if error == nil {
