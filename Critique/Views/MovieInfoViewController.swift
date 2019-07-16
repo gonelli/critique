@@ -109,9 +109,20 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         ).rounded() / pow(10.0, Double(2))
                     self.scoreLabel.text = String(avgScore) + " / 10"
                     
-                    let criticID = review.data()["criticID"] as! String
                     let imdbID = review.data()["imdbID"] as! String
-                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                    let criticID = review.data()["criticID"] as! String
+                    self.db.collection("users").document(criticID).getDocument() { (document, error) in
+                        if error == nil {
+                            if (document!.data()!["isPublic"] as! Bool) {
+                                // TO-DO: Block around reviews
+                                reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                            }
+                        }
+                        else {
+                            fatalError("Unknown user")
+                        }
+                    }
+                    
                 }
                 self.reviews = reviews
                 self.tableView.refreshControl?.endRefreshing()
