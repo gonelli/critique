@@ -241,25 +241,25 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let blocked = document!.data()!["blocked"] as! [String]
                 if following.contains(self.accountID) {
                     controller.addAction(unfollowAction)
+                    controller.addAction(messageAction)
                 }
                 else if !blocked.contains(self.accountID) {
                     controller.addAction(followAction)
+                    controller.addAction(messageAction)
                 }
-                controller.addAction(messageAction)
                 if blocked.contains(self.accountID) {
                     controller.addAction(unblockAction)
                 }
                 else {
                     controller.addAction(blockAction)
                 }
+                controller.addAction(cancelAction)
+                self.present(controller, animated: true, completion: nil)
             }
             else {
                 fatalError(error!.localizedDescription)
             }
         }
-        
-        controller.addAction(cancelAction)
-        present(controller, animated: true, completion: nil)
     }
 
 }
