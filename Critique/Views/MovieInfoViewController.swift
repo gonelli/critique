@@ -104,6 +104,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 for review in snapshot!.documents {
                     let body = review.data()["body"] as! String
                     let score = review.data()["score"] as! NSNumber
+                    let timestamp = review.data()["timestamp"] as! TimeInterval
                     self.scores.append(Double(truncating: score))
                     let avgScore = ((self.scores.reduce(0, +) / Double(self.scores.count)) * pow(10.0, Double(2))
                         ).rounded() / pow(10.0, Double(2))
@@ -115,7 +116,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         if error == nil {
                             if (document!.data()!["isPublic"] as! Bool) {
                                 // TO-DO: Block around reviews
-                                reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                                reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                                 self.reviews = reviews
                             }
                         }
@@ -145,11 +146,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         for review in snapshot!.documents {
                             let body = review.data()["body"] as! String
                             let score = review.data()["score"] as! NSNumber
+                            let timestamp = review.data()["timestamp"] as! TimeInterval
                             let criticID = review.data()["criticID"] as! String
                             let imdbID = review.data()["imdbID"] as! String
                             
                             if imdbID == currentMovieID {
-                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                             }
                         }
                         self.followingReviews = followingReviews

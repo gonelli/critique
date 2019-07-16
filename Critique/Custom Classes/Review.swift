@@ -19,12 +19,14 @@ class Review {
     var imdbID: String!
     var movieData: [String : Any]?
     var criticID: String!
+    var timestamp: TimeInterval!
     
-    init(imdbID: String, criticID: String, body: String, score: NSNumber) {
+    init(imdbID: String, criticID: String, body: String, score: NSNumber, timestamp: TimeInterval) {
         self.body = body
         self.score = score
         self.imdbID = imdbID
         self.criticID = criticID
+        self.timestamp = timestamp
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
@@ -64,4 +66,17 @@ class Review {
             completion(snapshot?.data()!["name"] as! String)
         }
     }
+    
+}
+
+extension Review: Comparable {
+    
+    static func < (lhs: Review, rhs: Review) -> Bool {
+        return lhs.timestamp < rhs.timestamp
+    }
+    
+    static func == (lhs: Review, rhs: Review) -> Bool {
+        return lhs.timestamp == rhs.timestamp
+    }
+    
 }

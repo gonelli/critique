@@ -103,7 +103,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let score = review.data()["score"] as! NSNumber
                     let criticID = review.data()["criticID"] as! String
                     let imdbID = review.data()["imdbID"] as! String
-                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                    let timestamp = review.data()["timestamp"] as! TimeInterval
+                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                 }
                 self.reviews = reviews
                 self.tableView.refreshControl?.endRefreshing()

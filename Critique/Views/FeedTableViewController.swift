@@ -14,25 +14,20 @@ import FirebaseFirestore
 class FeedTableViewController: UITableViewController {
     
     var db: Firestore!
-    var reviews: [Review] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
+    var reviews: [Review] = []
     let expandedReviewSegueID = "expandedReviewSegueID"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshView()
         initializeFirestore()
-        if (Auth.auth().currentUser != nil) {
-            getReviews()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.reviews = []
+        if Auth.auth().currentUser != nil {
+            getReviews()
+        }
     }
     
     // Either get reviews for valid user or direct them to create a new account
@@ -40,9 +35,6 @@ class FeedTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         if (Auth.auth().currentUser == nil) {
             self.performSegue(withIdentifier: "toCreateAccount", sender: self)
-        }
-        else {
-            getReviews()
         }
     }
     
@@ -65,7 +57,9 @@ class FeedTableViewController: UITableViewController {
     // Fetches reviews of critics user is following and populates the feed
     func getReviews() {
         self.reviews = []
+        tableView.reloadData()
         var reviews: [Review] = []
+        var usersGotten = 0
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if let following = document?.data()?["following"] as? [String] {
                 for followed in following {
@@ -75,13 +69,17 @@ class FeedTableViewController: UITableViewController {
                             let score = review.data()["score"] as! NSNumber
                             let criticID = review.data()["criticID"] as! String
                             let imdbID = review.data()["imdbID"] as! String
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
+                            let timestamp = review.data()["timestamp"] as! TimeInterval
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                         }
-                        self.reviews = reviews
-                        self.tableView.refreshControl?.endRefreshing()
+                        usersGotten += 1
+                        if usersGotten == following.count {
+                            self.reviews = reviews.sorted()
+                            self.tableView.reloadData()
+                            self.tableView.refreshControl?.endRefreshing()
+                        }
                     })
                 }
-                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }

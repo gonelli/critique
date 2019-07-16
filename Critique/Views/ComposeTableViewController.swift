@@ -45,9 +45,10 @@ class ComposeTableViewController: UITableViewController {
                 "body" : trimmedReview as Any,
                 "liked" : [] as [String],
                 "disliked" : [] as [String],
-                "score" : Double(scoreTF.text!) as Any
+                "score" : Double(scoreTF.text!) as Any,
+                "timestamp": Date().timeIntervalSince1970 as Any
                 ])
-                _ = navigationController?.popViewController(animated: true)
+                navigationController?.popViewController(animated: true)
         }
     }
 }
