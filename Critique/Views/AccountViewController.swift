@@ -32,6 +32,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        addRefreshView()
         initializeFirestore()
         getReviews()
         // Brings up table behind overlapping tab bar
@@ -60,6 +61,16 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.title = accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
+    }
+    
+    @objc func refresh() {
+        getReviews()
+    }
+    
+    func addRefreshView() {
+        let refresh = UIRefreshControl()
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
     }
     
     func initializeFirestore() {

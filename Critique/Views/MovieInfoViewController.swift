@@ -48,6 +48,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+        addRefreshView()
         initializeFirestore()
         getReviews()
     }
@@ -56,6 +57,16 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+    }
+    
+    @objc func refresh() {
+        getReviews()
+    }
+    
+    func addRefreshView() {
+        let refresh = UIRefreshControl()
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
     }
   
     @objc func post() {
