@@ -46,10 +46,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     // Fill in details of page based on whose Profile it is
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("--viewDidAppear--")
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)        
         // Looking at own profile
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
