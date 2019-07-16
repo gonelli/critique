@@ -31,6 +31,8 @@ class FeedTableViewCell: UITableViewCell {
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
             })
+            
+
         }
     }
 }

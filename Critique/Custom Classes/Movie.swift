@@ -15,11 +15,13 @@ class Movie {
     var title: String = "(blank movie title)"
     var movieData: Dictionary<String, Any>!
     var poster: UIImage = UIImage()
+    var outsideGroup: DispatchGroup
     let group = DispatchGroup()
     
     // Initialize object using the IMDB ID
-    init (imdbId: String) {
-      self.imdbID = imdbId
+    init (imdbId: String, outsideGroup: DispatchGroup = DispatchGroup()) {
+        self.outsideGroup = outsideGroup
+        self.imdbID = imdbId
         self.group.enter()
         
         DispatchQueue.main.async {
@@ -55,6 +57,7 @@ class Movie {
                         // Finally convert that Data into an image and do what you wish with it.
                         if let image = UIImage(data: imageData) {
                             self.poster = image
+                            self.outsideGroup.leave()
                         }
                     }
                     else {
@@ -78,7 +81,6 @@ class Movie {
                         do {
                             let movieDict : NSDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
                             DispatchQueue.main.async {
-                                print(movieDict)
                                 self.movieData = movieDict as? Dictionary<String, Any>
                                 self.group.leave()
                             }

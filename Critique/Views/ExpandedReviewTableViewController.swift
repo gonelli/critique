@@ -19,6 +19,11 @@ class ExpandedReviewTableViewController: UITableViewController {
     
     var deligate: UIViewController?
     var expanedReview: Review? = nil
+    var movieObject: Movie? {
+        didSet {
+//            self.performSegue(withIdentifier: "expandedMovieInfoSegue", sender: self)
+        }
+    }
     
     // Fill in review's elements - movie title, poster, and critic name
     override func viewDidLoad() {
@@ -47,9 +52,37 @@ class ExpandedReviewTableViewController: UITableViewController {
         
         let imagePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: posterImage.frame.width, height: posterImage.frame.height - 30))
         reviewTextView.textContainer.exclusionPaths = [imagePath]
+    
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        posterImage.addGestureRecognizer(tap)
+        posterImage.isUserInteractionEnabled = true
+        self.posterImage.addSubview(view)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue.main.async {
+            self.movieObject = Movie(imdbId: self.expanedReview!.imdbID, outsideGroup: group)
+//            group.leave()
+        }
+        group.notify(queue: .main) {
+            self.performSegue(withIdentifier: "expandedMovieInfoSegue", sender: self)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return max(reviewTextView.contentSize.height + 70, posterImage.frame.height + posterImage.frame.minY + 10)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Segue to Movie Info page
+        if segue.identifier == "expandedMovieInfoSegue" {
+            let infoVC = segue.destination as! MovieInfoViewController
+            infoVC.movieTitle = self.movieLabel.text
+            infoVC.movieObject = self.movieObject
+        }
+    }
 }
+
