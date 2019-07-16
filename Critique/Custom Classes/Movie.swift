@@ -16,10 +16,12 @@ class Movie {
     var movieData: Dictionary<String, Any>!
     var poster: UIImage = UIImage()
     var outsideGroup: DispatchGroup
+    var outsideGroupEntered: Bool
     let group = DispatchGroup()
     
     // Initialize object using the IMDB ID
-    init (imdbId: String, outsideGroup: DispatchGroup = DispatchGroup()) {
+    init (imdbId: String, outsideGroup: DispatchGroup = DispatchGroup(), outsideGroupEntered: Bool = false) {
+        self.outsideGroupEntered = outsideGroupEntered
         self.outsideGroup = outsideGroup
         self.imdbID = imdbId
         self.group.enter()
@@ -57,7 +59,10 @@ class Movie {
                         // Finally convert that Data into an image and do what you wish with it.
                         if let image = UIImage(data: imageData) {
                             self.poster = image
-                            self.outsideGroup.leave()
+                            if self.outsideGroupEntered { self.outsideGroup.leave()
+                                self.outsideGroupEntered = false
+                                
+                            }
                         }
                     }
                     else {

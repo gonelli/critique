@@ -64,8 +64,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         group.enter()
         
         DispatchQueue.main.async {
-            self.movieObject = Movie(imdbId: self.expanedReview!.imdbID, outsideGroup: group)
-//            group.leave()
+            self.movieObject = Movie(imdbId: self.expanedReview!.imdbID, outsideGroup: group, outsideGroupEntered: true)
         }
         group.notify(queue: .main) {
             self.performSegue(withIdentifier: "expandedMovieInfoSegue", sender: self)
