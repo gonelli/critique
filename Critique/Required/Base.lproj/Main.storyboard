@@ -923,6 +923,9 @@
                                     <segment title="Following"/>
                                 </segments>
                                 <color key="tintColor" red="0.89226299519999996" green="0.15754258630000001" blue="0.079005636269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="Db6-gs-pth" eventType="valueChanged" id="ENQ-Ds-kFL"/>
+                                </connections>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7mx-tG-OpA">
                                 <rect key="frame" x="178" y="108" width="216" height="144"/>
@@ -977,6 +980,7 @@
                     <connections>
                         <outlet property="posterImage" destination="cIr-y9-6hU" id="Xvs-1P-rVr"/>
                         <outlet property="scoreLabel" destination="hgi-Mv-GQB" id="hGM-TL-1PH"/>
+                        <outlet property="segmentedControl" destination="WM1-pV-CpP" id="mIt-RK-36G"/>
                         <outlet property="synopsisTextView" destination="7mx-tG-OpA" id="Tit-dx-EIc"/>
                         <outlet property="tableView" destination="0SB-bn-vJ6" id="zTN-rd-tSD"/>
                         <outlet property="yearLabel" destination="Mku-32-Uwl" id="8lK-kd-62G"/>
