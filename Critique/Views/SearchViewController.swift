@@ -8,9 +8,10 @@
 
 import UIKit
 import InstantSearchClient
+import FirebaseFirestore
+import FirebaseAuth
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-    
     
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -19,10 +20,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var movieList:Array<(String, Movie)> = Array<(String, Movie)>() // list of movie results - tuple stores name and Movie object
     var criticList: [(String, String)] = [] // list of critic results - tuple stores name and UID
     let group = DispatchGroup()
+    
     let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b") // Algolia client
     let cellIdentifier = "searchResultCell"
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
+    
+    var db: Firestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        initFirestore()
     }
+    
+    func initFirestore() {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
@@ -128,8 +140,47 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
                 if error == nil {
                     guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
+                    var hitsSearched = 0
                     for hit in hits {
-                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
+                        var hitPublic = true
+                        var userBlocked = false
+                        var hitBlocked = false
+                        var checksDone = 0 {
+                            didSet {
+                                if checksDone == 2 {
+                                    if hitPublic && !userBlocked && !hitBlocked {
+                                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
+                                    }
+                                    hitsSearched += 1
+                                    if hitsSearched == hits.count {
+                                        self.tableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                        self.db.collection("users").document(hit["objectID"] as! String).getDocument() { (document, error) in
+                            if error == nil {
+                                hitPublic = document!.data()!["isPublic"] as! Bool
+                                if hitPublic {
+                                    let hitBlockedList = document!.data()!["blocked"] as! [String]
+                                    userBlocked = hitBlockedList.contains(Auth.auth().currentUser!.uid)
+                                }
+                                checksDone += 1
+                            }
+                            else {
+                                fatalError(error!.localizedDescription)
+                            }
+                        }
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
+                            if error == nil {
+                                let userBlockedList = document!.data()!["blocked"] as! [String]
+                                hitBlocked = userBlockedList.contains(hit["objectID"] as! String)
+                                checksDone += 1
+                            }
+                            else {
+                                fatalError(error!.localizedDescription)
+                            }
+                        }
                     }
                     self.tableView.reloadData()
                 }
