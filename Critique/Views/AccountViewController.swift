@@ -41,20 +41,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         addRefreshView()
         initializeFirestore()
         
-        if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
-            accountID = Auth.auth().currentUser!.uid
-            db.collection("users").document(accountID).getDocument() { (document, error) in
-                if error == nil {
-                    self.accountName = document!.data()!["name"] as! String
-                    self.title = self.accountName
-                }
-                else {
-                    fatalError(error!.localizedDescription)
-                }
-            }
-        }
-        getReviews()
-        getFollowNumbers()
         // Brings up table behind overlapping tab bar
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 77, right: 0)
     }
@@ -70,7 +56,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
-                    self.title = self.accountName
+                    self.navigationController?.navigationBar.topItem?.title = self.accountName
+                    self.getReviews()
+                    self.getFollowNumbers()
                 }
                 else {
                     fatalError(error!.localizedDescription)
@@ -79,7 +67,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         // Looking at another critic's profile
         else {
-            self.title = accountName
+            getReviews()
+            getFollowNumbers()
+            self.navigationController?.navigationBar.topItem?.title = self.accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
     }
