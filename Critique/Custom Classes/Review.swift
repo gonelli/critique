@@ -72,7 +72,7 @@ class Review {
 extension Review: Comparable {
     
     static func < (lhs: Review, rhs: Review) -> Bool {
-        return lhs.timestamp < rhs.timestamp
+        return lhs.timestamp > rhs.timestamp
     }
     
     static func == (lhs: Review, rhs: Review) -> Bool {

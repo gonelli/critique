@@ -24,11 +24,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var accountID = ""
     var num_following = 0
     var num_followers = 0
-    var reviews: [Review] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
+    var reviews: [Review] = []
     let followersSegue = "followersSegue"
     let followingSegue = "followingSegue"
     
@@ -49,12 +45,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
         // Looking at own profile
+        reviews = []
+        tableView.reloadData()
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
-                    self.navigationController?.navigationBar.topItem?.title = self.accountName
+                    self.navigationItem.title = self.accountName
                     self.getReviews()
                     self.getFollowNumbers()
                 }
@@ -67,13 +65,15 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         else {
             getReviews()
             getFollowNumbers()
-            self.navigationController?.navigationBar.topItem?.title = self.accountName
+            self.navigationItem.title = self.accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
     }
     
     @objc func refresh() {
         print("--refesh--")
+        reviews = []
+        tableView.reloadData()
         getReviews()
         getFollowNumbers()
     }
@@ -93,21 +93,20 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Fetches reviews of critics user is following and populates the account page
     func getReviews() {
         var reviews: [Review] = []
-        db.collection("reviews").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
-            self.db.collection("reviews").whereField("criticID", isEqualTo: self.accountID).getDocuments(completion: { (snapshot, _) in
-                //TODO: custom MovieInfoCell, not FeedTableViewCell
-                for review in snapshot!.documents {
-                    let body = review.data()["body"] as! String
-                    let score = review.data()["score"] as! NSNumber
-                    let criticID = review.data()["criticID"] as! String
-                    let imdbID = review.data()["imdbID"] as! String
-                    let timestamp = review.data()["timestamp"] as! TimeInterval
-                    reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
-                }
-                self.reviews = reviews
-                self.tableView.refreshControl?.endRefreshing()
-            })
-        }
+        db.collection("reviews").whereField("criticID", isEqualTo: self.accountID).getDocuments(completion: { (snapshot, _) in
+            //TODO: custom MovieInfoCell, not FeedTableViewCell
+            for review in snapshot!.documents {
+                let body = review.data()["body"] as! String
+                let score = review.data()["score"] as! NSNumber
+                let criticID = review.data()["criticID"] as! String
+                let imdbID = review.data()["imdbID"] as! String
+                let timestamp = review.data()["timestamp"] as! TimeInterval
+                reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
+            }
+            self.reviews = reviews.sorted()
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        })
     }
     
     func getFollowNumbers() {

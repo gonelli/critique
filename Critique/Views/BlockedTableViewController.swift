@@ -19,14 +19,25 @@ class BlockedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeFirestore()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blockList = []
+        tableView.reloadData()
+        
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
             if error == nil {
                 let blocked = document!.data()!["blocked"] as! [String]
+                var criticsGotten = 0
                 for blockedCritic in blocked {
                     self.db.collection("users").document(blockedCritic).getDocument() { (document, error) in
                         if error == nil {
                             self.blockList.append((document!.data()!["name"] as! String, blockedCritic))
-                            self.tableView.reloadData()
+                            criticsGotten += 1
+                            if criticsGotten == blocked.count {
+                                self.tableView.reloadData()
+                            }
                         }
                         else {
                             fatalError(error!.localizedDescription)

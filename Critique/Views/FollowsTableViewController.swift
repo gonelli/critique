@@ -17,20 +17,20 @@ class FollowsTableViewController: UITableViewController {
     var db: Firestore!
     var lookupType: String = "Following"
     var user: String!
-    var critics: [(String, String)] = [] {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    var critics: [(String, String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshView()
         initializeFirestore()
-        if (Auth.auth().currentUser != nil) {
-            getCritics()
-        }
         titleLabel.title = lookupType
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.critics = []
+        tableView.reloadData()
+        getCritics()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,14 +38,9 @@ class FollowsTableViewController: UITableViewController {
         return critics.count
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if (Auth.auth().currentUser == nil) {
-            self.performSegue(withIdentifier: "toCreateAccount", sender: self)
-        }
-    }
-    
     @objc func refresh() {
+        self.critics = []
+        tableView.reloadData()
         getCritics()
     }
     
@@ -68,13 +63,18 @@ class FollowsTableViewController: UITableViewController {
         if lookupType == "Following" {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
+                    var criticsGotten = 0
                     for followed in following {
-                            self.db.collection("users").document(followed).getDocument{ (snapshot, _) in
-                                critics.append((snapshot?.data()?["name"] as! String, followed))
+                        self.db.collection("users").document(followed).getDocument{ (snapshot, _) in
+                            critics.append((snapshot?.data()?["name"] as! String, followed))
+                            criticsGotten += 1
+                            if criticsGotten == following.count {
                                 self.critics = critics
+                                self.tableView.reloadData()
+                                self.tableView.refreshControl?.endRefreshing()
                             }
+                        }
                     }
-                    self.tableView.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -91,6 +91,7 @@ class FollowsTableViewController: UITableViewController {
                     }
                 }
                 self.critics = critics
+                self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
             }
         }

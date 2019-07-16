@@ -25,21 +25,9 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var movieTitle: String!
     var movieObject: Movie!
     var db: Firestore!
-    var reviews: [Review] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
-    var followingReviews: [Review] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
-    var scores: [Double] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
+    var reviews: [Review] = []
+    var followingReviews: [Review] = []
+    var scores: [Double] = []
     let composeSegue = "composeSegue"
 
     // Load header - movie details, synopsis, average score, etc.
@@ -71,11 +59,29 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         db = Firestore.firestore()
     }
     
-    @objc func refresh() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if segmentedControl.selectedSegmentIndex == 0 {
+            reviews = []
+            tableView.reloadData()
             getReviews()
         }
         else {
+            followingReviews = []
+            tableView.reloadData()
+            getFollowingReviews()
+        }
+    }
+    
+    @objc func refresh() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            reviews = []
+            tableView.reloadData()
+            getReviews()
+        }
+        else {
+            followingReviews = []
+            tableView.reloadData()
             getFollowingReviews()
         }
     }
@@ -98,41 +104,43 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     func getReviews() {
         var reviews: [Review] = []
         let currentMovieID = movieObject.movieData["imdbID"]!
-        db.collection("reviews").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
-            self.db.collection("reviews").whereField("imdbID", isEqualTo: currentMovieID).getDocuments(completion: { (snapshot, _) in
-                //TODO: custom MovieInfoCell, not FeedTableViewCell
-                for review in snapshot!.documents {
-                    let body = review.data()["body"] as! String
-                    let score = review.data()["score"] as! NSNumber
-                    let timestamp = review.data()["timestamp"] as! TimeInterval
-                    self.scores.append(Double(truncating: score))
-                    let avgScore = ((self.scores.reduce(0, +) / Double(self.scores.count)) * pow(10.0, Double(2))
-                        ).rounded() / pow(10.0, Double(2))
-                    self.scoreLabel.text = String(avgScore) + " / 10"
-                    
-                    let imdbID = review.data()["imdbID"] as! String
-                    let criticID = review.data()["criticID"] as! String
-                    self.db.collection("users").document(criticID).getDocument() { (document, error) in
-                        if error == nil {
-                            if (document!.data()!["isPublic"] as! Bool) {
-                                // TO-DO: Block around reviews
-                                reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
-                                self.reviews = reviews
-                            }
+        self.db.collection("reviews").whereField("imdbID", isEqualTo: currentMovieID).getDocuments(completion: { (snapshot, _) in
+            //TODO: custom MovieInfoCell, not FeedTableViewCell
+            var reviewsGotten = 0
+            for review in snapshot!.documents {
+                let body = review.data()["body"] as! String
+                let score = review.data()["score"] as! NSNumber
+                let timestamp = review.data()["timestamp"] as! TimeInterval
+                self.scores.append(Double(truncating: score))
+                let avgScore = ((self.scores.reduce(0, +) / Double(self.scores.count)) * pow(10.0, Double(2))
+                    ).rounded() / pow(10.0, Double(2))
+                self.scoreLabel.text = String(avgScore) + " / 10"
+                
+                let imdbID = review.data()["imdbID"] as! String
+                let criticID = review.data()["criticID"] as! String
+                self.db.collection("users").document(criticID).getDocument() { (document, error) in
+                    if error == nil {
+                        if (document!.data()!["isPublic"] as! Bool) {
+                            // TO-DO: Block around reviews
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                         }
-                        else {
-                            fatalError("Unknown user")
+                        reviewsGotten += 1
+                        if reviewsGotten == snapshot!.documents.count {
+                            self.reviews = reviews.sorted()
+                            if (self.scores.count == 0) {
+                                self.scoreLabel.text = "No scores"
+                            }
+                            self.tableView.reloadData()
+                            self.tableView.refreshControl?.endRefreshing()
                         }
                     }
-                    
+                    else {
+                        fatalError("Unknown user")
+                    }
                 }
-                self.reviews = reviews
-                self.tableView.refreshControl?.endRefreshing()
-            })
-        }
-        if (scores.count == 0) {
-            self.scoreLabel.text = "No scores"
-        }
+                
+            }
+        })
     }
     
     func getFollowingReviews() {
@@ -141,6 +149,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if let following = document?.data()?["following"] as? [String] {
+                var criticsGotten = 0
                 for followed in following {
                     self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in
                         for review in snapshot!.documents {
@@ -154,11 +163,14 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                                 followingReviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
                             }
                         }
-                        self.followingReviews = followingReviews
-                        self.tableView.refreshControl?.endRefreshing()
+                        criticsGotten += 1
+                        if criticsGotten == following.count {
+                            self.followingReviews = followingReviews.sorted()
+                            self.tableView.reloadData()
+                            self.tableView.refreshControl?.endRefreshing()
+                        }
                     })
                 }
-                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }

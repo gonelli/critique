@@ -25,6 +25,8 @@ class FeedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.reviews = []
+        tableView.reloadData()
         if Auth.auth().currentUser != nil {
             getReviews()
         }
@@ -39,6 +41,8 @@ class FeedTableViewController: UITableViewController {
     }
     
     @objc func refresh() {
+        self.reviews = []
+        tableView.reloadData()
         getReviews()
     }
     
@@ -56,8 +60,6 @@ class FeedTableViewController: UITableViewController {
     
     // Fetches reviews of critics user is following and populates the feed
     func getReviews() {
-        self.reviews = []
-        tableView.reloadData()
         var reviews: [Review] = []
         var usersGotten = 0
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in

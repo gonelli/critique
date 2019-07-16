@@ -137,55 +137,57 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Search for critic
         else {
             self.criticList = []
-            client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
-                if error == nil {
-                    guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
-                    var hitsSearched = 0
-                    for hit in hits {
-                        var hitPublic = true
-                        var userBlocked = false
-                        var hitBlocked = false
-                        var checksDone = 0 {
-                            didSet {
-                                if checksDone == 2 {
-                                    if hitPublic && !userBlocked && !hitBlocked {
-                                        self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
-                                    }
-                                    hitsSearched += 1
-                                    if hitsSearched == hits.count {
-                                        self.tableView.reloadData()
+            if searchBar.text! != "" {
+                client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
+                    if error == nil {
+                        guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
+                        var hitsSearched = 0
+                        for hit in hits {
+                            var hitPublic = true
+                            var userBlocked = false
+                            var hitBlocked = false
+                            var checksDone = 0 {
+                                didSet {
+                                    if checksDone == 2 {
+                                        if hitPublic && !userBlocked && !hitBlocked {
+                                            self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
+                                        }
+                                        hitsSearched += 1
+                                        if hitsSearched == hits.count {
+                                            self.tableView.reloadData()
+                                        }
                                     }
                                 }
                             }
-                        }
-                        self.db.collection("users").document(hit["objectID"] as! String).getDocument() { (document, error) in
-                            if error == nil {
-                                hitPublic = document!.data()!["isPublic"] as! Bool
-                                if hitPublic {
-                                    let hitBlockedList = document!.data()!["blocked"] as! [String]
-                                    userBlocked = hitBlockedList.contains(Auth.auth().currentUser!.uid)
+                            self.db.collection("users").document(hit["objectID"] as! String).getDocument() { (document, error) in
+                                if error == nil {
+                                    hitPublic = document!.data()!["isPublic"] as! Bool
+                                    if hitPublic {
+                                        let hitBlockedList = document!.data()!["blocked"] as! [String]
+                                        userBlocked = hitBlockedList.contains(Auth.auth().currentUser!.uid)
+                                    }
+                                    checksDone += 1
                                 }
-                                checksDone += 1
+                                else {
+                                    fatalError(error!.localizedDescription)
+                                }
                             }
-                            else {
-                                fatalError(error!.localizedDescription)
+                            self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
+                                if error == nil {
+                                    let userBlockedList = document!.data()!["blocked"] as! [String]
+                                    hitBlocked = userBlockedList.contains(hit["objectID"] as! String)
+                                    checksDone += 1
+                                }
+                                else {
+                                    fatalError(error!.localizedDescription)
+                                }
                             }
                         }
-                        self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
-                            if error == nil {
-                                let userBlockedList = document!.data()!["blocked"] as! [String]
-                                hitBlocked = userBlockedList.contains(hit["objectID"] as! String)
-                                checksDone += 1
-                            }
-                            else {
-                                fatalError(error!.localizedDescription)
-                            }
-                        }
+                        self.tableView.reloadData()
                     }
-                    self.tableView.reloadData()
-                }
-                else {
-                    fatalError(error!.localizedDescription)
+                    else {
+                        fatalError(error!.localizedDescription)
+                    }
                 }
             }
         }
