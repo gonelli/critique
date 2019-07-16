@@ -43,6 +43,8 @@ class ComposeTableViewController: UITableViewController {
                 "criticID" : currentUser.uid,
                 "imdbID" : imdbID as Any,
                 "body" : trimmedReview as Any,
+                "liked" : [] as [String],
+                "disliked" : [] as [String],
                 "score" : Double(scoreTF.text!) as Any
                 ])
                 _ = navigationController?.popViewController(animated: true)
