@@ -22,6 +22,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var db: Firestore!
     var accountName = ""
     var accountID = ""
+    var num_following = 0
+    var num_followers = 0
     var reviews: [Review] = [] {
         didSet {
             self.tableView.reloadData() // Reload table after reviews are fetched
@@ -32,11 +34,27 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("--viewDidLoad--")
+        
         tableView.delegate = self
         tableView.dataSource = self
         addRefreshView()
         initializeFirestore()
+        
+        if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
+            accountID = Auth.auth().currentUser!.uid
+            db.collection("users").document(accountID).getDocument() { (document, error) in
+                if error == nil {
+                    self.accountName = document!.data()!["name"] as! String
+                    self.title = self.accountName
+                }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
+        }
         getReviews()
+        getFollowNumbers()
         // Brings up table behind overlapping tab bar
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 77, right: 0)
     }
@@ -44,6 +62,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Fill in details of page based on whose Profile it is
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("--viewDidAppear--")
         
         // Looking at own profile
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
@@ -66,8 +85,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func refresh() {
+        print("--refesh--")
         getReviews()
-        //getFollowNumbers()
+        getFollowNumbers()
     }
     
     func addRefreshView() {
@@ -101,19 +121,31 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-//    func getFollowNumbers() {
-//        // Number of Followers
-//        db.collection("users").getDocuments{ (snapshot, _) in
-//            for critic in snapshot!.documents {
-//                for following in critic.data()["following"] as! [String] {
-//                    if following == self.user {
-//                        critics.append((critic.data()["name"] as! String, critic.documentID))
-//                    }
-//                }
-//            }
-//            self.tableView.
-//        }
-//    }
+    func getFollowNumbers() {
+        print("\nCrash0--\(accountID)\n")
+        // Number of Following
+        db.collection("users").document(accountID).getDocument { (document, error) in
+            if error == nil {
+                let followingList = document!.data()!["following"] as! [String]
+                self.num_following = followingList.count
+            }
+            self.followingButtonOutlet.setTitle("\(self.num_following) Following",for: .normal)
+        }
+        
+        // Number of Followers
+        self.num_followers = 0
+        db.collection("users").getDocuments{ (snapshot, _) in
+            for critic in snapshot!.documents {
+                for following in critic.data()["following"] as! [String] {
+                    if following == self.accountID {
+                        self.num_followers += 1
+                    }
+                }
+            }
+            self.followersButtonOutlet.setTitle("\(self.num_followers) Followers",for: .normal)
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.reviews.count
@@ -258,25 +290,25 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let blocked = document!.data()!["blocked"] as! [String]
                 if following.contains(self.accountID) {
                     controller.addAction(unfollowAction)
+                    controller.addAction(messageAction)
                 }
                 else if !blocked.contains(self.accountID) {
                     controller.addAction(followAction)
+                    controller.addAction(messageAction)
                 }
-                controller.addAction(messageAction)
                 if blocked.contains(self.accountID) {
                     controller.addAction(unblockAction)
                 }
                 else {
                     controller.addAction(blockAction)
                 }
+                controller.addAction(cancelAction)
+                self.present(controller, animated: true, completion: nil)
             }
             else {
                 fatalError(error!.localizedDescription)
             }
         }
-        
-        controller.addAction(cancelAction)
-        present(controller, animated: true, completion: nil)
     }
 
 }
