@@ -857,6 +857,7 @@
                                             <outlet property="posterImage" destination="hnn-zr-qR3" id="0vA-vn-dhr"/>
                                             <outlet property="reviewLabel" destination="Rwa-Yl-V2r" id="kNC-vT-Lpz"/>
                                             <outlet property="scoreLabel" destination="AWD-AI-HtU" id="UUu-3C-mm6"/>
+                                            <segue destination="AnV-XF-KsE" kind="show" identifier="movieInfoExpandSegue" id="DtX-qp-0oM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1199,6 +1200,7 @@
         <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="DtX-qp-0oM"/>
         <segue reference="tYd-WL-nvm"/>
         <segue reference="PWr-WP-QuC"/>
     </inferredMetricsTieBreakers>

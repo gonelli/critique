@@ -101,5 +101,10 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             let composeVC = segue.destination as! ComposeTableViewController
             composeVC.imdbID = self.movieObject.imdbID
         }
+        else if segue.identifier == "movieInfoExpandSegue", let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {
+            nextVC.deligate = self
+            nextVC.expanedReview = reviews[reviewIndex]
+        }
+
     }
 }
