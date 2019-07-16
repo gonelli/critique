@@ -34,8 +34,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("--viewDidLoad--")
-        
         tableView.delegate = self
         tableView.dataSource = self
         addRefreshView()
@@ -47,14 +45,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // Fill in details of page based on whose Profile it is
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)        
+        super.viewWillAppear(animated)
         // Looking at own profile
-        if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
-            accountID = Auth.auth().currentUser!.uid
+        if self.accountName == "" || self.accountID == "" || self.accountID == Auth.auth().currentUser!.uid {
+            self.accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
-                    self.navigationController?.navigationBar.topItem?.title = self.accountName
+                    self.navigationItem.title = self.accountName
                     self.getReviews()
                     self.getFollowNumbers()
                 }
@@ -67,9 +65,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         else {
             getReviews()
             getFollowNumbers()
-            self.navigationController?.navigationBar.topItem?.title = self.accountName
+            self.navigationItem.title = self.accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.accountID = ""
     }
     
     @objc func refresh() {
@@ -111,7 +114,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getFollowNumbers() {
-        print("\nCrash0--\(accountID)\n")
         // Number of Following
         db.collection("users").document(accountID).getDocument { (document, error) in
             if error == nil {
