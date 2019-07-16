@@ -82,9 +82,11 @@ class FollowsTableViewController: UITableViewController {
         else {
             db.collection("users").getDocuments{ (snapshot, _) in
                 for critic in snapshot!.documents {
-                    for following in critic.data()["following"] as! [String] {
-                        if following == self.user {
-                            critics.append((critic.data()["name"] as! String, critic.documentID))
+                    if (critic.data()["isPublic"] as! Bool) {
+                        for following in critic.data()["following"] as! [String] {
+                            if following == self.user {
+                                critics.append((critic.data()["name"] as! String, critic.documentID))
+                            }
                         }
                     }
                 }
