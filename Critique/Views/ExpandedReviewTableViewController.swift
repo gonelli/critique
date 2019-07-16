@@ -19,11 +19,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     
     var deligate: UIViewController?
     var expanedReview: Review? = nil
-    var movieObject: Movie? {
-        didSet {
-//            self.performSegue(withIdentifier: "expandedMovieInfoSegue", sender: self)
-        }
-    }
+    var movieObject: Movie?
     
     // Fill in review's elements - movie title, poster, and critic name
     override func viewDidLoad() {

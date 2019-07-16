@@ -28,7 +28,6 @@ class FeedTableViewController: UITableViewController {
         if (Auth.auth().currentUser != nil) {
             getReviews()
         }
-
     }
     
     // Either get reviews for valid user or direct them to create a new account
