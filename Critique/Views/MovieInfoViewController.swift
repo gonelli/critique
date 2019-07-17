@@ -127,9 +127,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         reviewsGotten += 1
                         if reviewsGotten == snapshot!.documents.count {
                             self.reviews = reviews.sorted()
-                            if (self.scores.count == 0) {
-                                self.scoreLabel.text = "No scores"
-                            }
                             self.tableView.reloadData()
                             self.tableView.refreshControl?.endRefreshing()
                         }
@@ -138,7 +135,9 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         fatalError("Unknown user")
                     }
                 }
-                
+            }
+            if (self.scores.count == 0) {
+                self.scoreLabel.text = "No scores"
             }
         })
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -792,7 +792,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black Panther" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxi-7V-TGM">
-                                            <rect key="frame" x="104" y="15" width="109" height="21"/>
+                                            <rect key="frame" x="104" y="15" width="256" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -803,35 +803,32 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.9/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-9R-r2C">
-                                            <rect key="frame" x="347" y="15" width="47" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tony Stark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkk-G9-xuP">
                                             <rect key="frame" x="104" y="99" width="68.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-9R-r2C">
+                                            <rect key="frame" x="371.5" y="15" width="22.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Gxi-7V-TGM" secondAttribute="trailing" constant="54" id="0wV-3e-321"/>
                                         <constraint firstItem="Gxi-7V-TGM" firstAttribute="top" secondItem="mcK-XO-Nye" secondAttribute="top" id="3sx-h1-qKs"/>
                                         <constraint firstAttribute="trailing" secondItem="NQl-7h-2Vd" secondAttribute="trailing" constant="20" id="Emd-Pf-cIN"/>
                                         <constraint firstItem="mcK-XO-Nye" firstAttribute="top" secondItem="jmS-H5-CLg" secondAttribute="top" constant="15" id="JlY-1S-Cko"/>
                                         <constraint firstItem="pkk-G9-xuP" firstAttribute="leading" secondItem="mcK-XO-Nye" secondAttribute="trailing" constant="15" id="PVh-yt-RKH"/>
                                         <constraint firstItem="NQl-7h-2Vd" firstAttribute="leading" secondItem="mcK-XO-Nye" secondAttribute="trailing" constant="15" id="T4a-Qd-ae2"/>
-                                        <constraint firstItem="NQl-7h-2Vd" firstAttribute="top" secondItem="ef7-9R-r2C" secondAttribute="bottom" constant="8" id="Vux-Ff-Ati"/>
                                         <constraint firstItem="mcK-XO-Nye" firstAttribute="leading" secondItem="jmS-H5-CLg" secondAttribute="leading" constant="15" id="dX0-Wb-DV4"/>
-                                        <constraint firstItem="ef7-9R-r2C" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gxi-7V-TGM" secondAttribute="trailing" constant="1" id="eCF-f9-avq"/>
                                         <constraint firstAttribute="bottom" secondItem="pkk-G9-xuP" secondAttribute="bottom" constant="23.5" id="gdT-jF-qS4"/>
-                                        <constraint firstItem="pkk-G9-xuP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NQl-7h-2Vd" secondAttribute="bottom" constant="1" id="guw-rM-fO8"/>
                                         <constraint firstItem="ef7-9R-r2C" firstAttribute="top" secondItem="mcK-XO-Nye" secondAttribute="top" id="jQy-TA-4w7"/>
                                         <constraint firstItem="NQl-7h-2Vd" firstAttribute="top" secondItem="Gxi-7V-TGM" secondAttribute="bottom" constant="8" id="o2c-rZ-RqU"/>
-                                        <constraint firstAttribute="trailing" secondItem="ef7-9R-r2C" secondAttribute="trailing" constant="20" id="ohM-sU-sab"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pkk-G9-xuP" secondAttribute="trailing" constant="20" id="x8c-s1-FsE"/>
                                         <constraint firstItem="Gxi-7V-TGM" firstAttribute="leading" secondItem="mcK-XO-Nye" secondAttribute="trailing" constant="15" id="xCf-fv-QmB"/>
+                                        <constraint firstAttribute="trailing" secondItem="ef7-9R-r2C" secondAttribute="trailing" constant="20" id="yLh-Fu-kQ9"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1286,10 +1283,10 @@
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
-        <image name="icon-account" width="26" height="26"/>
-        <image name="icon-messages" width="26" height="26"/>
-        <image name="icon-movie" width="26" height="26"/>
-        <image name="icon-settings" width="26" height="26"/>
+        <image name="icon-account" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="icon-messages" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="icon-movie" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="m0R-vf-5JF"/>
