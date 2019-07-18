@@ -71,8 +71,10 @@ class FeedTableViewController: UITableViewController {
                             let score = review.data()["score"] as! NSNumber
                             let criticID = review.data()["criticID"] as! String
                             let imdbID = review.data()["imdbID"] as! String
+                            let likers = review.data()["liked"] as! [String]
+                            let dislikers = review.data()["disliked"] as! [String]
                             let timestamp = review.data()["timestamp"] as! TimeInterval
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
                         }
                         usersGotten += 1
                         if usersGotten == following.count {

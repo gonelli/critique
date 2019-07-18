@@ -117,12 +117,14 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.scoreLabel.text = String(avgScore) + " / 10"
                 
                 let imdbID = review.data()["imdbID"] as! String
+                let likers = review.data()["liked"] as! [String]
+                let dislikers = review.data()["disliked"] as! [String]
                 let criticID = review.data()["criticID"] as! String
                 self.db.collection("users").document(criticID).getDocument() { (document, error) in
                     if error == nil {
                         if (document!.data()!["isPublic"] as! Bool) {
                             // TO-DO: Block around reviews
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
                         }
                         reviewsGotten += 1
                         if reviewsGotten == snapshot!.documents.count {
@@ -156,10 +158,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                             let score = review.data()["score"] as! NSNumber
                             let timestamp = review.data()["timestamp"] as! TimeInterval
                             let criticID = review.data()["criticID"] as! String
+                            let likers = review.data()["liked"] as! [String]
+                            let dislikers = review.data()["disliked"] as! [String]
                             let imdbID = review.data()["imdbID"] as! String
                             
                             if imdbID == currentMovieID {
-                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score, timestamp: timestamp))
+                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
                             }
                         }
                         criticsGotten += 1
