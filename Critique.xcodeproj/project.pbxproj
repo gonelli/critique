@@ -24,6 +24,7 @@
 		55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */; };
 		55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2022CBDF92004A70A9 /* SettingsViewController.swift */; };
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
+		55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */; };
 		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
 		5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */; };
 		5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */; };
@@ -52,6 +53,7 @@
 		55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		55672C2022CBDF92004A70A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeCell.swift; sourceTree = "<group>"; };
 		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewTableViewController.swift; sourceTree = "<group>"; };
 		5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				1ABE096422D29F4600279752 /* Movie.swift */,
 				1ABE096022D29F1D00279752 /* Review.swift */,
 				1ABE096622D2A41F00279752 /* FeedTableViewCell.swift */,
+				55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */,
+				55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */,
 				55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */,
 				55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */,
 				1A4BB78422D15E090027E606 /* FeedTableViewController.swift in Sources */,

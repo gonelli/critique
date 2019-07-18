@@ -199,7 +199,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieInfoCell", for: indexPath) as! FeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieInfoCell", for: indexPath) as! LikeDislikeCell
         if segmentedControl.selectedSegmentIndex == 0 {
             cell.review = self.reviews[indexPath.row]
         }
