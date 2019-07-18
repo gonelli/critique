@@ -49,14 +49,16 @@ class FeedTableViewCell: UITableViewCell {
             let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
             ref.getDocument { (document, error) in
               if error == nil {
-                var liked = document!.data()!["liked"] as! [String]
-                var disliked = document!.data()!["disliked"] as! [String]
+                let liked = document!.data()!["liked"] as! [String]
+                let disliked = document!.data()!["disliked"] as! [String]
                 self.likesLabel.text = "\(liked.count - disliked.count)"
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                   self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
+                  self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
                 } else if disliked.contains(userID) {
                   self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
+                  self.likeButton.setImage(UIImage(named: "like"), for: .normal)
                 }
               } else {
                 fatalError(error!.localizedDescription)

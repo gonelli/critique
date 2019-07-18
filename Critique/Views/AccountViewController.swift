@@ -90,6 +90,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Fetches reviews of critics user is following and populates the account page
     func getReviews() {
         var reviews: [Review] = []
+        self.tableView.reloadData()
         db.collection("reviews").whereField("criticID", isEqualTo: self.accountID).getDocuments(completion: { (snapshot, _) in
             //TODO: custom MovieInfoCell, not FeedTableViewCell
             for review in snapshot!.documents {
