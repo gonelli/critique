@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjh-pw-eQb">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT5-Bd-Zyy">
                                         <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
@@ -185,7 +185,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2yr-yb-0Wp">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="accountReviewCell" id="SVh-ER-P0S" customClass="FeedTableViewCell" customModule="Critique" customModuleProvider="target">
@@ -471,7 +471,7 @@
         <scene sceneID="atS-aT-wHP">
             <objects>
                 <navigationController id="heN-PM-Rwc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="icon-movie" id="Hko-S0-ZyX"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="icon-feed" selectedImage="icon-feed" id="Hko-S0-ZyX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IsV-fN-Hb3">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -787,7 +787,7 @@
         <scene sceneID="3IV-ac-c0G">
             <objects>
                 <navigationController id="aPn-Vl-V1X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="icon-settings" id="Pib-uu-6u9"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="icon-settings" selectedImage="icon-settings" id="Pib-uu-6u9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="N0Y-Ca-ale">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1309,15 +1309,15 @@
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
-        <image name="icon-account" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-messages" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-movie" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="icon-settings" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="icon-account" width="26" height="26"/>
+        <image name="icon-feed" width="29" height="24"/>
+        <image name="icon-messages" width="27" height="26"/>
+        <image name="icon-settings" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="m0R-vf-5JF"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="gCB-a4-oA6"/>
-        <segue reference="PWr-WP-QuC"/>
+        <segue reference="znf-aU-fe4"/>
     </inferredMetricsTieBreakers>
 </document>
