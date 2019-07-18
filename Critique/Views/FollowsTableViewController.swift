@@ -11,9 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 class FollowsTableViewController: UITableViewController {
-    
-    @IBOutlet weak var titleLabel: UINavigationItem!
-    
+  
     var db: Firestore!
     var lookupType: String = "Following"
     var user: String!
@@ -21,9 +19,9 @@ class FollowsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = lookupType
         addRefreshView()
         initializeFirestore()
-        titleLabel.title = lookupType
     }
     
     override func viewWillAppear(_ animated: Bool) {
