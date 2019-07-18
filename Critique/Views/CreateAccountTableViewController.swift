@@ -42,12 +42,13 @@ class CreateAccountTableViewController: UITableViewController {
                         "isPublic" : true,
                         "name" : self.usernameTF.text!,
                         "following": [] as [String],
-                        "blocked": [] as [String] ], completion: { (error) in
-                            let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
-                            client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
-                            Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
-                        }
-                    )
+                        "blocked": [] as [String],
+                        "myChats": [] as [String]
+                    ]){ (error) in
+                        let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+                        client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
+                        Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
+                    }
                     self.dismiss(animated: true, completion: {
                         // code for refreshing on sign in
                         let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
