@@ -81,9 +81,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func segmentChanged(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             criticList = []
+            tableView.reloadData()
         }
         else {
             movieList = Array<(String, Movie)>()
+            tableView.reloadData()
         }
         searchBarSearchButtonClicked(searchBar)
     }
