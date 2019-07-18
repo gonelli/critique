@@ -87,6 +87,7 @@ class SettingsViewController: UITableViewController {
       else if (indexPath.section == 1 && indexPath.row == 0) {
         try! Auth.auth().signOut()
         (self.parent?.parent as! UITabBarController).selectedIndex = 0
+        (((self.parent?.parent as! UITabBarController).viewControllers![2] as! UINavigationController).children[0] as! AccountViewController).accountID = ""
       }
       tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -33,10 +33,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         addRefreshView()
-        initializeFirestore()
-        
-        // Brings up table behind overlapping tab bar
-        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 77, right: 0)
+        initializeFirestore()        
     }
     
     // Fill in details of page based on whose Profile it is
