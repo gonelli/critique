@@ -14,11 +14,11 @@ import FirebaseFirestore
 class MessagesViewController: UITableViewController {
 
     var db: Firestore!
-    var directMessages: [Chat] = [] {
-        didSet {
-            self.tableView.reloadData() // Reload table after reviews are fetched
-        }
-    }
+//    var directMessages: [Chat] = [] {
+//        didSet {
+//            self.tableView.reloadData() // Reload table after reviews are fetched
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
