@@ -217,7 +217,38 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let messageAction = UIAlertAction(
             title: "Message",
-            style: .default
+            style: .default,
+            handler: {(alert) in
+                var targetChatID = ""
+                let chatGroup = [Auth.auth().currentUser!.uid, self.accountID]
+                //Check to see if there exists a chat between these two users and ONLY these two users
+                self.chatRequest(chatGroup) { (approved, chatID) in
+                    if approved {
+                        //Add chatID to all users myChats array
+                        for user in chatGroup {
+                            print("Here0")
+                            var userChats:[String] = []
+                            self.db.collection("users").document(user).getDocument(){ (document, error) in
+                                print("Here1")
+                                if error == nil, let chatDoc = document{
+                                    print("Here2")
+                                    userChats = chatDoc.data()!["myChats"] as! [String]
+                                    userChats.append(chatID!)
+                                    self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
+                                }
+                            }
+                            print("Here3")
+                            print("Here4")
+                        }
+                    } else if chatID != nil {
+                        targetChatID = chatID!
+                    } else {
+                        //break
+                    }
+                }
+                //Navigate to chat
+                print(targetChatID)
+            }
         )
         
         let ref = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
@@ -294,6 +325,30 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             else {
                 fatalError(error!.localizedDescription)
             }
+        }
+    }
+    
+    func chatRequest(_ users:[String] ,completion: @escaping (Bool, String?) -> Void) {
+        db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
+            
+            if error == nil, let userDoc = document {
+                for chat in userDoc.data()?["myChats"] as! [String] {
+                    self.db.collection("chats").document(chat).getDocument(){ (document, error) in
+                        if error == nil, let chatDoc = document {
+                            let existingChat = chatDoc.data()!["users"] as! [String]
+                            if users.sorted() == existingChat.sorted() {
+                                completion(false, chat)
+                            }
+                        }
+                    }
+                }
+                let chatDoc = self.db.collection("chats").addDocument(data:
+                    ["messages": [],
+                     "users": users
+                    ])
+                completion(true, chatDoc.documentID)
+            }
+            completion(false, nil)
         }
     }
 
