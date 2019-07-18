@@ -44,13 +44,15 @@ class FeedTableViewCell: UITableViewCell {
                 self.criticLabel.text = critic
             })
             initializeFirestore()
+            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+            self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
             let movieID = review!.imdbID ?? "0"
             let criticID = review!.criticID ?? "0"
             let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
             ref.getDocument { (document, error) in
               if error == nil {
-                var liked = document!.data()!["liked"] as! [String]
-                var disliked = document!.data()!["disliked"] as! [String]
+                let liked = document!.data()!["liked"] as! [String]
+                let disliked = document!.data()!["disliked"] as! [String]
                 self.likesLabel.text = "\(liked.count - disliked.count)"
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
