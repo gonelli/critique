@@ -63,12 +63,10 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         if segmentedControl.selectedSegmentIndex == 0 {
             reviews = []
-            tableView.reloadData()
             getReviews()
         }
         else {
             followingReviews = []
-            tableView.reloadData()
             getFollowingReviews()
         }
     }
@@ -76,12 +74,10 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc func refresh() {
         if segmentedControl.selectedSegmentIndex == 0 {
             reviews = []
-            tableView.reloadData()
             getReviews()
         }
         else {
             followingReviews = []
-            tableView.reloadData()
             getFollowingReviews()
         }
     }
@@ -103,6 +99,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     // Fetches reviews of critics user is following and populates the movie review page
     func getReviews() {
         var reviews: [Review] = []
+        scores = []
         let currentMovieID = movieObject.movieData["imdbID"]!
         self.db.collection("reviews").whereField("imdbID", isEqualTo: currentMovieID).getDocuments(completion: { (snapshot, _) in
             //TODO: custom MovieInfoCell, not FeedTableViewCell

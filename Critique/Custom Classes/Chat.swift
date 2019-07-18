@@ -7,3 +7,21 @@
 //
 
 import Foundation
+import UIKit
+import Firebase
+import Alamofire
+
+class Chat {
+    
+    var db: Firestore!
+    var messages: String = ""
+    var chatID: String
+    var criticiDs: [String] = []
+    
+    init(_ chatID: String) {
+        self.chatID = chatID
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+    }
+}
