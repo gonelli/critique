@@ -67,16 +67,13 @@ class MessagesViewController: UITableViewController {
         cell.chat = directMessages[indexPath.row]
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // pass any object as parameter, i.e. the tapped row
-        print("\n\ngjsdklgjklsdjgksdklsdgklgjdsgkljdgjkls\n\n")
-        performSegue(withIdentifier: "dmSegue", sender: self)
-
-    }
 
     // If body of a review is touched, open an expanded view of it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("\n\nJFDKSL:FJKDS:JKSDL:GJKDGS:LJk\n\n")
+        let nextVC = segue.destination as! DirectMessageTableViewController
+        if segue.identifier == "dmSegue", let selectedRow = tableView.indexPathForSelectedRow {
+            nextVC.chat = directMessages[selectedRow.row]
+        }
     }
+    
 }

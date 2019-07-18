@@ -12,7 +12,7 @@ class ChatTableViewCell: UITableViewCell {
 
     var chat:Chat? {
         didSet {
-            self.textLabel?.text = chat?.title
+            self.textLabel?.text = chat?.getTitle()
         }
     }
 

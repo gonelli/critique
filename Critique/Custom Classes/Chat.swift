@@ -16,7 +16,7 @@ class Chat {
     var db: Firestore!
     var messages: [[String:Any]] = []
     var chatID: String
-    var criticiDs: [String] = []
+    var criticIDs: [String] = []
     var title: String
     
     init(_ chatID: String) {
@@ -29,7 +29,7 @@ class Chat {
             if error == nil && Auth.auth().currentUser != nil {
                 let currentUser = Auth.auth().currentUser!.uid
                 self.title = currentUser
-                for critic in self.criticiDs {
+                for critic in self.criticIDs {
                     if critic != currentUser {
                         self.db.collection("users").document(critic).getDocument() { (document, error) in
                             if error == nil {
@@ -39,9 +39,23 @@ class Chat {
                     }
                 }
                 self.messages = document?.data()!["messages"] as! [[String:Any]]
-                self.criticiDs = document?.data()!["users"] as! [String]
+                self.criticIDs = document?.data()!["users"] as! [String]
             }
-            print("ChatID: \(self.chatID)\nTitle: \(self.title)\nCriticIDs: \(self.criticiDs)\nMessages: \(self.messages)")
+            print("ChatID: \(self.chatID)\nTitle: \(self.title)\nCriticIDs: \(self.criticIDs)\nMessages: \(self.messages)")
         }
+    }
+    
+    func getTitle() -> String {
+        print(self.title)
+        return self.title
+    }
+    
+    func isCurrentUser(_ index:Int) -> Bool {
+        if index < messages.count, let currentUser = Auth.auth().currentUser {
+            if criticIDs[messages[index]["from"] as! Int] == currentUser.uid {
+                return true
+            }
+        }
+        return false
     }
 }
