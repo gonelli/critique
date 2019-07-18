@@ -23,6 +23,16 @@ class ComposeTableViewController: UITableViewController {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+        scoreTF.delegate = self
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            scoreTF.becomeFirstResponder()
+        } else if (indexPath.section == 1 && indexPath.row == 0) {
+            reviewTV.becomeFirstResponder()
+        }
     }
     
     // Create a new review document in database after review is posted
@@ -50,5 +60,17 @@ class ComposeTableViewController: UITableViewController {
                 ])
                 navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+extension ComposeTableViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 4
     }
 }

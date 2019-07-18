@@ -25,8 +25,6 @@ class FeedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.reviews = []
-        tableView.reloadData()
         if Auth.auth().currentUser != nil {
             getReviews()
         }
@@ -41,8 +39,6 @@ class FeedTableViewController: UITableViewController {
     }
     
     @objc func refresh() {
-        self.reviews = []
-        tableView.reloadData()
         getReviews()
     }
     

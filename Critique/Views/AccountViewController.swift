@@ -41,7 +41,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         // Looking at own profile
         reviews = []
-        tableView.reloadData()
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
@@ -72,7 +71,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func refresh() {
         print("--refesh--")
         reviews = []
-        tableView.reloadData()
         getReviews()
         getFollowNumbers()
     }
