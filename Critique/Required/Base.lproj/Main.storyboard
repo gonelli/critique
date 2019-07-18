@@ -96,7 +96,7 @@
             </objects>
             <point key="canvasLocation" x="-4126.086956521739" y="1825.4464285714284"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--Messages-->
         <scene sceneID="Ojk-Oe-Uav">
             <objects>
                 <tableViewController id="tiJ-6r-qvs" customClass="MessagesViewController" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
@@ -112,6 +112,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="5DA-AO-CyZ" kind="show" id="2Dz-a4-AXa"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -119,7 +122,7 @@
                             <outlet property="delegate" destination="tiJ-6r-qvs" id="Rez-LN-syl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="blT-XF-yFi"/>
+                    <navigationItem key="navigationItem" title="Messages" id="blT-XF-yFi"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIQ-P8-fp9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -395,6 +398,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ni-Ea-Ny7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1410" y="1825"/>
+        </scene>
+        <!--Direct Message Table View Controller-->
+        <scene sceneID="CW7-sm-Ygs">
+            <objects>
+                <tableViewController id="5DA-AO-CyZ" customClass="DirectMessageTableViewController" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5EJ-rx-TQc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="72r-8C-zRQ">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="72r-8C-zRQ" id="h4B-vM-J4A">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5DA-AO-CyZ" id="0q5-Dl-Fat"/>
+                            <outlet property="delegate" destination="5DA-AO-CyZ" id="94M-6T-aZ3"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cab-hP-SJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2268" y="2510"/>
         </scene>
         <!--Blocked Table View Controller-->
         <scene sceneID="vud-hs-qka">
