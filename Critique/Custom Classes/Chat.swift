@@ -45,9 +45,24 @@ class Chat {
         }
     }
     
-    func getTitle() -> String {
-        print(self.title)
-        return self.title
+    func getTitle(completion: @escaping (String) -> Void) {
+        db.collection("chats").document(chatID).getDocument() { (document, error) in
+            if error == nil && Auth.auth().currentUser != nil {
+                let currentUser = Auth.auth().currentUser!.uid
+                self.title = currentUser
+                for critic in self.criticIDs {
+                    if critic != currentUser {
+                        self.db.collection("users").document(critic).getDocument() { (document, error) in
+                            if error == nil {
+                                self.title = document?.data()!["name"] as! String
+                                completion(self.title)
+                            }
+                        }
+                    }
+                }
+            }
+            completion(self.title)
+        }
     }
     
     func isCurrentUser(_ index:Int) -> Bool {
