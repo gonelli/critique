@@ -14,22 +14,22 @@ import FirebaseFirestore
 class MessagesViewController: UITableViewController {
 
     var db: Firestore!
-//    var directMessages: [Chat] = [] {
-//        didSet {
-//            self.tableView.reloadData() // Reload table after reviews are fetched
-//        }
-//    }
+    var directMessages: [Chat] = [] {
+        didSet {
+            self.tableView.reloadData() // Reload table after reviews are fetched
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Messages"
         addRefreshView()
         initializeFirestore()
-//        getDirectMessages()
+        getDirectMessages()
     }
     
     @objc func refresh() {
-//        getDirectMessages()
+        getDirectMessages()
     }
     
     func addRefreshView() {
@@ -45,39 +45,38 @@ class MessagesViewController: UITableViewController {
     }
     
     // Fetches reviews of critics user is following and populates the feed
-//    func getDirectMessages() {
-//        var reviews: [Review] = []
-//        db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
-//            if let following = document?.data()?["following"] as? [String] {
-//                for followed in following {
-//                    self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in
-//                        for review in snapshot!.documents {
-//                            let body = review.data()["body"] as! String
-//                            let score = review.data()["score"] as! NSNumber
-//                            let criticID = review.data()["criticID"] as! String
-//                            let imdbID = review.data()["imdbID"] as! String
-//                            reviews.append(Review(imdbID: imdbID, criticID: criticID, body: body, score: score))
-//                        }
-//                        self.directMessages = reviews
-//                        self.tableView.refreshControl?.endRefreshing()
-//                    })
-//                }
-//                self.tableView.refreshControl?.endRefreshing()
-//            }
-//        }
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return directMessages.count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
-//        cell.review = directMessages[indexPath.row]
-//        return cell
-//    }
-//
-//    // If body of a review is touched, open an expanded view of it
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    }
+    func getDirectMessages() {
+        var directMessages: [Chat] = []
+        db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            if let myChats = document?.data()?["myChats"] as? [String] {
+                for chat in myChats {
+                    directMessages.append(Chat(chat))
+                }
+                self.directMessages = directMessages
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return directMessages.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
+        cell.chat = directMessages[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // pass any object as parameter, i.e. the tapped row
+        print("\n\ngjsdklgjklsdjgksdklsdgklgjdsgkljdgjkls\n\n")
+        performSegue(withIdentifier: "dmSegue", sender: self)
+
+    }
+
+    // If body of a review is touched, open an expanded view of it
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("\n\nJFDKSL:FJKDS:JKSDL:GJKDGS:LJk\n\n")
+    }
 }

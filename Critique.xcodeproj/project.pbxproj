@@ -30,6 +30,7 @@
 		5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */; };
 		5E74D9CF22DE5FE700A69FB4 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E74D9CE22DE5FE700A69FB4 /* Chat.swift */; };
 		5EEBBB7822E0DD2C00795BCE /* DirectMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */; };
+		5EEBBB7A22E0FDD200795BCE /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */; };
 		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewController.swift; sourceTree = "<group>"; };
 		5E74D9CE22DE5FE700A69FB4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageTableViewController.swift; sourceTree = "<group>"; };
+		5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				1ABE096022D29F1D00279752 /* Review.swift */,
 				5E74D9CE22DE5FE700A69FB4 /* Chat.swift */,
 				1ABE096622D2A41F00279752 /* FeedTableViewCell.swift */,
+				5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */,
 				55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */,
 			);
 			path = "Custom Classes";
@@ -303,6 +306,7 @@
 				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
+				5EEBBB7A22E0FDD200795BCE /* ChatTableViewCell.swift in Sources */,
 				1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */,
 				1ACF976522C197DC001A1B7A /* AppDelegate.swift in Sources */,
 			);

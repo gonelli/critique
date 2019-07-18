@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ypd-uL-THY">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatCell" id="Ypd-uL-THY" customClass="ChatTableViewCell" customModule="Critique" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ypd-uL-THY" id="NKv-19-55l">
@@ -113,7 +113,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="5DA-AO-CyZ" kind="show" id="2Dz-a4-AXa"/>
+                                    <segue destination="5DA-AO-CyZ" kind="show" identifier="dmSegue" id="QGW-IO-h3E"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -910,7 +910,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="u4L-fv-nOT"/>
                                 </constraints>
-                                <rect key="frame" x="134.5" y="343" width="145" height="29"/>
                                 <segments>
                                     <segment title="All"/>
                                     <segment title="Following"/>
@@ -1339,7 +1338,6 @@
         <image name="icon-settings" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DtX-qp-0oM"/>
         <segue reference="m0R-vf-5JF"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
