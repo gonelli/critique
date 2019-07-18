@@ -29,6 +29,9 @@ class ExpandedReviewTableViewController: UITableViewController {
         
         if let review = expanedReview {
             scoreLabel.text = "\(review.score ?? 0)"
+            if !scoreLabel.text!.contains(".") {
+                scoreLabel.text = scoreLabel.text! + ".0"
+            }
             reviewTextView.text = review.body
             
             review.getTitle(completion: { (title) in

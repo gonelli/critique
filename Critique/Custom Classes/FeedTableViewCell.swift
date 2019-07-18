@@ -21,6 +21,9 @@ class FeedTableViewCell: UITableViewCell {
     var review: Review? {
         didSet {
             scoreLabel.text = "\(review!.score ?? 0)"
+            if !scoreLabel.text!.contains(".") {
+                scoreLabel.text = scoreLabel.text! + ".0"
+            }
             reviewLabel.text = review?.body
             review?.getTitle(completion: { (title) in
                 self.movieLabel.text = title
