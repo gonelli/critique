@@ -17,14 +17,18 @@ class Review {
     var score: NSNumber!
     var db: Firestore!
     var imdbID: String!
+    var likers: [String]!
+    var dislikers: [String]!
     var movieData: [String : Any]?
     var criticID: String!
     var timestamp: TimeInterval!
     
-    init(imdbID: String, criticID: String, body: String, score: NSNumber, timestamp: TimeInterval) {
+    init(imdbID: String, criticID: String, likers: [String], dislikers: [String], body: String, score: NSNumber, timestamp: TimeInterval) {
         self.body = body
         self.score = score
         self.imdbID = imdbID
+        self.likers = likers
+        self.dislikers = dislikers
         self.criticID = criticID
         self.timestamp = timestamp
         let settings = FirestoreSettings()
