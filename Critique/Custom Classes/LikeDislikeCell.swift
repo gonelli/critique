@@ -44,8 +44,10 @@ class LikeDislikeCell: UITableViewCell {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                   self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
+                  self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
                 } else if disliked.contains(userID) {
                   self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
+                  self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
                 }
               } else {
                 fatalError(error!.localizedDescription)
