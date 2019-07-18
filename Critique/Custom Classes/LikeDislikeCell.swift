@@ -31,8 +31,26 @@ class LikeDislikeCell: UITableViewCell {
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
             })
-            
+            self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+            self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
             initializeFirestore()
+            let movieID = review!.imdbID ?? "0"
+            let criticID = review!.criticID ?? "0"
+            let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
+            ref.getDocument { (document, error) in
+              if error == nil {
+                var liked = document!.data()!["liked"] as! [String]
+                var disliked = document!.data()!["disliked"] as! [String]
+                let userID = Auth.auth().currentUser!.uid
+                if liked.contains(userID) {
+                  self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
+                } else if disliked.contains(userID) {
+                  self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
+                }
+              } else {
+                fatalError(error!.localizedDescription)
+              }
+            }
         }
     }
     
@@ -53,15 +71,18 @@ class LikeDislikeCell: UITableViewCell {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                     if let index = liked.firstIndex(of: userID) {
+                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
                         liked.remove(at: index)
                     }
                 }
                 else {
                     if disliked.contains(userID) {
                         if let index = disliked.firstIndex(of: userID) {
+                            self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
                             disliked.remove(at: index)
                         }
                     }
+                    self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
                     liked.append(Auth.auth().currentUser!.uid)
                 }
                 ref.setData(["liked": liked], merge: true)
@@ -86,15 +107,18 @@ class LikeDislikeCell: UITableViewCell {
                 
                 if disliked.contains(userID) {
                     if let index = disliked.firstIndex(of: userID) {
+                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
                         disliked.remove(at: index)
                     }
                 }
                 else {
                     if liked.contains(userID) {
                         if let index = liked.firstIndex(of: userID) {
+                            self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
                             liked.remove(at: index)
                         }
                     }
+                    self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
                     disliked.append(Auth.auth().currentUser!.uid)
                 }
                 ref.setData(["liked": liked], merge: true)

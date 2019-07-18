@@ -989,18 +989,16 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywm-O2-dXh" userLabel="Downvote Button">
-                                                            <rect key="frame" x="0.0" y="48.5" width="30" height="44"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                            <state key="normal" title="👍"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywm-O2-dXh" userLabel="Downvote Button">
+                                                            <rect key="frame" x="0.0" y="59.5" width="19" height="22"/>
+                                                            <state key="normal" image="like"/>
                                                             <connections>
                                                                 <action selector="upvotePressed:" destination="2iz-DX-a9w" eventType="touchUpInside" id="ksM-1O-fAN"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph5-jT-1ss" userLabel="Upvote">
-                                                            <rect key="frame" x="66" y="48.5" width="30" height="44"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                            <state key="normal" title="👎"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph5-jT-1ss" userLabel="Upvote">
+                                                            <rect key="frame" x="77" y="59.5" width="19" height="22"/>
+                                                            <state key="normal" image="dislike"/>
                                                             <connections>
                                                                 <action selector="downvotePressed:" destination="2iz-DX-a9w" eventType="touchUpInside" id="ThJ-T9-dmC"/>
                                                             </connections>
@@ -1332,13 +1330,15 @@
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
+        <image name="dislike" width="19" height="19"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
         <image name="icon-messages" width="27" height="26"/>
         <image name="icon-settings" width="28" height="28"/>
+        <image name="like" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m0R-vf-5JF"/>
+        <segue reference="DtX-qp-0oM"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="8Ob-Zd-y7p"/>
