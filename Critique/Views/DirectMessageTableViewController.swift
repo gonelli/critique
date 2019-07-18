@@ -18,23 +18,28 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var messageTF: UITextField!
     
     @IBAction func sendButton(_ sender: Any) {
+        if messageTF.text != nil, let tf = messageTF.text {
+            chat!.messages.append(contentsOf: [["body": tf, "from": chat!.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid)!, "time": Date()]])
+            db.collection("chats").document(chat!.chatID).setData(["messages": chat!.messages], merge: true)
+            messageTF.text = ""
+            tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
-        buttonPressed()
-        
-        //self.navigationController?.title = chat?.title
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return chat?.messages.count ?? 0
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -46,13 +51,6 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
         cell.textLabel?.text = chat?.messages[indexPath.row]["body"] as! String?
 
         return cell
-    }
-
-    
-    func buttonPressed() {
-        let tf = "Boiii!"
-        chat!.messages.append(contentsOf: [["body": tf, "from": chat!.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid)!, "time": Date()]])
-        db.collection("chats").document(chat!.chatID).setData(["messages": chat!.messages], merge: true)
     }
     
     /*
