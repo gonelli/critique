@@ -27,7 +27,6 @@ class FollowsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.critics = []
-        tableView.reloadData()
         getCritics()
     }
 
@@ -38,7 +37,6 @@ class FollowsTableViewController: UITableViewController {
     
     @objc func refresh() {
         self.critics = []
-        tableView.reloadData()
         getCritics()
     }
     

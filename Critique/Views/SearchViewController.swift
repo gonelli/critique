@@ -183,7 +183,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                             }
                         }
-                        self.tableView.reloadData()
                     }
                     else {
                         fatalError(error!.localizedDescription)

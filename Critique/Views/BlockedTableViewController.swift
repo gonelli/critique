@@ -24,7 +24,6 @@ class BlockedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         blockList = []
-        tableView.reloadData()
         
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
             if error == nil {
