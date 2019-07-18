@@ -291,6 +291,7 @@
                                             <outlet property="posterImage" destination="eZ3-LO-Ubz" id="UQz-0q-VTu"/>
                                             <outlet property="reviewLabel" destination="XoO-q3-psm" id="CBb-sv-hTo"/>
                                             <outlet property="scoreLabel" destination="K7x-9n-ZyD" id="KKh-Y8-1jU"/>
+                                            <segue destination="AnV-XF-KsE" kind="show" identifier="accountMovieExpandSegue" id="AaD-db-S69"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1451,7 +1452,7 @@
         <image name="like" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m0R-vf-5JF"/>
+        <segue reference="AaD-db-S69"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="8Ob-Zd-y7p"/>
