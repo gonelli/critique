@@ -41,7 +41,6 @@ class Chat {
                 self.messages = document?.data()!["messages"] as! [[String:Any]]
                 self.criticIDs = document?.data()!["users"] as! [String]
             }
-            print("ChatID: \(self.chatID)\nTitle: \(self.title)\nCriticIDs: \(self.criticIDs)\nMessages: \(self.messages)")
         }
     }
     
@@ -56,12 +55,31 @@ class Chat {
                             if error == nil {
                                 self.title = document?.data()!["name"] as! String
                                 completion(self.title)
+                                return
                             }
                         }
                     }
                 }
             }
             completion(self.title)
+        }
+    }
+    
+    func getMessages(completion: @escaping ([[String:Any]]) -> Void) {
+        db.collection("chats").document(chatID).getDocument() { (document, error) in
+            if error == nil && Auth.auth().currentUser != nil {
+                self.messages = document?.data()!["messages"] as! [[String:Any]]
+                completion(self.messages)
+            }
+        }
+    }
+    
+    func getUserIDs(completion: @escaping ([String]) -> Void) {
+        db.collection("chats").document(chatID).getDocument() { (document, error) in
+            if error == nil && Auth.auth().currentUser != nil {
+                self.criticIDs = document?.data()!["users"] as! [String]
+                completion(self.criticIDs)
+            }
         }
     }
     

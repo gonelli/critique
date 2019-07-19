@@ -35,10 +35,21 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return chat?.messages.count ?? 0
+        var messageCount:Int = 0
+        print("\n\nGOT HERE0")
+        chat?.getMessages() { (messages) in
+            print("\n\nGOT HERE1 \(messageCount)")
+            messageCount = messages.count
+            print("\n\nGOT HERE2 \(messageCount)")
+        }
+        return messageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +59,9 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
             cell.textLabel?.textAlignment = .right
             cell.textLabel?.backgroundColor = UIColor.blue
         }
-        cell.textLabel?.text = chat?.messages[indexPath.row]["body"] as! String?
+        chat?.getMessages(){ (messages) in
+            cell.textLabel?.text = messages[indexPath.row]["body"] as! String?
+        }
 
         return cell
     }

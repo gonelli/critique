@@ -314,6 +314,7 @@
                         <outlet property="followersButtonOutlet" destination="ZVu-uU-5Iy" id="ioc-6i-l5D"/>
                         <outlet property="followingButtonOutlet" destination="w0g-DD-Wpu" id="z3C-Gu-XCi"/>
                         <outlet property="tableView" destination="2yr-yb-0Wp" id="0Y2-dm-LBj"/>
+                        <segue destination="XXr-6Y-gUe" kind="show" identifier="accountDM_Segue" id="aHn-bx-bsG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wft-ti-k7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1455,6 +1456,7 @@
         <segue reference="AaD-db-S69"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
+        <segue reference="aHn-bx-bsG"/>
         <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -27,6 +27,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var reviews: [Review] = []
     let followersSegue = "followersSegue"
     let followingSegue = "followingSegue"
+    let accountDM_Segue = "accountDM_Segue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,6 +161,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             nextVC.deligate = self
             nextVC.expanedReview = reviews[reviewIndex]
         }
+        else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? DirectMessageTableViewController {
+            nextVC.chat = Chat(sender as! String)
+        }
     }
 
     // Generate action screen for when user clicks on options button
@@ -227,28 +231,28 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     if approved {
                         //Add chatID to all users myChats array
                         for user in chatGroup {
-                            print("Here0")
                             var userChats:[String] = []
                             self.db.collection("users").document(user).getDocument(){ (document, error) in
-                                print("Here1")
                                 if error == nil, let chatDoc = document{
-                                    print("Here2")
                                     userChats = chatDoc.data()!["myChats"] as! [String]
                                     userChats.append(chatID!)
                                     self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
                                 }
                             }
-                            print("Here3")
-                            print("Here4")
                         }
+                        targetChatID = chatID!
                     } else if chatID != nil {
                         targetChatID = chatID!
+                        print("\n\nTARGET CHAT ID:\(targetChatID)\n\n")
                     } else {
                         //break
+                        print("\n\nERROR HANDLING NOT IMPLEMENTED YET\n\n")
+                    }
+                    //Navigate to chat
+                    if targetChatID != "" {
+                        self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
                     }
                 }
-                //Navigate to chat
-                print(targetChatID)
             }
         )
         
@@ -331,26 +335,36 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func chatRequest(_ users:[String] ,completion: @escaping (Bool, String?) -> Void) {
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
-            
+            var createNew = false
             if error == nil, let userDoc = document {
                 for chat in userDoc.data()?["myChats"] as! [String] {
-                    self.db.collection("chats").document(chat).getDocument(){ (document, error) in
-                        if error == nil, let chatDoc = document {
-                            let existingChat = chatDoc.data()!["users"] as! [String]
-                            if users.sorted() == existingChat.sorted() {
-                                completion(false, chat)
-                            }
-                        }
+                    self.chatExists(userList: users, chatID: chat){ (exists) in
+                        createNew = exists
+                        completion(false, chat)
                     }
                 }
-                let chatDoc = self.db.collection("chats").addDocument(data:
-                    ["messages": [],
-                     "users": users
-                    ])
-                completion(true, chatDoc.documentID)
+                if createNew {
+                    let chatDoc = self.db.collection("chats").addDocument(data:
+                        ["messages": [],
+                         "users": users
+                        ])
+                    completion(true, chatDoc.documentID)
+                }
+            } else {
+                completion(false, nil)
             }
-            completion(false, nil)
         }
     }
-
+    
+    func chatExists(userList users:[String], chatID chat:String, completion: @escaping (Bool) -> Void) {
+        self.db.collection("chats").document(chat).getDocument(){ (document, error) in
+            if error == nil, let chatDoc = document {
+                let existingChat = chatDoc.data()!["users"] as! [String]
+                if users.sorted() == existingChat.sorted() {
+                    completion(true)
+                }
+            }
+        }
+    }
+    
 }

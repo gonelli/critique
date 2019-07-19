@@ -110,8 +110,6 @@ class FollowsTableViewController: UITableViewController {
             let selectedRow = tableView.indexPathForSelectedRow!
             profileVC.accountName = self.critics[selectedRow.row].0
             profileVC.accountID = self.critics[selectedRow.row].1
-            print(self.critics[selectedRow.row].0)
-            print(self.critics[selectedRow.row].1)
             
             tableView.deselectRow(at: selectedRow, animated: true)
         }
