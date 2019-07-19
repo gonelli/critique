@@ -31,9 +31,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
+        
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
+        
         initFirestore()
     }
     
@@ -124,6 +130,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.endEditing(true)
     }
     
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         // Search for movie
@@ -138,11 +148,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
             // Search for critic
         else {
-            self.criticList = []
             if searchBar.text! != "" {
+                var criticList: [(String, String)] = []
                 client.index(withName: "users").search(Query(query: searchBar.text!)) { (content, error) in
                     if error == nil {
                         guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
+                        if hits.count == 0 {
+                            self.criticList = []
+                            self.tableView.reloadData()
+                        }
                         var hitsSearched = 0
                         for hit in hits {
                             var hitPublic = true
@@ -152,10 +166,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 didSet {
                                     if checksDone == 2 {
                                         if hitPublic && !userBlocked && !hitBlocked {
-                                            self.criticList.append((hit["name"] as! String, hit["objectID"] as! String))
+                                            criticList.append((hit["name"] as! String, hit["objectID"] as! String))
                                         }
                                         hitsSearched += 1
                                         if hitsSearched == hits.count {
+                                            self.criticList = criticList
                                             self.tableView.reloadData()
                                         }
                                     }
@@ -190,6 +205,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         fatalError(error!.localizedDescription)
                     }
                 }
+            }
+            else {
+                self.criticList = []
+                self.tableView.reloadData()
             }
         }
     }

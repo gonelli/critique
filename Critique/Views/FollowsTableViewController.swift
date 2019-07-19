@@ -26,7 +26,6 @@ class FollowsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.critics = []
         getCritics()
     }
 
@@ -36,7 +35,6 @@ class FollowsTableViewController: UITableViewController {
     }
     
     @objc func refresh() {
-        self.critics = []
         getCritics()
     }
     
@@ -59,6 +57,11 @@ class FollowsTableViewController: UITableViewController {
         if lookupType == "Following" {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
+                    if following.count == 0 {
+                        self.critics = []
+                        self.tableView.reloadData()
+                        self.tableView.refreshControl?.endRefreshing()
+                    }
                     var criticsGotten = 0
                     for followed in following {
                         self.db.collection("users").document(followed).getDocument{ (snapshot, _) in

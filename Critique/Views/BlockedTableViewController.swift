@@ -23,18 +23,23 @@ class BlockedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        blockList = []
         
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
             if error == nil {
+                var blockList: [(String, String)] = []
                 let blocked = document!.data()!["blocked"] as! [String]
+                if blocked.count == 0 {
+                    self.blockList = []
+                    self.tableView.reloadData()
+                }
                 var criticsGotten = 0
                 for blockedCritic in blocked {
                     self.db.collection("users").document(blockedCritic).getDocument() { (document, error) in
                         if error == nil {
-                            self.blockList.append((document!.data()!["name"] as! String, blockedCritic))
+                            blockList.append((document!.data()!["name"] as! String, blockedCritic))
                             criticsGotten += 1
                             if criticsGotten == blocked.count {
+                                self.blockList = blockList
                                 self.tableView.reloadData()
                             }
                         }

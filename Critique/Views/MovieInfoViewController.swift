@@ -62,22 +62,18 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if segmentedControl.selectedSegmentIndex == 0 {
-            reviews = []
             getReviews()
         }
         else {
-            followingReviews = []
             getFollowingReviews()
         }
     }
     
     @objc func refresh() {
         if segmentedControl.selectedSegmentIndex == 0 {
-            reviews = []
             getReviews()
         }
         else {
-            followingReviews = []
             getFollowingReviews()
         }
     }
@@ -103,6 +99,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         let currentMovieID = movieObject.movieData["imdbID"]!
         self.db.collection("reviews").whereField("imdbID", isEqualTo: currentMovieID).getDocuments(completion: { (snapshot, _) in
             //TODO: custom MovieInfoCell, not FeedTableViewCell
+            if (snapshot!.documents.count == 0) {
+                self.scoreLabel.text = "No scores"
+                self.reviews = []
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
+            }
             var reviewsGotten = 0
             for review in snapshot!.documents {
                 let body = review.data()["body"] as! String
@@ -117,26 +119,33 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 let likers = review.data()["liked"] as! [String]
                 let dislikers = review.data()["disliked"] as! [String]
                 let criticID = review.data()["criticID"] as! String
-                self.db.collection("users").document(criticID).getDocument() { (document, error) in
+                self.db.collection("users").document(criticID).getDocument() { (criticDocument, error) in
                     if error == nil {
-                        if (document!.data()!["isPublic"] as! Bool) {
-                            // TO-DO: Block around reviews
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
-                        }
-                        reviewsGotten += 1
-                        if reviewsGotten == snapshot!.documents.count {
-                            self.reviews = reviews.sorted()
-                            self.tableView.reloadData()
-                            self.tableView.refreshControl?.endRefreshing()
-                        }
+                        let criticBlockList = criticDocument!.data()!["blocked"] as! [String]
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(completion: { (userDocument, error) in
+                            if error == nil {
+                                let userBlockList = userDocument!.data()!["blocked"] as! [String]
+                                let criticIsPublic = criticDocument!.data()!["isPublic"] as! Bool
+                                if criticIsPublic && !criticBlockList.contains(Auth.auth().currentUser!.uid) && !userBlockList.contains(criticID) {
+                                    // TO-DO: Block around reviews
+                                    reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                                }
+                                reviewsGotten += 1
+                                if reviewsGotten == snapshot!.documents.count {
+                                    self.reviews = reviews.sorted()
+                                    self.tableView.reloadData()
+                                    self.tableView.refreshControl?.endRefreshing()
+                                }
+                            }
+                            else {
+                                fatalError(error!.localizedDescription)
+                            }
+                        })
                     }
                     else {
                         fatalError("Unknown user")
                     }
                 }
-            }
-            if (self.scores.count == 0) {
-                self.scoreLabel.text = "No scores"
             }
         })
     }
@@ -147,6 +156,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if let following = document?.data()?["following"] as? [String] {
+                if following.count == 0 {
+                    self.followingReviews = []
+                    self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
+                }
                 var criticsGotten = 0
                 for followed in following {
                     self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in
@@ -177,10 +191,12 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func segmentChanged(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
-            self.reviews = []
+            self.followingReviews = []
+            tableView.reloadData()
         }
         else {
-            self.followingReviews = []
+            self.reviews = []
+            tableView.reloadData()
         }
         refresh()
 

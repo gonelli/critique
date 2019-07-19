@@ -41,7 +41,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Looking at own profile
-        reviews = []
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
             db.collection("users").document(accountID).getDocument() { (document, error) in
@@ -71,7 +70,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func refresh() {
         print("--refesh--")
-        reviews = []
         getReviews()
         getFollowNumbers()
     }
@@ -91,7 +89,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Fetches reviews of critics user is following and populates the account page
     func getReviews() {
         var reviews: [Review] = []
-        self.tableView.reloadData()
         db.collection("reviews").whereField("criticID", isEqualTo: self.accountID).getDocuments(completion: { (snapshot, _) in
             //TODO: custom MovieInfoCell, not FeedTableViewCell
             for review in snapshot!.documents {
