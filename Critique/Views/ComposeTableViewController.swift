@@ -30,6 +30,11 @@ class ComposeTableViewController: UITableViewController {
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
     }
+  
+    override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+      scoreTF.becomeFirstResponder()
+    }
     
     @objc func dismissKeyboard() {
         self.view.endEditing(true)

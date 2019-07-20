@@ -43,7 +43,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         yearLabel.text = " \( movieObject.movieData["Year"]!)"
         yearLabel.textColor = UIColor.gray
         
-        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 77, right: 0)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Review", style: .done, target: self, action: #selector(self.post))
         
         tableView.delegate = self
