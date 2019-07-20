@@ -189,14 +189,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func segmentChanged(_ sender: Any) {
-        if segmentedControl.selectedSegmentIndex == 0 {
-            self.followingReviews = []
-            tableView.reloadData()
-        }
-        else {
-            self.reviews = []
-            tableView.reloadData()
-        }
         refresh()
 
     }

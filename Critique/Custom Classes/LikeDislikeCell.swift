@@ -25,34 +25,39 @@ class LikeDislikeCell: UITableViewCell {
     // A table cell in the Feed is defined by the Review it corresponds to
     var review: Review? {
         didSet {
-            scoreLabel.text = "\(review!.score ?? 0)"
-            reviewLabel.text = review?.body
-            votesLabel.text = "\(review!.likers.count - review!.dislikers.count)"
+//            self.criticLabel.text = " "
             review?.getCritic(completion: { (critic) in
+                self.scoreLabel.text = "\(self.review!.score ?? 0)"
+                self.reviewLabel.text = self.review?.body
+                self.votesLabel.text = "\(self.review!.likers.count - self.review!.dislikers.count)"
                 self.criticLabel.text = critic
+                
+
             })
-            self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
-            self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
-            initializeFirestore()
-            let movieID = review!.imdbID ?? "0"
-            let criticID = review!.criticID ?? "0"
+//            self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+//            self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+            self.initializeFirestore()
+            let movieID = self.review!.imdbID ?? "0"
+            let criticID = self.review!.criticID ?? "0"
+
             let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
             ref.getDocument { (document, error) in
-              if error == nil {
-                var liked = document!.data()!["liked"] as! [String]
-                var disliked = document!.data()!["disliked"] as! [String]
-                let userID = Auth.auth().currentUser!.uid
-                if liked.contains(userID) {
-                  self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
-                  self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
-                } else if disliked.contains(userID) {
-                  self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
-                  self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+                if error == nil {
+                    var liked = document!.data()!["liked"] as! [String]
+                    var disliked = document!.data()!["disliked"] as! [String]
+                    let userID = Auth.auth().currentUser!.uid
+                    if liked.contains(userID) {
+                        self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
+                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                    } else if disliked.contains(userID) {
+                        self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
+                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+                    }
+                } else {
+                    fatalError(error!.localizedDescription)
                 }
-              } else {
-                fatalError(error!.localizedDescription)
-              }
             }
+
         }
     }
     
