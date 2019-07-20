@@ -1,45 +1,50 @@
 # Contributions
 
-Ameya Joshi (30%)
+Ameya Joshi (Release 20%, Overall 25%)
 - Firebase Firestore
 - User Search
 - Settings
 - Following and Blocking
+- Privacy
+- Data Refreshing
 
-James Jackson (30%)
+James Jackson (Release 25%, Overall 27.5%)
 - Firebase Firestore
 - Feed
 - Review Posting
 - Create Account and Login
+- Review Ordering
+- Liking / Disliking
 
-Andrew Cramer (20%)
+Andrew Cramer (Release 25%, Overall 22.5%)
 - Firebase setup
 - Login Backend
 - Expanded movie review
 - Followers / Following
+- Profile Screen
+- Messaging
 
-Tony Gonelli (20%)
+Tony Gonelli (Release 30%, Overall 25%)
 - Movie search
 - OMDB API
 - Navigation
+- Movie Info
+- Profile Page
+- Liking / Disliking
 
 # Deviations
 
-- Our alpha submission offers nearly everything promised, aside from two of our settings; blocking and account privacy. These settings are tracked in the database, but do not yet affect user search. This was due to us not having planned to have user search in Alpha, but in Beta, so Ameya has not yet figured out how to filter in Algolia.
-- We went ahead to some of our beta features and have implemented movie info, movie search, and critic page. They accomplish their basic functions, and only need to have a few features added. We jumped ahead to them because our idea for the design led to us to realize that review posting and the feed would need them as middle grounds for navigation, which we hadn't noticed during the proposal.
+- Finished implementing the Alpha features of blocking and privacy.
+- Since we got a head start on the Beta features in the Alpha release, we were able to start Messaging early.
+- The like/dislike backend is functional, however the front end has known bugs.
 
 ## Things to fix:
 
-- Calculate a movie's Critique score
-- Populate movie info page with reviews
-- Block people from finding each other in search if one person blocks
-- Hide private accounts
-- Order feed by date posted
-- Cap movie scores
-- Don't follow yourself (this is temporary and intentional to allow viewing your own reviews in your feed)
+- Messaging is very much a work in progress and is known to frequently crash the app
+- Like/dislike updates the score correctly in the backend, however the buttons are sometimes incorrectly updated.
 
 ## Things to add:
 
 - Messaging
-- Likes and dislikes on reviews
-- Links from a review to movie info and profile screens
+- Discovery (Stretch goal)
+- IMDB Links (Stretch goal)
