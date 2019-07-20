@@ -43,6 +43,8 @@ class FeedTableViewCell: UITableViewCell {
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
             })
+            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+            self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
             initializeFirestore()
             let movieID = review!.imdbID ?? "0"
             let criticID = review!.criticID ?? "0"
@@ -55,10 +57,10 @@ class FeedTableViewCell: UITableViewCell {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                   self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                  self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
+                  //self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
                 } else if disliked.contains(userID) {
                   self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
-                  self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                  //self.likeButton.setImage(UIImage(named: "like"), for: .normal)
                 }
               } else {
                 fatalError(error!.localizedDescription)
