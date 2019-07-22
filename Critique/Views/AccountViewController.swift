@@ -265,6 +265,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         var following = document!.data()!["following"] as! [String]
                         following.append(self.accountID)
                         ref.setData(["following": following], merge: true)
+                        self.getFollowNumbers()
                     }
                     else {
                         fatalError(error!.localizedDescription)
@@ -283,6 +284,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         var following = document!.data()!["following"] as! [String]
                         following.removeAll { $0 == self.accountID }
                         ref.setData(["following": following], merge: true)
+                        self.getFollowNumbers()
                     }
                     else {
                         fatalError(error!.localizedDescription)

@@ -29,6 +29,7 @@ class FeedTableViewCell: UITableViewCell {
     // A table cell in the Feed is defined by the Review it corresponds to
     var review: Review? {
         didSet {
+            initializeFirestore()
             scoreLabel.text = "\(review!.score ?? 0)"
             if !scoreLabel.text!.contains(".") {
                 scoreLabel.text = scoreLabel.text! + ".0"
@@ -43,9 +44,6 @@ class FeedTableViewCell: UITableViewCell {
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
             })
-            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-            self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
-            initializeFirestore()
             let movieID = review!.imdbID ?? "0"
             let criticID = review!.criticID ?? "0"
             let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
@@ -56,11 +54,14 @@ class FeedTableViewCell: UITableViewCell {
                 self.likesLabel.text = "\(liked.count - disliked.count)"
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
-                  self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                  //self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
+                    self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
+                    self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
                 } else if disliked.contains(userID) {
-                  self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
-                  //self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                    self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                    self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
+                } else {
+                    self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                    self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
                 }
               } else {
                 fatalError(error!.localizedDescription)
@@ -86,23 +87,23 @@ class FeedTableViewCell: UITableViewCell {
         var disliked = document!.data()!["disliked"] as! [String]
         let userID = Auth.auth().currentUser!.uid
         if liked.contains(userID) {
-          if let index = liked.firstIndex(of: userID) {
-            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-            liked.remove(at: index)
-          }
+            if let index = liked.firstIndex(of: userID) {
+                self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
+                liked.remove(at: index)
+            }
         }
         else {
-          if disliked.contains(userID) {
-            if let index = disliked.firstIndex(of: userID) {
-              self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
-              disliked.remove(at: index)
+            if disliked.contains(userID) {
+                if let index = disliked.firstIndex(of: userID) {
+                    disliked.remove(at: index)
+                }
             }
-          }
-          self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-          liked.append(Auth.auth().currentUser!.uid)
+            self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
+            self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
+            liked.append(userID)
         }
-        ref.setData(["liked": liked], merge: true)
-        ref.setData(["disliked": disliked], merge: true)
+        ref.setData(["liked": liked, "disliked": disliked], merge: true)
         self.likesLabel.text = "\(liked.count - disliked.count)"
       }
       else {
@@ -125,22 +126,22 @@ class FeedTableViewCell: UITableViewCell {
         
         if disliked.contains(userID) {
           if let index = disliked.firstIndex(of: userID) {
+            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
             self.dislikeButton.setImage(UIImage(named: "dislike"), for: .normal)
             disliked.remove(at: index)
           }
         }
         else {
-          if liked.contains(userID) {
-            if let index = liked.firstIndex(of: userID) {
-              self.likeButton.setImage(UIImage(named: "like"), for: .normal)
-              liked.remove(at: index)
+            if liked.contains(userID) {
+                if let index = liked.firstIndex(of: userID) {
+                    liked.remove(at: index)
+                }
             }
-          }
-          self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
-          disliked.append(Auth.auth().currentUser!.uid)
+            self.likeButton.setImage(UIImage(named: "like"), for: .normal)
+            self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
+            disliked.append(userID)
         }
-        ref.setData(["liked": liked], merge: true)
-        ref.setData(["disliked": disliked], merge: true)
+        ref.setData(["liked": liked, "disliked": disliked], merge: true)
         self.likesLabel.text = "\(liked.count - disliked.count)"
       }
       else {
