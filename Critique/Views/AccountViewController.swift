@@ -248,7 +248,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     //Navigate to chat
                     if targetChatID != "" {
-                        self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
+//                        self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
                     }
                 }
             }
