@@ -73,6 +73,7 @@ class Review {
     
 }
 
+// Allows ordering reviews by date
 extension Review: Comparable {
     
     static func < (lhs: Review, rhs: Review) -> Bool {

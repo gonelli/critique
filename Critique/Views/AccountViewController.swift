@@ -86,7 +86,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         db = Firestore.firestore()
     }
     
-    // Fetches reviews of critics user is following and populates the account page
+    // Fetches reviews by this Profile's critic
     func getReviews() {
         var reviews: [Review] = []
         db.collection("reviews").whereField("criticID", isEqualTo: self.accountID).getDocuments(completion: { (snapshot, _) in
@@ -107,6 +107,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
+    // Calculates the number of critics the user is following and followed by
     func getFollowNumbers() {
         // Number of Following
         db.collection("users").document(accountID).getDocument { (document, error) in
@@ -223,7 +224,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             handler: {(alert) in
                 var targetChatID = ""
                 let chatGroup = [Auth.auth().currentUser!.uid, self.accountID]
-                //Check to see if there exists a chat between these two users and ONLY these two users
+                // Check to see if there exists a chat between these two users and ONLY these two users
                 self.chatRequest(chatGroup) { (approved, chatID) in
                     if approved {
                         //Add chatID to all users myChats array

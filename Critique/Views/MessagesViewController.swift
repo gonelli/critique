@@ -44,7 +44,7 @@ class MessagesViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
-    // Fetches reviews of critics user is following and populates the feed
+    // Fetches messages
     func getDirectMessages() {
         var directMessages: [Chat] = []
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
@@ -68,7 +68,6 @@ class MessagesViewController: UITableViewController {
         return cell
     }
 
-    // If body of a review is touched, open an expanded view of it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! DirectMessageTableViewController
         if segue.identifier == "dmSegue", let selectedRow = tableView.indexPathForSelectedRow {

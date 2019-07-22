@@ -77,6 +77,7 @@ class ComposeTableViewController: UITableViewController {
     }
 }
 
+// Limits score entry
 extension ComposeTableViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,

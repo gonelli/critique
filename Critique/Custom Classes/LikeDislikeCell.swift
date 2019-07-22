@@ -22,10 +22,10 @@ class LikeDislikeCell: UITableViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     var db: Firestore!
     
-    // A table cell in the Feed is defined by the Review it corresponds to
+    // Special review cell for Movie Info page that doesn't need poster and movie title
     var review: Review? {
         didSet {
-//            self.criticLabel.text = " "
+            //            self.criticLabel.text = " "
             review?.getCritic(completion: { (critic) in
                 self.scoreLabel.text = "\(self.review!.score ?? 0)"
                 if !self.scoreLabel.text!.contains(".") {
@@ -37,7 +37,7 @@ class LikeDislikeCell: UITableViewCell {
             self.initializeFirestore()
             let movieID = self.review!.imdbID ?? "0"
             let criticID = self.review!.criticID ?? "0"
-
+            
             let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
             ref.getDocument { (document, error) in
                 if error == nil {
@@ -59,7 +59,7 @@ class LikeDislikeCell: UITableViewCell {
                     fatalError(error!.localizedDescription)
                 }
             }
-
+            
         }
     }
     
@@ -68,7 +68,8 @@ class LikeDislikeCell: UITableViewCell {
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
     }
-
+    
+    // The user liked this review
     @IBAction func upvotePressed(_ sender: Any) {
         let movieID = review!.imdbID ?? "0"
         let criticID = review!.criticID ?? "0"
@@ -103,6 +104,8 @@ class LikeDislikeCell: UITableViewCell {
             }
         }
     }
+    
+    // The user disliked this review
     @IBAction func downvotePressed(_ sender: Any) {
         let movieID = review!.imdbID ?? "0"
         let criticID = review!.criticID ?? "0"
@@ -138,6 +141,6 @@ class LikeDislikeCell: UITableViewCell {
                 fatalError(error!.localizedDescription)
             }
         }
-
+        
     }
 }

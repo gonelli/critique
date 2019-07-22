@@ -21,7 +21,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     var expanedReview: Review? = nil
     var movieObject: Movie?
     
-    // Fill in review's elements - movie title, poster, and critic name
+    // Fill in review's elements - movie title, poster, critic name, etc.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +58,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         self.posterImage.addSubview(view)
     }
     
+    // If movie poster is pressed, show the movie's info
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         let group = DispatchGroup()
         group.enter()

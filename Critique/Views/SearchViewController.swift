@@ -146,7 +146,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-            // Search for critic
+        // Search for critic
         else {
             if searchBar.text! != "" {
                 var criticList: [(String, String)] = []
