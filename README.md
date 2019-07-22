@@ -36,15 +36,19 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 - Finished implementing the Alpha features of blocking and privacy.
 - Since we got a head start on the Beta features in the Alpha release, we were able to start Messaging early.
-- The like/dislike backend is functional, however the front end has known bugs.
 
 ## Things to fix:
 
 - Messaging is very much a work in progress and is known to frequently crash the app
-- Like/dislike updates the score correctly in the backend, however the buttons are sometimes incorrectly updated.
+- We encountered many front end bugs with the like/dislike buttons. We have not been able to recreate them after patching them, so we are assuming they are fixed. However, unknown ones could pop up, and if you happen to notice any issues, please let us know the details in your comments.
 
 ## Things to add:
 
 - Messaging
 - Discovery (Stretch goal)
 - IMDB Links (Stretch goal)
+
+## Notes:
+
+- Since there is now a Profile Page, you can view your own reviews there instead of the Feed, unlike the Alpha.
+- You recommended we swap the positions of the Login and Create Account screens in out Alpha. We have kept them in that position because our app automatically signs users in after they create an account. Since most users won't sign out, we believe the first screen should be the Create Account, because they are likely a new user.
