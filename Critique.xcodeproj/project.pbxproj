@@ -16,12 +16,13 @@
 		1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976822C197DC001A1B7A /* Main.storyboard */; };
 		1ACF976C22C197DD001A1B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976B22C197DD001A1B7A /* Assets.xcassets */; };
 		1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */; };
+		1AF3C4FF22E7AEC600F6B10F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */; };
 		1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */; };
 		1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */; };
 		552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */; };
 		55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1A22CBDF56004A70A9 /* SearchViewController.swift */; };
 		55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1C22CBDF65004A70A9 /* AccountViewController.swift */; };
-		55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */; };
+		55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */; };
 		55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2022CBDF92004A70A9 /* SettingsViewController.swift */; };
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
 		55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */; };
@@ -48,12 +49,13 @@
 		1ACF976B22C197DD001A1B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ACF976E22C197DD001A1B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ACF977022C197DD001A1B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = ../../../../../../System/Volumes/Data/Users/james/Desktop/critique/Critique/Views/ChatViewController.swift; sourceTree = "<group>"; };
 		1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedTableViewController.swift; sourceTree = "<group>"; };
 		55672C1A22CBDF56004A70A9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		55672C1C22CBDF65004A70A9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
 		55672C2022CBDF92004A70A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeCell.swift; sourceTree = "<group>"; };
@@ -118,7 +120,8 @@
 				5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */,
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
 				1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */,
-				55672C1E22CBDF76004A70A9 /* MessagesViewController.swift */,
+				55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */,
+				1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */,
 				5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */,
 				55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */,
 				55672C1C22CBDF65004A70A9 /* AccountViewController.swift */,
@@ -291,7 +294,7 @@
 			files = (
 				5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */,
 				55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */,
-				55672C1F22CBDF76004A70A9 /* MessagesViewController.swift in Sources */,
+				55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */,
 				5E74D9CF22DE5FE700A69FB4 /* Chat.swift in Sources */,
 				55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */,
 				5EEBBB7822E0DD2C00795BCE /* DirectMessageTableViewController.swift in Sources */,
@@ -299,6 +302,7 @@
 				55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */,
 				1ABE096122D29F1D00279752 /* Review.swift in Sources */,
 				552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */,
+				1AF3C4FF22E7AEC600F6B10F /* ChatViewController.swift in Sources */,
 				1A4BB77F22D134310027E606 /* ComposeTableViewController.swift in Sources */,
 				1ABE096522D29F4600279752 /* Movie.swift in Sources */,
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
