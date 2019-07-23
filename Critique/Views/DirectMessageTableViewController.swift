@@ -13,7 +13,6 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
 
     var db: Firestore!
     var chat:Chat? = nil
-    var messageCount:Int = 0
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTF: UITextField!
@@ -35,29 +34,35 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+        if chat != nil {
+            db.collection("chats").document(chat!.chatID).addSnapshotListener() { _,_ in
+                print("database updated")
+                self.chat?.refresh() { () in
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         chat?.getMessages() { (messages) in
-            self.messageCount = messages.count
             self.tableView.reloadData()
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("NUM ROWS: \(chat?.messages.count ?? 0)")
         return chat?.messages.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        print("\nGot here\n")
         let cell = UITableViewCell()
         if chat!.isCurrentUser(indexPath.row) {
             cell.textLabel?.textAlignment = .right
             cell.textLabel?.backgroundColor = UIColor.blue
         }
         chat?.getMessages(){ (messages) in
-            print("\nMessages:\(messages)\n")
             cell.textLabel?.text = messages[indexPath.row]["body"] as! String?
         }
 
