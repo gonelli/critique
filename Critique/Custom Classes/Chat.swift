@@ -10,11 +10,13 @@ import Foundation
 import UIKit
 import Firebase
 import Alamofire
+import FirebaseFirestore
+import FirebaseCore
 
 class Chat {
     
     var db: Firestore!
-    var messages: [[String:Any]] = []
+    var messages: [MockMessage] = []
     var chatID: String
     var criticIDs: [String] = []
     var title: String
@@ -38,8 +40,11 @@ class Chat {
                         }
                     }
                 }
-                self.messages = document?.data()!["messages"] as! [[String:Any]]
-                self.criticIDs = document?.data()!["users"] as! [String]
+              self.getMessages(completion: { (messages) in
+              })
+              
+              self.getUserIDs(completion: { (ids) in
+              })
             }
         }
     }
@@ -65,11 +70,20 @@ class Chat {
         }
     }
     
-    func getMessages(completion: @escaping ([[String:Any]]) -> Void) {
+    func getMessages(completion: @escaping ([MockMessage]) -> Void) {
         db.collection("chats").document(chatID).getDocument() { (document, error) in
             if error == nil && Auth.auth().currentUser != nil {
-                self.messages = document?.data()!["messages"] as! [[String:Any]]
+              if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+                var i = 0
+                for message in raw {
+                  i += 1
+                  let text = message["body"] as! String
+                  let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                  let timestamp = (message["time"] as! Timestamp).dateValue()
+                  self.messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                }
                 completion(self.messages)
+              }
             }
         }
     }
@@ -82,17 +96,9 @@ class Chat {
             }
         }
     }
-    
-    func isCurrentUser(_ index:Int) -> Bool {
-        if index < messages.count, let currentUser = Auth.auth().currentUser {
-            if criticIDs[messages[index]["from"] as! Int] == currentUser.uid {
-                return true
-            }
-        }
-        return false
-    }
-    
+  
     func refresh(completion: @escaping () -> Void) {
+        self.messages = []
         getMessages(completion: {_ in completion()})
     }
 }
