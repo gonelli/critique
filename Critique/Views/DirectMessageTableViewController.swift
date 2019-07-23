@@ -13,6 +13,7 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
 
     var db: Firestore!
     var chat:Chat? = nil
+    var messageCount:Int = 0
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTF: UITextField!
@@ -23,7 +24,7 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
             db.collection("chats").document(chat!.chatID).setData(["messages": chat!.messages], merge: true)
             messageTF.text = ""
             tableView.reloadData()
-            tableView.scrollToRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+            //tableView.scrollToRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
         }
     }
     
@@ -37,29 +38,26 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        chat?.getMessages() { (messages) in
+            self.messageCount = messages.count
+            self.tableView.reloadData()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        var messageCount:Int = 0
-        print("\n\nGOT HERE0")
-        chat?.getMessages() { (messages) in
-            print("\n\nGOT HERE1 \(messageCount)")
-            messageCount = messages.count
-            print("\n\nGOT HERE2 \(messageCount)")
-        }
-        return messageCount
+        return chat?.messages.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        print("\nGot here\n")
         let cell = UITableViewCell()
         if chat!.isCurrentUser(indexPath.row) {
             cell.textLabel?.textAlignment = .right
             cell.textLabel?.backgroundColor = UIColor.blue
         }
         chat?.getMessages(){ (messages) in
+            print("\nMessages:\(messages)\n")
             cell.textLabel?.text = messages[indexPath.row]["body"] as! String?
         }
 
