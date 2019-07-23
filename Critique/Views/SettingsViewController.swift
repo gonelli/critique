@@ -57,22 +57,23 @@ class SettingsViewController: UITableViewController {
           preferredStyle: .alert)
         
         controller.addTextField(configurationHandler: {
-          (textField:UITextField!) in textField.placeholder = "New Name"
+            (textField:UITextField!) in textField.placeholder = "New Name"
         })
-        
-        controller.addAction(UIAlertAction(
-        title: "Confirm",
-        style: .default,
-        handler: { (paramAction:UIAlertAction!) in
-            if let textFields = controller.textFields {
-                let theTextFields = textFields as [UITextField]
-                let enteredText = theTextFields[0].text!
-                self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
-                self.client.index(withName: "users").partialUpdateObject(["name": enteredText], withID: "\(Auth.auth().currentUser!.uid)")
+        let confirmAction = UIAlertAction(
+            title: "Confirm",
+            style: .default,
+            handler: { (paramAction:UIAlertAction!) in
+                if let textFields = controller.textFields {
+                    let theTextFields = textFields as [UITextField]
+                    let enteredText = theTextFields[0].text!
+                    self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
+                    self.client.index(withName: "users").partialUpdateObject(["name": enteredText], withID: "\(Auth.auth().currentUser!.uid)")
+                }
             }
-        }
-        ))
+        )
+        controller.addAction(confirmAction)
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        controller.preferredAction = confirmAction
         present(controller,animated:true,completion:nil)
       }
       // Blocked
