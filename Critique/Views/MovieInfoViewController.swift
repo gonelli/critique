@@ -10,9 +10,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import SafariServices
 
-class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SFSafariViewControllerDelegate {
     
+    @IBOutlet var imdbButton: UIButton!
     @IBOutlet var segmentChanged: UISegmentedControl!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var scoreLabel: UILabel!
@@ -89,6 +91,20 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         posterImage.image = movieObject.poster
+    }
+    @IBAction func imdbButtonPressed(_ sender: Any) {
+        // check if website exists
+        guard let url = URL(string: "https://www.imdb.com/title/" + movieObject.imdbID) else {
+            return
+        }
+        
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = self
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     // Fetches all reviews for this movie
