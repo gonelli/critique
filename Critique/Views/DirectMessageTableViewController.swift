@@ -51,7 +51,6 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("NUM ROWS: \(chat?.messages.count ?? 0)")
         return chat?.messages.count ?? 0
     }
     
