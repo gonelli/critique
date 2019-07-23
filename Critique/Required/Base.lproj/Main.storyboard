@@ -234,7 +234,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msz-eo-6OE">
-                                                    <rect key="frame" x="375" y="92" width="19" height="30"/>
+                                                    <rect key="frame" x="378" y="92" width="16" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="wJz-az-oJR"/>
                                                     </constraints>
@@ -244,7 +244,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWe-hN-9mF" userLabel="Likes Label">
-                                                    <rect key="frame" x="330" y="95" width="40" height="24"/>
+                                                    <rect key="frame" x="333" y="95" width="40" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Rgp-cs-nYg"/>
                                                     </constraints>
@@ -253,7 +253,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-sU-zPO">
-                                                    <rect key="frame" x="306" y="92" width="19" height="30"/>
+                                                    <rect key="frame" x="312" y="92" width="16" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="fxl-dA-bbK"/>
                                                     </constraints>
@@ -922,7 +922,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyc-qQ-mre">
-                                            <rect key="frame" x="375" y="92" width="19" height="30"/>
+                                            <rect key="frame" x="378" y="92" width="16" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="tCA-uy-ycu"/>
                                             </constraints>
@@ -932,7 +932,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xu-re-xll" userLabel="Likes Label">
-                                            <rect key="frame" x="330" y="95" width="40" height="24"/>
+                                            <rect key="frame" x="333" y="95" width="40" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="0Kl-Za-HzQ"/>
                                             </constraints>
@@ -941,7 +941,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89v-fH-hPr">
-                                            <rect key="frame" x="306" y="92" width="19" height="30"/>
+                                            <rect key="frame" x="312" y="92" width="16" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="jl8-xJ-l7r"/>
                                             </constraints>
