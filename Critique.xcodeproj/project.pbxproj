@@ -29,10 +29,10 @@
 		5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */; };
 		5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */; };
 		5E74D9CF22DE5FE700A69FB4 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E74D9CE22DE5FE700A69FB4 /* Chat.swift */; };
-		5EEBBB7822E0DD2C00795BCE /* DirectMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */; };
 		5EEBBB7A22E0FDD200795BCE /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */; };
 		6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDA22E7BD79002117E0 /* Critic.swift */; };
 		6313EEDD22E7BD7A002117E0 /* DummyDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */; };
+		633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F7F8B22E8C2D000F746EF /* ChatViewController.swift */; };
 		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
@@ -63,10 +63,10 @@
 		5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewTableViewController.swift; sourceTree = "<group>"; };
 		5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewController.swift; sourceTree = "<group>"; };
 		5E74D9CE22DE5FE700A69FB4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
-		5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageTableViewController.swift; sourceTree = "<group>"; };
 		5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		6313EEDA22E7BD79002117E0 /* Critic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Critic.swift; sourceTree = "<group>"; };
 		6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyDiscovery.swift; sourceTree = "<group>"; };
+		633F7F8B22E8C2D000F746EF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
 				1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */,
 				55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */,
-				5EEBBB7722E0DD2C00795BCE /* DirectMessageTableViewController.swift */,
+				633F7F8B22E8C2D000F746EF /* ChatViewController.swift */,
 				55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */,
 				55672C1C22CBDF65004A70A9 /* AccountViewController.swift */,
 				5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */,
@@ -308,7 +308,6 @@
 				55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */,
 				5E74D9CF22DE5FE700A69FB4 /* Chat.swift in Sources */,
 				55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */,
-				5EEBBB7822E0DD2C00795BCE /* DirectMessageTableViewController.swift in Sources */,
 				1A4BB78422D15E090027E606 /* FeedTableViewController.swift in Sources */,
 				6313EEDD22E7BD7A002117E0 /* DummyDiscovery.swift in Sources */,
 				6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */,
@@ -319,6 +318,7 @@
 				1ABE096522D29F4600279752 /* Movie.swift in Sources */,
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
+				633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */,
 				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
@@ -472,7 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B2LB439YX9;
+				DEVELOPMENT_TEAM = 6QX9D8LZWS;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,7 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B2LB439YX9;
+				DEVELOPMENT_TEAM = 6QX9D8LZWS;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -194,7 +194,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             nextVC.deligate = self
             nextVC.expanedReview = reviews[reviewIndex]
         }
-        else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? DirectMessageTableViewController {
+        else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? ChatViewController {
             nextVC.chat = Chat(sender as! String)
         }
     }
