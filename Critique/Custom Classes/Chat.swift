@@ -71,6 +71,7 @@ class Chat {
     }
     
     func getMessages(completion: @escaping ([MockMessage]) -> Void) {
+        var messages: [MockMessage] = []
         db.collection("chats").document(chatID).getDocument() { (document, error) in
             if error == nil && Auth.auth().currentUser != nil {
               if let raw =  document?.data()?["messages"] as? [[String: Any]] {
@@ -80,8 +81,9 @@ class Chat {
                   let text = message["body"] as! String
                   let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
                   let timestamp = (message["time"] as! Timestamp).dateValue()
-                  self.messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                  messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
                 }
+                self.messages = messages
                 completion(self.messages)
               }
             }
@@ -98,7 +100,6 @@ class Chat {
     }
   
     func refresh(completion: @escaping () -> Void) {
-        self.messages = []
         getMessages(completion: {_ in completion()})
     }
 }

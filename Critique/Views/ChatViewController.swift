@@ -24,10 +24,21 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     configureMessageCollectionView()
     configureMessageInputBar()
     
-    db.collection("chats").document(chat!.chatID).addSnapshotListener() { _,_ in
-      self.chat?.refresh() { () in
+    db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
+        if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+            var messages: [MockMessage] = []
+            var i = 0
+            for message in raw {
+                i += 1
+                let text = message["body"] as! String
+                let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                let timestamp = (message["time"] as! Timestamp).dateValue()
+                messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+            }
+            self.chat!.messages = messages
+        }
         self.messagesCollectionView.reloadDataAndKeepOffset()
-      }
+        self.messagesCollectionView.scrollToBottom(animated: true)
     }
   }
   
@@ -181,7 +192,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
       let current = MockUser(senderId: "0000", displayName: "todo")
       let message = MockMessage(text: messageText, user: current, messageId: UUID().uuidString, date: Date())
       chat!.messages.append(message)
-      
+        insertMessage(message)
       
       
       /// !!!!!
@@ -192,7 +203,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         self.messageInputBar.sendButton.stopAnimating()
         self.messageInputBar.inputTextView.placeholder = "Text Message"
-        self.insertMessage(message)
         self.messagesCollectionView.scrollToBottom(animated: true)
       }
     }

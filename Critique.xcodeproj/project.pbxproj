@@ -16,7 +16,6 @@
 		1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976822C197DC001A1B7A /* Main.storyboard */; };
 		1ACF976C22C197DD001A1B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976B22C197DD001A1B7A /* Assets.xcassets */; };
 		1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */; };
-		1AF3C4FF22E7AEC600F6B10F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */; };
 		1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */; };
 		1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */; };
 		552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */; };
@@ -33,6 +32,7 @@
 		5EEBBB7A22E0FDD200795BCE /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */; };
 		6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDA22E7BD79002117E0 /* Critic.swift */; };
 		6313EEDD22E7BD7A002117E0 /* DummyDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */; };
+		633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F7F8B22E8C2D000F746EF /* ChatViewController.swift */; };
 		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
@@ -50,7 +50,6 @@
 		1ACF976B22C197DD001A1B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ACF976E22C197DD001A1B7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ACF977022C197DD001A1B7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = ../../../../../../System/Volumes/Data/Users/james/Desktop/critique/Critique/Views/ChatViewController.swift; sourceTree = "<group>"; };
 		1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedTableViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		6313EEDA22E7BD79002117E0 /* Critic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Critic.swift; sourceTree = "<group>"; };
 		6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyDiscovery.swift; sourceTree = "<group>"; };
+		633F7F8B22E8C2D000F746EF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
 				1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */,
 				55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */,
-				1AF3C4FE22E7AEC600F6B10F /* ChatViewController.swift */,
+				633F7F8B22E8C2D000F746EF /* ChatViewController.swift */,
 				55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */,
 				55672C1C22CBDF65004A70A9 /* AccountViewController.swift */,
 				5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */,
@@ -314,11 +314,11 @@
 				55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */,
 				1ABE096122D29F1D00279752 /* Review.swift in Sources */,
 				552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */,
-				1AF3C4FF22E7AEC600F6B10F /* ChatViewController.swift in Sources */,
 				1A4BB77F22D134310027E606 /* ComposeTableViewController.swift in Sources */,
 				1ABE096522D29F4600279752 /* Movie.swift in Sources */,
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
+				633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */,
 				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
