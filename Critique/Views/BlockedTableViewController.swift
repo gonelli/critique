@@ -9,16 +9,21 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 class BlockedTableViewController: UITableViewController {
     
     var blockList : [(String, String)] = []
     var db: Firestore!
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     // Fetch and populate table with list of blocked users
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeFirestore()
+        
+        tableView.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +78,10 @@ class BlockedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "blockedCell", for: indexPath)
         
         cell.textLabel?.text = blockList[indexPath.row].0
+        
+        // NightNight
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.textLabel?.mixedTextColor = mixedNightTextColor
         
         return cell
     }

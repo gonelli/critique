@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import NightNight
 
 class FollowsTableViewController: UITableViewController {
   
@@ -16,12 +17,17 @@ class FollowsTableViewController: UITableViewController {
     var lookupType: String = "Following"
     var user: String!
     var critics: [(String, String)] = []
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = lookupType
         addRefreshView()
         initializeFirestore()
+        
+        // NightNight
+        tableView.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,6 +105,11 @@ class FollowsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
         cell.textLabel?.text = critics[indexPath.row].0
+        
+        // NightNight
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.textLabel?.mixedTextColor = mixedNightTextColor
+        
         return cell
     }
     

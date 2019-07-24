@@ -10,12 +10,17 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 class ComposeTableViewController: UITableViewController {
     
     var db: Firestore!
     var imdbID: String!
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
+    @IBOutlet var scoreCell: UITableViewCell!
+    @IBOutlet var reviewCell: UITableViewCell!
     @IBOutlet weak var scoreTF: UITextField!
     @IBOutlet weak var reviewTV: UITextView!
     
@@ -29,8 +34,32 @@ class ComposeTableViewController: UITableViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
+        
+        // NIGHT NIGHT
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
+        scoreTF.mixedTextColor = mixedNightTextColor
+        scoreTF.mixedBackgroundColor = mixedNightBgColor
+        scoreTF.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
+    
+        reviewTV.mixedTextColor = mixedNightTextColor
+        reviewTV.mixedBackgroundColor = mixedNightBgColor
+        
+        reviewCell.mixedBackgroundColor = mixedNightBgColor
+        scoreCell.mixedBackgroundColor = mixedNightBgColor
     }
-  
+    
+    // Exception where NightNight doesn't work
+    override func viewWillAppear(_ animated: Bool) {
+        if(NightNight.theme == .night) {
+            scoreTF.attributedPlaceholder = NSAttributedString(string: "7.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+
+        }
+        else {
+            scoreTF.attributedPlaceholder = NSAttributedString(string: "7.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
       scoreTF.becomeFirstResponder()
@@ -48,6 +77,12 @@ class ComposeTableViewController: UITableViewController {
             reviewTV.becomeFirstResponder()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.mixedTextColor = mixedNightTextColor
+    }
+
     
     // Create a new review document in database after review is posted
     @IBAction func post(_ sender: Any) {

@@ -11,11 +11,12 @@ import FirebaseCore
 import FirebaseFirestore
 import UIKit
 import Foundation
+import NightNight
 
 class AccountViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var topBarOuterView: UIView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var accountTabLabel: UILabel!
     @IBOutlet weak var followersButtonOutlet: UIButton!
     @IBOutlet weak var followingButtonOutlet: UIButton!
     
@@ -28,13 +29,24 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     let followersSegue = "followersSegue"
     let followingSegue = "followingSegue"
     let accountDM_Segue = "accountDM_Segue"
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         addRefreshView()
-        initializeFirestore()        
+        initializeFirestore()
+        
+        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedTintColor = mixedNightTextColor
+        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        NightNight.toggleNightTheme()
+        NightNight.toggleNightTheme() // Idk but it works
+        view.mixedBackgroundColor = mixedNightBgColor
+        tableView.mixedBackgroundColor = mixedNightBgColor
+        topBarOuterView.mixedBackgroundColor = mixedNightBgColor
     }
     
     // Fill in details of page based on whose Profile it is
@@ -61,6 +73,19 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             getFollowNumbers()
             self.navigationItem.title = self.accountName
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
+        }
+        
+        //Exception where NightNight doesn't work
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+            followersButtonOutlet.setTitleColor(UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0), for: .normal)
+            followingButtonOutlet.setTitleColor(UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0), for: .normal)
+            
+        }
+        else {
+            followingButtonOutlet.setTitleColor(UIColor.white, for: .normal)
+            followersButtonOutlet.setTitleColor(UIColor.white, for: .normal)
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -140,6 +165,16 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountReviewCell", for: indexPath) as! FeedTableViewCell
         cell.review = self.reviews[indexPath.row]
+        
+        // NIGHT NIGHT
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.criticLabel.mixedTextColor = mixedNightTextColor
+        cell.likesLabel.mixedTextColor = mixedNightTextColor
+        cell.movieLabel.mixedTextColor = mixedNightTextColor
+        cell.reviewLabel.mixedTextColor = mixedNightTextColor
+        cell.reviewLabel.mixedBackgroundColor = mixedNightBgColor
+        cell.scoreLabel.mixedTextColor = mixedNightTextColor
+        
         return cell
     }
 

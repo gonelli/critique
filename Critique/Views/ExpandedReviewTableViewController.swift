@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NightNight
 
 class ExpandedReviewTableViewController: UITableViewController {
     
@@ -20,6 +21,8 @@ class ExpandedReviewTableViewController: UITableViewController {
     var deligate: UIViewController?
     var expanedReview: Review? = nil
     var movieObject: Movie?
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     // Fill in review's elements - movie title, poster, critic name, etc.
     override func viewDidLoad() {
@@ -56,6 +59,16 @@ class ExpandedReviewTableViewController: UITableViewController {
         posterImage.addGestureRecognizer(tap)
         posterImage.isUserInteractionEnabled = true
         self.posterImage.addSubview(view)
+        
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        reviewCell.mixedBackgroundColor = mixedNightBgColor
+        reviewCell.mixedTintColor = mixedNightTextColor
+        reviewTextView.mixedBackgroundColor = mixedNightBgColor
+        reviewTextView.mixedTintColor = mixedNightTextColor // borders above and below
+        reviewTextView.mixedTextColor = mixedNightTextColor
+        criticLabel.mixedTextColor = mixedNightTextColor
+        scoreLabel.mixedTextColor = mixedNightTextColor
+        movieLabel.mixedTextColor = mixedNightTextColor
     }
     
     // If movie poster is pressed, show the movie's info
