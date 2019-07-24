@@ -83,8 +83,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
         else {
-            followingButtonOutlet.setTitleColor(UIColor.white, for: .normal)
-            followersButtonOutlet.setTitleColor(UIColor.white, for: .normal)
+            followingButtonOutlet.setTitleColor(UIColor.black, for: .normal)
+            followersButtonOutlet.setTitleColor(UIColor.black, for: .normal)
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }

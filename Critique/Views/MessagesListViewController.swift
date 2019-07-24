@@ -69,10 +69,10 @@ class MessagesListViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextVC = segue.destination as! ChatViewController
-        if segue.identifier == "toChat", let selectedRow = tableView.indexPathForSelectedRow {
-            nextVC.chat = directMessages[selectedRow.row]
-        }
+//        let nextVC = segue.destination as! ChatViewController
+//        if segue.identifier == "toChat", let selectedRow = tableView.indexPathForSelectedRow {
+//            nextVC.chat = directMessages[selectedRow.row]
+//        }
     }
     
 }

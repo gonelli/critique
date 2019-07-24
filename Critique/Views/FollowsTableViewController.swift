@@ -28,6 +28,7 @@ class FollowsTableViewController: UITableViewController {
         
         // NightNight
         tableView.mixedBackgroundColor = mixedNightBgColor
+        view.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
