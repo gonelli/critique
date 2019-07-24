@@ -283,7 +283,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                     //Navigate to chat
                     if targetChatID != "" {
-//                        self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
+                        self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
                     }
                 }
             }
@@ -370,20 +370,24 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func chatRequest(_ users:[String] ,completion: @escaping (Bool, String?) -> Void) {
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
-            var createNew = false
+            var createNew = true
             if error == nil, let userDoc = document {
+                var syncCount = -1*(userDoc.data()?["myChats"] as! [String]).count
                 for chat in userDoc.data()?["myChats"] as! [String] {
                     self.chatExists(userList: users, chatID: chat){ (exists) in
-                        createNew = exists
-                        completion(false, chat)
+                        syncCount += 1
+                        if exists {
+                            createNew = false
+                            completion(false, chat)
+                            print("Sync Count: \(syncCount) | Create New: \(createNew)")
+                        } else if syncCount == 0 && createNew {
+                            let chatDoc = self.db.collection("chats").addDocument(data:
+                                ["messages": [],
+                                 "users": users
+                                ])
+                            completion(true, chatDoc.documentID)
+                        }
                     }
-                }
-                if createNew {
-                    let chatDoc = self.db.collection("chats").addDocument(data:
-                        ["messages": [],
-                         "users": users
-                        ])
-                    completion(true, chatDoc.documentID)
                 }
             } else {
                 completion(false, nil)
@@ -397,6 +401,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let existingChat = chatDoc.data()!["users"] as! [String]
                 if users.sorted() == existingChat.sorted() {
                     completion(true)
+                } else {
+                    completion(false)
                 }
             }
         }

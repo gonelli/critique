@@ -91,4 +91,8 @@ class Chat {
         }
         return false
     }
+    
+    func refresh(completion: @escaping () -> Void) {
+        getMessages(completion: {_ in completion()})
+    }
 }

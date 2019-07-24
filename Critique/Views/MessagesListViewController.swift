@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 
-class MessagesViewController: UITableViewController {
+class MessagesListViewController: UITableViewController {
 
     var db: Firestore!
     var directMessages: [Chat] = [] {
@@ -59,7 +59,7 @@ class MessagesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return directMessages.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,8 +69,8 @@ class MessagesViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextVC = segue.destination as! DirectMessageTableViewController
-        if segue.identifier == "dmSegue", let selectedRow = tableView.indexPathForSelectedRow {
+        let nextVC = segue.destination as! ChatViewController
+        if segue.identifier == "toChat", let selectedRow = tableView.indexPathForSelectedRow {
             nextVC.chat = directMessages[selectedRow.row]
         }
     }

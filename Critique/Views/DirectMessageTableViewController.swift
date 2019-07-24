@@ -23,7 +23,7 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
             db.collection("chats").document(chat!.chatID).setData(["messages": chat!.messages], merge: true)
             messageTF.text = ""
             tableView.reloadData()
-            tableView.scrollToRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+            //tableView.scrollToRow(at: IndexPath(row: tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
         }
     }
     
@@ -34,22 +34,25 @@ class DirectMessageTableViewController: UIViewController, UITableViewDataSource,
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+        if chat != nil {
+            db.collection("chats").document(chat!.chatID).addSnapshotListener() { _,_ in
+                print("database updated")
+                self.chat?.refresh() { () in
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        chat?.getMessages() { (messages) in
+            self.tableView.reloadData()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        var messageCount:Int = 0
-        print("\n\nGOT HERE0")
-        chat?.getMessages() { (messages) in
-            print("\n\nGOT HERE1 \(messageCount)")
-            messageCount = messages.count
-            print("\n\nGOT HERE2 \(messageCount)")
-        }
-        return messageCount
+        print("NUM ROWS: \(chat?.messages.count ?? 0)")
+        return chat?.messages.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
