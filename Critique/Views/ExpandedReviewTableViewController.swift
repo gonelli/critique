@@ -60,6 +60,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         posterImage.isUserInteractionEnabled = true
         self.posterImage.addSubview(view)
         
+        // NightNight
         tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
         reviewCell.mixedBackgroundColor = mixedNightBgColor
         reviewCell.mixedTintColor = mixedNightTextColor
@@ -69,6 +70,16 @@ class ExpandedReviewTableViewController: UITableViewController {
         criticLabel.mixedTextColor = mixedNightTextColor
         scoreLabel.mixedTextColor = mixedNightTextColor
         movieLabel.mixedTextColor = mixedNightTextColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        }
     }
     
     // If movie poster is pressed, show the movie's info

@@ -40,7 +40,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         initializeFirestore()
         
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
-        self.navigationController!.navigationBar.mixedTintColor = mixedNightTextColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         NightNight.toggleNightTheme()
         NightNight.toggleNightTheme() // Idk but it works
@@ -174,6 +173,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.reviewLabel.mixedTextColor = mixedNightTextColor
         cell.reviewLabel.mixedBackgroundColor = mixedNightBgColor
         cell.scoreLabel.mixedTextColor = mixedNightTextColor
+        cell.selectionStyle = .none
         
         return cell
     }

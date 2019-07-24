@@ -50,7 +50,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // NIGHT NIGHT
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
-        self.navigationController!.navigationBar.mixedTintColor = mixedNightTextColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         NightNight.toggleNightTheme()
         NightNight.toggleNightTheme() // Idk but it works
@@ -58,7 +57,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.mixedBackgroundColor = mixedNightBgColor
         view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
-        searchBar.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
         searchBar.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         (searchBar.value(forKey: "searchField") as? UITextField)?.mixedTextColor = mixedNightTextColor
         
@@ -68,9 +66,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // NightNight exception
         if (NightNight.theme == .night) {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+            searchBar.keyboardAppearance = .dark
         }
         else {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            searchBar.keyboardAppearance = .default
         }
     }
     
@@ -101,11 +101,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.textLabel?.text = criticList[row].0
         }
         
-        
+        // NightNight
         cell.selectionStyle = .none
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.textLabel?.mixedTextColor = mixedNightTextColor
-
         
         return cell
     }

@@ -28,13 +28,11 @@ class FeedTableViewController: UITableViewController {
         
         // TODO Set other nav controllers too
         self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
-        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         NightNight.toggleNightTheme()
         NightNight.toggleNightTheme() // Idk but it works
         
         tableView.mixedBackgroundColor = mixedNightBgColor
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -53,7 +53,6 @@ class SettingsViewController: UITableViewController {
         
         // NightNight
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
-        self.navigationController!.navigationBar.mixedTintColor = mixedNightTextColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         NightNight.toggleNightTheme()
         NightNight.toggleNightTheme() // Idk but it works
@@ -62,15 +61,19 @@ class SettingsViewController: UITableViewController {
         
         NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
         NameChangeCell.mixedBackgroundColor = mixedNightBgColor
+        NameChangeCell.selectionStyle = .none
         
         BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
         BlockedCell.mixedBackgroundColor = mixedNightBgColor
+        BlockedCell.selectionStyle = .none
 
         publicLabel.mixedTextColor = mixedNightTextColor
         PublicCell.mixedBackgroundColor = mixedNightBgColor
+        PublicCell.selectionStyle = .none
 
         nightModeLabel.mixedTextColor = mixedNightTextColor
         nightModeCell.mixedBackgroundColor = mixedNightBgColor
+        nightModeCell.selectionStyle = .none
 
         signOutCell.textLabel?.mixedTextColor = MixedColor(normal: critiqueRed, night: nightTextColor)
         signOutCell.mixedBackgroundColor = mixedNightBgColor

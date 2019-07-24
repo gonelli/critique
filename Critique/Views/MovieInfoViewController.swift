@@ -79,13 +79,20 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        NightNight.theme = .night
 
         if segmentedControl.selectedSegmentIndex == 0 {
             getReviews()
         }
         else {
             getFollowingReviews()
+        }
+        
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
