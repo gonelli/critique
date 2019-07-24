@@ -159,9 +159,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             nextVC.deligate = self
             nextVC.expanedReview = reviews[reviewIndex]
         }
-//        else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? DirectMessageTableViewController {
-//            nextVC.chat = Chat(sender as! String)
-//        }
+        else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? ChatViewController {
+            nextVC.chat = Chat(sender as! String)
+        }
     }
 
     // Generate action screen for when user clicks on options button
