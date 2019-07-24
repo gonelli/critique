@@ -18,12 +18,15 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   var db: Firestore!
   var chat: Chat? = nil
   
+  var current: MockUser {
+    return MockUser(senderId: "\(chat?.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid) ?? 0)", displayName: "todo")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     initializeFirestore()
     configureMessageCollectionView()
     configureMessageInputBar()
-    
     db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
         if let raw =  document?.data()?["messages"] as? [[String: Any]] {
             var messages: [MockMessage] = []
@@ -40,6 +43,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         self.messagesCollectionView.reloadDataAndKeepOffset()
         self.messagesCollectionView.scrollToBottom(animated: true)
     }
+    title = chat?.title
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -90,7 +94,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   }
   
   func currentSender() -> SenderType {
-    return MockUser(senderId: "0000", displayName: "Bill")
+    return current
   }
   
   func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -189,11 +193,9 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     messageInputBar.sendButton.startAnimating()
     messageInputBar.inputTextView.placeholder = "Sending..."
     if let messageText = components[0] as? String {
-      let current = MockUser(senderId: "0000", displayName: "todo")
       let message = MockMessage(text: messageText, user: current, messageId: UUID().uuidString, date: Date())
       chat!.messages.append(message)
-        insertMessage(message)
-      
+      insertMessage(message)
       
       /// !!!!!
       
@@ -207,7 +209,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
       }
     }
   }
-  
   
   func encode(messages: [MockMessage]) -> [[String: Any]] {
     var encoded: [[String: Any]] = []
@@ -271,7 +272,6 @@ extension ChatViewController: MessagesDisplayDelegate {
   
   func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
     return []
-    //    return [.url, .address, .phoneNumber, .date, .transitInformation, .mention, .hashtag]
   }
   
   // MARK: - All Messages
@@ -286,7 +286,10 @@ extension ChatViewController: MessagesDisplayDelegate {
   }
   
   func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-    avatarView.set(avatar: Avatar(image: nil, initials: "J"))
+    if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+      layout.setMessageIncomingAvatarSize(.zero)
+      layout.setMessageOutgoingAvatarSize(.zero)
+    }
   }
   
 }
