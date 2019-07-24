@@ -27,35 +27,21 @@ class Chat {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
-        db.collection("chats").document(chatID).getDocument() { (document, error) in
-            if error == nil && Auth.auth().currentUser != nil {
-                let currentUser = Auth.auth().currentUser!.uid
-                self.title = currentUser
-                for critic in self.criticIDs {
-                    if critic != currentUser {
-                        self.db.collection("users").document(critic).getDocument() { (document, error) in
-                            if error == nil {
-                                self.title = document?.data()!["name"] as! String
-                            }
-                        }
-                    }
-                }
-              self.getMessages(completion: { (messages) in
-              })
-              
-              self.getUserIDs(completion: { (ids) in
-              })
-            }
-        }
+        self.getMessages(completion: { (messages) in
+        })
+        self.getUserIDs(completion: { (ids) in
+          self.getTitle { (title) in
+          }
+      })
     }
     
     func getTitle(completion: @escaping (String) -> Void) {
         db.collection("chats").document(chatID).getDocument() { (document, error) in
             if error == nil && Auth.auth().currentUser != nil {
                 let currentUser = Auth.auth().currentUser!.uid
-                self.title = currentUser
                 for critic in self.criticIDs {
                     if critic != currentUser {
+                        print("HAVE A USER NOT ME")
                         self.db.collection("users").document(critic).getDocument() { (document, error) in
                             if error == nil {
                                 self.title = document?.data()!["name"] as! String
@@ -66,7 +52,6 @@ class Chat {
                     }
                 }
             }
-            completion(self.title)
         }
     }
     
