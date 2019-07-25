@@ -270,7 +270,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msz-eo-6OE">
-                                                    <rect key="frame" x="375" y="92" width="19" height="30"/>
+                                                    <rect key="frame" x="365.5" y="92" width="28.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="wJz-az-oJR"/>
                                                     </constraints>
@@ -280,7 +280,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWe-hN-9mF" userLabel="Likes Label">
-                                                    <rect key="frame" x="330" y="95" width="40" height="24"/>
+                                                    <rect key="frame" x="320.5" y="95" width="40" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Rgp-cs-nYg"/>
                                                     </constraints>
@@ -289,7 +289,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXw-sU-zPO">
-                                                    <rect key="frame" x="306" y="92" width="19" height="30"/>
+                                                    <rect key="frame" x="287" y="92" width="28.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="fxl-dA-bbK"/>
                                                     </constraints>
@@ -957,7 +957,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyc-qQ-mre">
-                                            <rect key="frame" x="375" y="92" width="19" height="30"/>
+                                            <rect key="frame" x="365.5" y="92" width="28.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="tCA-uy-ycu"/>
                                             </constraints>
@@ -967,7 +967,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xu-re-xll" userLabel="Likes Label">
-                                            <rect key="frame" x="330" y="95" width="40" height="24"/>
+                                            <rect key="frame" x="320.5" y="95" width="40" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="0Kl-Za-HzQ"/>
                                             </constraints>
@@ -976,7 +976,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89v-fH-hPr">
-                                            <rect key="frame" x="306" y="92" width="19" height="30"/>
+                                            <rect key="frame" x="287" y="92" width="28.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="jl8-xJ-l7r"/>
                                             </constraints>
@@ -1509,19 +1509,19 @@
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
-        <image name="dislike" width="19" height="19"/>
+        <image name="dislike" width="28.5" height="28.5"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
         <image name="icon-messages" width="27" height="26"/>
         <image name="icon-settings" width="28" height="28"/>
         <image name="imdb-30" width="53" height="30"/>
-        <image name="like" width="19" height="19"/>
+        <image name="like" width="28.5" height="28.5"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DtX-qp-0oM"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="PWr-WP-QuC"/>
+        <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
 </document>
