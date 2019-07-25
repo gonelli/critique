@@ -270,10 +270,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         for user in chatGroup {
                             var userChats:[String] = []
                             self.db.collection("users").document(user).getDocument(){ (document, error) in
-                                if error == nil, let chatDoc = document{
+                                if error == nil, let chatDoc = document {
                                     userChats = chatDoc.data()!["myChats"] as! [String]
-                                    userChats.append(chatID!)
-                                    self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
+                                    if !userChats.contains(chatID!) {
+                                        userChats.append(chatID!)
+                                        self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
+                                    }
                                 }
                             }
                         }
@@ -373,16 +375,18 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func chatRequest(_ users:[String] ,completion: @escaping (Bool, String?) -> Void) {
-        db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
+        
+        db.collection("chats").getDocuments() { (snapshot, error) in
             var createNew = true
-            if error == nil, let userDoc = document {
-                var syncCount = -1*(userDoc.data()?["myChats"] as! [String]).count
-                for chat in userDoc.data()?["myChats"] as! [String] {
+            if error == nil, let snapshot = snapshot {
+                var syncCount = -1*(snapshot.documents.count)
+                for chatDoc in snapshot.documents {
+                    let chat = chatDoc.documentID
                     self.chatExists(userList: users, chatID: chat){ (exists) in
                         syncCount += 1
                         if exists {
                             createNew = false
-                            completion(false, chat)
+                            completion(true, chat)
                             print("Sync Count: \(syncCount) | Create New: \(createNew)")
                         } else if syncCount == 0 && createNew {
                             let chatDoc = self.db.collection("chats").addDocument(data:
@@ -397,6 +401,31 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 completion(false, nil)
             }
         }
+        
+//        db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
+//            var createNew = true
+//            if error == nil, let userDoc = document {
+//                var syncCount = -1*(userDoc.data()?["myChats"] as! [String]).count
+//                for chat in userDoc.data()?["myChats"] as! [String] {
+//                    self.chatExists(userList: users, chatID: chat){ (exists) in
+//                        syncCount += 1
+//                        if exists {
+//                            createNew = false
+//                            completion(false, chat)
+//                            print("Sync Count: \(syncCount) | Create New: \(createNew)")
+//                        } else if syncCount == 0 && createNew {
+//                            let chatDoc = self.db.collection("chats").addDocument(data:
+//                                ["messages": [],
+//                                 "users": users
+//                                ])
+//                            completion(true, chatDoc.documentID)
+//                        }
+//                    }
+//                }
+//            } else {
+//                completion(false, nil)
+//            }
+//        }
     }
     
     func chatExists(userList users:[String], chatID chat:String, completion: @escaping (Bool) -> Void) {

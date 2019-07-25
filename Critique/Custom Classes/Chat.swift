@@ -41,7 +41,6 @@ class Chat {
                 let currentUser = Auth.auth().currentUser!.uid
                 for critic in self.criticIDs {
                     if critic != currentUser {
-                        print("HAVE A USER NOT ME")
                         self.db.collection("users").document(critic).getDocument() { (document, error) in
                             if error == nil {
                                 self.title = document?.data()!["name"] as! String
