@@ -11,6 +11,7 @@ import Kingfisher
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 class LikeDislikeCell: UITableViewCell {
     
@@ -49,13 +50,13 @@ class LikeDislikeCell: UITableViewCell {
                     let userID = Auth.auth().currentUser!.uid
                     if liked.contains(userID) {
                         self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
-                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                        self.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                     } else if disliked.contains(userID) {
-                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+                        self.upvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                         self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
                     } else {
-                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
-                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                        self.upvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+                        self.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                     }
                 } else {
                     fatalError(error!.localizedDescription)
@@ -83,8 +84,8 @@ class LikeDislikeCell: UITableViewCell {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                     if let index = liked.firstIndex(of: userID) {
-                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
-                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                        self.upvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+                        self.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         liked.remove(at: index)
                     }
                 }
@@ -95,7 +96,7 @@ class LikeDislikeCell: UITableViewCell {
                         }
                     }
                     self.upvoteButton.setImage(UIImage(named: "liked"), for: .normal)
-                    self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                    self.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                     liked.append(userID)
                 }
                 ref.setData(["liked": liked, "disliked": disliked], merge: true)
@@ -121,8 +122,8 @@ class LikeDislikeCell: UITableViewCell {
                 
                 if disliked.contains(userID) {
                     if let index = disliked.firstIndex(of: userID) {
-                        self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
-                        self.downvoteButton.setImage(UIImage(named: "dislike"), for: .normal)
+                        self.upvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+                        self.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         disliked.remove(at: index)
                     }
                 }
@@ -132,7 +133,7 @@ class LikeDislikeCell: UITableViewCell {
                             liked.remove(at: index)
                         }
                     }
-                    self.upvoteButton.setImage(UIImage(named: "like"), for: .normal)
+                    self.upvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                     self.downvoteButton.setImage(UIImage(named: "disliked"), for: .normal)
                     disliked.append(userID)
                 }

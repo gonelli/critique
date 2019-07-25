@@ -39,14 +39,10 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 ## Things to fix:
 
-- Messaging is very much a work in progress and is known to frequently crash the app
-- We encountered many front end bugs with the like/dislike buttons. We have not been able to recreate them after patching them, so we are assuming they are fixed. However, unknown ones could pop up, and if you happen to notice any issues, please let us know the details in your comments.
-
-## Things to add:
-
-- Messaging
-- Discovery (Stretch goal)
-- IMDB Links (Stretch goal)
+- Sign up and Login screen orders
+- Segue from expanded review to profile
+- Fix table view crash when quickly reloading**
+- Add own reviews to Feed
 
 ## Notes:
 

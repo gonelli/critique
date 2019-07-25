@@ -244,6 +244,23 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                             following.removeAll { $0 == Auth.auth().currentUser!.uid }
                             refBlocked.setData(["following": following], merge: true)
                         }
+                        
+                        // Remove any messaging history
+                        let chatGroup = [self.accountID, Auth.auth().currentUser!.uid]
+                        self.chatExists(userList: chatGroup) { chatID in
+                            for user in chatGroup {
+                                var userChats:[String] = []
+                                self.db.collection("users").document(user).getDocument(){ (document, error) in
+                                    if error == nil, let chatDoc = document {
+                                        userChats = chatDoc.data()!["myChats"] as! [String]
+                                        if let index = userChats.firstIndex(of: chatID) {
+                                            userChats.remove(at: index)
+                                            self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else {
                         fatalError(error!.localizedDescription)
@@ -440,6 +457,29 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
 //                completion(false, nil)
 //            }
 //        }
+    }
+    
+    func chatExists(userList users:[String], completion: @escaping (String) -> Void) {
+        
+        db.collection("chats").getDocuments() { (snapshot, error) in
+            var found = false
+            
+            if error == nil, let snapshot = snapshot {
+                for chatDoc in snapshot.documents {
+                    let chat = chatDoc.documentID
+                    self.chatExists(userList: users, chatID: chat){ (exists) in
+                        if exists {
+                            completion(chat)
+                            found = true
+                        }
+                    }
+                    
+                    if found {
+                        break
+                    }
+                }
+            }
+        }
     }
     
     func chatExists(userList users:[String], chatID chat:String, completion: @escaping (Bool) -> Void) {

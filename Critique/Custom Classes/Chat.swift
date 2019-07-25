@@ -16,23 +16,49 @@ import FirebaseCore
 class Chat {
     
     var db: Firestore!
-    var messages: [MockMessage] = []
+    var messages: [MockMessage] = [] {
+        didSet {
+            for user in criticIDs {
+                var userChats:[String] = []
+                self.db.collection("users").document(user).getDocument(){ (document, error) in
+                    if error == nil, let chatDoc = document {
+                        userChats = chatDoc.data()!["myChats"] as! [String]
+                        if !userChats.contains(self.chatID) {
+                            userChats.append(self.chatID)
+                            self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
+                        }
+                    }
+                }
+            }
+        }
+    }
     var chatID: String
     var criticIDs: [String] = []
-    var title: String
+    var title: String = ""
+    var timestamp: Date? = nil
     
     init(_ chatID: String) {
         self.chatID = chatID
-        self.title = chatID
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
-        self.getMessages(completion: { (messages) in
-        })
-        self.getUserIDs(completion: { (ids) in
-          self.getTitle { (title) in
-          }
-      })
+        self.getMessages() { messages in }
+        self.getUserIDs() { ids in
+            self.getTitle { title in }
+        }
+    }
+    
+    init(_ chatID: String, completion: @escaping () -> Void) {
+        self.chatID = chatID
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        self.getMessages() { messages in
+            completion()
+        }
+        self.getUserIDs() { ids in
+            self.getTitle { title in }
+        }
     }
     
     func getTitle(completion: @escaping (String) -> Void) {
@@ -55,6 +81,7 @@ class Chat {
     }
     
     func getMessages(completion: @escaping ([MockMessage]) -> Void) {
+        //print("GET MESSAGES: \(messages.count)")
         var messages: [MockMessage] = []
         db.collection("chats").document(chatID).getDocument() { (document, error) in
             if error == nil && Auth.auth().currentUser != nil {
@@ -68,6 +95,10 @@ class Chat {
                   messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
                 }
                 self.messages = messages
+                if messages.count > 0 {
+                    print("Made it here \(String(describing: self.timestamp))")
+                    self.timestamp = messages[messages.count - 1].sentDate
+                }
                 completion(self.messages)
               }
             }
@@ -82,8 +113,16 @@ class Chat {
             }
         }
     }
+    
+    func getTimestamp() -> Date? {
+        return timestamp
+    }
   
     func refresh(completion: @escaping () -> Void) {
         getMessages(completion: {_ in completion()})
+    }
+    
+    func getReference() -> DocumentReference {
+        return db.collection("chats").document(chatID)
     }
 }
