@@ -33,6 +33,7 @@
 		6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDA22E7BD79002117E0 /* Critic.swift */; };
 		6313EEDD22E7BD7A002117E0 /* DummyDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */; };
 		633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F7F8B22E8C2D000F746EF /* ChatViewController.swift */; };
+		63ACB6FF22EA4C05008F6A79 /* DiscoveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */; };
 		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		6313EEDA22E7BD79002117E0 /* Critic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Critic.swift; sourceTree = "<group>"; };
 		6313EEDB22E7BD7A002117E0 /* DummyDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyDiscovery.swift; sourceTree = "<group>"; };
 		633F7F8B22E8C2D000F746EF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTableViewCell.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				1ABE096622D2A41F00279752 /* FeedTableViewCell.swift */,
 				5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */,
 				55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */,
+				63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */,
+				63ACB6FF22EA4C05008F6A79 /* DiscoveryTableViewCell.swift in Sources */,
 				55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */,
 				55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */,
 				5E74D9CF22DE5FE700A69FB4 /* Chat.swift in Sources */,

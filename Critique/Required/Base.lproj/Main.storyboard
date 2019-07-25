@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,8 +48,9 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O2V-u0-75k">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O2V-u0-75k">
                                 <rect key="frame" x="82" y="144" width="250" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="Fb6-tp-qFy"/>
@@ -63,6 +64,67 @@
                                     <action selector="segmentChanged:" destination="gVt-aB-NUa" eventType="valueChanged" id="A4O-k1-Og5"/>
                                 </connections>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KUj-eX-Hw4">
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="discoveryCell" rowHeight="78" id="FK5-Es-BrK" customClass="DiscoveryTableViewCell" customModule="Critique" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="78"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FK5-Es-BrK" id="OGw-lF-0P2">
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="77.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F0y-Os-EOx">
+                                                    <rect key="frame" x="20" y="14" width="50" height="50"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6E-78-Ydm">
+                                                            <rect key="frame" x="20" y="14.5" width="10" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.89411764705882357" green="0.15294117647058825" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="u6E-78-Ydm" firstAttribute="centerY" secondItem="F0y-Os-EOx" secondAttribute="centerY" id="HdL-oW-KRs"/>
+                                                        <constraint firstItem="u6E-78-Ydm" firstAttribute="centerX" secondItem="F0y-Os-EOx" secondAttribute="centerX" id="U8Z-mx-cZV"/>
+                                                        <constraint firstAttribute="width" secondItem="F0y-Os-EOx" secondAttribute="height" multiplier="1:1" id="cb0-TO-SeZ"/>
+                                                        <constraint firstAttribute="width" constant="50" id="drz-11-Q10"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="James" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZP5-lG-jV1">
+                                                    <rect key="frame" x="82" y="18.5" width="50" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following: X Followers: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xj-Ps-Nqe">
+                                                    <rect key="frame" x="82" y="42" width="161" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZP5-lG-jV1" firstAttribute="leading" secondItem="F0y-Os-EOx" secondAttribute="trailing" constant="12" id="53w-jz-PKK"/>
+                                                <constraint firstItem="F0y-Os-EOx" firstAttribute="leading" secondItem="OGw-lF-0P2" secondAttribute="leadingMargin" id="aXE-Ei-x7Z"/>
+                                                <constraint firstItem="F0y-Os-EOx" firstAttribute="centerY" secondItem="OGw-lF-0P2" secondAttribute="centerY" id="g3I-qE-eOS"/>
+                                                <constraint firstItem="9xj-Ps-Nqe" firstAttribute="top" secondItem="ZP5-lG-jV1" secondAttribute="bottom" constant="2.5" id="kHl-np-qG1"/>
+                                                <constraint firstItem="9xj-Ps-Nqe" firstAttribute="leading" secondItem="ZP5-lG-jV1" secondAttribute="leading" id="whT-Si-9S5"/>
+                                                <constraint firstItem="ZP5-lG-jV1" firstAttribute="centerY" secondItem="OGw-lF-0P2" secondAttribute="centerY" constant="-9.75" id="y8p-2T-EH7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="followLabel" destination="9xj-Ps-Nqe" id="huh-an-4yK"/>
+                                            <outlet property="initialBGView" destination="F0y-Os-EOx" id="3pv-E7-gMD"/>
+                                            <outlet property="initialLabel" destination="u6E-78-Ydm" id="N1y-kO-cdN"/>
+                                            <outlet property="nameLabel" destination="ZP5-lG-jV1" id="EEt-ie-jMh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -76,12 +138,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="uJV-cU-k7e"/>
                     <connections>
+                        <outlet property="discoveryTableView" destination="KUj-eX-Hw4" id="Cmc-Gs-7T7"/>
                         <outlet property="searchBar" destination="2wd-IM-HfM" id="Xwm-FH-ecx"/>
                         <outlet property="searchDisplayController" destination="abx-gg-Hxa" id="o8w-SO-eD9"/>
                         <outlet property="segmentedControl" destination="O2V-u0-75k" id="Pp6-KG-ksy"/>
                         <outlet property="tableView" destination="Wqp-I2-s6g" id="lfD-aB-wCN"/>
                         <segue destination="Db6-gs-pth" kind="show" identifier="movieInfoSegue" id="6HJ-bD-fjt"/>
                         <segue destination="Fq4-Js-ghB" kind="show" identifier="criticProfileSegue" id="8Ob-Zd-y7p"/>
+                        <segue destination="Fq4-Js-ghB" kind="show" identifier="discoverySegue" id="Br5-Dr-wkF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Cx-XN-5DJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1518,10 +1582,10 @@
         <image name="like" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DtX-qp-0oM"/>
+        <segue reference="m0R-vf-5JF"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="PWr-WP-QuC"/>
+        <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
 </document>
