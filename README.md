@@ -43,6 +43,8 @@ Tony Gonelli (Release 30%, Overall 25%)
 - Segue from expanded review to profile
 - Fix table view crash when quickly reloading**
 - Add own reviews to Feed
+- Night mode for Discovery
+- QA Testing
 
 ## Notes:
 
