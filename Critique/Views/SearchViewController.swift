@@ -10,6 +10,7 @@ import UIKit
 import InstantSearchClient
 import FirebaseFirestore
 import FirebaseAuth
+import NightNight
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -25,6 +26,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let cellIdentifier = "searchResultCell"
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
+    let critiqueRed = 0xe12b22
+    let nightBgColor = 0x222222
+    let nightTextColor = 0xdddddd
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     var db: Firestore!
     
@@ -41,6 +47,31 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.addGestureRecognizer(tapGesture)
         
         initFirestore()
+        
+        // NIGHT NIGHT
+        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        NightNight.toggleNightTheme()
+        NightNight.toggleNightTheme() // Idk but it works
+        segmentedControl.mixedTintColor = MixedColor(normal: critiqueRed, night: nightTextColor)
+        searchBar.mixedBackgroundColor = mixedNightBgColor
+        view.mixedBackgroundColor = mixedNightBgColor
+        tableView.mixedBackgroundColor = mixedNightBgColor
+        searchBar.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
+        (searchBar.value(forKey: "searchField") as? UITextField)?.mixedTextColor = mixedNightTextColor
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+            searchBar.keyboardAppearance = .dark
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            searchBar.keyboardAppearance = .default
+        }
     }
     
     func initFirestore() {
@@ -69,6 +100,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         else {
             cell.textLabel?.text = criticList[row].0
         }
+        
+        // NightNight
+        cell.selectionStyle = .none
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.textLabel?.mixedTextColor = mixedNightTextColor
         
         return cell
     }

@@ -11,16 +11,27 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import InstantSearchClient
+import NightNight
 
 class SettingsViewController: UITableViewController {
     
     @IBOutlet var NameChangeCell: UITableViewCell!
     @IBOutlet var BlockedCell: UITableViewCell!
     @IBOutlet var PublicCell: UITableViewCell!
+    @IBOutlet var nightModeCell: UITableViewCell!
     @IBOutlet weak var publicSwitch: UISwitch!
+    @IBOutlet var nightModeSwitch: UISwitch!
+    @IBOutlet var publicLabel: UILabel!
+    @IBOutlet var nightModeLabel: UILabel!
+    @IBOutlet var signOutCell: UITableViewCell!
     
     var db: Firestore!
     let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    let critiqueRed = 0xe12b22
+    let nightBgColor = 0x222222
+    let nightTextColor = 0xdddddd
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +47,49 @@ class SettingsViewController: UITableViewController {
         doc.getDocument { (document, error) in
             let val = document!.data()!["isPublic"]! as! Bool
             if !val {
-                self.publicSwitch.setOn(false, animated: true)
+                self.publicSwitch.setOn(false, animated: false)
             }
         }
+        
+        // NightNight
+        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        NightNight.toggleNightTheme()
+        NightNight.toggleNightTheme() // Idk but it works
+
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        
+        NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
+        NameChangeCell.mixedBackgroundColor = mixedNightBgColor
+        NameChangeCell.selectionStyle = .none
+        
+        BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
+        BlockedCell.mixedBackgroundColor = mixedNightBgColor
+        BlockedCell.selectionStyle = .none
+
+        publicLabel.mixedTextColor = mixedNightTextColor
+        PublicCell.mixedBackgroundColor = mixedNightBgColor
+        PublicCell.selectionStyle = .none
+
+        nightModeLabel.mixedTextColor = mixedNightTextColor
+        nightModeCell.mixedBackgroundColor = mixedNightBgColor
+        nightModeCell.selectionStyle = .none
+
+        signOutCell.textLabel?.mixedTextColor = MixedColor(normal: critiqueRed, night: nightTextColor)
+        signOutCell.mixedBackgroundColor = mixedNightBgColor
+        
+        
+        if NightNight.theme == .night {
+            self.nightModeSwitch.setOn(true, animated: false)
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+
+        }
+        else {
+            self.nightModeSwitch.setOn(false, animated: false)
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        }
     }
-    
+        
     func initializeFirestore() {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
@@ -95,6 +144,16 @@ class SettingsViewController: UITableViewController {
   
     @IBAction func publicSwitchPressed(_ sender: Any) {
         changeAccountPrivacy()
+    }
+    
+    @IBAction func nightModeToggled(_ sender: Any) {
+        NightNight.toggleNightTheme()
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        }
     }
     
     // Store and flip switch

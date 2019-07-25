@@ -20,6 +20,8 @@ class LikeDislikeCell: UITableViewCell {
     @IBOutlet weak var criticLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var likesContainer: UIView!
+    
     var db: Firestore!
     
     // Special review cell for Movie Info page that doesn't need poster and movie title

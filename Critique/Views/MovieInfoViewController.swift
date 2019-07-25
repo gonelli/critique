@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import SafariServices
+import NightNight
 
 class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SFSafariViewControllerDelegate {
     
@@ -31,6 +32,13 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var followingReviews: [Review] = []
     var scores: [Double] = []
     let composeSegue = "composeSegue"
+    
+    let critiqueRed = 0xe12b22
+    let nightBgColor = 0x222222
+    let nightTextColor = 0xdddddd
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+
 
     // Load header - movie details, synopsis, average score, etc.
     override func viewDidLoad() {
@@ -52,6 +60,15 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         addRefreshView()
         initializeFirestore()
         getReviews()
+        
+        // NIGHT NIGHT
+        view.mixedBackgroundColor = mixedNightBgColor
+        tableView.mixedBackgroundColor = mixedNightBgColor
+        synopsisTextView.mixedBackgroundColor = mixedNightBgColor
+        
+        synopsisTextView.mixedTextColor = MixedColor(normal: 0x000000, night: nightTextColor)
+        scoreLabel.mixedTextColor = MixedColor(normal: 0x000000, night: nightTextColor)
+        segmentedControl.mixedTintColor = MixedColor(normal: critiqueRed, night: nightTextColor)
     }
     
     func initializeFirestore() {
@@ -62,11 +79,20 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         if segmentedControl.selectedSegmentIndex == 0 {
             getReviews()
         }
         else {
             getFollowingReviews()
+        }
+        
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -227,6 +253,20 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         else {
             cell.review = self.followingReviews[indexPath.row]
         }
+        
+        // NIGHT NIGHT
+        cell.selectionStyle = .none
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.likesContainer.mixedBackgroundColor = mixedNightBgColor
+        
+        cell.criticLabel.mixedTextColor = mixedNightTextColor
+        cell.reviewLabel.mixedTextColor = mixedNightTextColor
+        cell.scoreLabel.mixedTextColor = mixedNightTextColor
+        cell.votesLabel.mixedTextColor = mixedNightTextColor
+        
+//        Should be done in LikeDislikeCell
+//        cell.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "liked")!, night: UIImage(named: "liked")!), forState: .normal)
+        
         return cell
 
     }

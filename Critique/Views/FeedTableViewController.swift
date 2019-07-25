@@ -10,23 +10,43 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 class FeedTableViewController: UITableViewController {
     
     var db: Firestore!
     var reviews: [Review] = []
     let expandedReviewSegueID = "expandedReviewSegueID"
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshView()
         initializeFirestore()
+        
+        
+        // TODO Set other nav controllers too
+        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        NightNight.toggleNightTheme()
+        NightNight.toggleNightTheme() // Idk but it works
+        
+        tableView.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if Auth.auth().currentUser != nil {
             getReviews()
+        }
+        
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -96,9 +116,22 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         cell.review = reviews[indexPath.row]
+        
+        // NIGH NIGHT
+        cell.criticLabel.mixedTextColor = mixedNightTextColor
+        cell.likesLabel.mixedTextColor = mixedNightTextColor
+        cell.reviewLabel.mixedTextColor = mixedNightTextColor
+        cell.scoreLabel.mixedTextColor = mixedNightTextColor
+        cell.movieLabel.mixedTextColor = mixedNightTextColor
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.mixedTintColor = mixedNightTextColor
+        
+        cell.selectedBackgroundView?.mixedBackgroundColor = MixedColor(normal: UIColor.red, night: UIColor.red)
+        cell.selectionStyle = .none
+        
         return cell
     }
-
+    
     // If body of a review is touched, open an expanded view of it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == expandedReviewSegueID, let nextVC = segue.destination as? ExpandedReviewTableViewController , let reviewIndex = tableView.indexPathForSelectedRow?.row {

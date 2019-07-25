@@ -14,4 +14,6 @@ target 'Critique' do
   pod 'Kingfisher', '~> 5.0'
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'InstantSearchClient', '~> 7.0'
+  # Pod for Night mode
+  pod 'NightNight'
 end
