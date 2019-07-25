@@ -25,9 +25,10 @@ class FeedTableViewController: UITableViewController {
         addRefreshView()
         initializeFirestore()
         
-        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
-        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor // Gray nav bar
+        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
+//        self.tabBarController!.tabBar.mixedBarTintColor = MixedColor(normal: UIColor.white, night: UIColor.black) // Black tab bar
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
             NightNight.theme = .night
         }
