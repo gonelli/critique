@@ -25,13 +25,18 @@ class FeedTableViewController: UITableViewController {
         addRefreshView()
         initializeFirestore()
         
-        
-        // TODO Set other nav controllers too
-        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        NightNight.toggleNightTheme()
-        NightNight.toggleNightTheme() // Idk but it works
+        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor // Gray nav bar
+        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
+//        self.tabBarController!.tabBar.mixedBarTintColor = MixedColor(normal: UIColor.white, night: UIColor.black) // Black tab bar
+        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+            NightNight.theme = .night
+        }
+        else {
+            NightNight.theme = .normal
+        }
         
+        view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
     }
     
@@ -43,7 +48,7 @@ class FeedTableViewController: UITableViewController {
         
         // NightNight exception
         if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)] // 0xdddddd
         }
         else {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -126,7 +131,6 @@ class FeedTableViewController: UITableViewController {
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.mixedTintColor = mixedNightTextColor
         
-        cell.selectedBackgroundView?.mixedBackgroundColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         cell.selectionStyle = .none
         
         return cell

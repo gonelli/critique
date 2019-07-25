@@ -41,8 +41,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        NightNight.toggleNightTheme()
-        NightNight.toggleNightTheme() // Idk but it works
+        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+            NightNight.theme = .night
+        }
+        else {
+            NightNight.theme = .normal
+        }
         view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
         topBarOuterView.mixedBackgroundColor = mixedNightBgColor
@@ -71,7 +75,20 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             getReviews()
             getFollowNumbers()
             self.navigationItem.title = self.accountName
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
+            db.collection("users").document(accountID).getDocument() { (document, error) in
+                if error == nil {
+                    let blocked = document!.data()!["blocked"] as! [String]
+                    if !blocked.contains(Auth.auth().currentUser!.uid) {
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
+                    }
+                    else {
+                        self.navigationItem.rightBarButtonItem = nil
+                    }
+                }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
         }
         
         //Exception where NightNight doesn't work
@@ -196,6 +213,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? ChatViewController {
             nextVC.chat = Chat(sender as! String)
+            nextVC.messageInputBar.becomeFirstResponder()
         }
     }
 

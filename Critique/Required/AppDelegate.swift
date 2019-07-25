@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
