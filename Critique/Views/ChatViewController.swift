@@ -43,7 +43,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         self.messagesCollectionView.reloadDataAndKeepOffset()
         self.messagesCollectionView.scrollToBottom(animated: true)
     }
-    title = chat?.title
+    chat?.getTitle() { title in
+        self.title = title
+    }
   }
   
   override func viewDidDisappear(_ animated: Bool) {
