@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    
+    
+    var snapshotListener:ListenerRegistration? = nil
     
     var chat:Chat? {
         didSet {
@@ -29,14 +33,18 @@ class ChatTableViewCell: UITableViewCell {
                 
             }
             
-            chat!.getMessages() { messages in
-                if messages.count > 0 {
-                    let lastMessage = messages[messages.count - 1]
-                    self.lastMessageLabel.text = lastMessage.text
-                    self.timestampLabel.text = self.getTimestampLabel(lastMessage.sentDate)
-                } else {
-                    self.lastMessageLabel.text = ""
-                }
+            setSubtitleInfo()
+        }
+    }
+    
+    func setSubtitleInfo() {
+        chat!.getMessages() { messages in
+            if messages.count > 0 {
+                let lastMessage = messages[messages.count - 1]
+                self.lastMessageLabel.text = lastMessage.text
+                self.timestampLabel.text = self.getTimestampLabel(lastMessage.sentDate)
+            } else {
+                self.lastMessageLabel.text = ""
             }
         }
     }
@@ -47,8 +55,13 @@ class ChatTableViewCell: UITableViewCell {
         let day:TimeInterval = 24 * hour
         let week:TimeInterval = 7 * day
         
-        let timeDiff = sentDate.timeIntervalSinceNow
+        var sentDateComponents: DateComponents? = Calendar.current.dateComponents([.hour, .minute, .second], from: sentDate)
+        var currentDateComponents: DateComponents? = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        currentDateComponents?.hour = sentDateComponents?.hour
+        currentDateComponents?.minute = sentDateComponents?.minute
+        currentDateComponents?.second = sentDateComponents?.second
         
+        let timeDiff = Calendar.current.date(from: currentDateComponents!)!.timeIntervalSince(sentDate)
         if timeDiff < day {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "HH:mm"
@@ -63,6 +76,20 @@ class ChatTableViewCell: UITableViewCell {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "MM/dd/yy"
             return timeFormatter.string(from: sentDate)
+        }
+    }
+    
+    func setListener() {
+        snapshotListener = chat?.getReference().addSnapshotListener() { _, _ in
+            self.chat?.refresh {
+                self.setSubtitleInfo()
+            }
+        }
+    }
+    
+    func removeListener() {
+        if snapshotListener != nil{
+            snapshotListener!.remove()
         }
     }
 

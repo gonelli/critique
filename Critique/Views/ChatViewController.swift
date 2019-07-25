@@ -17,6 +17,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   
   var db: Firestore!
   var chat: Chat? = nil
+  var snapshotListener:ListenerRegistration! = nil
   
   var current: MockUser {
     return MockUser(senderId: "\(chat?.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid) ?? 0)", displayName: "todo")
@@ -33,7 +34,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   }
     
     override func viewDidAppear(_ animated: Bool) {
-        db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
+        snapshotListener = db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
             if let raw =  document?.data()?["messages"] as? [[String: Any]] {
                 var messages: [MockMessage] = []
                 var i = 0
@@ -53,6 +54,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
+    snapshotListener.remove()
   }
   
   func initializeFirestore() {
