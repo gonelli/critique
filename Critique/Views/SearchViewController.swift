@@ -239,13 +239,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            self.searchBar.showsCancelButton = false
-            self.tableView.isHidden = true
-            self.segmentedControl.isHidden = true
-            self.discoveryTableView.isHidden = false
-            self.navigationItem.title = "Discovery"
-        })
+//        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+//            self.searchBar.showsCancelButton = false
+//            self.tableView.isHidden = true
+//            self.segmentedControl.isHidden = true
+//            self.discoveryTableView.isHidden = false
+//            self.navigationItem.title = "Discovery"
+//        })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

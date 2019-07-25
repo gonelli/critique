@@ -44,7 +44,7 @@ class CreateAccountTableViewController: UITableViewController {
                     self.db.collection("users").document((user?.user.uid)!).setData([
                         "isPublic" : true,
                         "name" : self.usernameTF.text!,
-                        "following": [] as [String],
+                        "following": [user!.user.uid] as [String],
                         "blocked": [] as [String],
                         "myChats": [] as [String]
                     ]){ (error) in

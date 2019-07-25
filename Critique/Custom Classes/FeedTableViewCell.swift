@@ -53,11 +53,11 @@ class FeedTableViewCell: UITableViewCell {
                     let liked = document!.data()!["liked"] as! [String]
                     let disliked = document!.data()!["disliked"] as! [String]
                     self.likesLabel.text = "\(liked.count - disliked.count)"
-                    let userID = Auth.auth().currentUser!.uid
-                    if liked.contains(userID) {
+                    let userID = Auth.auth().currentUser?.uid
+                    if liked.contains(userID ?? "") {
                         self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
                         self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
-                    } else if disliked.contains(userID) {
+                    } else if disliked.contains(userID ?? "") {
                         self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                         self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
                     } else {

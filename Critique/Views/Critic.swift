@@ -19,11 +19,14 @@ class Critic: Comparable {
     }
     
     static func < (lhs: Critic, rhs: Critic) -> Bool {
-        return lhs.weight < rhs.weight
+        if lhs.weight != rhs.weight {
+            return lhs.weight < rhs.weight
+        }
+        return lhs.name! > rhs.name!
     }
     
     static func == (lhs: Critic, rhs: Critic) -> Bool {
-        return lhs.weight == rhs.weight
+        return lhs.weight == rhs.weight && lhs.name! == rhs.name!
     }
     
 }
