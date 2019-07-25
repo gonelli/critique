@@ -118,6 +118,7 @@ class FollowsTableViewController: UITableViewController {
         // NightNight
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.textLabel?.mixedTextColor = mixedNightTextColor
+        cell.selectionStyle = .none
         
         return cell
     }

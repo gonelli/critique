@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjh-pw-eQb">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT5-Bd-Zyy">
                                         <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
@@ -185,7 +185,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2yr-yb-0Wp">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="accountReviewCell" id="LMQ-7M-2pB" customClass="FeedTableViewCell" customModule="Critique" customModuleProvider="target">
@@ -1482,10 +1482,10 @@
         <image name="like" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaD-db-S69"/>
+        <segue reference="DtX-qp-0oM"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="aHn-bx-bsG"/>
-        <segue reference="PWr-WP-QuC"/>
+        <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
 </document>

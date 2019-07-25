@@ -41,8 +41,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        NightNight.toggleNightTheme()
-        NightNight.toggleNightTheme() // Idk but it works
+        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+            NightNight.theme = .night
+        }
+        else {
+            NightNight.theme = .normal
+        }
         view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
         topBarOuterView.mixedBackgroundColor = mixedNightBgColor

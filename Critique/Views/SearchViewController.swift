@@ -51,14 +51,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // NIGHT NIGHT
         self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        NightNight.toggleNightTheme()
-        NightNight.toggleNightTheme() // Idk but it works
         segmentedControl.mixedTintColor = MixedColor(normal: critiqueRed, night: nightTextColor)
         searchBar.mixedBackgroundColor = mixedNightBgColor
         view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
         searchBar.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         (searchBar.value(forKey: "searchField") as? UITextField)?.mixedTextColor = mixedNightTextColor
+        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+            NightNight.theme = .night
+        }
+        else {
+            NightNight.theme = .normal
+        }
         
     }
     
