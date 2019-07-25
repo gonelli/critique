@@ -27,26 +27,29 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     initializeFirestore()
     configureMessageCollectionView()
     configureMessageInputBar()
-    db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
-        if let raw =  document?.data()?["messages"] as? [[String: Any]] {
-            var messages: [MockMessage] = []
-            var i = 0
-            for message in raw {
-                i += 1
-                let text = message["body"] as! String
-                let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
-                let timestamp = (message["time"] as! Timestamp).dateValue()
-                messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
-            }
-            self.chat!.messages = messages
-        }
-        self.messagesCollectionView.reloadDataAndKeepOffset()
-        self.messagesCollectionView.scrollToBottom(animated: true)
-    }
     chat?.getTitle() { title in
         self.title = title
     }
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
+            if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+                var messages: [MockMessage] = []
+                var i = 0
+                for message in raw {
+                    i += 1
+                    let text = message["body"] as! String
+                    let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                    let timestamp = (message["time"] as! Timestamp).dateValue()
+                    messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                }
+                self.chat!.messages = messages
+            }
+            self.messagesCollectionView.reloadDataAndKeepOffset()
+            self.messagesCollectionView.scrollToBottom(animated: true)
+        }
+    }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
