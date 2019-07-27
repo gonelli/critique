@@ -61,6 +61,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.mixedBackgroundColor = mixedNightBgColor
         view.mixedBackgroundColor = mixedNightBgColor
         tableView.mixedBackgroundColor = mixedNightBgColor
+        discoveryTableView.mixedBackgroundColor = mixedNightBgColor
         searchBar.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         (searchBar.value(forKey: "searchField") as? UITextField)?.mixedTextColor = mixedNightTextColor
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
@@ -155,6 +156,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let critic = critics[indexPath.row].1
             
             cell.setCell(name: critic.name!, followers: critic.followers.count, following: critic.following.count)
+            
+            
+            // NightNight
+            cell.selectionStyle = .none
+            cell.mixedBackgroundColor = mixedNightBgColor
+            cell.nameLabel?.mixedTextColor = mixedNightTextColor
+            cell.initialBGView.layer.cornerRadius = cell.initialBGView.frame.size.width/2.0
+            cell.initialBGView.clipsToBounds = true
             
             return cell
         }
