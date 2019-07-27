@@ -23,12 +23,18 @@ class DiscoveryTableViewCell: UITableViewCell {
         if nameSplit.count >= 2 {
             initialLabel.text = "\(Array(nameSplit[0])[0])\(Array(nameSplit[1])[0])"
         }
-        initialBGView.backgroundColor = randomColor(seed: name.uppercased())
+        // Random Color
+        initialBGView.backgroundColor = randomColor(seed: name.uppercased()).darker()
+        // Circles
+        initialBGView.layer.cornerRadius = initialBGView.frame.size.width/2.0
+        initialBGView.clipsToBounds = true
     }
+    
+    // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb
     func randomColor(seed: String) -> UIColor {
         
         var total: Int = 0
-        for u in seed.unicodeScalars {
+        for u in (seed + "h").unicodeScalars {
             total += Int(UInt32(u))
         }
         
@@ -43,5 +49,7 @@ class DiscoveryTableViewCell: UITableViewCell {
         
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
+    
 
 }
+

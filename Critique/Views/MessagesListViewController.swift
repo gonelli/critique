@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import NightNight
 
 class MessagesListViewController: UITableViewController {
   
@@ -20,6 +21,8 @@ class MessagesListViewController: UITableViewController {
     }
   }
   var snapshotListener:ListenerRegistration! = nil
+  let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+  let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,7 +30,28 @@ class MessagesListViewController: UITableViewController {
     addRefreshView()
     initializeFirestore()
     //getDirectMessages()
+    
+    // NightNight
+    self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+    self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+    tableView.mixedBackgroundColor = mixedNightBgColor
+    if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+        NightNight.theme = .night
+    }
+    else {
+        NightNight.theme = .normal
+    }
   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // NightNight exception
+        if (NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         snapshotListener = db.collection("users").document(Auth.auth().currentUser!.uid).addSnapshotListener() { document, error in
@@ -73,7 +97,7 @@ class MessagesListViewController: UITableViewController {
               directMessages.sort() { (chat1, chat2) in
                 if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
                     if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
-                        print("again")
+//                        print("again")
                         return true
                     }
                 }
@@ -96,6 +120,12 @@ class MessagesListViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
     cell.chat = directMessages[indexPath.row]
     cell.setListener()
+    
+    // NightNight
+    cell.mixedBackgroundColor = mixedNightBgColor
+    cell.titleLabel.mixedTextColor = mixedNightTextColor
+    cell.selectionStyle = .none
+    
     return cell
   }
   
@@ -103,9 +133,7 @@ class MessagesListViewController: UITableViewController {
     let nextVC = segue.destination as! ChatViewController
     if segue.identifier == "toChat", let selectedRow = tableView.indexPathForSelectedRow {
       nextVC.chat = directMessages[selectedRow.row]
+        nextVC.incomingName = (tableView.cellForRow(at: IndexPath(row: selectedRow.row, section: 0)) as! ChatTableViewCell).titleLabel.text!
     }
   }
-    
-    
-  
 }

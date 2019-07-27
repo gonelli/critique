@@ -12,12 +12,16 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import InputBarAccessoryView
+import NightNight
 
 class ChatViewController: MessagesViewController, MessagesDataSource {
   
   var db: Firestore!
   var chat: Chat? = nil
   var snapshotListener:ListenerRegistration! = nil
+  var incomingName = ""
+  let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+  let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
   
   var current: MockUser {
     return MockUser(senderId: "\(chat?.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid) ?? 0)", displayName: "todo")
@@ -31,6 +35,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     chat?.getTitle() { title in
         self.title = title
     }
+    
   }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +75,15 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     maintainPositionOnKeyboardFrameChanged = true // default false
     messagesCollectionView.messagesLayoutDelegate = self
     messagesCollectionView.messagesDisplayDelegate = self
+    
+    // Hide Own Initials
+    if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+        layout.setMessageOutgoingAvatarSize(.zero)
+        layout.setMessageIncomingAvatarSize(.zero) // Comment out if you want initials
+    }
+    
+    // NightNight
+    messagesCollectionView.mixedBackgroundColor = mixedNightBgColor
   }
   
   func configureMessageInputBar() {
@@ -78,6 +92,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     messageInputBar.inputTextView.tintColor = .primaryColor
     messageInputBar.sendButton.setTitleColor(.primaryColor, for: .normal)
     messageInputBar.sendButton.setTitleColor(UIColor.primaryColor.withAlphaComponent(0.3), for: .highlighted)
+    
+    // NightNight
+    messageInputBar.backgroundView.mixedBackgroundColor = mixedNightBgColor
+    messageInputBar.inputTextView.mixedTextColor = mixedNightTextColor
   }
   
   func insertMessage(_ message: MockMessage) {
@@ -294,12 +312,44 @@ extension ChatViewController: MessagesDisplayDelegate {
   
   func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
     if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-      layout.setMessageIncomingAvatarSize(.zero)
-      layout.setMessageOutgoingAvatarSize(.zero)
+        avatarView.initials = ""
+        
+        avatarView.initials = "" //\(Array(incomingName.uppercased())[0])"
+        
+        let nameSplit = (self.incomingName).uppercased().split(separator: " ")
+        if nameSplit.count >= 2 {
+            avatarView.initials = "\(Array(nameSplit[0])[0])\(Array(nameSplit[1])[0])"
+        }
+        else {
+            avatarView.initials = "\(Array(nameSplit[0])[0])"
+        }
+        avatarView.backgroundColor = randomColor(seed: incomingName.uppercased()).darker()
+        
+        
     }
   }
-  
+    // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb
+    func randomColor(seed: String) -> UIColor {
+        
+        var total: Int = 0
+        for u in (seed).unicodeScalars {
+            total += Int(UInt32(u))
+        }
+        
+        srand48(total * 200)
+        let r = CGFloat(drand48())
+        
+        srand48(total)
+        let g = CGFloat(drand48())
+        
+        srand48(total / 200)
+        let b = CGFloat(drand48())
+        
+        return UIColor(red: r, green: g, blue: b, alpha: 1)
+    }
+    
 }
+
 
 // MARK: - MessagesLayoutDelegate
 

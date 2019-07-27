@@ -162,8 +162,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.selectionStyle = .none
             cell.mixedBackgroundColor = mixedNightBgColor
             cell.nameLabel?.mixedTextColor = mixedNightTextColor
-            cell.initialBGView.layer.cornerRadius = cell.initialBGView.frame.size.width/2.0
-            cell.initialBGView.clipsToBounds = true
             
             return cell
         }

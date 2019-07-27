@@ -96,7 +96,7 @@ class Chat {
                 }
                 self.messages = messages
                 if messages.count > 0 {
-                    print("Made it here \(String(describing: self.timestamp))")
+//                    print("Made it here \(String(describing: self.timestamp))")
                     self.timestamp = messages[messages.count - 1].sentDate
                 }
                 completion(self.messages)
