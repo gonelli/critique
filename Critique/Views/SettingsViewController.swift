@@ -52,7 +52,7 @@ class SettingsViewController: UITableViewController {
         }
         
         // NightNight
-        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
             NightNight.theme = .night
@@ -60,7 +60,7 @@ class SettingsViewController: UITableViewController {
         else {
             NightNight.theme = .normal
         }
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
         
         NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
         NameChangeCell.mixedBackgroundColor = mixedNightBgColor

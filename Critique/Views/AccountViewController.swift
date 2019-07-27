@@ -39,7 +39,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         addRefreshView()
         initializeFirestore()
         
-        self.navigationController!.navigationBar.mixedBarTintColor = mixedNightBgColor
+        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
             NightNight.theme = .night

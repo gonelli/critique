@@ -61,7 +61,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         self.posterImage.addSubview(view)
         
         // NightNight
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
         reviewCell.mixedBackgroundColor = mixedNightBgColor
         reviewCell.mixedTintColor = mixedNightTextColor
         reviewTextView.mixedBackgroundColor = mixedNightBgColor

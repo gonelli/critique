@@ -177,13 +177,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbI-kb-52r" userLabel="Chat Title">
-                                            <rect key="frame" x="20" y="11" width="57" height="21"/>
+                                            <rect key="frame" x="82" y="11" width="57" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fia-xj-TwD" userLabel="Last Message">
-                                            <rect key="frame" x="20" y="37.5" width="57" height="21"/>
+                                            <rect key="frame" x="82" y="37.5" width="57" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -194,6 +194,27 @@
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOq-ba-zWG">
+                                            <rect key="frame" x="20" y="10" width="50" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX6-PA-Wzk">
+                                                    <rect key="frame" x="8" y="15" width="34" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Vtd-9V-dfr"/>
+                                                        <constraint firstAttribute="width" constant="34" id="mnB-Py-NcC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Dgp-K3-a13"/>
+                                                <constraint firstAttribute="width" constant="50" id="QjE-6f-LCy"/>
+                                                <constraint firstItem="GX6-PA-Wzk" firstAttribute="top" secondItem="VOq-ba-zWG" secondAttribute="top" constant="15" id="elV-Z3-yDF"/>
+                                                <constraint firstItem="GX6-PA-Wzk" firstAttribute="leading" secondItem="VOq-ba-zWG" secondAttribute="leading" constant="8" id="tXw-v3-pR7"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fia-xj-TwD" firstAttribute="height" secondItem="BbI-kb-52r" secondAttribute="height" id="5j2-eP-cNf"/>
@@ -201,15 +222,19 @@
                                         <constraint firstItem="fia-xj-TwD" firstAttribute="leading" secondItem="BbI-kb-52r" secondAttribute="leading" id="QHS-rX-7ge"/>
                                         <constraint firstItem="BbI-kb-52r" firstAttribute="top" secondItem="NKv-19-55l" secondAttribute="top" constant="11" id="TTQ-lT-HBg"/>
                                         <constraint firstAttribute="trailing" secondItem="geE-dG-5Jl" secondAttribute="trailing" constant="8" id="aLR-m6-3sP"/>
-                                        <constraint firstItem="BbI-kb-52r" firstAttribute="leading" secondItem="NKv-19-55l" secondAttribute="leading" constant="20" id="iAJ-P5-Kmt"/>
+                                        <constraint firstItem="BbI-kb-52r" firstAttribute="leading" secondItem="NKv-19-55l" secondAttribute="leading" constant="82" id="iAJ-P5-Kmt"/>
                                         <constraint firstItem="fia-xj-TwD" firstAttribute="trailing" secondItem="BbI-kb-52r" secondAttribute="trailing" id="isI-p7-Mqg"/>
                                         <constraint firstItem="fia-xj-TwD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BbI-kb-52r" secondAttribute="bottom" constant="1" id="kPo-9N-rmg"/>
+                                        <constraint firstItem="VOq-ba-zWG" firstAttribute="leading" secondItem="NKv-19-55l" secondAttribute="leading" constant="20" id="kZT-de-akv"/>
                                         <constraint firstItem="geE-dG-5Jl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BbI-kb-52r" secondAttribute="trailing" constant="1" id="oJ0-i1-1vu"/>
                                         <constraint firstAttribute="bottom" secondItem="fia-xj-TwD" secondAttribute="bottom" constant="11" id="q8c-iz-fo2"/>
+                                        <constraint firstItem="VOq-ba-zWG" firstAttribute="centerY" secondItem="NKv-19-55l" secondAttribute="centerY" id="qcL-8D-B0x"/>
                                         <constraint firstItem="fia-xj-TwD" firstAttribute="width" secondItem="BbI-kb-52r" secondAttribute="width" id="sex-yg-lrA"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="initialBgView" destination="VOq-ba-zWG" id="7l1-EQ-eWv"/>
+                                    <outlet property="initialLabel" destination="GX6-PA-Wzk" id="Tna-3g-Nfu"/>
                                     <outlet property="lastMessageLabel" destination="fia-xj-TwD" id="6vI-p2-29j"/>
                                     <outlet property="timestampLabel" destination="geE-dG-5Jl" id="RWe-OY-xu2"/>
                                     <outlet property="titleLabel" destination="BbI-kb-52r" id="DVo-2l-Jdz"/>

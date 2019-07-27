@@ -13,6 +13,8 @@ class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet var initialLabel: UILabel!
+    @IBOutlet var initialBgView: UIView!
     
     
     var snapshotListener:ListenerRegistration? = nil
@@ -31,9 +33,21 @@ class ChatTableViewCell: UITableViewCell {
             chat!.getTitle(){ (title) in
                 self.titleLabel.text = title
                 
+                // Avatar Initials
+                self.initialLabel.text = "\(Array(title.uppercased())[0])"
+                let nameSplit = title.uppercased().split(separator: " ")
+                if nameSplit.count >= 2 {
+                    self.initialLabel.text = "\(Array(nameSplit[0])[0])\(Array(nameSplit[1])[0])"
+                }
+                
+                // Random Color
+                self.initialBgView.backgroundColor = self.randomColor(seed: title.uppercased()).darker()
             }
-            
             setSubtitleInfo()
+            
+            // Circles
+            initialBgView.layer.cornerRadius = initialBgView.frame.size.width/2.0
+            initialBgView.clipsToBounds = true
         }
     }
     
@@ -64,7 +78,9 @@ class ChatTableViewCell: UITableViewCell {
         let timeDiff = Calendar.current.date(from: currentDateComponents!)!.timeIntervalSince(sentDate)
         if timeDiff < day {
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm"
+            timeFormatter.dateFormat = "h:mm a"
+            timeFormatter.amSymbol = "AM"
+            timeFormatter.pmSymbol = "PM"
             return timeFormatter.string(from: sentDate)
         } else if timeDiff < 2 * day {
             return "Yesterday"
@@ -91,6 +107,26 @@ class ChatTableViewCell: UITableViewCell {
         if snapshotListener != nil{
             snapshotListener!.remove()
         }
+    }
+    
+    // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb
+    func randomColor(seed: String) -> UIColor {
+        
+        var total: Int = 0
+        for u in (seed + "ZnVjayB0cnVtcCBmdXV1dXVjayB0cnVtcA").unicodeScalars {
+            total += Int(UInt32(u))
+        }
+        
+        srand48(total * 200)
+        let r = CGFloat(drand48())
+        
+        srand48(total)
+        let g = CGFloat(drand48())
+        
+        srand48(total / 200)
+        let b = CGFloat(drand48())
+        
+        return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
 
 }

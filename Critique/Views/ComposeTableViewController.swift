@@ -36,7 +36,7 @@ class ComposeTableViewController: UITableViewController {
         tableView.addGestureRecognizer(tapGesture)
         
         // NIGHT NIGHT
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x111111)
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
         tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         scoreTF.mixedTextColor = mixedNightTextColor
         scoreTF.mixedBackgroundColor = mixedNightBgColor
