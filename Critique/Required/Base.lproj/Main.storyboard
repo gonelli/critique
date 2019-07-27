@@ -1117,12 +1117,13 @@
                     <navigationItem key="navigationItem" title="Feed" id="dP0-iF-3zt"/>
                     <connections>
                         <segue destination="nM5-N3-eVF" kind="presentation" identifier="toCreateAccount" id="ajz-Fk-wmt"/>
+                        <segue destination="Db6-gs-pth" kind="show" identifier="feedPosterSegue" id="RCH-s0-PH4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v15-sQ-zKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="CQp-1E-FW4"/>
             </objects>
-            <point key="canvasLocation" x="-5023.188405797102" y="1824.7767857142856"/>
+            <point key="canvasLocation" x="-5023" y="1825"/>
         </scene>
         <!--Movie Info View Controller-->
         <scene sceneID="7qO-XH-CKi">
@@ -1609,7 +1610,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="m0R-vf-5JF"/>
         <segue reference="P5H-yz-H6Q"/>
-        <segue reference="6HJ-bD-fjt"/>
+        <segue reference="RCH-s0-PH4"/>
         <segue reference="QQ9-ix-apW"/>
         <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>

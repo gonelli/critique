@@ -92,6 +92,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.performSegue(withIdentifier: "expandedMovieInfoSegue", sender: self)
+            print(self.movieObject?.movieData["Title"])
         }
     }
     

@@ -16,6 +16,8 @@ class FeedTableViewController: UITableViewController {
     
     var db: Firestore!
     var reviews: [Review] = []
+    var tappedPosterTitle = ""
+    var tappedPosterMovieObject : Movie? = nil
     let expandedReviewSegueID = "expandedReviewSegueID"
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
@@ -132,10 +134,34 @@ class FeedTableViewController: UITableViewController {
         cell.movieLabel.mixedTextColor = mixedNightTextColor
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.mixedTintColor = mixedNightTextColor
-        
         cell.selectionStyle = .none
         
+        var tap = MyTapGesture(target: self, action: #selector(self.handleTap(_:)))
+        tap.imdbID = cell.review!.imdbID
+        
+        cell.posterImage.addGestureRecognizer(tap)
+        cell.posterImage.isUserInteractionEnabled = true
+//        cell.posterImage.addSubview(view)
+
+        
+        
         return cell
+    }
+    
+    // If movie poster is pressed, show the movie's info
+    @objc func handleTap(_ sender: MyTapGesture? = nil) {
+        let feedGroup = DispatchGroup()
+        feedGroup.enter()
+        var outgoingMovie = Movie(imdbId: "tt0848228")
+
+        DispatchQueue.main.async {
+            outgoingMovie = Movie(imdbId: sender!.imdbID, outsideGroup: feedGroup, outsideGroupEntered: true)
+        }
+        feedGroup.notify(queue: .main) {
+            self.tappedPosterTitle = outgoingMovie.movieData["Title"] as! String
+            self.tappedPosterMovieObject = outgoingMovie
+            self.performSegue(withIdentifier: "feedPosterSegue", sender: self)
+        }
     }
     
     // If body of a review is touched, open an expanded view of it
@@ -144,5 +170,14 @@ class FeedTableViewController: UITableViewController {
             nextVC.deligate = self
             nextVC.expanedReview = reviews[reviewIndex]
         }
+        else if segue.identifier == "feedPosterSegue" {
+            let infoVC = segue.destination as! MovieInfoViewController
+            infoVC.movieTitle = self.tappedPosterTitle
+            infoVC.movieObject = self.tappedPosterMovieObject
+        }
     }
+}
+
+class MyTapGesture: UITapGestureRecognizer {
+    var imdbID = String()
 }
