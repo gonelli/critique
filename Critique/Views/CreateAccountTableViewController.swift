@@ -44,7 +44,7 @@ class CreateAccountTableViewController: UITableViewController {
                     self.db.collection("users").document((user?.user.uid)!).setData([
                         "isPublic" : true,
                         "name" : self.usernameTF.text!,
-                        "following": [user!.user.uid] as [String],
+                        "following": [] as [String],
                         "blocked": [] as [String],
                         "myChats": [] as [String]
                     ]){ (error) in
@@ -54,8 +54,10 @@ class CreateAccountTableViewController: UITableViewController {
                     }
                     self.dismiss(animated: true, completion: {
                         // code for refreshing on sign in
-                        let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
-                        parent.getReviews()
+//                        let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+//                        parent.getReviews()
+                        let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
+                        parent.goToFeed()
                     })
                 }
                 // Error on singing up

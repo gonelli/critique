@@ -1046,8 +1046,8 @@
                         <outlet property="CritiqueName" destination="LqP-qm-KVx" id="cJO-4v-wcf"/>
                         <outlet property="NameHider" destination="mDg-Ji-REP" id="7c6-6M-UxV"/>
                         <outlet property="Popcorn" destination="4Go-SE-6q9" id="hBu-NA-YiE"/>
-                        <segue destination="TYS-HE-qcX" kind="modal" identifier="BootupFeedSegue" modalTransitionStyle="crossDissolve" id="IAL-Xn-RCJ"/>
-                        <segue destination="nM5-N3-eVF" kind="modal" identifier="BootupLoginSegue" modalTransitionStyle="crossDissolve" id="8tK-A1-eZz"/>
+                        <segue destination="nM5-N3-eVF" kind="presentation" identifier="BootupLoginSegue" modalTransitionStyle="crossDissolve" id="8tK-A1-eZz"/>
+                        <segue destination="TYS-HE-qcX" kind="presentation" identifier="BootupFeedSegue" modalTransitionStyle="crossDissolve" id="YV6-47-6fF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNO-Jn-AuY" userLabel="First Responder" sceneMemberID="firstResponder"/>

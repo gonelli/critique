@@ -10,27 +10,29 @@ import Foundation
 import UIKit
 import QuartzCore
 import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 class LaunchScreen: UIViewController, CAAnimationDelegate {
     
-    var tapCount = 0
-    
     @IBOutlet var NameHider: UIImageView!
-    @IBOutlet var myButton: UIButton!
     @IBOutlet var CritiqueName: UIImageView!
     @IBOutlet var Popcorn: UIImageView!
     @IBOutlet var CqInitials: UIImageView!
-    
-    override func viewDidLoad() {
+    var reviews: [Review] = []
+    var db: Firestore!
+    var loggedIn: Bool! = false
 
-    }
-    @IBAction func myButtonPressed(_ sender: Any) {
-        self.spin1()
-        
+    override func viewDidLoad() {
+        if (Auth.auth().currentUser != nil) {
+            self.loggedIn = true
+            self.initializeFirestore()
+            self.getReviews()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        usleep(100000) // 0.1 sec.
+        usleep(100000) // 0.1 sec, buffer time
         self.spin1()
         self.moveName()
         self.movePopcorn()
@@ -45,7 +47,6 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
         completion: { finished in
             self.spin2()
         })
-        
     }
     
     func spin2() {
@@ -123,18 +124,65 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
                 UIView.animate(withDuration: 0.10, animations: {
                 self.CqInitials.transform = CGAffineTransform.identity
                 }, completion: {finished in
-                    if (Auth.auth().currentUser == nil) {
+                    if (!self.loggedIn) {
                         self.performSegue(withIdentifier: "BootupLoginSegue", sender: self)
                     }
                     else {
-                        self.performSegue(withIdentifier: "BootupFeedSegue", sender: self)
-                        
+                        self.goToFeed()
                     }})
             }
+    }
+    
+    func goToFeed() {
+        self.performSegue(withIdentifier: "BootupFeedSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.Popcorn.isHidden = true
         self.CqInitials.isHidden = true
+        
+        if segue.identifier == "BootupFeedSegue" {
+            let tabVC = segue.destination as! UITabBarController
+            let navVC = tabVC.viewControllers![0] as! UINavigationController
+            let feedVC = navVC.topViewController as! FeedTableViewController
+            feedVC.reviews = self.reviews
+        }
+    }
+    
+    func initializeFirestore() {
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+    }
+    
+    func getReviews() {
+        var reviews: [Review] = []
+        var usersGotten = 0
+        db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
+            if var following = document?.data()?["following"] as? [String] {
+                if following.count == 0 {
+                    self.reviews = []
+                }
+                following.append(Auth.auth().currentUser!.uid)
+                for followed in following {
+                    self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in
+                        for review in snapshot!.documents {
+                            let body = review.data()["body"] as! String
+                            let score = review.data()["score"] as! NSNumber
+                            let criticID = review.data()["criticID"] as! String
+                            let imdbID = review.data()["imdbID"] as! String
+                            let likers = review.data()["liked"] as! [String]
+                            let dislikers = review.data()["disliked"] as! [String]
+                            let timestamp = review.data()["timestamp"] as! TimeInterval
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                        }
+                        usersGotten += 1
+                        if usersGotten == following.count {
+                            self.reviews = reviews.sorted()
+                        }
+                    })
+                }
+            }
+        }
     }
 }

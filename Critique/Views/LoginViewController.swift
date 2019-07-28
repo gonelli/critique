@@ -27,8 +27,9 @@ class LoginViewController: UITableViewController {
         Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passField.text!) { (result, error) in
             if error == nil {
                 self.view.window!.rootViewController?.dismiss(animated: true, completion: {
-                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
-                    parent.getReviews()
+//                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+                    let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
+                    parent.goToFeed()
                 })
             }
             // Error while signing in

@@ -142,8 +142,6 @@ class FeedTableViewController: UITableViewController {
         cell.posterImage.addGestureRecognizer(tap)
         cell.posterImage.isUserInteractionEnabled = true
 //        cell.posterImage.addSubview(view)
-
-        
         
         return cell
     }
