@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TYS-HE-qcX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -991,6 +991,69 @@
             </objects>
             <point key="canvasLocation" x="-1410" y="1103"/>
         </scene>
+        <!--Launch Screen-->
+        <scene sceneID="sJK-gd-XN4">
+            <objects>
+                <viewController id="1gZ-xt-0a6" customClass="LaunchScreen" customModule="Critique" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xis-3M-91a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Critiquepdf" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqP-qm-KVx">
+                                <rect key="frame" x="183" y="432" width="145" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="jLW-dI-abD"/>
+                                    <constraint firstAttribute="width" constant="145" id="rYK-Ze-DiV"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NameHider" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mDg-Ji-REP">
+                                <rect key="frame" x="-92" y="389" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="239.99999999999994" id="EYc-jU-10B"/>
+                                    <constraint firstAttribute="height" constant="128" id="HuL-pF-UKi"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nocqpdf" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Go-SE-6q9">
+                                <rect key="frame" x="86" y="415.5" width="78" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="1gx-n1-s0p"/>
+                                    <constraint firstAttribute="width" constant="78" id="egm-04-wnw"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cqwhitepdf" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-ub-10L">
+                                <rect key="frame" x="102.5" y="440" width="45" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="Pq7-NN-LtU"/>
+                                    <constraint firstAttribute="height" constant="26" id="Ri6-Ui-8ff"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bHq-ub-10L" firstAttribute="centerX" secondItem="4Go-SE-6q9" secondAttribute="centerX" id="7Hj-hR-54H"/>
+                            <constraint firstItem="LqP-qm-KVx" firstAttribute="leading" secondItem="mDg-Ji-REP" secondAttribute="trailing" constant="35.000000000000057" id="AdK-vg-3Pv"/>
+                            <constraint firstItem="mDg-Ji-REP" firstAttribute="centerY" secondItem="PV1-W9-rgA" secondAttribute="centerY" id="GbK-nN-FC5"/>
+                            <constraint firstItem="bHq-ub-10L" firstAttribute="centerY" secondItem="4Go-SE-6q9" secondAttribute="centerY" id="MJ9-sq-pM5"/>
+                            <constraint firstItem="LqP-qm-KVx" firstAttribute="leading" secondItem="4Go-SE-6q9" secondAttribute="trailing" constant="19" id="OEI-Sz-6KO"/>
+                            <constraint firstItem="4Go-SE-6q9" firstAttribute="leading" secondItem="PV1-W9-rgA" secondAttribute="leading" constant="86" id="T46-q2-J5s"/>
+                            <constraint firstItem="4Go-SE-6q9" firstAttribute="centerY" secondItem="PV1-W9-rgA" secondAttribute="centerY" id="c7k-i1-on1"/>
+                            <constraint firstItem="LqP-qm-KVx" firstAttribute="centerY" secondItem="PV1-W9-rgA" secondAttribute="centerY" id="nsS-I3-Dlp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PV1-W9-rgA"/>
+                    </view>
+                    <connections>
+                        <outlet property="CqInitials" destination="bHq-ub-10L" id="Q7e-Nf-8NW"/>
+                        <outlet property="CritiqueName" destination="LqP-qm-KVx" id="cJO-4v-wcf"/>
+                        <outlet property="NameHider" destination="mDg-Ji-REP" id="7c6-6M-UxV"/>
+                        <outlet property="Popcorn" destination="4Go-SE-6q9" id="hBu-NA-YiE"/>
+                        <segue destination="TYS-HE-qcX" kind="modal" identifier="BootupFeedSegue" modalTransitionStyle="crossDissolve" id="IAL-Xn-RCJ"/>
+                        <segue destination="nM5-N3-eVF" kind="modal" identifier="BootupLoginSegue" modalTransitionStyle="crossDissolve" id="8tK-A1-eZz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pNO-Jn-AuY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3181" y="-988"/>
+        </scene>
         <!--Feed-->
         <scene sceneID="Jvo-br-xLR">
             <objects>
@@ -1599,6 +1662,9 @@
     </scenes>
     <resources>
         <image name="Cq-App-icon" width="1024" height="1024"/>
+        <image name="Critiquepdf" width="121" height="30"/>
+        <image name="NameHider" width="197" height="40"/>
+        <image name="cqwhitepdf" width="28" height="21"/>
         <image name="dislike" width="28.5" height="28.5"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
@@ -1606,9 +1672,11 @@
         <image name="icon-settings" width="28" height="28"/>
         <image name="imdb-30" width="53" height="30"/>
         <image name="like" width="28.5" height="28.5"/>
+        <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="m0R-vf-5JF"/>
+        <segue reference="8tK-A1-eZz"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="RCH-s0-PH4"/>
         <segue reference="QQ9-ix-apW"/>

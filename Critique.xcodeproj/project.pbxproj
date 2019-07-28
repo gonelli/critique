@@ -19,6 +19,7 @@
 		1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */; };
 		1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */; };
 		552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */; };
+		554DD2E822ED17B200B4FC6B /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */; };
 		55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1A22CBDF56004A70A9 /* SearchViewController.swift */; };
 		55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1C22CBDF65004A70A9 /* AccountViewController.swift */; };
 		55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */; };
@@ -54,6 +55,7 @@
 		1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedTableViewController.swift; sourceTree = "<group>"; };
+		554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		55672C1A22CBDF56004A70A9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		55672C1C22CBDF65004A70A9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		1AFF494922D11D6800E06200 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */,
 				6313EED922E7BD53002117E0 /* DiscoveryBackend */,
 				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
 				1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */,
@@ -314,6 +317,7 @@
 				55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */,
 				1A4BB78422D15E090027E606 /* FeedTableViewController.swift in Sources */,
 				6313EEDD22E7BD7A002117E0 /* DummyDiscovery.swift in Sources */,
+				554DD2E822ED17B200B4FC6B /* LaunchScreen.swift in Sources */,
 				6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */,
 				55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */,
 				1ABE096122D29F1D00279752 /* Review.swift in Sources */,
