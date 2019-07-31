@@ -1184,6 +1184,7 @@
                     <connections>
                         <segue destination="nM5-N3-eVF" kind="presentation" identifier="toCreateAccount" id="ajz-Fk-wmt"/>
                         <segue destination="Db6-gs-pth" kind="show" identifier="feedPosterSegue" id="RCH-s0-PH4"/>
+                        <segue destination="Fq4-Js-ghB" kind="show" identifier="feedCriticSegue" id="yQa-Xr-4Li"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v15-sQ-zKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1678,11 +1679,11 @@
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m0R-vf-5JF"/>
-        <segue reference="8tK-A1-eZz"/>
+        <segue reference="AaD-db-S69"/>
+        <segue reference="ajz-Fk-wmt"/>
         <segue reference="P5H-yz-H6Q"/>
-        <segue reference="6HJ-bD-fjt"/>
+        <segue reference="RCH-s0-PH4"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="8Ob-Zd-y7p"/>
+        <segue reference="yQa-Xr-4Li"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -264,8 +264,10 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.scoreLabel.mixedTextColor = mixedNightTextColor
         cell.votesLabel.mixedTextColor = mixedNightTextColor
         
-//        Should be done in LikeDislikeCell
-//        cell.downvoteButton.setMixedImage(MixedImage(normal: UIImage(named: "liked")!, night: UIImage(named: "liked")!), forState: .normal)
+        if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
+            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed, night: critiqueRed)
+        }
         
         return cell
 

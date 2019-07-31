@@ -17,6 +17,8 @@ class FeedTableViewController: UITableViewController {
     var db: Firestore!
     var reviews: [Review] = []
     var tappedPosterTitle = ""
+    var tappedCriticID = ""
+    var tappedCriticName = ""
     var tappedPosterMovieObject : Movie? = nil
     let expandedReviewSegueID = "expandedReviewSegueID"
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
@@ -126,6 +128,17 @@ class FeedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         cell.review = reviews[indexPath.row]
         
+        let posterTap = ReviewCellTapGesture(target: self, action: #selector(self.handleTap(_:)))
+        posterTap.imdbID = cell.review!.imdbID
+        cell.posterImage.addGestureRecognizer(posterTap)
+        cell.posterImage.isUserInteractionEnabled = true
+        //        cell.posterImage.addSubview(view)
+
+        let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleTap(_:)))
+        criticTap.criticID = cell.review!.criticID
+        cell.criticLabel.addGestureRecognizer(criticTap)
+        cell.criticLabel.isUserInteractionEnabled = true
+
         // NIGHT NIGHT
         cell.criticLabel.mixedTextColor = mixedNightTextColor
         cell.likesLabel.mixedTextColor = mixedNightTextColor
@@ -137,32 +150,56 @@ class FeedTableViewController: UITableViewController {
         cell.selectionStyle = .none
         
         if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
-            cell.mixedBackgroundColor = MixedColor(normal: 0xf3f3f3, night: 0x2c2c2c)
+            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed, night: critiqueRed)
         }
-        
-        var tap = MyTapGesture(target: self, action: #selector(self.handleTap(_:)))
-        tap.imdbID = cell.review!.imdbID
-        
-        cell.posterImage.addGestureRecognizer(tap)
-        cell.posterImage.isUserInteractionEnabled = true
-//        cell.posterImage.addSubview(view)
         
         return cell
     }
     
     // If movie poster is pressed, show the movie's info
-    @objc func handleTap(_ sender: MyTapGesture? = nil) {
-        let feedGroup = DispatchGroup()
-        feedGroup.enter()
-        var outgoingMovie = Movie(imdbId: "tt0848228")
-
-        DispatchQueue.main.async {
-            outgoingMovie = Movie(imdbId: sender!.imdbID, outsideGroup: feedGroup, outsideGroupEntered: true)
+    @objc func handleTap(_ sender: ReviewCellTapGesture? = nil) {
+        // Poster tapped
+        if (sender?.criticID == String()) {
+            let feedGroup = DispatchGroup()
+            feedGroup.enter()
+            var outgoingMovie = Movie(imdbId: "tt0848228")
+    
+            DispatchQueue.main.async {
+                outgoingMovie = Movie(imdbId: sender!.imdbID, outsideGroup: feedGroup, outsideGroupEntered: true)
+            }
+            feedGroup.notify(queue: .main) {
+                self.tappedPosterTitle = outgoingMovie.movieData["Title"] as! String
+                self.tappedPosterMovieObject = outgoingMovie
+                self.performSegue(withIdentifier: "feedPosterSegue", sender: self)
+            }
         }
-        feedGroup.notify(queue: .main) {
-            self.tappedPosterTitle = outgoingMovie.movieData["Title"] as! String
-            self.tappedPosterMovieObject = outgoingMovie
-            self.performSegue(withIdentifier: "feedPosterSegue", sender: self)
+        // Critic tapped
+        else {
+            self.tappedCriticID = sender!.criticID
+            print(sender!.criticName)
+            
+            let criticNameGroup = DispatchGroup()
+            criticNameGroup.enter()
+            
+            // Can't take name from label due to it not being set in cellForRowAt
+            DispatchQueue.main.async {
+                let ref = self.db.collection("users").document(self.tappedCriticID)
+                ref.getDocument { (document, error) in
+                    if error == nil {
+                        self.tappedCriticName = document!.data()!["name"] as! String
+                        criticNameGroup.leave()
+                    }
+                    else {
+                        fatalError(error!.localizedDescription)
+                    }
+                }
+            }
+            
+            criticNameGroup.notify(queue: .main) {
+                print("LEFT")
+                self.performSegue(withIdentifier: "feedCriticSegue", sender: self)
+            }
         }
     }
     
@@ -177,9 +214,11 @@ class FeedTableViewController: UITableViewController {
             infoVC.movieTitle = self.tappedPosterTitle
             infoVC.movieObject = self.tappedPosterMovieObject
         }
+        else if segue.identifier == "feedCriticSegue" {
+            let criticVC = segue.destination as! AccountViewController
+            print(self.tappedCriticName, "-")
+            criticVC.accountID = self.tappedCriticID
+            criticVC.accountName = self.tappedCriticName
+        }
     }
-}
-
-class MyTapGesture: UITapGestureRecognizer {
-    var imdbID = String()
 }

@@ -25,6 +25,7 @@
 		55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */; };
 		55672C2122CBDF92004A70A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2022CBDF92004A70A9 /* SettingsViewController.swift */; };
 		55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C2222CBDFD7004A70A9 /* LoginViewController.swift */; };
+		5593C85022F13CD700A8EF44 /* ReviewCellTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593C84F22F13CD700A8EF44 /* ReviewCellTapGesture.swift */; };
 		55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */; };
 		55D74C2F22CF06F100434B69 /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */; };
 		5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */; };
@@ -61,6 +62,7 @@
 		55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
 		55672C2022CBDF92004A70A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		55672C2222CBDFD7004A70A9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5593C84F22F13CD700A8EF44 /* ReviewCellTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellTapGesture.swift; sourceTree = "<group>"; };
 		55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDislikeCell.swift; sourceTree = "<group>"; };
 		55D74C2E22CF06F100434B69 /* MovieInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoViewController.swift; sourceTree = "<group>"; };
 		5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedReviewTableViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */,
 				55BDC16D22E0DEDB002AB3B6 /* LikeDislikeCell.swift */,
 				63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */,
+				5593C84F22F13CD700A8EF44 /* ReviewCellTapGesture.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
 				633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */,
+				5593C85022F13CD700A8EF44 /* ReviewCellTapGesture.swift in Sources */,
 				5E31BBFF22D76F6700F38822 /* ExpandedReviewTableViewController.swift in Sources */,
 				1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */,
 				55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */,
