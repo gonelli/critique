@@ -151,7 +151,7 @@ class FeedTableViewController: UITableViewController {
         
         if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
             let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed, night: critiqueRed)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
         }
         
         return cell
@@ -177,7 +177,6 @@ class FeedTableViewController: UITableViewController {
         // Critic tapped
         else {
             self.tappedCriticID = sender!.criticID
-            print(sender!.criticName)
             
             let criticNameGroup = DispatchGroup()
             criticNameGroup.enter()
@@ -197,7 +196,6 @@ class FeedTableViewController: UITableViewController {
             }
             
             criticNameGroup.notify(queue: .main) {
-                print("LEFT")
                 self.performSegue(withIdentifier: "feedCriticSegue", sender: self)
             }
         }
@@ -216,7 +214,6 @@ class FeedTableViewController: UITableViewController {
         }
         else if segue.identifier == "feedCriticSegue" {
             let criticVC = segue.destination as! AccountViewController
-            print(self.tappedCriticName, "-")
             criticVC.accountID = self.tappedCriticID
             criticVC.accountName = self.tappedCriticName
         }

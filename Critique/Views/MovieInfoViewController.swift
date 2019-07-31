@@ -31,6 +31,8 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     var reviews: [Review] = []
     var followingReviews: [Review] = []
     var scores: [Double] = []
+    var tappedCriticID = ""
+    var tappedCriticName = ""
     let composeSegue = "composeSegue"
     
     let critiqueRed = 0xe12b22
@@ -254,6 +256,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.review = self.followingReviews[indexPath.row]
         }
         
+        let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleTap(_:)))
+        criticTap.criticID = cell.review!.criticID
+        cell.criticLabel.addGestureRecognizer(criticTap)
+        cell.criticLabel.isUserInteractionEnabled = true
+        
         // NIGHT NIGHT
         cell.selectionStyle = .none
         cell.mixedBackgroundColor = mixedNightBgColor
@@ -266,11 +273,37 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
             let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed, night: critiqueRed)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
         }
         
         return cell
-
+    }
+    
+    @objc func handleTap(_ sender: ReviewCellTapGesture? = nil) {
+        // Critic tapped
+        
+        self.tappedCriticID = sender!.criticID
+        
+        let criticNameGroup = DispatchGroup()
+        criticNameGroup.enter()
+        
+        // Can't take name from label due to it not being set in cellForRowAt
+        DispatchQueue.main.async {
+            let ref = self.db.collection("users").document(self.tappedCriticID)
+            ref.getDocument { (document, error) in
+                if error == nil {
+                    self.tappedCriticName = document!.data()!["name"] as! String
+                    criticNameGroup.leave()
+                }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
+        }
+        
+        criticNameGroup.notify(queue: .main) {
+            self.performSegue(withIdentifier: "infoCriticSegue", sender: self)
+        }
     }
 
     // Segue to Compose Review screen
@@ -288,6 +321,10 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 nextVC.expanedReview = followingReviews[reviewIndex]
             }
         }
-
+        else if segue.identifier == "infoCriticSegue" {
+            let criticVC = segue.destination as! AccountViewController
+            criticVC.accountID = self.tappedCriticID
+            criticVC.accountName = self.tappedCriticName
+        }
     }
 }

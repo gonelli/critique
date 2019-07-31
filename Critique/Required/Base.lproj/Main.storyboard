@@ -1404,6 +1404,7 @@
                         <outlet property="tableView" destination="0SB-bn-vJ6" id="zTN-rd-tSD"/>
                         <outlet property="yearLabel" destination="Mku-32-Uwl" id="8lK-kd-62G"/>
                         <segue destination="eQH-Wl-eC1" kind="show" identifier="toCompose" id="01V-wt-Nlw"/>
+                        <segue destination="Fq4-Js-ghB" kind="show" identifier="infoCriticSegue" id="6Ny-WO-T4H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxI-iA-0FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1679,11 +1680,11 @@
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaD-db-S69"/>
+        <segue reference="DtX-qp-0oM"/>
         <segue reference="ajz-Fk-wmt"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="RCH-s0-PH4"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="yQa-Xr-4Li"/>
+        <segue reference="6Ny-WO-T4H"/>
     </inferredMetricsTieBreakers>
 </document>
