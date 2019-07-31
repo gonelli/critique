@@ -30,8 +30,10 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func signInPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passField.text!) { (result, error) in
             if error == nil {
-                self.view.window!.rootViewController?.dismiss(animated: false, completion: {
-//                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+                self.dismiss(animated: true, completion: {
+                    // code for refreshing on sign in
+                    //                        let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+                    //                        parent.getReviews()
                     let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
                     parent.goToFeed()
                 })
@@ -63,10 +65,6 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         alert.addAction(action)
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         self.present(alert, animated: true)
-    }
-    
-    @IBAction func cancelPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

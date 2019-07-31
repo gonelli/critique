@@ -797,14 +797,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kfh-gd-R1T">
-                            <rect key="frame" x="0.0" y="229" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Already Have an Account Sign In?"/>
-                            <connections>
-                                <segue destination="wMU-W1-WBL" kind="presentation" id="Wlr-4j-oHi"/>
-                            </connections>
-                        </button>
                         <sections>
                             <tableViewSection id="Huo-G5-KO7">
                                 <cells>
@@ -905,6 +897,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Account" id="Hlo-OX-xph">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Kg6-Gl-iyZ">
+                            <connections>
+                                <action selector="cancelPressed:" destination="MuA-MN-S86" id="9YZ-BL-XWK"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Sign Up" style="done" id="bUj-fN-zab">
                             <connections>
                                 <action selector="signUp:" destination="MuA-MN-S86" id="xGQ-LD-cXv"/>
@@ -920,7 +917,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lCb-ex-mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3580" y="-265"/>
+            <point key="canvasLocation" x="-1465" y="-265"/>
         </scene>
         <!--Search-->
         <scene sceneID="z2l-L7-6on">
@@ -1049,13 +1046,13 @@
                         <outlet property="CritiqueName" destination="LqP-qm-KVx" id="cJO-4v-wcf"/>
                         <outlet property="NameHider" destination="mDg-Ji-REP" id="7c6-6M-UxV"/>
                         <outlet property="Popcorn" destination="4Go-SE-6q9" id="hBu-NA-YiE"/>
-                        <segue destination="nM5-N3-eVF" kind="presentation" identifier="BootupLoginSegue" modalTransitionStyle="crossDissolve" id="8tK-A1-eZz"/>
                         <segue destination="TYS-HE-qcX" kind="presentation" identifier="BootupFeedSegue" modalTransitionStyle="crossDissolve" id="YV6-47-6fF"/>
+                        <segue destination="wMU-W1-WBL" kind="presentation" identifier="BootupLoginSegue" modalTransitionStyle="crossDissolve" id="h6d-22-aBx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNO-Jn-AuY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3181" y="-988"/>
+            <point key="canvasLocation" x="-3181" y="-949"/>
         </scene>
         <!--Feed-->
         <scene sceneID="Jvo-br-xLR">
@@ -1180,11 +1177,11 @@
                             <outlet property="delegate" destination="NT3-Pf-lbM" id="ojK-FS-nKP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Feed" id="dP0-iF-3zt"/>
+                    <navigationItem key="navigationItem" title="Feed" id="Rnb-23-COy"/>
                     <connections>
-                        <segue destination="nM5-N3-eVF" kind="presentation" identifier="toCreateAccount" id="ajz-Fk-wmt"/>
                         <segue destination="Db6-gs-pth" kind="show" identifier="feedPosterSegue" id="RCH-s0-PH4"/>
                         <segue destination="Fq4-Js-ghB" kind="show" identifier="feedCriticSegue" id="yQa-Xr-4Li"/>
+                        <segue destination="wMU-W1-WBL" kind="show" identifier="feedToSignInSegue" id="C6q-cU-QrV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v15-sQ-zKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1459,7 +1456,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBt-gK-oKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4297" y="-265"/>
+            <point key="canvasLocation" x="-2268" y="-265"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="TwJ-fL-lbL">
@@ -1469,8 +1466,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qNr-UL-ZyC">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Or Create Account"/>
+                            <connections>
+                                <segue destination="nM5-N3-eVF" kind="popoverPresentation" popoverAnchorView="qNr-UL-ZyC" id="wja-bc-fc8">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </button>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sGa-Sb-BaC">
-                            <rect key="frame" x="0.0" y="141" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="150" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Forgot Password?"/>
                             <connections>
@@ -1481,7 +1488,7 @@
                             <tableViewSection id="vin-fp-ybo">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="N1A-T0-Ktv">
-                                        <rect key="frame" x="0.0" y="35" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N1A-T0-Ktv" id="tIA-IP-eLl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1503,7 +1510,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6W1-fa-0g6">
-                                        <rect key="frame" x="0.0" y="79" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6W1-fa-0g6" id="mqW-Re-7Fd">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1533,11 +1540,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sign In" id="Zak-m7-SuX">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="4K9-jM-vM6">
-                            <connections>
-                                <action selector="cancelPressed:" destination="1sn-LL-Udm" id="KJQ-KW-SsS"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Sign In" style="done" id="VVH-F2-KMV">
                             <connections>
                                 <action selector="signInPressed:" destination="1sn-LL-Udm" id="p76-Yr-uZx"/>
@@ -1551,7 +1553,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhi-WY-SOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2083" y="-265"/>
+            <point key="canvasLocation" x="-4126" y="-265"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IAU-ob-EKI">
@@ -1569,7 +1571,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tha-Lc-Lvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2841" y="-265"/>
+            <point key="canvasLocation" x="-5023" y="-265"/>
         </scene>
         <!--Expanded Review Table View Controller-->
         <scene sceneID="bnP-Mv-qH1">
@@ -1680,11 +1682,11 @@
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DtX-qp-0oM"/>
-        <segue reference="ajz-Fk-wmt"/>
+        <segue reference="m0R-vf-5JF"/>
+        <segue reference="C6q-cU-QrV"/>
         <segue reference="P5H-yz-H6Q"/>
-        <segue reference="RCH-s0-PH4"/>
+        <segue reference="gCB-a4-oA6"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="6Ny-WO-T4H"/>
+        <segue reference="yQa-Xr-4Li"/>
     </inferredMetricsTieBreakers>
 </document>

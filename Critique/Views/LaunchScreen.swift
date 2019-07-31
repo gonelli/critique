@@ -39,7 +39,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     }
     
     func spin1() {
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.Popcorn.transform = CGAffineTransform(rotationAngle:  CGFloat.pi / -8)
             self.Popcorn.transform = CGAffineTransform(rotationAngle:  CGFloat.pi / -3)
             self.view.layoutIfNeeded()
@@ -51,7 +51,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     
     func spin2() {
         UIView.animate(
-            withDuration: 0.3,
+            withDuration: 0.2,
             animations: {
                 self.Popcorn.transform =
                     self.Popcorn.transform.rotated(by: CGFloat(Double.pi / 3))
@@ -65,7 +65,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     
     func moveName() {
         UIView.animate(
-            withDuration: 0.6,
+            withDuration: 0.4,
             animations: {
                 self.CritiqueName.center.x -= self.view.center.x 
         },
@@ -80,21 +80,21 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
         let distanceToMove = self.view.center.x - self.Popcorn.center.x
         
         UIView.animate(
-            withDuration: 0.6,
+            withDuration: 0.4,
             animations: {
                 self.Popcorn.center.x += distanceToMove
         }
         )
         
         UIView.animate(
-            withDuration: 0.6,
+            withDuration: 0.4,
             animations: {
                 self.CqInitials.center.x += distanceToMove
         }
         )
         
         UIView.animate(
-            withDuration: 0.7,
+            withDuration: 0.5,
             animations: {
                 self.NameHider.center.x += distanceToMove
         }
@@ -103,25 +103,25 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     
     func zoomPopcorn() {
         UIView.animate(
-            withDuration: 0.10,
+            withDuration: 0.08,
             delay: 0.0,
             options: .curveEaseIn,
             animations: {
                 self.Popcorn.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8) // Scale your image
             }) { finished in
-                UIView.animate(withDuration: 0.10, animations: {
+                UIView.animate(withDuration: 0.08, animations: {
                 self.Popcorn.transform = CGAffineTransform.identity
             })
         }
         
         UIView.animate(
-            withDuration: 0.10,
+            withDuration: 0.08,
             delay: 0.0,
             options: .curveEaseIn,
             animations: {
                 self.CqInitials.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8) // Scale your image
         }) { finished in
-                UIView.animate(withDuration: 0.10, animations: {
+                UIView.animate(withDuration: 0.08, animations: {
                 self.CqInitials.transform = CGAffineTransform.identity
                 }, completion: {finished in
                     if (!self.loggedIn) {

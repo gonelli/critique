@@ -58,10 +58,9 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
                         client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
                         Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
                     }
-                    self.dismiss(animated: true, completion: {
-                        // code for refreshing on sign in
-//                        let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
-//                        parent.getReviews()
+
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: {
+                        //                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
                         let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
                         parent.goToFeed()
                     })
@@ -84,6 +83,10 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

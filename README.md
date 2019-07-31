@@ -39,13 +39,15 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 ## Things to fix:
 
-- Sign up and Login screen orders
-- Segue from expanded review to profile
-- Add own reviews to Feed
-- Night mode for Discovery
+- ~~Sign up and Login screen orders~~
+- ~~Segue from expanded review to profile~~
+- ~~Add own reviews to Feed~~
+- ~~Night mode for Discovery~~
+- Account cells sometimes show a wrong (duplicate) review
 - QA Testing
 - Fix table view crash when quickly reloading**
 - No Internet Crash**
+- Clean up sign in / create account views and dismissals
 
 ## Notes:
 

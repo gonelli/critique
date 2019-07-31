@@ -60,11 +60,11 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    // Either get reviews for valid user or direct them to create a new account
+    // Either get reviews for valid user or direct them to sign in
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (Auth.auth().currentUser == nil) {
-            self.performSegue(withIdentifier: "toCreateAccount", sender: self)
+            self.performSegue(withIdentifier: "feedToSignInSegue", sender: self)
         }
     }
     
