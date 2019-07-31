@@ -126,7 +126,7 @@ class FeedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         cell.review = reviews[indexPath.row]
         
-        // NIGH NIGHT
+        // NIGHT NIGHT
         cell.criticLabel.mixedTextColor = mixedNightTextColor
         cell.likesLabel.mixedTextColor = mixedNightTextColor
         cell.reviewLabel.mixedTextColor = mixedNightTextColor
@@ -135,6 +135,10 @@ class FeedTableViewController: UITableViewController {
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.mixedTintColor = mixedNightTextColor
         cell.selectionStyle = .none
+        
+        if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
+            cell.mixedBackgroundColor = MixedColor(normal: 0xf3f3f3, night: 0x2c2c2c)
+        }
         
         var tap = MyTapGesture(target: self, action: #selector(self.handleTap(_:)))
         tap.imdbID = cell.review!.imdbID

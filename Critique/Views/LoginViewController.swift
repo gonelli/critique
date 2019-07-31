@@ -26,7 +26,7 @@ class LoginViewController: UITableViewController {
     @IBAction func signInPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passField.text!) { (result, error) in
             if error == nil {
-                self.view.window!.rootViewController?.dismiss(animated: true, completion: {
+                self.view.window!.rootViewController?.dismiss(animated: false, completion: {
 //                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
                     let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
                     parent.goToFeed()

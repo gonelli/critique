@@ -62,6 +62,9 @@ class MessagesListViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         snapshotListener.remove()
+        if (tableView.numberOfRows(inSection: 0) == 0) {
+            return
+        }
         for cellIndex in 0...(tableView.numberOfRows(inSection: 0)-1){
             let cell = tableView.cellForRow(at: IndexPath(row: cellIndex, section: 0)) as! ChatTableViewCell
             cell.removeListener()
