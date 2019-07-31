@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import InstantSearchClient
 
-class CreateAccountTableViewController: UITableViewController {
+class CreateAccountTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
@@ -21,6 +21,12 @@ class CreateAccountTableViewController: UITableViewController {
     var db: Firestore!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        usernameTF.delegate = self
+        emailTF.delegate = self
+        passwordTF.delegate = self
+        confirmPasswordTF.delegate = self
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
@@ -85,8 +91,20 @@ class CreateAccountTableViewController: UITableViewController {
     }
     
     // code to dismiss keyboard when user clicks on background
-    func textFieldShouldReturn(textField:UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        if (textField == usernameTF) {
+            emailTF.becomeFirstResponder()
+        }
+        else if (textField == emailTF) {
+            passwordTF.becomeFirstResponder()
+        }
+        else if (textField == passwordTF) {
+            confirmPasswordTF.becomeFirstResponder()
+        }
+        else {
+            textField.resignFirstResponder()
+            signUp(self)
+        }
         return true
     }
     

@@ -10,13 +10,17 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class LoginViewController: UITableViewController {
+class LoginViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailField.delegate = self
+        passField.delegate = self
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
@@ -70,8 +74,15 @@ class LoginViewController: UITableViewController {
     }
     
     // code to dismiss keyboard when user clicks on background
-    func textFieldShouldReturn(textField:UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        if (textField == emailField) {
+            passField.becomeFirstResponder()
+        }
+        else {
+            textField.resignFirstResponder()
+            signInPressed(self)
+        }
+        
         return true
     }
     

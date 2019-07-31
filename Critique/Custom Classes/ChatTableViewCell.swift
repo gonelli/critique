@@ -113,7 +113,7 @@ class ChatTableViewCell: UITableViewCell {
     func randomColor(seed: String) -> UIColor {
         
         var total: Int = 0
-        for u in (seed + "ZnVjayB0cnVtcCBmdXV1dXVjayB0cnVtcA").unicodeScalars {
+        for u in (seed + "ZnVjayBkb25hbGQgdHJ1bXAgLSBmdWNrIGRvbmFsZCB0cnVtcA").unicodeScalars {
             total += Int(UInt32(u))
         }
         

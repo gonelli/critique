@@ -67,7 +67,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
         UIView.animate(
             withDuration: 0.6,
             animations: {
-                self.CritiqueName.center.x -= self.view.center.x / 2
+                self.CritiqueName.center.x -= self.view.center.x 
         },
             completion:{ finished in
                 self.NameHider.isHidden = true
