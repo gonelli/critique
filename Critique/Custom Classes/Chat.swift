@@ -32,6 +32,7 @@ class Chat {
             }
         }
     }
+    var usersMessages: [[String: Any]]?
     var chatID: String
     var criticIDs: [String] = []
     var title: String = ""
@@ -85,22 +86,44 @@ class Chat {
         var messages: [MockMessage] = []
         db.collection("chats").document(chatID).getDocument() { (document, error) in
             if error == nil && Auth.auth().currentUser != nil {
-              if let raw =  document?.data()?["messages"] as? [[String: Any]] {
-                var i = 0
-                for message in raw {
-                  i += 1
-                  let text = message["body"] as! String
-                  let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
-                  let timestamp = (message["time"] as! Timestamp).dateValue()
-                  messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                if let users = document?.data()?["users"] as? [String] {
+                    var i = 0
+                    for uid in users {
+                        if let messagesByUID = document?.data()?[uid] as? [[String: Any]] {
+                            if uid == Auth.auth().currentUser!.uid {
+                                self.usersMessages = messagesByUID
+                            }
+                            for message in messagesByUID {
+                                i += 1
+                                let text = message["body"] as! String
+                                let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                                let timestamp = (message["time"] as! Timestamp).dateValue()
+                                messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                            }
+                        }
+                    }
+                    messages.sort()
+                    if messages.count > 0 {
+                        self.timestamp = messages[messages.count - 1].sentDate
+                    }
+                    self.messages = messages
+                    completion(self.messages)
                 }
-                self.messages = messages
-                if messages.count > 0 {
-//                    print("Made it here \(String(describing: self.timestamp))")
-                    self.timestamp = messages[messages.count - 1].sentDate
-                }
-                completion(self.messages)
-              }
+//              if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+//                var i = 0
+//                for message in raw {
+//                  i += 1
+//                  let text = message["body"] as! String
+//                  let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+//                  let timestamp = (message["time"] as! Timestamp).dateValue()
+//                  messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+//                }
+//                self.messages = messages
+//                if messages.count > 0 {
+//                    self.timestamp = messages[messages.count - 1].sentDate
+//                }
+//                completion(self.messages)
+//              }
             }
         }
     }

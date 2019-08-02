@@ -40,18 +40,39 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     override func viewDidAppear(_ animated: Bool) {
         snapshotListener = db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
-            if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+            if let users = document?.data()?["users"] as? [String] {
                 var messages: [MockMessage] = []
                 var i = 0
-                for message in raw {
-                    i += 1
-                    let text = message["body"] as! String
-                    let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
-                    let timestamp = (message["time"] as! Timestamp).dateValue()
-                    messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                for uid in users {
+                    if let messagesByUID = document?.data()?[uid] as? [[String: Any]] {
+                        for message in messagesByUID {
+                            i += 1
+                            let text = message["body"] as! String
+                            let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                            let timestamp = (message["time"] as! Timestamp).dateValue()
+                            messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                        }
+                    }
+                }
+                messages.sort()
+                if messages.count > 0 {
+                    self.chat!.timestamp = messages[messages.count - 1].sentDate
                 }
                 self.chat!.messages = messages
             }
+            
+//            if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+//                var messages: [MockMessage] = []
+//                var i = 0
+//                for message in raw {
+//                    i += 1
+//                    let text = message["body"] as! String
+//                    let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+//                    let timestamp = (message["time"] as! Timestamp).dateValue()
+//                    messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+//                }
+//                self.chat!.messages = messages
+//            }
             self.messagesCollectionView.reloadDataAndKeepOffset()
             self.messagesCollectionView.scrollToBottom(animated: true)
         }
@@ -219,12 +240,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     messageInputBar.inputTextView.placeholder = "Sending..."
     if let messageText = components[0] as? String {
       let message = MockMessage(text: messageText, user: current, messageId: UUID().uuidString, date: Date())
-      chat!.messages.append(message)
-      insertMessage(message)
+//      chat!.messages.append(message)
+//      insertMessage(message)
+        chat!.usersMessages?.append(message.encode())
       
-      /// !!!!!
-      
-      db.collection("chats").document(chat!.chatID).setData(["messages": encode(messages: chat!.messages)], merge: true) { (error) in
+      db.collection("chats").document(chat!.chatID).setData([Auth.auth().currentUser!.uid: chat!.usersMessages ?? []], merge: true) { (error) in
         if let error = error {
           fatalError(error.localizedDescription) // FIX
         }
@@ -245,38 +265,46 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 }
 
 extension UIColor {
-  static let primaryColor = UIColor(red:0.89, green:0.16, blue:0.08, alpha:1.0)
+    static let primaryColor = UIColor(red:0.89, green:0.16, blue:0.08, alpha:1.0)
 }
 
 struct MockUser: SenderType, Equatable {
-  var senderId: String
-  var displayName: String
+    var senderId: String
+    var displayName: String
 }
 
-struct MockMessage: MessageType {
+struct MockMessage: MessageType, Comparable {
   
-  var messageId: String
-  var sender: SenderType {
-    return user
-  }
-  var sentDate: Date
-  var kind: MessageKind
-  
-  var user: MockUser
-  
-  var text: String = ""
-  
-  private init(kind: MessageKind, user: MockUser, messageId: String, date: Date) {
-    self.kind = kind
-    self.user = user
-    self.messageId = messageId
-    self.sentDate = date
-  }
-  
-  init(text: String, user: MockUser, messageId: String, date: Date) {
-    self.init(kind: .text(text), user: user, messageId: messageId, date: date)
-    self.text = text
-  }
+    var messageId: String
+    var sender: SenderType {
+        return user
+    }
+    var sentDate: Date
+    var kind: MessageKind
+
+    var user: MockUser
+
+    var text: String = ""
+
+    private init(kind: MessageKind, user: MockUser, messageId: String, date: Date) {
+        self.kind = kind
+        self.user = user
+        self.messageId = messageId
+        self.sentDate = date
+    }
+
+    init(text: String, user: MockUser, messageId: String, date: Date) {
+        self.init(kind: .text(text), user: user, messageId: messageId, date: date)
+        self.text = text
+    }
+    
+    static func < (lhs: MockMessage, rhs: MockMessage) -> Bool {
+        return lhs.sentDate < rhs.sentDate
+    }
+    
+    static func == (lhs: MockMessage, rhs: MockMessage) -> Bool {
+        return lhs.sentDate == rhs.sentDate
+    }
   
 }
 

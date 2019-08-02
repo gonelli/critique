@@ -421,10 +421,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                             completion(true, chat)
                             print("Sync Count: \(syncCount) | Create New: \(createNew)")
                         } else if syncCount == 0 && createNew {
-                            let chatDoc = self.db.collection("chats").addDocument(data:
-                                ["messages": [],
-                                 "users": users
-                                ])
+                            var data: [String: Any] = ["messages": [], "users": users]
+                            for user in users {
+                                data[user] = []
+                            }
+                            let chatDoc = self.db.collection("chats").addDocument(data: data)
                             completion(true, chatDoc.documentID)
                         }
                     }
