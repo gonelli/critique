@@ -214,6 +214,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         else if segue.identifier == accountDM_Segue, let nextVC = segue.destination as? ChatViewController {
             nextVC.chat = Chat(sender as! String)
             nextVC.messageInputBar.becomeFirstResponder()
+            nextVC.incomingName = accountName
         }
     }
 

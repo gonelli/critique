@@ -199,12 +199,8 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         let currentMovieID = movieObject.movieData["imdbID"] as! String
         
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
-            if let following = document?.data()?["following"] as? [String] {
-                if following.count == 0 {
-                    self.followingReviews = []
-                    self.tableView.reloadData()
-                    self.tableView.refreshControl?.endRefreshing()
-                }
+            if var following = document?.data()?["following"] as? [String] {
+                following.append(Auth.auth().currentUser!.uid)
                 var criticsGotten = 0
                 for followed in following {
                     self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in

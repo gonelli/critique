@@ -90,11 +90,6 @@ class FeedTableViewController: UITableViewController {
         var usersGotten = 0
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if var following = document?.data()?["following"] as? [String] {
-                if following.count == 0 {
-                    self.reviews = []
-                    self.tableView.reloadData()
-                    self.tableView.refreshControl?.endRefreshing()
-                }
                 following.append(Auth.auth().currentUser!.uid)
                 for followed in following {
                     self.db.collection("reviews").whereField("criticID", isEqualTo: followed).getDocuments(completion: { (snapshot, _) in

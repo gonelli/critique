@@ -21,6 +21,8 @@ class ExpandedReviewTableViewController: UITableViewController {
     var deligate: UIViewController?
     var expanedReview: Review? = nil
     var movieObject: Movie?
+    var tappedCriticID: String?
+    var tappedCriticName: String?
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
@@ -45,6 +47,10 @@ class ExpandedReviewTableViewController: UITableViewController {
             })
             review.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
+                let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleExpandedTap(_:)))
+                criticTap.criticID = review.criticID
+                self.criticLabel.addGestureRecognizer(criticTap)
+                self.criticLabel.isUserInteractionEnabled = true
             })
         }
         
@@ -104,12 +110,23 @@ class ExpandedReviewTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    @objc func handleExpandedTap(_ sender: ReviewCellTapGesture? = nil) {
+        self.tappedCriticID = sender!.criticID
+        self.tappedCriticName = self.criticLabel.text!
+        performSegue(withIdentifier: "expandedCriticSegue", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Segue to Movie Info page
         if segue.identifier == "expandedMovieInfoSegue" {
             let infoVC = segue.destination as! MovieInfoViewController
             infoVC.movieTitle = self.movieLabel.text
             infoVC.movieObject = self.movieObject
+        }
+        else if segue.identifier == "expandedCriticSegue" {
+            let criticVC = segue.destination as! AccountViewController
+            criticVC.accountID = self.tappedCriticID!
+            criticVC.accountName = self.tappedCriticName!
         }
     }
 }
