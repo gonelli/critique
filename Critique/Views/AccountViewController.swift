@@ -329,16 +329,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 // Check to see if there exists a chat between these two users and ONLY these two users
                 self.chatRequest(chatGroup) { (approved, chatID) in
                     if approved {
-                        //Add chatID to all users myChats array
-                        for user in chatGroup {
-                            var userChats:[String] = []
-                            self.db.collection("users").document(user).getDocument(){ (document, error) in
-                                if error == nil, let chatDoc = document {
-                                    userChats = chatDoc.data()!["myChats"] as! [String]
-                                    if !userChats.contains(chatID!) {
-                                        userChats.append(chatID!)
-                                        self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
-                                    }
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
+                            if error == nil, let chatDoc = document {
+                                var userChats = chatDoc.data()!["myChats"] as! [String]
+                                if !userChats.contains(chatID!) {
+                                    userChats.append(chatID!)
+                                    self.db.collection("users").document(Auth.auth().currentUser!.uid).setData(["myChats": userChats], merge: true)
                                 }
                             }
                         }
