@@ -43,11 +43,15 @@ Tony Gonelli (Release 30%, Overall 25%)
 - ~~Segue from expanded review to profile~~
 - ~~Add own reviews to Feed~~
 - ~~Night mode for Discovery~~
-- Account cells sometimes show a wrong (duplicate) review
-- QA Testing
+- Sign up sign in dark mode
+- (difficult) Poster bug on bottom of account table
 - Fix table view crash when quickly reloading**
 - No Internet Crash**
 - Clean up sign in / create account views and dismissals
+- Time when you block someone in the chat table
+- Deleting chats
+ - (optional) initials for blocked, followers, search, etc.
+
 
 ## Notes:
 
