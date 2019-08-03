@@ -20,7 +20,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     @IBOutlet weak var reviewCell: UITableViewCell!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
-  @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var likesLabel: UILabel!
   
     var deligate: UIViewController?
     var expanedReview: Review? = nil
@@ -134,7 +134,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return max(reviewTextView.contentSize.height + 125, posterImage.frame.height + posterImage.frame.minY + 10)
+        return max(reviewTextView.frame.height + self.likeButton.frame.height + 60, posterImage.frame.height + posterImage.frame.origin.y + 60)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
