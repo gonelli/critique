@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -191,8 +191,8 @@
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geE-dG-5Jl" userLabel="Timestamp">
-                                            <rect key="frame" x="334.5" y="24.5" width="33.5" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geE-dG-5Jl" userLabel="Timestamp">
+                                            <rect key="frame" x="368" y="35" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -1676,13 +1676,13 @@
         <image name="Critiquepdf" width="121" height="30"/>
         <image name="NameHider" width="197" height="40"/>
         <image name="cqwhitepdf" width="28" height="21"/>
-        <image name="dislike" width="28.5" height="28.5"/>
+        <image name="dislike" width="28" height="28"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
         <image name="icon-messages" width="27" height="26"/>
         <image name="icon-settings" width="28" height="28"/>
         <image name="imdb-30" width="53" height="30"/>
-        <image name="like" width="28.5" height="28.5"/>
+        <image name="like" width="28" height="28"/>
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
@@ -1690,7 +1690,7 @@
         <segue reference="C6q-cU-QrV"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="tPo-Pi-ziy"/>
-        <segue reference="aHn-bx-bsG"/>
+        <segue reference="QQ9-ix-apW"/>
         <segue reference="ddd-nP-DQE"/>
     </inferredMetricsTieBreakers>
 </document>
