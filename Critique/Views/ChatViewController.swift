@@ -16,8 +16,6 @@ import NightNight
 
 class ChatViewController: MessagesViewController, MessagesDataSource {
   
-  var i = 0
-    
   var db: Firestore!
   var chat: Chat? = nil
   var snapshotListener:ListenerRegistration! = nil
@@ -240,7 +238,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     // Send button activity animation
     messageInputBar.sendButton.startAnimating()
     messageInputBar.inputTextView.placeholder = "Sending..."
-    if let messageText = text as? String {
+    if let messageText = components[0] as? String {
       let message = MockMessage(text: messageText, user: current, messageId: UUID().uuidString, date: Date())
 //      chat!.messages.append(message)
 //      insertMessage(message)
@@ -249,10 +247,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
       db.collection("chats").document(chat!.chatID).setData([Auth.auth().currentUser!.uid: chat!.usersMessages ?? []], merge: true) { (error) in
         if let error = error {
           fatalError(error.localizedDescription) // FIX
-        }
-        if self.i < 100 {
-            self.i += 1
-            self.inputBar(inputBar, didPressSendButtonWith: "\(self.i)")
         }
         self.messageInputBar.sendButton.stopAnimating()
         self.messageInputBar.inputTextView.placeholder = "Text Message"
