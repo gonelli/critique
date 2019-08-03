@@ -44,7 +44,7 @@ class Review {
         else {
             if let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID ?? "")&apikey=7cc21a66") {
                 AF.request(url).responseJSON { (response) in
-                    if let json = response.result.value as? [String : Any] {
+                    if let json = try! response.result.get() as? [String : Any] {
                         self.movieData = json
                         completion(json)
                     }
