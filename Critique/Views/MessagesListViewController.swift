@@ -142,4 +142,24 @@ class MessagesListViewController: UITableViewController {
         nextVC.incomingName = (tableView.cellForRow(at: IndexPath(row: selectedRow.row, section: 0)) as! ChatTableViewCell).titleLabel.text!
     }
   }
+  
+  
+  override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+    let hide = UITableViewRowAction(style: .destructive, title: "Hide") { (action, editActionsForRowAt) in
+      let docRef = self.db.collection("users").document(Auth.auth().currentUser!.uid)
+      docRef.getDocument { (document, error) in
+        if error == nil {
+          var chats = document!.data()!["myChats"] as! [String]
+          chats.remove(at: chats.firstIndex(of: self.directMessages[editActionsForRowAt.row].chatID)!)
+          docRef.setData(["myChats": chats], merge: true)
+        }
+        else {
+          fatalError(error!.localizedDescription)
+        }
+      }
+    }
+    return [hide]
+  }
+  
+  
 }
