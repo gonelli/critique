@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 import InstantSearchClient
+import NightNight
 
 class CreateAccountTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -17,6 +18,8 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var confirmPasswordTF: UITextField!
+    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
+    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     var db: Firestore!
     override func viewDidLoad() {
@@ -31,6 +34,58 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
         initFirestore()
+        
+        // NightNight
+        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
+        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
+        usernameTF.mixedTextColor = mixedNightTextColor
+        usernameTF.mixedBackgroundColor = mixedNightBgColor
+        emailTF.mixedTextColor = mixedNightTextColor
+        emailTF.mixedBackgroundColor = mixedNightBgColor
+        passwordTF.mixedTextColor = mixedNightTextColor
+        passwordTF.mixedBackgroundColor = mixedNightBgColor
+        confirmPasswordTF.mixedTextColor = mixedNightTextColor
+        confirmPasswordTF.mixedBackgroundColor = mixedNightBgColor
+        
+        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+            NightNight.theme = .night
+        }
+        else {
+            NightNight.theme = .normal
+        }
+        
+        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
+        tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(NightNight.theme == .night) {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
+            usernameTF.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+            usernameTF.keyboardAppearance = .dark
+            emailTF.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+            emailTF.keyboardAppearance = .dark
+            
+            
+            passwordTF.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+            passwordTF.keyboardAppearance = .dark
+            confirmPasswordTF.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+            confirmPasswordTF.keyboardAppearance = .dark
+            
+        }
+        else {
+            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            usernameTF.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+            usernameTF.keyboardAppearance = .default
+            emailTF.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+            emailTF.keyboardAppearance = .default
+            passwordTF.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+            passwordTF.keyboardAppearance = .default
+            confirmPasswordTF.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+            confirmPasswordTF.keyboardAppearance = .default
+        }
     }
     
     func initFirestore() {
@@ -91,6 +146,10 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.mixedBackgroundColor = mixedNightBgColor
     }
     
     // code to dismiss keyboard when user clicks on background
