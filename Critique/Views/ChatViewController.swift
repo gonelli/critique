@@ -77,6 +77,23 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
             self.messagesCollectionView.scrollToBottom(animated: true)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if chat!.messages.count == 0 {
+            let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                if error == nil {
+                    var chats = document!.data()!["myChats"] as! [String]
+                    chats.remove(at: chats.firstIndex(of: self.chat!.chatID)!)
+                    docRef.setData(["myChats": chats], merge: true)
+                }
+                else {
+                    fatalError(error!.localizedDescription)
+                }
+            }
+        }
+    }
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
@@ -252,6 +269,23 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         self.messageInputBar.inputTextView.placeholder = "Text Message"
         self.messagesCollectionView.scrollToBottom(animated: true)
       }
+        for uid in self.chat!.criticIDs {
+            if uid != Auth.auth().currentUser!.uid {
+                let ref = db.collection("users").document(uid)
+                ref.getDocument { (document, error) in
+                    if error == nil {
+                        var chats = document!.data()!["myChats"] as! [String]
+                        if !chats.contains(self.chat!.chatID) {
+                            chats.append(self.chat!.chatID)
+                            ref.setData(["myChats": chats], merge: true)
+                        }
+                    }
+                    else {
+                        fatalError(error!.localizedDescription)
+                    }
+                }
+            }
+        }
     }
   }
   

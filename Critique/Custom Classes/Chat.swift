@@ -18,15 +18,13 @@ class Chat {
     var db: Firestore!
     var messages: [MockMessage] = [] {
         didSet {
-            for user in criticIDs {
-                var userChats:[String] = []
-                self.db.collection("users").document(user).getDocument(){ (document, error) in
-                    if error == nil, let chatDoc = document {
-                        userChats = chatDoc.data()!["myChats"] as! [String]
-                        if !userChats.contains(self.chatID) {
-                            userChats.append(self.chatID)
-                            self.db.collection("users").document(user).setData(["myChats": userChats], merge: true)
-                        }
+            var userChats:[String] = []
+            self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, error) in
+                if error == nil, let chatDoc = document {
+                    userChats = chatDoc.data()!["myChats"] as! [String]
+                    if !userChats.contains(self.chatID) {
+                        userChats.append(self.chatID)
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).setData(["myChats": userChats], merge: true)
                     }
                 }
             }
