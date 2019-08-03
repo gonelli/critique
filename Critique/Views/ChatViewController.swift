@@ -35,10 +35,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     chat?.getTitle() { title in
         self.title = title
     }
-    
   }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         snapshotListener = db.collection("chats").document(chat!.chatID).addSnapshotListener() { document, error in
             if let users = document?.data()?["users"] as? [String] {
                 var messages: [MockMessage] = []
@@ -74,8 +74,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //                self.chat!.messages = messages
 //            }
             self.messagesCollectionView.reloadDataAndKeepOffset()
-            self.messagesCollectionView.scrollToBottom(animated: true)
         }
+        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.scrollToBottom()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
