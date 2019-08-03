@@ -23,6 +23,8 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     var db: Firestore!
     var accountName = ""
     var accountID = ""
+    var tappedPosterTitle = ""
+    var tappedPosterMovieObject : Movie? = nil
     var num_following = 0
     var num_followers = 0
     var reviews: [Review] = []
@@ -182,6 +184,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountReviewCell", for: indexPath) as! FeedTableViewCell
         cell.review = self.reviews[indexPath.row]
         
+        let posterTap = ReviewCellTapGesture(target: self, action: #selector(self.handleTap(_:)))
+        posterTap.imdbID = cell.review!.imdbID
+        cell.posterImage.addGestureRecognizer(posterTap)
+        cell.posterImage.isUserInteractionEnabled = true
+
+        
         // NIGHT NIGHT
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.criticLabel.mixedTextColor = mixedNightTextColor
@@ -194,7 +202,25 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         return cell
     }
+    
+    // If movie poster is pressed, show the movie's info
+    @objc func handleTap(_ sender: ReviewCellTapGesture? = nil) {
+        // Poster tapped
+        let feedGroup = DispatchGroup()
+        feedGroup.enter()
+        var outgoingMovie = Movie(imdbId: "tt0848228")
+        
+        DispatchQueue.main.async {
+            outgoingMovie = Movie(imdbId: sender!.imdbID, outsideGroup: feedGroup, outsideGroupEntered: true)
+        }
+        feedGroup.notify(queue: .main) {
+            self.tappedPosterTitle = outgoingMovie.movieData["Title"] as! String
+            self.tappedPosterMovieObject = outgoingMovie
+            self.performSegue(withIdentifier: "accountPosterSegue", sender: self)
+        }
+    }
 
+    // accountPosterSegue
     // Segue to Following/Followers/Expanded screens
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == followersSegue {
@@ -215,6 +241,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             nextVC.chat = Chat(sender as! String)
             nextVC.messageInputBar.becomeFirstResponder()
             nextVC.incomingName = accountName
+        }
+        else if segue.identifier == "accountPosterSegue" {
+            let infoVC = segue.destination as! MovieInfoViewController
+            infoVC.movieTitle = self.tappedPosterTitle
+            infoVC.movieObject = self.tappedPosterMovieObject
         }
     }
 
