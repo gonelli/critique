@@ -39,18 +39,14 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 ## Things to fix:
 
-- ~~Sign up and Login screen orders~~
-- ~~Segue from expanded review to profile~~
-- ~~Add own reviews to Feed~~
-- ~~Night mode for Discovery~~
-- Sign up sign in dark mode
+- Deleting chats
+- Expanded review likes and dislikes
+- profile picture for blocked, followers, search, etc.
+
+Probably ignore:
 - (difficult) Poster bug on bottom of account table
 - Fix table view crash when quickly reloading**
 - No Internet Crash**
-- Clean up sign in / create account views and dismissals
-- Time when you block someone in the chat table
-- Deleting chats
- - (optional) initials for blocked, followers, search, etc.
 
 
 ## Notes:
