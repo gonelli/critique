@@ -1661,7 +1661,6 @@
                                                 <constraint firstItem="gJa-mW-Xzw" firstAttribute="top" secondItem="me1-iS-SF8" secondAttribute="top" id="Gcg-0l-Sy3"/>
                                                 <constraint firstAttribute="trailing" secondItem="gJa-mW-Xzw" secondAttribute="trailing" constant="15" id="HtK-G8-BrL"/>
                                                 <constraint firstItem="me1-iS-SF8" firstAttribute="top" secondItem="9hY-4h-3nW" secondAttribute="top" id="MVx-hl-WHi"/>
-                                                <constraint firstItem="rvi-fg-wgk" firstAttribute="leading" secondItem="C5w-Q3-9Y6" secondAttribute="leading" constant="15" id="NqA-Ie-dCW"/>
                                                 <constraint firstItem="rvi-fg-wgk" firstAttribute="centerY" secondItem="vX2-IC-Krt" secondAttribute="centerY" id="RpK-sD-IJ1"/>
                                                 <constraint firstAttribute="trailing" secondItem="lt6-b4-hvb" secondAttribute="trailing" constant="15" id="VVw-G8-lPd"/>
                                                 <constraint firstItem="kdU-nh-7O2" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rvi-fg-wgk" secondAttribute="bottom" id="aWK-Qg-44h"/>
@@ -1672,6 +1671,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="lt6-b4-hvb" secondAttribute="bottom" constant="5" id="i2k-tF-287"/>
                                                 <constraint firstAttribute="trailing" secondItem="kdU-nh-7O2" secondAttribute="trailing" constant="5" id="jmd-J5-EzZ"/>
                                                 <constraint firstItem="lt6-b4-hvb" firstAttribute="bottom" secondItem="vX2-IC-Krt" secondAttribute="bottom" id="ohl-Fg-7jm"/>
+                                                <constraint firstItem="rvi-fg-wgk" firstAttribute="leading" secondItem="C5w-Q3-9Y6" secondAttribute="leading" constant="15" id="pW0-yX-YrC"/>
                                                 <constraint firstItem="gJa-mW-Xzw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="me1-iS-SF8" secondAttribute="trailing" constant="1" id="vmR-Is-2un"/>
                                             </constraints>
                                         </tableViewCellContentView>

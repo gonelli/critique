@@ -55,6 +55,10 @@ class ExpandedReviewTableViewController: UITableViewController {
                 self.criticLabel.text = critic
                 let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleExpandedTap(_:)))
                 criticTap.criticID = review.criticID
+                if review.criticID == Auth.auth().currentUser!.uid {
+                    let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
+                    self.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
+                }
                 self.criticLabel.addGestureRecognizer(criticTap)
                 self.criticLabel.isUserInteractionEnabled = true
             })
@@ -64,7 +68,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         let newSize = reviewTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         reviewTextView.frame.size = CGSize(width: fixedWidth, height: newSize.height)
         
-        let imagePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: posterImage.frame.width, height: posterImage.frame.height - 30))
+        let imagePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: posterImage.frame.width + 10, height: posterImage.frame.height - 30))
         reviewTextView.textContainer.exclusionPaths = [imagePath]
     
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))

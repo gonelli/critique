@@ -110,6 +110,7 @@ class MessagesListViewController: UITableViewController {
             }
           })
         }
+        self.tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
       }
     }
@@ -152,6 +153,9 @@ class MessagesListViewController: UITableViewController {
           var chats = document!.data()!["myChats"] as! [String]
           chats.remove(at: chats.firstIndex(of: self.directMessages[editActionsForRowAt.row].chatID)!)
           docRef.setData(["myChats": chats], merge: true)
+            (tableView.cellForRow(at: editActionsForRowAt) as! ChatTableViewCell).removeListener()
+            self.directMessages.remove(at: editActionsForRowAt.row)
+            tableView.reloadData()
         }
         else {
           fatalError(error!.localizedDescription)
