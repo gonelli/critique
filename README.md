@@ -31,6 +31,7 @@ Tony Gonelli (Release 30%, Overall 25%)
 - Movie Info
 - Profile Page
 - Liking / Disliking
+- Launchscreen
 
 # Deviations
 
@@ -40,7 +41,6 @@ Tony Gonelli (Release 30%, Overall 25%)
 ## Things to fix:
 
 ### Less difficult
-- Nightnight change names and like scores to gray
 - Profile picture for blocked, followers, search, etc.
 - All movie search results
 - No duplicates on messages list view controller

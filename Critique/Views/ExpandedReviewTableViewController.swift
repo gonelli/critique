@@ -29,6 +29,7 @@ class ExpandedReviewTableViewController: UITableViewController {
     var tappedCriticName: String?
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
   
     var db: Firestore!
     
@@ -56,8 +57,8 @@ class ExpandedReviewTableViewController: UITableViewController {
                 let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleExpandedTap(_:)))
                 criticTap.criticID = review.criticID
                 if review.criticID == Auth.auth().currentUser!.uid {
-                    let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
-                    self.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
+                    let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
+                    self.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
                 }
                 self.criticLabel.addGestureRecognizer(criticTap)
                 self.criticLabel.isUserInteractionEnabled = true
@@ -83,10 +84,11 @@ class ExpandedReviewTableViewController: UITableViewController {
         reviewTextView.mixedBackgroundColor = mixedNightBgColor
         reviewTextView.mixedTintColor = mixedNightTextColor // borders above and below
         reviewTextView.mixedTextColor = mixedNightTextColor
-        criticLabel.mixedTextColor = mixedNightTextColor
+        criticLabel.mixedTextColor = mixedNightFadedTextColor
+        likesLabel.mixedTextColor = mixedNightFadedTextColor
         scoreLabel.mixedTextColor = mixedNightTextColor
         movieLabel.mixedTextColor = mixedNightTextColor
-      
+        
         initializeFirestore()
         let movieID = expanedReview!.imdbID ?? "0"
         let criticID = expanedReview!.criticID ?? "0"

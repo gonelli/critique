@@ -23,6 +23,7 @@ class FeedTableViewController: UITableViewController {
     let expandedReviewSegueID = "expandedReviewSegueID"
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,8 +136,8 @@ class FeedTableViewController: UITableViewController {
         cell.criticLabel.isUserInteractionEnabled = true
 
         // NIGHT NIGHT
-        cell.criticLabel.mixedTextColor = mixedNightTextColor
-        cell.likesLabel.mixedTextColor = mixedNightTextColor
+        cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
+        cell.likesLabel.mixedTextColor = mixedNightFadedTextColor
         cell.reviewLabel.mixedTextColor = mixedNightTextColor
         cell.scoreLabel.mixedTextColor = mixedNightTextColor
         cell.movieLabel.mixedTextColor = mixedNightTextColor
@@ -144,11 +145,11 @@ class FeedTableViewController: UITableViewController {
         cell.mixedTintColor = mixedNightTextColor
         cell.selectionStyle = .none
         
-        if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
-            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
+        if cell.review!.criticID == Auth.auth().currentUser!.uid {
+            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
         }
-        
+
         return cell
     }
     
