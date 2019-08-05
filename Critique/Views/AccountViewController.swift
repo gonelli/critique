@@ -60,12 +60,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Looking at own profile
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
+            self.getReviews()
+            self.getFollowNumbers()
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
                     self.navigationItem.title = self.accountName
-                    self.getReviews()
-                    self.getFollowNumbers()
                 }
                 else {
                     fatalError(error!.localizedDescription)
@@ -189,7 +189,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.posterImage.addGestureRecognizer(posterTap)
         cell.posterImage.isUserInteractionEnabled = true
 
-        
         // NIGHT NIGHT
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.criticLabel.mixedTextColor = mixedNightTextColor
@@ -201,6 +200,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Fixes account page bottom cell issue ?????????????????
+        let _ = tableView.dequeueReusableCell(withIdentifier: "accountReviewCell", for: indexPath) as! FeedTableViewCell
     }
     
     // If movie poster is pressed, show the movie's info

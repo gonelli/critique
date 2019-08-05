@@ -39,15 +39,16 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 ## Things to fix:
 
-- Deleting chats
-- Expanded review likes and dislikes
-- profile picture for blocked, followers, search, etc.
+### Less difficult
+- Nightnight change names and like scores to gray
+- Profile picture for blocked, followers, search, etc.
+- All movie search results
+- No duplicates on messages list view controller
 
-Probably ignore:
-- (difficult) Poster bug on bottom of account table
+### More difficult
+- Show first messages in chats without scrolling
 - Fix table view crash when quickly reloading**
 - No Internet Crash**
-
 
 ## Notes:
 
