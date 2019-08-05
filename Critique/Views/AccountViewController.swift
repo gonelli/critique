@@ -33,6 +33,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     let accountDM_Segue = "accountDM_Segue"
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +61,12 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Looking at own profile
         if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
             accountID = Auth.auth().currentUser!.uid
+            self.getReviews()
+            self.getFollowNumbers()
             db.collection("users").document(accountID).getDocument() { (document, error) in
                 if error == nil {
                     self.accountName = document!.data()!["name"] as! String
                     self.navigationItem.title = self.accountName
-                    self.getReviews()
-                    self.getFollowNumbers()
                 }
                 else {
                     fatalError(error!.localizedDescription)
@@ -189,18 +190,27 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.posterImage.addGestureRecognizer(posterTap)
         cell.posterImage.isUserInteractionEnabled = true
 
-        
         // NIGHT NIGHT
         cell.mixedBackgroundColor = mixedNightBgColor
-        cell.criticLabel.mixedTextColor = mixedNightTextColor
-        cell.likesLabel.mixedTextColor = mixedNightTextColor
+        cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
+        cell.likesLabel.mixedTextColor = mixedNightFadedTextColor
         cell.movieLabel.mixedTextColor = mixedNightTextColor
         cell.reviewLabel.mixedTextColor = mixedNightTextColor
         cell.reviewLabel.mixedBackgroundColor = mixedNightBgColor
         cell.scoreLabel.mixedTextColor = mixedNightTextColor
         cell.selectionStyle = .none
         
+        if cell.review!.criticID == Auth.auth().currentUser!.uid {
+            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
+            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Fixes account page bottom cell issue ?????????????????
+        let _ = tableView.dequeueReusableCell(withIdentifier: "accountReviewCell", for: indexPath) as! FeedTableViewCell
     }
     
     // If movie poster is pressed, show the movie's info
