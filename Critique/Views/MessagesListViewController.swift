@@ -44,6 +44,9 @@ class MessagesListViewController: UITableViewController {
   }
     
     override func viewWillAppear(_ animated: Bool) {
+        directMessages = []
+        tableView.reloadData()
+        getDirectMessages()
         // NightNight exception
         if (NightNight.theme == .night) {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
