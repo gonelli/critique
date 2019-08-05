@@ -74,13 +74,17 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //                self.chat!.messages = messages
 //            }
             self.messagesCollectionView.reloadDataAndKeepOffset()
+            if self.chat!.messages.count == 1 {
+                self.messagesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+            }
         }
-        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.reloadDataAndKeepOffset()
         self.messagesCollectionView.scrollToBottom()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print(chat!.messages.count)
         if chat!.messages.count == 0 {
             let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
             docRef.getDocument { (document, error) in
