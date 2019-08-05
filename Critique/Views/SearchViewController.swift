@@ -70,7 +70,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         else {
             NightNight.theme = .normal
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -260,6 +259,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Search for movie
         if segmentedControl.selectedSegmentIndex == 0 {
             self.group.enter()  // i.e. semaphore up
+            self.movieList = Array<(String, Movie)>() // Clear results page
             self.getMovieList(movieQuery: self.searchBar.text!)
             group.notify(queue: .main) { // Wait for dispatch after async
                 DispatchQueue.main.async {
@@ -401,8 +401,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     // Gets search results for a movie query using the OMDB API
-    func getMovieList(movieQuery: String) {
-        let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=" + "7cc21a66"
+    func getMovieList(movieQuery: String, page: Int = 1) {
+        let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=7cc21a66" + "&page=" + String(page)
         let allowedUrlString = unallowedUrlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         if let url = URL(string: allowedUrlString!) {
             URLSession.shared.dataTask(with: url) { data, response, error in
@@ -424,9 +424,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         }
                                         titleList.append((movie["Title"]! as! String, Movie(imdbId: movie["imdbID"] as! String)))
                                     }
-                                    self.movieList = titleList
+                                    self.movieList += titleList
                                 }
-                                self.group.leave()  // async done, i.e. sema down
+                                if let movieDict = movieNSDict as? [String: Any] {
+                                    let results: Int = Int(movieDict["totalResults"] as? String ?? String()) ?? 0
+                                    if results > page * 10 && page <= 4 {
+                                        self.getMovieList(movieQuery: movieQuery, page: page + 1)
+                                    }
+                                    else {
+                                        self.group.leave()
+                                    }
+                                }
+                                else {
+                                    self.group.leave()  // async done, i.e. sema down
+                                }
                             }
                         }
                         catch {

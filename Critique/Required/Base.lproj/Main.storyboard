@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,9 +25,8 @@
                                     <outlet property="delegate" destination="gVt-aB-NUa" id="S29-k3-inE"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wqp-I2-s6g">
-                                <rect key="frame" x="0.0" y="205" width="414" height="608"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wqp-I2-s6g">
+                                <rect key="frame" x="0.0" y="180" width="414" height="633"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResultCell" textLabel="pOf-4S-mtB" style="IBUITableViewCellStyleDefault" id="DTp-xg-AxG">
@@ -130,11 +129,15 @@
                             <constraint firstItem="O2V-u0-75k" firstAttribute="top" secondItem="2wd-IM-HfM" secondAttribute="bottom" id="Dg4-yS-y97"/>
                             <constraint firstItem="KUj-eX-Hw4" firstAttribute="leading" secondItem="Xtf-cN-SB1" secondAttribute="leading" id="DwN-0T-ijc"/>
                             <constraint firstItem="Xtf-cN-SB1" firstAttribute="bottom" secondItem="KUj-eX-Hw4" secondAttribute="bottom" id="L4B-7h-x5w"/>
+                            <constraint firstItem="Xtf-cN-SB1" firstAttribute="trailing" secondItem="Wqp-I2-s6g" secondAttribute="trailing" id="QOF-Wl-Khq"/>
                             <constraint firstItem="KUj-eX-Hw4" firstAttribute="top" secondItem="2wd-IM-HfM" secondAttribute="bottom" id="WQk-K1-wpU"/>
                             <constraint firstItem="O2V-u0-75k" firstAttribute="centerX" secondItem="Xtf-cN-SB1" secondAttribute="centerX" id="WSF-7u-MCL"/>
+                            <constraint firstItem="Wqp-I2-s6g" firstAttribute="leading" secondItem="Xtf-cN-SB1" secondAttribute="leading" id="X5F-1W-vHb"/>
                             <constraint firstItem="2wd-IM-HfM" firstAttribute="trailing" secondItem="Xtf-cN-SB1" secondAttribute="trailing" id="X6o-cN-at5"/>
                             <constraint firstItem="Xtf-cN-SB1" firstAttribute="trailing" secondItem="KUj-eX-Hw4" secondAttribute="trailing" id="nT4-Ca-y8S"/>
                             <constraint firstItem="2wd-IM-HfM" firstAttribute="top" secondItem="Xtf-cN-SB1" secondAttribute="top" id="onO-XO-xPE"/>
+                            <constraint firstItem="Wqp-I2-s6g" firstAttribute="top" secondItem="O2V-u0-75k" secondAttribute="bottom" constant="8" id="r17-3W-2PI"/>
+                            <constraint firstItem="Xtf-cN-SB1" firstAttribute="bottom" secondItem="Wqp-I2-s6g" secondAttribute="bottom" id="rEW-pf-emS"/>
                             <constraint firstItem="2wd-IM-HfM" firstAttribute="leading" secondItem="Xtf-cN-SB1" secondAttribute="leading" id="rTm-gM-eSg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xtf-cN-SB1"/>
@@ -1709,21 +1712,21 @@
         <image name="Critiquepdf" width="121" height="30"/>
         <image name="NameHider" width="197" height="40"/>
         <image name="cqwhitepdf" width="28" height="21"/>
-        <image name="dislike" width="28" height="28"/>
+        <image name="dislike" width="28.5" height="28.5"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
         <image name="icon-messages" width="27" height="26"/>
         <image name="icon-settings" width="28" height="28"/>
         <image name="imdb-30" width="53" height="30"/>
-        <image name="like" width="28" height="28"/>
+        <image name="like" width="28.5" height="28.5"/>
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="m0R-vf-5JF"/>
         <segue reference="C6q-cU-QrV"/>
         <segue reference="P5H-yz-H6Q"/>
-        <segue reference="gCB-a4-oA6"/>
+        <segue reference="6HJ-bD-fjt"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="ddd-nP-DQE"/>
+        <segue reference="8Ob-Zd-y7p"/>
     </inferredMetricsTieBreakers>
 </document>

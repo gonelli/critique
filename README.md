@@ -42,11 +42,8 @@ Tony Gonelli (Release 30%, Overall 25%)
 
 ### Less difficult
 - Profile picture for blocked, followers, search, etc.
-- All movie search results
-- No duplicates on messages list view controller
 
 ### More difficult
-- Show first messages in chats without scrolling
 - Fix table view crash when quickly reloading**
 - No Internet Crash**
 
