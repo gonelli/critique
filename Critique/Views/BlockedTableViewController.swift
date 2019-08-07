@@ -47,7 +47,7 @@ class BlockedTableViewController: UITableViewController {
                             blockList.append((document!.data()!["name"] as! String, blockedCritic))
                             criticsGotten += 1
                             if criticsGotten == blocked.count {
-                                self.blockList = blockList
+                                self.blockList = blockList.sorted(by: <)
                                 self.tableView.reloadData()
                             }
                         }

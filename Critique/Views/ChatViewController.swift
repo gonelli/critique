@@ -75,7 +75,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //                self.chat!.messages = messages
 //            }
             self.messagesCollectionView.reloadDataAndKeepOffset()
-            if self.chat!.messages.count == 1 || !self.loaded {
+            if self.chat!.messages.count != 0 && (self.chat!.messages.count == 1 || !self.loaded) {
                 self.loaded = true
                 self.messagesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                 self.messagesCollectionView.scrollToBottom(animated: true)

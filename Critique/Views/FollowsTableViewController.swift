@@ -83,7 +83,7 @@ class FollowsTableViewController: UITableViewController {
                             critics.append((snapshot?.data()?["name"] as! String, followed))
                             criticsGotten += 1
                             if criticsGotten == following.count {
-                                self.critics = critics
+                                self.critics = critics.sorted(by: <)
                                 self.tableView.reloadData()
                                 self.tableView.refreshControl?.endRefreshing()
                             }
@@ -104,7 +104,7 @@ class FollowsTableViewController: UITableViewController {
                         }
                     }
                 }
-                self.critics = critics
+                self.critics = critics.sorted(by: <)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
             }

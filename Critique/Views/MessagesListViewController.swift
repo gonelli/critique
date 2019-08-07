@@ -102,6 +102,9 @@ class MessagesListViewController: UITableViewController {
     db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
       if let myChats = document?.data()?["myChats"] as? [String] {
         var syncCount = myChats.count
+        if syncCount == 0 {
+            self.directMessages = []
+        }
         for chat in myChats {
           directMessages.append(Chat(chat) { () in
             syncCount -= 1
