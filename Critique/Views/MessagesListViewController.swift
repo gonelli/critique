@@ -74,12 +74,11 @@ class MessagesListViewController: UITableViewController {
     }
   
   @objc func refresh() {
-    if (tableView.numberOfRows(inSection: 0) == 0) {
-        return
-    }
-    for cellIndex in 0...(tableView.numberOfRows(inSection: 0)-1){
-        let cell = tableView.cellForRow(at: IndexPath(row: cellIndex, section: 0)) as! ChatTableViewCell
-        cell.removeListener()
+    if tableView.numberOfRows(inSection: 0) != 0 {
+        for cellIndex in 0...(tableView.numberOfRows(inSection: 0)-1){
+            let cell = tableView.cellForRow(at: IndexPath(row: cellIndex, section: 0)) as! ChatTableViewCell
+            cell.removeListener()
+        }
     }
     getDirectMessages()
   }
@@ -98,6 +97,7 @@ class MessagesListViewController: UITableViewController {
   
   // Fetches messages
   func getDirectMessages() {
+    print("getDMs")
     var directMessages: [Chat] = []
     db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
       if let myChats = document?.data()?["myChats"] as? [String] {
