@@ -22,7 +22,8 @@ class BlockedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeFirestore()
-        
+        self.navigationItem.title = "Blocked"
+
         // NightNight
         tableView.mixedBackgroundColor = mixedNightBgColor
         view.mixedBackgroundColor = mixedNightBgColor
