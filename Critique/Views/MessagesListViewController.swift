@@ -15,7 +15,7 @@ import NightNight
 class MessagesListViewController: UITableViewController {
   
   var db: Firestore!
-    var directMessages: [Chat] = [] {
+  var directMessages: [Chat] = [] {
     didSet {
       self.tableView.reloadData() // Reload table after reviews are fetched
     }
@@ -29,7 +29,6 @@ class MessagesListViewController: UITableViewController {
     self.title = "Messages"
     addRefreshView()
     initializeFirestore()
-    //getDirectMessages()
     
     // NightNight
     self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
@@ -58,26 +57,7 @@ class MessagesListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         snapshotListener = db.collection("users").document(Auth.auth().currentUser!.uid).addSnapshotListener() { document, error in
-            if error == nil {
-                let chats = document!.data()!["myChats"] as! [String]
-                if chats.count < self.directMessages.count {
-                    var i = 0
-                    for chat in self.directMessages {
-                        if !chats.contains(chat.chatID) {
-                            (self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! ChatTableViewCell).removeListener()
-                            self.directMessages.remove(at: i)
-                            self.tableView.reloadData()
-                        }
-                        i += 1
-                    }
-                }
-                else {
-                    self.refresh()
-                }
-            }
-            else {
-                fatalError(error!.localizedDescription)
-            }
+            self.refresh()
         }
     }
     
@@ -94,6 +74,13 @@ class MessagesListViewController: UITableViewController {
     }
   
   @objc func refresh() {
+    if (tableView.numberOfRows(inSection: 0) == 0) {
+        return
+    }
+    for cellIndex in 0...(tableView.numberOfRows(inSection: 0)-1){
+        let cell = tableView.cellForRow(at: IndexPath(row: cellIndex, section: 0)) as! ChatTableViewCell
+        cell.removeListener()
+    }
     getDirectMessages()
   }
   
@@ -115,32 +102,34 @@ class MessagesListViewController: UITableViewController {
     db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
       if let myChats = document?.data()?["myChats"] as? [String] {
         var syncCount = myChats.count
-        if syncCount == 0 {
-            self.directMessages = []
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
-        }
         for chat in myChats {
           directMessages.append(Chat(chat) { () in
             syncCount -= 1
             if syncCount <= 0 {
-              directMessages.sort() { (chat1, chat2) in
-                if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
-                    if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
-//                        print("again")
-                        return true
-                    }
-                }
-                return false
-              }
-              self.directMessages = directMessages
+                self.directMessages = directMessages
+                self.sortDMs()
             }
           })
         }
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
       }
     }
+  }
+    
+  func sortDMs() {
+//    print("0: \(directMessages[0].chatID), \(directMessages[1].chatID)")
+    directMessages.sort() { (chat1, chat2) in
+      if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
+        if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
+          return true
+        }
+      }
+      return false
+    }
+//    tableView.reloadData()
+//    print("1: \(directMessages[0].chatID), \(directMessages[1].chatID)")
+//    print("2: \((tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ChatTableViewCell).chat!.chatID), \((tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ChatTableViewCell).chat!.chatID)")
   }
     
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,6 +139,7 @@ class MessagesListViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
     cell.chat = directMessages[indexPath.row]
+    cell.delegate = self
     cell.setListener()
     
     // Avatars
@@ -162,6 +152,10 @@ class MessagesListViewController: UITableViewController {
     
     return cell
   }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        (cell as! ChatTableViewCell).removeListener()
+    }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let nextVC = segue.destination as! ChatViewController

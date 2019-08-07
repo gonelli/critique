@@ -18,6 +18,8 @@ class ChatTableViewCell: UITableViewCell {
     
     
     var snapshotListener:ListenerRegistration? = nil
+    var delegate:UITableViewController! = nil
+    var initialized:Bool = false
     
     var chat:Chat? {
         didSet {
@@ -96,14 +98,23 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func setListener() {
+        print("ADD LISTENER")
+        self.initialized = false
         snapshotListener = chat?.getReference().addSnapshotListener() { _, _ in
             self.chat?.refresh {
                 self.setSubtitleInfo()
+                print("Listened")
+                if self.delegate != nil && self.initialized {
+                    (self.delegate as! MessagesListViewController).sortDMs()
+                } else {
+                    self.initialized = true
+                }
             }
         }
     }
     
     func removeListener() {
+        print("REMOVE LISTENER")
         if snapshotListener != nil{
             snapshotListener!.remove()
         }
