@@ -139,22 +139,30 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
             let row = indexPath.row
             
             if segmentedControl.selectedSegmentIndex == 0 {
-                cell.textLabel?.text = movieList[row].0
+                let movieCell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath as IndexPath) as! SearchMovieImageCell
+                movieCell.titleLabel?.text = movieList[row].0
+                movieCell.posterThumbnail.image = movieList[row].1.poster
+                
+                // NightNight
+                movieCell.selectionStyle = .none
+                movieCell.mixedBackgroundColor = mixedNightBgColor
+                movieCell.titleLabel?.mixedTextColor = mixedNightTextColor
+                return movieCell
             }
             else {
-                cell.textLabel?.text = criticList[row].0
+                let criticCell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath as IndexPath) as! DiscoveryTableViewCell
+                criticCell.setCell(name: criticList[row].0, followers: 0, following: 0)
+                criticCell.followLabel.text = ""
+                
+                // NightNight
+                criticCell.selectionStyle = .none
+                criticCell.mixedBackgroundColor = mixedNightBgColor
+                criticCell.nameLabel?.mixedTextColor = mixedNightTextColor
+                return criticCell
             }
-            
-            // NightNight
-            cell.selectionStyle = .none
-            cell.mixedBackgroundColor = mixedNightBgColor
-            cell.textLabel?.mixedTextColor = mixedNightTextColor
-            
-            return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "discoveryCell", for: indexPath as IndexPath) as! DiscoveryTableViewCell

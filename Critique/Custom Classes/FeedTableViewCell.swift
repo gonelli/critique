@@ -40,7 +40,12 @@ class FeedTableViewCell: UITableViewCell {
                 self.movieLabel.text = title
             })
             review?.getPosterURL(completion: { (posterURLString) in
-                self.posterImage.kf.setImage(with: URL(string: posterURLString))
+                if (posterURLString == "N/A"){
+                    self.posterImage.image = UIImage(named: "missing")
+                }
+                else {
+                    self.posterImage.kf.setImage(with: URL(string: posterURLString))
+                }
             })
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic

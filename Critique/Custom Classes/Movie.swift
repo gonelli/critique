@@ -14,7 +14,7 @@ class Movie {
     var imdbID: String! // A unique identifier for a movie on IMDB
     var title: String = "(blank movie title)"
     var movieData: Dictionary<String, Any>!
-    var poster: UIImage = UIImage()
+    var poster: UIImage = UIImage(named: "missing")!
     var outsideGroup: DispatchGroup
     var outsideGroupEntered: Bool
     let group = DispatchGroup()

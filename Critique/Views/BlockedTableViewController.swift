@@ -86,7 +86,6 @@ class BlockedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> DiscoveryTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "blockedCell", for: indexPath) as! DiscoveryTableViewCell
-        print(blockList, blockList[indexPath.row].0)
         cell.setCell(name: blockList[indexPath.row].0, followers: 0, following: 0)
         cell.followLabel.text = ""
 

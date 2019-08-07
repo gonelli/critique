@@ -41,7 +41,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
 
-
     // Load header - movie details, synopsis, average score, etc.
     override func viewDidLoad() {
         super.viewDidLoad()
