@@ -22,6 +22,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
   var incomingName = ""
   let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
   let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    var loaded = false
   
   var current: MockUser {
     return MockUser(senderId: "\(chat?.criticIDs.firstIndex(of: Auth.auth().currentUser!.uid) ?? 0)", displayName: "todo")
@@ -74,17 +75,19 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //                self.chat!.messages = messages
 //            }
             self.messagesCollectionView.reloadDataAndKeepOffset()
-            if self.chat!.messages.count == 1 {
-                self.messagesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+            if self.chat!.messages.count == 1 || !self.loaded {
+                self.loaded = true
+                self.messagesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                self.messagesCollectionView.scrollToBottom(animated: true)
             }
         }
-        self.messagesCollectionView.reloadDataAndKeepOffset()
-        self.messagesCollectionView.scrollToBottom()
+//        self.messagesCollectionView.reloadDataAndKeepOffset()
+//        self.messagesCollectionView.scrollToBottom()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(chat!.messages.count)
+        self.loaded = false
         if chat!.messages.count == 0 {
             let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
             docRef.getDocument { (document, error) in
