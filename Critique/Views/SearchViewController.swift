@@ -52,6 +52,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.isHidden = true
         segmentedControl.isHidden = true
         self.navigationItem.title = "Discovery"
+        discoveryTableView.refreshControl = UIRefreshControl()
+        discoveryTableView.refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
         initFirestore()
         
         // NIGHT NIGHT
@@ -89,6 +91,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+    }
+    
+    @objc func refresh() {
+        getCritics()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -393,6 +399,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 self.critics = critics.sorted(by: { $0.value > $1.value })
                 self.discoveryTableView.reloadData()
+                self.discoveryTableView.refreshControl?.endRefreshing()
             }
             else {
                 fatalError(error!.localizedDescription)

@@ -58,7 +58,26 @@ class MessagesListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         snapshotListener = db.collection("users").document(Auth.auth().currentUser!.uid).addSnapshotListener() { document, error in
-            self.refresh()
+            if error == nil {
+                let chats = document!.data()!["myChats"] as! [String]
+                if chats.count < self.directMessages.count {
+                    var i = 0
+                    for chat in self.directMessages {
+                        if !chats.contains(chat.chatID) {
+                            (self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! ChatTableViewCell).removeListener()
+                            self.directMessages.remove(at: i)
+                            self.tableView.reloadData()
+                        }
+                        i += 1
+                    }
+                }
+                else {
+                    self.refresh()
+                }
+            }
+            else {
+                fatalError(error!.localizedDescription)
+            }
         }
     }
     
@@ -96,6 +115,11 @@ class MessagesListViewController: UITableViewController {
     db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
       if let myChats = document?.data()?["myChats"] as? [String] {
         var syncCount = myChats.count
+        if syncCount == 0 {
+            self.directMessages = []
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        }
         for chat in myChats {
           directMessages.append(Chat(chat) { () in
             syncCount -= 1
