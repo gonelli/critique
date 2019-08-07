@@ -111,15 +111,16 @@ class FollowsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath)
-        cell.textLabel?.text = critics[indexPath.row].0
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> DiscoveryTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath) as! DiscoveryTableViewCell
+        cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0)
+        cell.followLabel.text = ""
         
         // NightNight
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.textLabel?.mixedTextColor = mixedNightTextColor
         cell.selectionStyle = .none
-        
+        cell.mixedBackgroundColor = mixedNightBgColor
+        cell.nameLabel?.mixedTextColor = mixedNightTextColor
+
         return cell
     }
     
