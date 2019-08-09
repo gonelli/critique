@@ -140,6 +140,15 @@ class SettingsViewController: UITableViewController {
         else if (indexPath.section == 1 && indexPath.row == 0) {
             try! Auth.auth().signOut()
             (self.parent?.parent as! UITabBarController).selectedIndex = 0
+            
+            ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
+            
+            
+//
+//            if let expanded = (self.parent?.parent as! UITabBarController).selectedViewController as? ExpandedReviewTableViewController {
+//                print("EXPANED!")
+//                expanded.dismiss(animated: false, completion: nil)
+//            }
             (((self.parent?.parent as! UITabBarController).viewControllers![2] as! UINavigationController).children[0] as! AccountViewController).accountID = ""
         }
         tableView.deselectRow(at: indexPath, animated: true)

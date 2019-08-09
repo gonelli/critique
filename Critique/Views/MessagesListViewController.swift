@@ -34,7 +34,7 @@ class MessagesListViewController: UITableViewController {
         self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         tableView.mixedBackgroundColor = mixedNightBgColor
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
+        if(NightNight.theme == .night) {
             NightNight.theme = .night
         }
         else {
@@ -97,7 +97,6 @@ class MessagesListViewController: UITableViewController {
     
     // Fetches messages
     func getDirectMessages() {
-        print("getDMs")
         var directMessages: [Chat] = []
         db.collection("users").document("\(Auth.auth().currentUser!.uid)").getDocument { (document, error) in
             if let myChats = document?.data()?["myChats"] as? [String] {
@@ -114,14 +113,12 @@ class MessagesListViewController: UITableViewController {
                         }
                     })
                 }
-                //        self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
     
     func sortDMs() {
-        //    print("0: \(directMessages[0].chatID), \(directMessages[1].chatID)")
         directMessages.sort() { (chat1, chat2) in
             if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
                 if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
@@ -130,9 +127,6 @@ class MessagesListViewController: UITableViewController {
             }
             return false
         }
-        //    tableView.reloadData()
-        //    print("1: \(directMessages[0].chatID), \(directMessages[1].chatID)")
-        //    print("2: \((tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ChatTableViewCell).chat!.chatID), \((tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ChatTableViewCell).chat!.chatID)")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -144,9 +138,6 @@ class MessagesListViewController: UITableViewController {
         cell.chat = directMessages[indexPath.row]
         cell.delegate = self
         cell.setListener()
-        
-        // Avatars
-        
         
         // NightNight
         cell.mixedBackgroundColor = mixedNightBgColor
