@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A4BB77F22D134310027E606 /* ComposeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */; };
 		1A4BB78422D15E090027E606 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4BB78322D15E090027E606 /* FeedTableViewController.swift */; };
+		1ABA581E22FDE14B00E72317 /* MockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA581D22FDE14B00E72317 /* MockUser.swift */; };
+		1ABA582022FDE15600E72317 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA581F22FDE15600E72317 /* MockMessage.swift */; };
 		1ABE096122D29F1D00279752 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE096022D29F1D00279752 /* Review.swift */; };
 		1ABE096522D29F4600279752 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE096422D29F4600279752 /* Movie.swift */; };
 		1ABE096722D2A41F00279752 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE096622D2A41F00279752 /* FeedTableViewCell.swift */; };
@@ -44,6 +46,8 @@
 		15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.release.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.release.xcconfig"; sourceTree = "<group>"; };
 		1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeTableViewController.swift; sourceTree = "<group>"; };
 		1A4BB78322D15E090027E606 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		1ABA581D22FDE14B00E72317 /* MockUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUser.swift; sourceTree = "<group>"; };
+		1ABA581F22FDE15600E72317 /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		1ABE096022D29F1D00279752 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		1ABE096422D29F4600279752 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		1ABE096622D2A41F00279752 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				550A563322FB65AC0003AB07 /* SearchMovieImageCell.swift */,
 				63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */,
 				5593C84F22F13CD700A8EF44 /* ReviewCellTapGesture.swift */,
+				1ABA581D22FDE14B00E72317 /* MockUser.swift */,
+				1ABA581F22FDE15600E72317 /* MockMessage.swift */,
 			);
 			path = "Custom Classes";
 			sourceTree = "<group>";
@@ -306,6 +312,7 @@
 			files = (
 				5E3A7ABB22D7AE410015FCC7 /* FollowsTableViewController.swift in Sources */,
 				63ACB6FF22EA4C05008F6A79 /* DiscoveryTableViewCell.swift in Sources */,
+				1ABA581E22FDE14B00E72317 /* MockUser.swift in Sources */,
 				550A563422FB65AC0003AB07 /* SearchMovieImageCell.swift in Sources */,
 				55BDC16E22E0DEDB002AB3B6 /* LikeDislikeCell.swift in Sources */,
 				55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */,
@@ -318,6 +325,7 @@
 				1ABE096122D29F1D00279752 /* Review.swift in Sources */,
 				552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */,
 				1A4BB77F22D134310027E606 /* ComposeTableViewController.swift in Sources */,
+				1ABA582022FDE15600E72317 /* MockMessage.swift in Sources */,
 				1ABE096522D29F4600279752 /* Movie.swift in Sources */,
 				55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */,
 				55672C2322CBDFD7004A70A9 /* LoginViewController.swift in Sources */,
@@ -476,7 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B2LB439YX9;
+				DEVELOPMENT_TEAM = 6QX9D8LZWS;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,7 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B2LB439YX9;
+				DEVELOPMENT_TEAM = 6QX9D8LZWS;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
