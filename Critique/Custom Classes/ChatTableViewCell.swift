@@ -98,7 +98,6 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func setListener() {
-        print("ADD LISTENER")
         self.initialized = false
         snapshotListener = chat?.getReference().addSnapshotListener() { _, _ in
             self.chat?.refresh {
@@ -114,7 +113,6 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     func removeListener() {
-        print("REMOVE LISTENER")
         if snapshotListener != nil{
             snapshotListener!.remove()
         }
