@@ -18,6 +18,8 @@ class Movie {
     var outsideGroup: DispatchGroup
     var outsideGroupEntered: Bool
     let group = DispatchGroup()
+    var movieCell: SearchMovieImageCell? = nil
+//    let posterGroup = DispatchGroup()
     
     // Initialize object using the IMDB ID
     init (imdbId: String, outsideGroup: DispatchGroup = DispatchGroup(), outsideGroupEntered: Bool = false) {
@@ -30,6 +32,7 @@ class Movie {
             self.getMovieDict(imdbId: imdbId)
         }
         self.group.notify(queue: .main) {
+//            self.posterGroup.enter()
             self.getMoviePoster(photoString: (self.movieData["Poster"] as? String)!)
         }
     }
@@ -59,6 +62,11 @@ class Movie {
                         // Finally convert that Data into an image and do what you wish with it.
                         if let image = UIImage(data: imageData) {
                             self.poster = image
+                            if self.movieCell != nil {
+                                DispatchQueue.main.async {
+                                    self.movieCell?.posterThumbnail.image = image
+                                }
+                            }
                             if self.outsideGroupEntered { self.outsideGroup.leave()
                                 self.outsideGroupEntered = false
                                 

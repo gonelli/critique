@@ -145,6 +145,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let movieCell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath as IndexPath) as! SearchMovieImageCell
                 movieCell.titleLabel?.text = movieList[row].0
                 movieCell.posterThumbnail.image = movieList[row].1.poster
+                movieCell.movieObject = movieList[row].1
+                movieList[row].1.movieCell = movieCell
                 
                 // NightNight
                 movieCell.selectionStyle = .none

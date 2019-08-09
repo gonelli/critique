@@ -13,8 +13,10 @@ class SearchMovieImageCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var posterThumbnail: UIImageView!
+    var movieObject: Movie!
+    var group = DispatchGroup()
     
-    func setCell(name: String, year: String) {
+    func setCell(name: String, year: String, movie: Movie) {
         titleLabel.text = name
         yearLabel.text = "(" + year + ")"
     }
