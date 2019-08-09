@@ -56,7 +56,7 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
         
         tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
         tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,14 +113,14 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
                         client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
                         Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
                     }
-
+                    
                     self.view.window!.rootViewController?.dismiss(animated: false, completion: {
                         //                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
                         let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
                         parent.goToFeed()
                     })
                 }
-                // Error on singing up
+                    // Error on singing up
                 else {
                     let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))

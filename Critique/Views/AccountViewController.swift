@@ -73,7 +73,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
         }
-        // Looking at another critic's profile
+            // Looking at another critic's profile
         else {
             getReviews()
             getFollowNumbers()
@@ -189,7 +189,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         posterTap.imdbID = cell.review!.imdbID
         cell.posterImage.addGestureRecognizer(posterTap)
         cell.posterImage.isUserInteractionEnabled = true
-
+        
         // NIGHT NIGHT
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
@@ -229,7 +229,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.performSegue(withIdentifier: "accountPosterSegue", sender: self)
         }
     }
-
+    
     // accountPosterSegue
     // Segue to Following/Followers/Expanded screens
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -258,7 +258,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             infoVC.movieObject = self.tappedPosterMovieObject
         }
     }
-
+    
     // Generate action screen for when user clicks on options button
     @objc func accountAction() {
         let controller = UIAlertController(
@@ -308,7 +308,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         fatalError(error!.localizedDescription)
                     }
                 }
-            }
+        }
         )
         
         let unblockAction = UIAlertAction(
@@ -327,7 +327,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         fatalError(error!.localizedDescription)
                     }
                 }
-            }
+        }
         )
         
         let messageAction = UIAlertAction(
@@ -361,7 +361,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.performSegue(withIdentifier: self.accountDM_Segue, sender: targetChatID)
                     }
                 }
-            }
+        }
         )
         
         let ref = self.db.collection("users").document("\(Auth.auth().currentUser!.uid)")
@@ -382,7 +382,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         fatalError(error!.localizedDescription)
                     }
                 }
-            }
+        }
         )
         
         let unfollowAction = UIAlertAction(
@@ -401,7 +401,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                         fatalError(error!.localizedDescription)
                     }
                 }
-            }
+        }
         )
         
         let cancelAction = UIAlertAction(
@@ -472,30 +472,30 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
-//        db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
-//            var createNew = true
-//            if error == nil, let userDoc = document {
-//                var syncCount = -1*(userDoc.data()?["myChats"] as! [String]).count
-//                for chat in userDoc.data()?["myChats"] as! [String] {
-//                    self.chatExists(userList: users, chatID: chat){ (exists) in
-//                        syncCount += 1
-//                        if exists {
-//                            createNew = false
-//                            completion(false, chat)
-//                            print("Sync Count: \(syncCount) | Create New: \(createNew)")
-//                        } else if syncCount == 0 && createNew {
-//                            let chatDoc = self.db.collection("chats").addDocument(data:
-//                                ["messages": [],
-//                                 "users": users
-//                                ])
-//                            completion(true, chatDoc.documentID)
-//                        }
-//                    }
-//                }
-//            } else {
-//                completion(false, nil)
-//            }
-//        }
+        //        db.collection("users").document(Auth.auth().currentUser!.uid).getDocument(){ (document, error) in
+        //            var createNew = true
+        //            if error == nil, let userDoc = document {
+        //                var syncCount = -1*(userDoc.data()?["myChats"] as! [String]).count
+        //                for chat in userDoc.data()?["myChats"] as! [String] {
+        //                    self.chatExists(userList: users, chatID: chat){ (exists) in
+        //                        syncCount += 1
+        //                        if exists {
+        //                            createNew = false
+        //                            completion(false, chat)
+        //                            print("Sync Count: \(syncCount) | Create New: \(createNew)")
+        //                        } else if syncCount == 0 && createNew {
+        //                            let chatDoc = self.db.collection("chats").addDocument(data:
+        //                                ["messages": [],
+        //                                 "users": users
+        //                                ])
+        //                            completion(true, chatDoc.documentID)
+        //                        }
+        //                    }
+        //                }
+        //            } else {
+        //                completion(false, nil)
+        //            }
+        //        }
     }
     
     func chatExists(userList users:[String], completion: @escaping (String) -> Void) {

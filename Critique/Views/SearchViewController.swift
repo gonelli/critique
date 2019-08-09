@@ -218,7 +218,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             tableView.deselectRow(at: selectedRow, animated: true)
         }
-        // Segue to Profile page
+            // Segue to Profile page
         else if segue.identifier == criticProfileSegue {
             let profileVC = segue.destination as! AccountViewController
             let selectedRow = tableView.indexPathForSelectedRow!
@@ -259,13 +259,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
-//        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-//            self.searchBar.showsCancelButton = false
-//            self.tableView.isHidden = true
-//            self.segmentedControl.isHidden = true
-//            self.discoveryTableView.isHidden = false
-//            self.navigationItem.title = "Discovery"
-//        })
+        //        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+        //            self.searchBar.showsCancelButton = false
+        //            self.tableView.isHidden = true
+        //            self.segmentedControl.isHidden = true
+        //            self.discoveryTableView.isHidden = false
+        //            self.navigationItem.title = "Discovery"
+        //        })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -281,7 +281,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-        // Search for critic
+            // Search for critic
         else {
             if searchBar.text! != "" {
                 var criticList: [(String, String)] = []
@@ -414,7 +414,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
-
+    
     // Gets search results for a movie query using the OMDB API
     func getMovieList(movieQuery: String, page: Int = 1) {
         let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=7cc21a66" + "&page=" + String(page)
@@ -462,7 +462,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 else {
                     print("Data nil")
                 }
-            }.resume()
+                }.resume()
         }
     }
 }

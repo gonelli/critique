@@ -22,7 +22,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     var reviews: [Review] = []
     var db: Firestore!
     var loggedIn: Bool! = false
-
+    
     override func viewDidLoad() {
         if (Auth.auth().currentUser != nil) {
             self.loggedIn = true
@@ -44,8 +44,8 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
             self.Popcorn.transform = CGAffineTransform(rotationAngle:  CGFloat.pi / -3)
             self.view.layoutIfNeeded()
         },
-        completion: { finished in
-            self.spin2()
+                       completion: { finished in
+                        self.spin2()
         })
     }
     
@@ -108,8 +108,8 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
             options: .curveEaseIn,
             animations: {
                 self.Popcorn.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8) // Scale your image
-            }) { finished in
-                UIView.animate(withDuration: 0.08, animations: {
+        }) { finished in
+            UIView.animate(withDuration: 0.08, animations: {
                 self.Popcorn.transform = CGAffineTransform.identity
             })
         }
@@ -121,16 +121,16 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
             animations: {
                 self.CqInitials.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8) // Scale your image
         }) { finished in
-                UIView.animate(withDuration: 0.08, animations: {
+            UIView.animate(withDuration: 0.08, animations: {
                 self.CqInitials.transform = CGAffineTransform.identity
-                }, completion: {finished in
-                    if (!self.loggedIn) {
-                        self.performSegue(withIdentifier: "BootupLoginSegue", sender: self)
-                    }
-                    else {
-                        self.goToFeed()
-                    }})
-            }
+            }, completion: {finished in
+                if (!self.loggedIn) {
+                    self.performSegue(withIdentifier: "BootupLoginSegue", sender: self)
+                }
+                else {
+                    self.goToFeed()
+                }})
+        }
     }
     
     func goToFeed() {

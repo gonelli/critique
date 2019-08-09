@@ -12,7 +12,7 @@ import Firebase
 import Alamofire
 
 class Review {
-
+    
     var body: String!
     var score: NSNumber!
     var db: Firestore!

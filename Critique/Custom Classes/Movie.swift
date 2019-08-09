@@ -44,7 +44,7 @@ class Movie {
         // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
         let session = URLSession(configuration: .default)
         
-
+        
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
         let downloadPicTask = session.dataTask(with: pictureURL) { (data, response, error) in
             // The download has finished.
@@ -97,7 +97,7 @@ class Movie {
                 else {
                     print("Data nil")
                 }
-            }.resume()
+                }.resume()
         }
     }
 }

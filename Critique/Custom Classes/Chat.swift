@@ -107,21 +107,21 @@ class Chat {
                     self.messages = messages
                     completion(self.messages)
                 }
-//              if let raw =  document?.data()?["messages"] as? [[String: Any]] {
-//                var i = 0
-//                for message in raw {
-//                  i += 1
-//                  let text = message["body"] as! String
-//                  let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
-//                  let timestamp = (message["time"] as! Timestamp).dateValue()
-//                  messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
-//                }
-//                self.messages = messages
-//                if messages.count > 0 {
-//                    self.timestamp = messages[messages.count - 1].sentDate
-//                }
-//                completion(self.messages)
-//              }
+                //              if let raw =  document?.data()?["messages"] as? [[String: Any]] {
+                //                var i = 0
+                //                for message in raw {
+                //                  i += 1
+                //                  let text = message["body"] as! String
+                //                  let user = MockUser(senderId: "\(message["from"] as! Int)", displayName: "TODO")
+                //                  let timestamp = (message["time"] as! Timestamp).dateValue()
+                //                  messages.append(MockMessage(text: text, user: user, messageId: "\(i)", date: timestamp))
+                //                }
+                //                self.messages = messages
+                //                if messages.count > 0 {
+                //                    self.timestamp = messages[messages.count - 1].sentDate
+                //                }
+                //                completion(self.messages)
+                //              }
             }
         }
     }
@@ -138,7 +138,7 @@ class Chat {
     func getTimestamp() -> Date? {
         return timestamp
     }
-  
+    
     func refresh(completion: @escaping () -> Void) {
         getMessages(completion: {_ in completion()})
     }

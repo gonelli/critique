@@ -34,7 +34,7 @@ class FeedTableViewController: UITableViewController {
         self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
         self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
         self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
-//        self.tabBarController!.tabBar.mixedBarTintColor = MixedColor(normal: UIColor.white, night: UIColor.black) // Black tab bar
+        //        self.tabBarController!.tabBar.mixedBarTintColor = MixedColor(normal: UIColor.white, night: UIColor.black) // Black tab bar
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
             NightNight.theme = .night
         }
@@ -129,12 +129,12 @@ class FeedTableViewController: UITableViewController {
         cell.posterImage.addGestureRecognizer(posterTap)
         cell.posterImage.isUserInteractionEnabled = true
         //        cell.posterImage.addSubview(view)
-
+        
         let criticTap = ReviewCellTapGesture(target: self, action: #selector(self.handleTap(_:)))
         criticTap.criticID = cell.review!.criticID
         cell.criticLabel.addGestureRecognizer(criticTap)
         cell.criticLabel.isUserInteractionEnabled = true
-
+        
         // NIGHT NIGHT
         cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
         cell.likesLabel.mixedTextColor = mixedNightFadedTextColor
@@ -149,7 +149,7 @@ class FeedTableViewController: UITableViewController {
             let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
             cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
         }
-
+        
         return cell
     }
     
@@ -160,7 +160,7 @@ class FeedTableViewController: UITableViewController {
             let feedGroup = DispatchGroup()
             feedGroup.enter()
             var outgoingMovie = Movie(imdbId: "tt0848228")
-    
+            
             DispatchQueue.main.async {
                 outgoingMovie = Movie(imdbId: sender!.imdbID, outsideGroup: feedGroup, outsideGroupEntered: true)
             }
@@ -170,7 +170,7 @@ class FeedTableViewController: UITableViewController {
                 self.performSegue(withIdentifier: "feedPosterSegue", sender: self)
             }
         }
-        // Critic tapped
+            // Critic tapped
         else {
             self.tappedCriticID = sender!.criticID
             

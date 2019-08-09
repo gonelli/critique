@@ -139,5 +139,5 @@ class ChatTableViewCell: UITableViewCell {
         
         return UIColor(red: r, green: g, blue: b, alpha: 1)
     }
-
+    
 }

@@ -40,7 +40,7 @@ class ComposeTableViewController: UITableViewController {
         tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
         scoreTF.mixedTextColor = mixedNightTextColor
         scoreTF.mixedBackgroundColor = mixedNightBgColor
-    
+        
         reviewTV.mixedTextColor = mixedNightTextColor
         reviewTV.mixedBackgroundColor = mixedNightBgColor
         
@@ -55,7 +55,7 @@ class ComposeTableViewController: UITableViewController {
             scoreTF.attributedPlaceholder = NSAttributedString(string: "7.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
             reviewTV.keyboardAppearance = .dark
             scoreTF.keyboardAppearance = .dark
-
+            
         }
         else {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -64,10 +64,10 @@ class ComposeTableViewController: UITableViewController {
             scoreTF.keyboardAppearance = .default
         }
     }
-        
+    
     override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      scoreTF.becomeFirstResponder()
+        super.viewDidAppear(animated)
+        scoreTF.becomeFirstResponder()
     }
     
     @objc func dismissKeyboard() {
@@ -87,7 +87,7 @@ class ComposeTableViewController: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.mixedTextColor = mixedNightTextColor
     }
-
+    
     
     // Create a new review document in database after review is posted
     @IBAction func post(_ sender: Any) {
@@ -112,7 +112,7 @@ class ComposeTableViewController: UITableViewController {
                 "score" : Double(scoreTF.text!) as Any,
                 "timestamp": Date().timeIntervalSince1970 as Any
                 ])
-                navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         }
     }
 }

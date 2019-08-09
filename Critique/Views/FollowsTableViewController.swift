@@ -12,7 +12,7 @@ import FirebaseFirestore
 import NightNight
 
 class FollowsTableViewController: UITableViewController {
-  
+    
     var db: Firestore!
     var lookupType: String = "Following"
     var user: String!
@@ -43,7 +43,7 @@ class FollowsTableViewController: UITableViewController {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return critics.count
@@ -92,7 +92,7 @@ class FollowsTableViewController: UITableViewController {
                 }
             }
         }
-        // Get all critics the user is followed by
+            // Get all critics the user is followed by
         else {
             db.collection("users").getDocuments{ (snapshot, _) in
                 for critic in snapshot!.documents {
@@ -120,7 +120,7 @@ class FollowsTableViewController: UITableViewController {
         cell.selectionStyle = .none
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.nameLabel?.mixedTextColor = mixedNightTextColor
-
+        
         return cell
     }
     

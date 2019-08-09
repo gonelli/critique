@@ -40,7 +40,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     let nightTextColor = 0xdddddd
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
-
+    
     // Load header - movie details, synopsis, average score, etc.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if segmentedControl.selectedSegmentIndex == 0 {
             getReviews()
         }
@@ -111,7 +111,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
     }
-  
+    
     @objc func post() {
         performSegue(withIdentifier: "toCompose", sender: self)
     }
@@ -230,9 +230,9 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func segmentChanged(_ sender: Any) {
         refresh()
-
-    }
         
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
             return self.reviews.count
@@ -300,7 +300,7 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             self.performSegue(withIdentifier: "infoCriticSegue", sender: self)
         }
     }
-
+    
     // Segue to Compose Review screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCompose" {

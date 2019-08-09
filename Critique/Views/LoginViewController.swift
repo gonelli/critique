@@ -35,7 +35,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         emailField.mixedBackgroundColor = mixedNightBgColor
         passField.mixedTextColor = mixedNightTextColor
         passField.mixedBackgroundColor = mixedNightBgColor
-
+        
         if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
             NightNight.theme = .night
         }
@@ -78,7 +78,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                     parent.goToFeed()
                 })
             }
-            // Error while signing in
+                // Error while signing in
             else {
                 let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))

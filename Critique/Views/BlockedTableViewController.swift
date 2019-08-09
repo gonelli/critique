@@ -23,7 +23,7 @@ class BlockedTableViewController: UITableViewController {
         super.viewDidLoad()
         initializeFirestore()
         self.navigationItem.title = "Blocked"
-
+        
         // NightNight
         tableView.mixedBackgroundColor = mixedNightBgColor
         view.mixedBackgroundColor = mixedNightBgColor
@@ -89,12 +89,12 @@ class BlockedTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "blockedCell", for: indexPath) as! DiscoveryTableViewCell
         cell.setCell(name: blockList[indexPath.row].0, followers: 0, following: 0)
         cell.followLabel.text = ""
-
+        
         // NightNight
         cell.selectionStyle = .none
         cell.mixedBackgroundColor = mixedNightBgColor
         cell.nameLabel?.mixedTextColor = mixedNightTextColor
-
+        
         return cell
     }
     
@@ -112,6 +112,6 @@ class BlockedTableViewController: UITableViewController {
             fatalError("Unknown segue identifier")
         }
     }
-
+    
     
 }

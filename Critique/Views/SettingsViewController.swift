@@ -69,15 +69,15 @@ class SettingsViewController: UITableViewController {
         BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
         BlockedCell.mixedBackgroundColor = mixedNightBgColor
         BlockedCell.selectionStyle = .none
-
+        
         publicLabel.mixedTextColor = mixedNightTextColor
         PublicCell.mixedBackgroundColor = mixedNightBgColor
         PublicCell.selectionStyle = .none
-
+        
         nightModeLabel.mixedTextColor = mixedNightTextColor
         nightModeCell.mixedBackgroundColor = mixedNightBgColor
         nightModeCell.selectionStyle = .none
-
+        
         signOutCell.textLabel?.mixedTextColor = MixedColor(normal: critiqueRed, night: nightTextColor)
         signOutCell.mixedBackgroundColor = mixedNightBgColor
         
@@ -85,14 +85,14 @@ class SettingsViewController: UITableViewController {
         if NightNight.theme == .night {
             self.nightModeSwitch.setOn(true, animated: false)
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-
+            
         }
         else {
             self.nightModeSwitch.setOn(false, animated: false)
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
-        
+    
     func initializeFirestore() {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
@@ -101,50 +101,50 @@ class SettingsViewController: UITableViewController {
     
     // Take action depending on what setting the user pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      // Change Name
-      if (indexPath.section == 0 && indexPath.row == 0) {
-        let controller = UIAlertController(
-          title: "Change Name",
-          message: "Please enter a new name.",
-          preferredStyle: .alert)
-        
-        controller.addTextField(configurationHandler: {
-            (textField:UITextField!) in textField.placeholder = "New Name"
-        })
-        let confirmAction = UIAlertAction(
-            title: "Confirm",
-            style: .default,
-            handler: { (paramAction:UIAlertAction!) in
-                if let textFields = controller.textFields {
-                    let theTextFields = textFields as [UITextField]
-                    let enteredText = theTextFields[0].text!
-                    self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
-                    self.client.index(withName: "users").partialUpdateObject(["name": enteredText], withID: "\(Auth.auth().currentUser!.uid)")
-                }
+        // Change Name
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            let controller = UIAlertController(
+                title: "Change Name",
+                message: "Please enter a new name.",
+                preferredStyle: .alert)
+            
+            controller.addTextField(configurationHandler: {
+                (textField:UITextField!) in textField.placeholder = "New Name"
+            })
+            let confirmAction = UIAlertAction(
+                title: "Confirm",
+                style: .default,
+                handler: { (paramAction:UIAlertAction!) in
+                    if let textFields = controller.textFields {
+                        let theTextFields = textFields as [UITextField]
+                        let enteredText = theTextFields[0].text!
+                        self.db.collection("users").document("\(Auth.auth().currentUser!.uid)").setData([ "name": enteredText ], merge: true)
+                        self.client.index(withName: "users").partialUpdateObject(["name": enteredText], withID: "\(Auth.auth().currentUser!.uid)")
+                    }
             }
-        )
-        controller.addAction(confirmAction)
-        controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        controller.preferredAction = confirmAction
-        present(controller,animated:true,completion:nil)
-      }
-      // Blocked
-      else if (indexPath.section == 0 && indexPath.row == 1) {
-        performSegue(withIdentifier: "blockedSegue", sender: self)
-      }
-      // Account Privacy
-      else if (indexPath.section == 0 && indexPath.row == 2) {
-        changeAccountPrivacy()
-      }
-      // Sign Out
-      else if (indexPath.section == 1 && indexPath.row == 0) {
-        try! Auth.auth().signOut()
-        (self.parent?.parent as! UITabBarController).selectedIndex = 0
-        (((self.parent?.parent as! UITabBarController).viewControllers![2] as! UINavigationController).children[0] as! AccountViewController).accountID = ""
-      }
-      tableView.deselectRow(at: indexPath, animated: true)
+            )
+            controller.addAction(confirmAction)
+            controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            controller.preferredAction = confirmAction
+            present(controller,animated:true,completion:nil)
+        }
+            // Blocked
+        else if (indexPath.section == 0 && indexPath.row == 1) {
+            performSegue(withIdentifier: "blockedSegue", sender: self)
+        }
+            // Account Privacy
+        else if (indexPath.section == 0 && indexPath.row == 2) {
+            changeAccountPrivacy()
+        }
+            // Sign Out
+        else if (indexPath.section == 1 && indexPath.row == 0) {
+            try! Auth.auth().signOut()
+            (self.parent?.parent as! UITabBarController).selectedIndex = 0
+            (((self.parent?.parent as! UITabBarController).viewControllers![2] as! UINavigationController).children[0] as! AccountViewController).accountID = ""
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-  
+    
     @IBAction func publicSwitchPressed(_ sender: Any) {
         changeAccountPrivacy()
     }
