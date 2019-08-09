@@ -350,8 +350,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getCritics() {
         var critics: [String: Critic] = [:]
-        var usersBlocked: [String]!
-        var usersFollowing: [String]!
+        var usersBlocked: [String]! = []
+        var usersFollowing: [String]! = []
         var usersFollowers: [String] = []
         let userID = Auth.auth().currentUser!.uid
         db.collection("users").getDocuments { (snapshot, error) in
