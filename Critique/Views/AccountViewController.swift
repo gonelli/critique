@@ -449,6 +449,14 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             var createNew = true
             if error == nil, let snapshot = snapshot {
                 var syncCount = -1*(snapshot.documents.count)
+                if syncCount == 0 && createNew {
+                    var data: [String: Any] = ["messages": [], "users": users]
+                    for user in users {
+                        data[user] = []
+                    }
+                    let chatDoc = self.db.collection("chats").addDocument(data: data)
+                    completion(true, chatDoc.documentID)
+                }
                 for chatDoc in snapshot.documents {
                     let chat = chatDoc.documentID
                     self.chatExists(userList: users, chatID: chat){ (exists) in
