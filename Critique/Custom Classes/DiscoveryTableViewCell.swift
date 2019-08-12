@@ -16,7 +16,7 @@ class DiscoveryTableViewCell: UITableViewCell {
     @IBOutlet weak var initialLabel: UILabel!
     @IBOutlet weak var initialBGView: UIView!
     
-    func setCell(name: String, followers: Int, following: Int) {
+    func setCell(name: String, followers: Int, following: Int, uid: String) {
         nameLabel.text = name
         followLabel.text = "Followers: \(followers) Following: \(following)"
         initialLabel.text = "\(Array(name.uppercased())[0])"
@@ -30,32 +30,33 @@ class DiscoveryTableViewCell: UITableViewCell {
         initialBGView.layer.cornerRadius = initialBGView.frame.size.width/2.0
         initialBGView.clipsToBounds = true
 
-        getFirebaseImages()
+        getFirebaseImages(uid: uid)
     }
     
-    func getFirebaseImages() {
+    func getFirebaseImages(uid: String) {
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
         
-        // Create a storage reference from our storage service
-        let storageRef = storage.reference()
         var testImage = UIImage(named: "disliked")
         
         var reference: StorageReference!
-        reference = storage.reference(forURL: "gs://critique-com.appspot.com/images/missing.jpg")
+        reference = storage.reference(forURL: "gs://critique-com.appspot.com/images/\(uid).jpg")
         reference.downloadURL { (url, error) in
-            let data = NSData(contentsOf: url!)
-            testImage = UIImage(data: data! as Data)
-            
-            UIGraphicsBeginImageContext(self.initialBGView.frame.size)
-            testImage?.draw(in: self.initialBGView.bounds)
-            
-            if let image = testImage{
-                UIGraphicsEndImageContext()
-                self.initialBGView.backgroundColor = UIColor(patternImage: testImage!)
-            }else{
-                UIGraphicsEndImageContext()
-                debugPrint("Image not available")
+            if url != nil {
+                let data = NSData(contentsOf: url!)
+                testImage = UIImage(data: data! as Data)
+                
+                UIGraphicsBeginImageContext(self.initialBGView.frame.size)
+                testImage?.draw(in: self.initialBGView.bounds)
+                
+                if let image = testImage{
+                    UIGraphicsEndImageContext()
+                    self.initialBGView.backgroundColor = UIColor(patternImage: testImage!.resized(toWidth: 50)!)
+                    self.initialLabel.text = ""
+                }else{
+                    UIGraphicsEndImageContext()
+                    debugPrint("Image not available")
+                }
             }
         }
     }

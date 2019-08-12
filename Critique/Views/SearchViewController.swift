@@ -156,7 +156,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             else {
                 let criticCell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath as IndexPath) as! DiscoveryTableViewCell
-                criticCell.setCell(name: criticList[row].0, followers: 0, following: 0)
+                criticCell.setCell(name: criticList[row].0, followers: 0, following: 0, uid: criticList[row].1)
                 criticCell.followLabel.text = ""
                 
                 // NightNight
@@ -170,8 +170,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "discoveryCell", for: indexPath as IndexPath) as! DiscoveryTableViewCell
             let critic = critics[indexPath.row].1
             
-            cell.setCell(name: critic.name!, followers: critic.followers.count, following: critic.following.count)
-            
+            cell.setCell(name: critic.name!, followers: critic.followers.count, following: critic.following.count, uid: critics[indexPath.row].0)
             
             // NightNight
             cell.selectionStyle = .none

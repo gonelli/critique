@@ -13,8 +13,11 @@ import FirebaseFirestore
 import InstantSearchClient
 import NightNight
 
-class SettingsViewController: UITableViewController {
+import FirebaseStorage
+
+class SettingsViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var libraryButton: UIBarButtonItem!
     @IBOutlet var NameChangeCell: UITableViewCell!
     @IBOutlet var BlockedCell: UITableViewCell!
     @IBOutlet var PublicCell: UITableViewCell!
@@ -27,6 +30,7 @@ class SettingsViewController: UITableViewController {
     
     var db: Firestore!
     let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    let picker = UIImagePickerController()
     let critiqueRed = 0xe12b22
     let nightBgColor = 0x222222
     let nightTextColor = 0xdddddd
@@ -36,6 +40,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
+        picker.delegate = self
         
         BlockedCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         NameChangeCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -97,6 +102,57 @@ class SettingsViewController: UITableViewController {
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+    }
+    
+    @IBAction func libraryButtonPressed(_ sender: Any) {
+        // whole picture, not going to allow editing before returning
+        picker.allowsEditing = false
+        
+        // set the source to be the Photo Library
+        picker.sourceType = .photoLibrary
+        
+        picker.modalPresentationStyle = .popover
+        present(picker,animated:true,completion:nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // get the selected picture
+        var chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
+        self.uploadProfilePhoto(chosenImage: chosenImage)
+        
+        dismiss(animated:true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated:true,completion:nil)
+    }
+    
+    func uploadProfilePhoto(chosenImage: UIImage) {
+        // Data in memory
+        let data = chosenImage.pngData()!
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let riversRef = storageRef.child("images/\(Auth.auth().currentUser!.uid).jpg")
+        
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            let size = metadata.size
+            // You can also access to download URL after upload.
+            riversRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+            }
+        }
     }
     
     // Take action depending on what setting the user pressed
