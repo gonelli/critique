@@ -143,7 +143,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let dislikers = review.data()["disliked"] as! [String]
                 let imdbID = review.data()["imdbID"] as! String
                 let timestamp = review.data()["timestamp"] as! TimeInterval
-                reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: true))
             }
             self.reviews = reviews.sorted()
             self.tableView.reloadData()

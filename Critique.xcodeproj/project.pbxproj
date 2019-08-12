@@ -74,6 +74,7 @@
 		5E3A7ABA22D7AE410015FCC7 /* FollowsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsTableViewController.swift; sourceTree = "<group>"; };
 		5E74D9CE22DE5FE700A69FB4 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		5EEBBB7922E0FDD200795BCE /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		630526902301DB2400D45765 /* Critique.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Critique.entitlements; sourceTree = "<group>"; };
 		6313EEDA22E7BD79002117E0 /* Critic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Critic.swift; sourceTree = "<group>"; };
 		633F7F8B22E8C2D000F746EF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 		1ACF976322C197DC001A1B7A /* Critique */ = {
 			isa = PBXGroup;
 			children = (
+				630526902301DB2400D45765 /* Critique.entitlements */,
 				1AFF494922D11D6800E06200 /* Views */,
 				1AFF494A22D11D8C00E06200 /* Custom Classes */,
 				1AFF494B22D11DA200E06200 /* Required */,
@@ -227,6 +229,11 @@
 				TargetAttributes = {
 					1ACF976022C197DC001A1B7A = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -483,6 +490,7 @@
 			baseConfigurationReference = 6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Critique/Critique.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2LB439YX9;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";
@@ -503,6 +511,7 @@
 			baseConfigurationReference = 15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Critique/Critique.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2LB439YX9;
 				INFOPLIST_FILE = "$(SRCROOT)/Critique/Required/Info.plist";

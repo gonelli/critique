@@ -108,8 +108,15 @@ class MessagesListViewController: UITableViewController {
                     directMessages.append(Chat(chat) { () in
                         syncCount -= 1
                         if syncCount <= 0 {
+                            directMessages.sort() { (chat1, chat2) in
+                                if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
+                                    if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
+                                        return true
+                                    }
+                                }
+                                return false
+                            }
                             self.directMessages = directMessages
-                            self.sortDMs()
                         }
                     })
                 }

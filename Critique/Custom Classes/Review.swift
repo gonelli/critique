@@ -14,7 +14,7 @@ import Alamofire
 class Review {
     
     var body: String!
-    var score: NSNumber!
+    var score: Double!
     var db: Firestore!
     var imdbID: String!
     var likers: [String]!
@@ -22,15 +22,17 @@ class Review {
     var movieData: [String : Any]?
     var criticID: String!
     var timestamp: TimeInterval!
+    var timeSort: Bool!
     
-    init(imdbID: String, criticID: String, likers: [String], dislikers: [String], body: String, score: NSNumber, timestamp: TimeInterval) {
+    init(imdbID: String, criticID: String, likers: [String], dislikers: [String], body: String, score: NSNumber, timestamp: TimeInterval, timeSort: Bool) {
         self.body = body
-        self.score = score
+        self.score = Double(round(100 * (score as! Double)) / 100)
         self.imdbID = imdbID
         self.likers = likers
         self.dislikers = dislikers
         self.criticID = criticID
         self.timestamp = timestamp
+        self.timeSort = timeSort
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
@@ -77,11 +79,21 @@ class Review {
 extension Review: Comparable {
     
     static func < (lhs: Review, rhs: Review) -> Bool {
-        return lhs.timestamp > rhs.timestamp
+        if lhs.timeSort {
+            return lhs.timestamp > rhs.timestamp
+        }
+        else {
+            return (lhs.likers.count - lhs.dislikers.count) > (rhs.likers.count - rhs.dislikers.count)
+        }
     }
     
     static func == (lhs: Review, rhs: Review) -> Bool {
-        return lhs.timestamp == rhs.timestamp
+        if lhs.timeSort {
+            return lhs.timestamp == rhs.timestamp
+        }
+        else {
+            return (lhs.likers.count - lhs.dislikers.count) == (rhs.likers.count - rhs.dislikers.count)
+        }
     }
     
 }
