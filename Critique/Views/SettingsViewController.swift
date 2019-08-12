@@ -17,7 +17,7 @@ import FirebaseStorage
 
 class SettingsViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var libraryButton: UIBarButtonItem!
+    @IBOutlet weak var PhotoChangeCell: UITableViewCell!
     @IBOutlet var NameChangeCell: UITableViewCell!
     @IBOutlet var BlockedCell: UITableViewCell!
     @IBOutlet var PublicCell: UITableViewCell!
@@ -42,8 +42,9 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
         self.title = "Settings"
         picker.delegate = self
         
-        BlockedCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         NameChangeCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        PhotoChangeCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        BlockedCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         initializeFirestore()
         
@@ -70,6 +71,11 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
         NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
         NameChangeCell.mixedBackgroundColor = mixedNightBgColor
         NameChangeCell.selectionStyle = .none
+        
+        
+        PhotoChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
+        PhotoChangeCell.mixedBackgroundColor = mixedNightBgColor
+        PhotoChangeCell.selectionStyle = .none
         
         BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
         BlockedCell.mixedBackgroundColor = mixedNightBgColor
@@ -104,7 +110,7 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
         db = Firestore.firestore()
     }
     
-    @IBAction func libraryButtonPressed(_ sender: Any) {
+    func libraryButtonPressed() {
         // whole picture, not going to allow editing before returning
         picker.allowsEditing = true
         
@@ -215,13 +221,13 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
             controller.preferredAction = confirmAction
             present(controller,animated:true,completion:nil)
         }
-            // Blocked
+            // Profile Picture
         else if (indexPath.section == 0 && indexPath.row == 1) {
-            performSegue(withIdentifier: "blockedSegue", sender: self)
+            libraryButtonPressed()
         }
-            // Account Privacy
+            // Blocked
         else if (indexPath.section == 0 && indexPath.row == 2) {
-            changeAccountPrivacy()
+            performSegue(withIdentifier: "blockedSegue", sender: self)
         }
             // Sign Out
         else if (indexPath.section == 1 && indexPath.row == 0) {

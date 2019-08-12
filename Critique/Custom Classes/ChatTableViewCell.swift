@@ -140,7 +140,6 @@ class ChatTableViewCell: UITableViewCell {
         snapshotListener = chat?.getReference().addSnapshotListener() { _, _ in
             self.chat?.refresh {
                 self.setSubtitleInfo()
-                print("Listened")
                 if self.delegate != nil && self.initialized {
                     (self.delegate as! MessagesListViewController).sortDMs()
                 } else {
