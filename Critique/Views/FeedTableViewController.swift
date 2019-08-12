@@ -12,6 +12,8 @@ import FirebaseCore
 import FirebaseFirestore
 import NightNight
 
+import FirebaseStorage
+
 class FeedTableViewController: UITableViewController {
     
     var db: Firestore!

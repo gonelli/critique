@@ -11,6 +11,9 @@ import FirebaseCore
 import FirebaseFirestore
 import NightNight
 
+import Firebase
+import FirebaseStorage
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         self.window?.tintColor = UIColor.red
         let db = Firestore.firestore()
+        let storage = Storage.storage()
         return true
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class DiscoveryTableViewCell: UITableViewCell {
     
@@ -28,6 +29,35 @@ class DiscoveryTableViewCell: UITableViewCell {
         // Circles
         initialBGView.layer.cornerRadius = initialBGView.frame.size.width/2.0
         initialBGView.clipsToBounds = true
+
+        getFirebaseImages()
+    }
+    
+    func getFirebaseImages() {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        var testImage = UIImage(named: "disliked")
+        
+        var reference: StorageReference!
+        reference = storage.reference(forURL: "gs://critique-com.appspot.com/images/missing.jpg")
+        reference.downloadURL { (url, error) in
+            let data = NSData(contentsOf: url!)
+            testImage = UIImage(data: data! as Data)
+            
+            UIGraphicsBeginImageContext(self.initialBGView.frame.size)
+            testImage?.draw(in: self.initialBGView.bounds)
+            
+            if let image = testImage{
+                UIGraphicsEndImageContext()
+                self.initialBGView.backgroundColor = UIColor(patternImage: testImage!)
+            }else{
+                UIGraphicsEndImageContext()
+                debugPrint("Image not available")
+            }
+        }
     }
     
     // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb
