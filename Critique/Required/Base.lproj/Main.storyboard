@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1gZ-xt-0a6">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -836,7 +836,7 @@ IAogA
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7.8" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-Ij-Fgg">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-Ij-Fgg">
                                                     <rect key="frame" x="20" y="11" width="374" height="22"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1192,8 +1192,8 @@ IAogA
                                                 <constraint firstAttribute="height" constant="109.5" id="lJG-IY-q6i"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Black Panther" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gxi-7V-TGM">
-                                            <rect key="frame" x="104" y="16" width="242" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gxi-7V-TGM">
+                                            <rect key="frame" x="104" y="16" width="242" height="0.0"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="242" id="hJV-Jf-yfh"/>
                                             </constraints>
@@ -1201,20 +1201,20 @@ IAogA
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQl-7h-2Vd">
-                                            <rect key="frame" x="104" y="44" width="290" height="41"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQl-7h-2Vd">
+                                            <rect key="frame" x="104" y="23" width="290" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tony Stark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkk-G9-xuP">
-                                            <rect key="frame" x="104" y="98" width="69" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkk-G9-xuP">
+                                            <rect key="frame" x="104" y="109.5" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-9R-r2C">
-                                            <rect key="frame" x="354" y="15" width="40" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-9R-r2C">
+                                            <rect key="frame" x="354" y="15" width="40" height="0.0"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="QdF-tf-ZPJ"/>
                                             </constraints>
@@ -1223,7 +1223,7 @@ IAogA
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyc-qQ-mre">
-                                            <rect key="frame" x="366" y="92" width="28" height="30"/>
+                                            <rect key="frame" x="366" y="94.5" width="28" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="tCA-uy-ycu"/>
                                             </constraints>
@@ -1232,8 +1232,8 @@ IAogA
                                                 <action selector="like:" destination="cER-Cw-PhB" eventType="touchUpInside" id="GBn-hT-icY"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xu-re-xll" userLabel="Likes Label">
-                                            <rect key="frame" x="321" y="95" width="40" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xu-re-xll" userLabel="Likes Label">
+                                            <rect key="frame" x="321" y="100" width="40" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="0Kl-Za-HzQ"/>
                                             </constraints>
@@ -1242,7 +1242,7 @@ IAogA
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89v-fH-hPr">
-                                            <rect key="frame" x="288" y="92" width="28" height="30"/>
+                                            <rect key="frame" x="288" y="94.5" width="28" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="jl8-xJ-l7r"/>
                                             </constraints>
@@ -1258,6 +1258,7 @@ IAogA
                                         <constraint firstAttribute="trailing" secondItem="NQl-7h-2Vd" secondAttribute="trailing" constant="20" id="Emd-Pf-cIN"/>
                                         <constraint firstItem="Gxi-7V-TGM" firstAttribute="leading" secondItem="mcK-XO-Nye" secondAttribute="trailing" constant="15" id="Gqe-IU-XF2"/>
                                         <constraint firstItem="89v-fH-hPr" firstAttribute="centerY" secondItem="3xu-re-xll" secondAttribute="centerY" id="HSK-vr-kdJ"/>
+                                        <constraint firstItem="89v-fH-hPr" firstAttribute="bottom" secondItem="mcK-XO-Nye" secondAttribute="bottom" id="JEb-Zc-f39"/>
                                         <constraint firstItem="mcK-XO-Nye" firstAttribute="top" secondItem="jmS-H5-CLg" secondAttribute="top" constant="15" id="JlY-1S-Cko"/>
                                         <constraint firstItem="ef7-9R-r2C" firstAttribute="trailing" secondItem="jmS-H5-CLg" secondAttribute="trailingMargin" id="P4z-Hj-cK4"/>
                                         <constraint firstItem="pkk-G9-xuP" firstAttribute="leading" secondItem="mcK-XO-Nye" secondAttribute="trailing" constant="15" id="PVh-yt-RKH"/>
@@ -1266,7 +1267,6 @@ IAogA
                                         <constraint firstItem="Gxi-7V-TGM" firstAttribute="top" secondItem="jmS-H5-CLg" secondAttribute="topMargin" constant="5" id="alS-2q-EjC"/>
                                         <constraint firstItem="mcK-XO-Nye" firstAttribute="leading" secondItem="jmS-H5-CLg" secondAttribute="leading" constant="15" id="dX0-Wb-DV4"/>
                                         <constraint firstItem="cyc-qQ-mre" firstAttribute="leading" secondItem="3xu-re-xll" secondAttribute="trailing" constant="5" id="eiJ-48-3X5"/>
-                                        <constraint firstAttribute="bottom" secondItem="pkk-G9-xuP" secondAttribute="bottom" constant="23.5" id="gdT-jF-qS4"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="3xu-re-xll" secondAttribute="bottom" constant="10" id="htn-CN-WGe"/>
                                         <constraint firstItem="ef7-9R-r2C" firstAttribute="top" secondItem="mcK-XO-Nye" secondAttribute="top" id="jQy-TA-4w7"/>
                                         <constraint firstItem="pkk-G9-xuP" firstAttribute="centerY" secondItem="3xu-re-xll" secondAttribute="centerY" id="mBj-Ve-d1J"/>
@@ -1403,21 +1403,21 @@ IAogA
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WY0-ul-sbZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="139.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1P-Jd-PAJ" userLabel="Likes Label">
-                                                            <rect key="frame" x="0.0" y="70" width="96" height="0.0"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1P-Jd-PAJ" userLabel="Likes Label">
+                                                            <rect key="frame" x="0.0" y="58" width="96" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywm-O2-dXh" userLabel="Downvote Button">
-                                                            <rect key="frame" x="0.0" y="0.0" width="96" height="70"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="96" height="58"/>
                                                             <state key="normal" image="like"/>
                                                             <connections>
                                                                 <action selector="upvotePressed:" destination="2iz-DX-a9w" eventType="touchUpInside" id="ksM-1O-fAN"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph5-jT-1ss" userLabel="Upvote">
-                                                            <rect key="frame" x="0.0" y="70" width="96" height="69.5"/>
+                                                            <rect key="frame" x="0.0" y="82" width="96" height="57.5"/>
                                                             <state key="normal" image="dislike"/>
                                                             <connections>
                                                                 <action selector="downvotePressed:" destination="2iz-DX-a9w" eventType="touchUpInside" id="ThJ-T9-dmC"/>
@@ -1867,21 +1867,21 @@ IAogA
         <image name="Critiquepdf" width="121" height="30"/>
         <image name="NameHider" width="197" height="40"/>
         <image name="cqwhitepdf" width="28" height="21"/>
-        <image name="dislike" width="28.5" height="28.5"/>
+        <image name="dislike" width="28" height="28"/>
         <image name="icon-account" width="26" height="26"/>
         <image name="icon-feed" width="29" height="24"/>
         <image name="icon-messages" width="27" height="26"/>
         <image name="icon-settings" width="28" height="28"/>
         <image name="imdb-30" width="53" height="30"/>
-        <image name="like" width="28.5" height="28.5"/>
+        <image name="like" width="28" height="28"/>
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaD-db-S69"/>
+        <segue reference="m0R-vf-5JF"/>
         <segue reference="C6q-cU-QrV"/>
         <segue reference="P5H-yz-H6Q"/>
-        <segue reference="6HJ-bD-fjt"/>
-        <segue reference="QQ9-ix-apW"/>
-        <segue reference="8Ob-Zd-y7p"/>
+        <segue reference="RCH-s0-PH4"/>
+        <segue reference="aHn-bx-bsG"/>
+        <segue reference="yQa-Xr-4Li"/>
     </inferredMetricsTieBreakers>
 </document>

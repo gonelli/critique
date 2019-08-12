@@ -52,14 +52,14 @@ class ComposeTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         if(NightNight.theme == .night) {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-            scoreTF.attributedPlaceholder = NSAttributedString(string: "7.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
+            scoreTF.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
             reviewTV.keyboardAppearance = .dark
             scoreTF.keyboardAppearance = .dark
             
         }
         else {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            scoreTF.attributedPlaceholder = NSAttributedString(string: "7.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
+            scoreTF.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
             reviewTV.keyboardAppearance = .default
             scoreTF.keyboardAppearance = .default
         }

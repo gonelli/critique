@@ -21,6 +21,7 @@ class Review {
     var dislikers: [String]!
     var movieData: [String : Any]?
     var criticID: String!
+    var criticName: String?
     var timestamp: TimeInterval!
     var timeSort: Bool!
     
@@ -40,7 +41,7 @@ class Review {
     
     // Fetch movie info in JSON format given an IMDB id
     func getMovieData(completion: @escaping ([String : Any]) -> Void) {
-        if let movieData = movieData {
+        if let movieData = self.movieData {
             completion(movieData)
         }
         else {
@@ -68,8 +69,14 @@ class Review {
     }
     
     func getCritic(completion: @escaping (String) -> Void) {
-        db.collection("users").document(self.criticID).getDocument { (snapshot, error) in
-            completion(snapshot?.data()!["name"] as! String)
+        if let criticName = self.criticName {
+            completion(criticName)
+        }
+        else {
+            db.collection("users").document(self.criticID).getDocument { (snapshot, error) in
+                self.criticName = snapshot?.data()!["name"] as! String
+                completion(self.criticName!)
+            }
         }
     }
     

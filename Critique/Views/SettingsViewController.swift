@@ -140,8 +140,8 @@ class SettingsViewController: UITableViewController {
         else if (indexPath.section == 1 && indexPath.row == 0) {
             try! Auth.auth().signOut()
             (self.parent?.parent as! UITabBarController).selectedIndex = 0
-            
-            ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+//            ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
             
             
 //

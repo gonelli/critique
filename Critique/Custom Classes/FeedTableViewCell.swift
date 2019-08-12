@@ -50,32 +50,48 @@ class FeedTableViewCell: UITableViewCell {
             review?.getCritic(completion: { (critic) in
                 self.criticLabel.text = critic
             })
-            let movieID = review!.imdbID ?? "0"
-            let criticID = review!.criticID ?? "0"
-            let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
-            ref.getDocument { (document, error) in
-                if error == nil {
-                    let liked = document!.data()!["liked"] as! [String]
-                    let disliked = document!.data()!["disliked"] as! [String]
-                    self.likesLabel.text = "\(liked.count - disliked.count)"
-                    let userID = Auth.auth().currentUser?.uid
-                    if liked.contains(userID ?? "") {
-                        self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
-                    } else if disliked.contains(userID ?? "") {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
-                    } else {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
-                    }
-                } else {
-                    fatalError(error!.localizedDescription)
-                }
+            
+//            let movieID = review!.imdbID ?? "0"
+//            let criticID = review!.criticID ?? "0"
+//            let ref = self.db.collection("reviews").document(criticID + "_" + movieID)
+//            ref.getDocument { (document, error) in
+//                if error == nil {
+//                    let liked = document!.data()!["liked"] as! [String]
+//                    let disliked = document!.data()!["disliked"] as! [String]
+//                    self.likesLabel.text = "\(liked.count - disliked.count)"
+//                    let userID = Auth.auth().currentUser?.uid
+//                    if liked.contains(userID ?? "") {
+//                        self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    } else if disliked.contains(userID ?? "") {
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
+//                    } else {
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    }
+//                } else {
+//                    fatalError(error!.localizedDescription)
+//                }
+//            }
+            
+            let liked = review!.likers!
+            let disliked = review!.dislikers!
+            self.likesLabel.text = "\(liked.count - disliked.count)"
+            let userID = Auth.auth().currentUser?.uid
+            if liked.contains(userID ?? "") {
+                self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
+                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+            } else if disliked.contains(userID ?? "") {
+                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+                self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
+            } else {
+                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
             }
+
         }
     }
-    
     
     func initializeFirestore() {
         let settings = FirestoreSettings()
