@@ -119,7 +119,7 @@ class FollowsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> DiscoveryTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath) as! DiscoveryTableViewCell
-        cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0)
+        cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0, uid: critics[indexPath.row].1)
         cell.followLabel.text = ""
         
         // NightNight

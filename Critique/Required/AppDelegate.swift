@@ -11,6 +11,9 @@ import FirebaseCore
 import FirebaseFirestore
 import NightNight
 
+import Firebase
+import FirebaseStorage
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,7 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         self.window?.tintColor = UIColor.red
         let db = Firestore.firestore()
+        let storage = Storage.storage()
         return true
+    }
+}
+
+extension UIImage {
+    func resized(toWidth width: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
 

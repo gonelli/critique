@@ -558,8 +558,25 @@ IAogA
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlockedCell" textLabel="091-CL-5Sd" style="IBUITableViewCellStyleDefault" id="hkO-kg-mLV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoChangeCell" textLabel="z6u-p7-e7r" style="IBUITableViewCellStyleDefault" id="5IK-Er-Dw3">
                                         <rect key="frame" x="0.0" y="79" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5IK-Er-Dw3" id="aTV-8j-TKh">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Change Profile Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z6u-p7-e7r">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlockedCell" textLabel="091-CL-5Sd" style="IBUITableViewCellStyleDefault" id="hkO-kg-mLV">
+                                        <rect key="frame" x="0.0" y="123" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hkO-kg-mLV" id="e1w-8S-k8f">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -576,7 +593,7 @@ IAogA
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PublicCell" id="qPg-CB-foU">
-                                        <rect key="frame" x="0.0" y="123" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="167" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qPg-CB-foU" id="Wuc-4N-AN8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -603,7 +620,7 @@ IAogA
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="nightModeCell" id="5T4-IC-r1U" userLabel="NightModeCell">
-                                        <rect key="frame" x="0.0" y="167" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="211" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5T4-IC-r1U" id="GfB-OE-L3q">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -634,7 +651,7 @@ IAogA
                             <tableViewSection id="yWM-At-VOv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="signOutCell" id="uXq-Ya-SID" userLabel="Signout Cell">
-                                        <rect key="frame" x="0.0" y="247" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="291" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uXq-Ya-SID" id="d1g-Ao-100">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -667,6 +684,7 @@ IAogA
                     <connections>
                         <outlet property="BlockedCell" destination="hkO-kg-mLV" id="7x6-SC-SiI"/>
                         <outlet property="NameChangeCell" destination="hIu-Wr-T1d" id="qBu-xW-Sdy"/>
+                        <outlet property="PhotoChangeCell" destination="5IK-Er-Dw3" id="gcb-jz-7Av"/>
                         <outlet property="PublicCell" destination="qPg-CB-foU" id="DPM-lW-tOH"/>
                         <outlet property="nightModeCell" destination="5T4-IC-r1U" id="AEG-50-nYL"/>
                         <outlet property="nightModeLabel" destination="YGT-jU-s70" id="0aU-X6-ivO"/>
@@ -1877,11 +1895,11 @@ IAogA
         <image name="nocqpdf" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaD-db-S69"/>
+        <segue reference="m0R-vf-5JF"/>
         <segue reference="C6q-cU-QrV"/>
         <segue reference="P5H-yz-H6Q"/>
         <segue reference="6HJ-bD-fjt"/>
         <segue reference="QQ9-ix-apW"/>
-        <segue reference="8Ob-Zd-y7p"/>
+        <segue reference="Br5-Dr-wkF"/>
     </inferredMetricsTieBreakers>
 </document>
