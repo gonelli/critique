@@ -51,7 +51,7 @@ class DiscoveryTableViewCell: UITableViewCell {
                 
                 if let image = testImage{
                     UIGraphicsEndImageContext()
-                    self.initialBGView.backgroundColor = UIColor(patternImage: testImage!.resized(toWidth: 50)!)
+                    self.initialBGView.backgroundColor = UIColor(patternImage: testImage!)
                     self.initialLabel.text = ""
                 }else{
                     UIGraphicsEndImageContext()

@@ -106,7 +106,7 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
     
     @IBAction func libraryButtonPressed(_ sender: Any) {
         // whole picture, not going to allow editing before returning
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         
         // set the source to be the Photo Library
         picker.sourceType = .photoLibrary
@@ -119,9 +119,40 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
         // get the selected picture
         var chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
-        self.uploadProfilePhoto(chosenImage: chosenImage)
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        {
+            chosenImage = img
+            
+        }
+        else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            chosenImage = img
+        }
+
+        
+        self.uploadProfilePhoto(chosenImage: squareImageFromImage(image: chosenImage).resized(toWidth: 50)!)
         
         dismiss(animated:true, completion: nil)
+    }
+    
+    func squareImageFromImage(image: UIImage) -> UIImage{
+        let maxSize = max(image.size.width,image.size.height)
+        let squareSize = CGSize.init(width: maxSize, height: maxSize)
+        
+        let dx = (maxSize - image.size.width) / 2.0
+        let dy = (maxSize - image.size.height) / 2.0
+        UIGraphicsBeginImageContext(squareSize)
+        var rect = CGRect.init(x: 0, y: 0, width: maxSize, height: maxSize)
+        
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(UIColor.clear.cgColor)
+        context?.fill(rect)
+        
+        rect = rect.insetBy(dx: dx, dy: dy)
+        image.draw(in: rect, blendMode: CGBlendMode.normal, alpha: 1.0)
+        let squareImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return squareImage!
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

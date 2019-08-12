@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -15,7 +16,6 @@ class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet var initialLabel: UILabel!
     @IBOutlet var initialBgView: UIView!
-    
     
     var snapshotListener:ListenerRegistration? = nil
     var delegate:UITableViewController! = nil
@@ -50,6 +50,44 @@ class ChatTableViewCell: UITableViewCell {
             // Circles
             initialBgView.layer.cornerRadius = initialBgView.frame.size.width/2.0
             initialBgView.clipsToBounds = true
+            chat!.getUserIDs(){ (ids) in
+                var theirUid = ""
+                if ids[0] == Auth.auth().currentUser?.uid {
+                    self.getFirebaseImages(uid: ids[1])
+                }
+                else {
+                    self.getFirebaseImages(uid: ids[0])
+                }
+                
+            }
+        }
+    }
+    
+    func getFirebaseImages(uid: String) {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        
+        var testImage = UIImage(named: "disliked")
+        
+        var reference = storage.reference(forURL: "gs://critique-com.appspot.com/images/\(uid).jpg")
+        
+        reference.downloadURL { (url, error) in
+            if url != nil {
+                let data = NSData(contentsOf: url!)
+                testImage = UIImage(data: data! as Data)
+                
+                UIGraphicsBeginImageContext(self.initialBgView.frame.size)
+                testImage?.draw(in: self.initialBgView.bounds)
+                
+                if let image = testImage{
+                    UIGraphicsEndImageContext()
+                    self.initialBgView.backgroundColor = UIColor(patternImage: testImage!)
+                    self.initialLabel.text = ""
+                }else{
+                    UIGraphicsEndImageContext()
+                    debugPrint("Image not available")
+                }
+            }
         }
     }
     
