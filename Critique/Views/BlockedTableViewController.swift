@@ -37,8 +37,10 @@ class BlockedTableViewController: UITableViewController {
                 var blockList: [(String, String)] = []
                 let blocked = document!.data()!["blocked"] as! [String]
                 if blocked.count == 0 {
+                    self.tableView.isUserInteractionEnabled = false
                     self.blockList = []
                     self.tableView.reloadData()
+                    self.tableView.isUserInteractionEnabled = true
                 }
                 var criticsGotten = 0
                 for blockedCritic in blocked {
@@ -47,8 +49,10 @@ class BlockedTableViewController: UITableViewController {
                             blockList.append((document!.data()!["name"] as! String, blockedCritic))
                             criticsGotten += 1
                             if criticsGotten == blocked.count {
+                                self.tableView.isUserInteractionEnabled = false
                                 self.blockList = blockList.sorted(by: <)
                                 self.tableView.reloadData()
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
                         else {

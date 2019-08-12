@@ -143,9 +143,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             //TODO: custom MovieInfoCell, not FeedTableViewCell
             if (snapshot!.documents.count == 0) {
                 self.scoreLabel.text = "No scores"
+                self.tableView.isUserInteractionEnabled = false
                 self.reviews = []
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
+                self.tableView.isUserInteractionEnabled = true
             }
             var reviewsGotten = 0
             for review in snapshot!.documents {
@@ -174,9 +176,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                                 }
                                 reviewsGotten += 1
                                 if reviewsGotten == snapshot!.documents.count {
+                                    self.tableView.isUserInteractionEnabled = false
                                     self.reviews = reviews.sorted()
                                     self.tableView.reloadData()
                                     self.tableView.refreshControl?.endRefreshing()
+                                    self.tableView.isUserInteractionEnabled = true
                                 }
                             }
                             else {
@@ -218,9 +222,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                         }
                         criticsGotten += 1
                         if criticsGotten == following.count {
+                            self.tableView.isUserInteractionEnabled = false
                             self.followingReviews = followingReviews.sorted()
                             self.tableView.reloadData()
                             self.tableView.refreshControl?.endRefreshing()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                     })
                 }

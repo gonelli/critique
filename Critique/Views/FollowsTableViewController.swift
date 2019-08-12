@@ -73,9 +73,11 @@ class FollowsTableViewController: UITableViewController {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
                     if following.count == 0 {
+                        self.tableView.isUserInteractionEnabled = false
                         self.critics = []
                         self.tableView.reloadData()
                         self.tableView.refreshControl?.endRefreshing()
+                        self.tableView.isUserInteractionEnabled = true
                     }
                     var criticsGotten = 0
                     for followed in following {
@@ -83,9 +85,11 @@ class FollowsTableViewController: UITableViewController {
                             critics.append((snapshot?.data()?["name"] as! String, followed))
                             criticsGotten += 1
                             if criticsGotten == following.count {
+                                self.tableView.isUserInteractionEnabled = false
                                 self.critics = critics.sorted(by: <)
                                 self.tableView.reloadData()
                                 self.tableView.refreshControl?.endRefreshing()
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
                     }
@@ -104,9 +108,11 @@ class FollowsTableViewController: UITableViewController {
                         }
                     }
                 }
+                self.tableView.isUserInteractionEnabled = false
                 self.critics = critics.sorted(by: <)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
+                self.tableView.isUserInteractionEnabled = true
             }
         }
     }

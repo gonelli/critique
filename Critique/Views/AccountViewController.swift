@@ -145,9 +145,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let timestamp = review.data()["timestamp"] as! TimeInterval
                 reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: true))
             }
+            self.tableView.isUserInteractionEnabled = false
             self.reviews = reviews.sorted()
             self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
+            self.tableView.isUserInteractionEnabled = true
         })
     }
     

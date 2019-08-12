@@ -200,12 +200,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Reset search results and reload on a segment change
     @IBAction func segmentChanged(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
+            self.tableView.isUserInteractionEnabled = false
             criticList = []
             tableView.reloadData()
+            self.tableView.isUserInteractionEnabled = true
         }
         else {
+            self.tableView.isUserInteractionEnabled = false
             movieList = Array<(String, Movie)>()
             tableView.reloadData()
+            self.tableView.isUserInteractionEnabled = true
         }
         searchBarSearchButtonClicked(searchBar)
     }
@@ -291,8 +295,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if error == nil {
                         guard let hits = content!["hits"] as? [[String: AnyObject]] else { fatalError("Hits is not a json") }
                         if hits.count == 0 {
+                            self.tableView.isUserInteractionEnabled = false
                             self.criticList = []
                             self.tableView.reloadData()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                         var hitsSearched = 0
                         for hit in hits {
@@ -307,8 +313,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         }
                                         hitsSearched += 1
                                         if hitsSearched == hits.count {
+                                            self.tableView.isUserInteractionEnabled = false
                                             self.criticList = criticList
                                             self.tableView.reloadData()
+                                            self.tableView.isUserInteractionEnabled = true
                                         }
                                     }
                                 }
@@ -344,8 +352,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             else {
+                self.tableView.isUserInteractionEnabled = false
                 self.criticList = []
                 self.tableView.reloadData()
+                self.tableView.isUserInteractionEnabled = true
             }
         }
     }
@@ -407,9 +417,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 for followedByUserID in usersFollowing {
                     critics[followedByUserID] = nil
                 }
+                self.discoveryTableView.isUserInteractionEnabled = false
                 self.critics = critics.sorted(by: { $0.value > $1.value })
                 self.discoveryTableView.reloadData()
                 self.discoveryTableView.refreshControl?.endRefreshing()
+                self.discoveryTableView.isUserInteractionEnabled = true
             }
             else {
                 fatalError(error!.localizedDescription)

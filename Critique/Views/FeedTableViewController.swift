@@ -106,9 +106,11 @@ class FeedTableViewController: UITableViewController {
                         }
                         usersGotten += 1
                         if usersGotten == following.count {
+                            self.tableView.isUserInteractionEnabled = false
                             self.reviews = reviews.sorted()
                             self.tableView.reloadData()
                             self.tableView.refreshControl?.endRefreshing()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                     })
                 }
