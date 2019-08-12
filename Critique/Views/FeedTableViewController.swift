@@ -102,13 +102,15 @@ class FeedTableViewController: UITableViewController {
                             let likers = review.data()["liked"] as! [String]
                             let dislikers = review.data()["disliked"] as! [String]
                             let timestamp = review.data()["timestamp"] as! TimeInterval
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: true))
                         }
                         usersGotten += 1
                         if usersGotten == following.count {
+                            self.tableView.isUserInteractionEnabled = false
                             self.reviews = reviews.sorted()
                             self.tableView.reloadData()
                             self.tableView.refreshControl?.endRefreshing()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                     })
                 }
@@ -118,6 +120,11 @@ class FeedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviews.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Fixes account page bottom cell issue ?????????????????
+        let _ = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,7 +152,7 @@ class FeedTableViewController: UITableViewController {
         cell.mixedTintColor = mixedNightTextColor
         cell.selectionStyle = .none
         
-        if cell.review!.criticID == Auth.auth().currentUser!.uid {
+        if cell.review!.criticID == Auth.auth().currentUser?.uid {
             let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
             cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
         }

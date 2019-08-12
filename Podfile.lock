@@ -8,6 +8,8 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.3)
   - Firebase (6.6.0):
     - Firebase/Core (= 6.6.0)
+  - Firebase/Analytics (6.6.0):
+    - Firebase/Core
   - Firebase/Auth (6.6.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.2.2)
@@ -22,6 +24,9 @@ PODS:
   - Firebase/Firestore (6.6.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.4.3)
+  - Firebase/Storage (6.6.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.4.0)
   - FirebaseAnalytics (6.1.0):
     - FirebaseCore (~> 6.2)
     - FirebaseInstanceID (~> 4.2)
@@ -72,6 +77,10 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseStorage (3.4.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleAppMeasurement (6.1.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -134,10 +143,12 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
   - Firebase
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
+  - Firebase/Storage
   - InstantSearchClient (~> 7.0)
   - Kingfisher (~> 5.0)
   - MessageKit
@@ -157,6 +168,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -186,6 +198,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
   FirebaseFirestore: d65bd28e77a8cdc045be6353c6e1e146efdf92dc
   FirebaseInstanceID: 8b42755db950682e7de0d167bc6fb26a57b244af
+  FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
   GoogleAppMeasurement: 47285fa897e5a125df56b9ef8750a1d81e4598a8
   GoogleDataTransport: fe6af28a312ae5a56d5cec00ff14f6e3ded3beef
   GoogleDataTransportCCTSupport: e6fa721757b147d7f1481d7367b8dab3e9010889
@@ -202,6 +215,6 @@ SPEC CHECKSUMS:
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
 
-PODFILE CHECKSUM: bbddf62d93e3ad9b7ff7c50b2c34a4a6669ec938
+PODFILE CHECKSUM: 3e0818acf86d28113c9ceaacc84d4867929d756c
 
 COCOAPODS: 1.7.5

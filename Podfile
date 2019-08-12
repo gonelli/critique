@@ -16,4 +16,6 @@ target 'Critique' do
   pod 'InstantSearchClient', '~> 7.0'
   # Pod for Night mode
   pod 'NightNight'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
 end

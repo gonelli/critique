@@ -143,9 +143,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             //TODO: custom MovieInfoCell, not FeedTableViewCell
             if (snapshot!.documents.count == 0) {
                 self.scoreLabel.text = "No scores"
+                self.tableView.isUserInteractionEnabled = false
                 self.reviews = []
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
+                self.tableView.isUserInteractionEnabled = true
             }
             var reviewsGotten = 0
             for review in snapshot!.documents {
@@ -170,13 +172,15 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                                 let criticIsPublic = criticDocument!.data()!["isPublic"] as! Bool
                                 if criticIsPublic && !criticBlockList.contains(Auth.auth().currentUser!.uid) && !userBlockList.contains(criticID) {
                                     // TO-DO: Block around reviews
-                                    reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                                    reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: false))
                                 }
                                 reviewsGotten += 1
                                 if reviewsGotten == snapshot!.documents.count {
+                                    self.tableView.isUserInteractionEnabled = false
                                     self.reviews = reviews.sorted()
                                     self.tableView.reloadData()
                                     self.tableView.refreshControl?.endRefreshing()
+                                    self.tableView.isUserInteractionEnabled = true
                                 }
                             }
                             else {
@@ -213,14 +217,16 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                             let imdbID = review.data()["imdbID"] as! String
                             
                             if imdbID == currentMovieID {
-                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                                followingReviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: false))
                             }
                         }
                         criticsGotten += 1
                         if criticsGotten == following.count {
+                            self.tableView.isUserInteractionEnabled = false
                             self.followingReviews = followingReviews.sorted()
                             self.tableView.reloadData()
                             self.tableView.refreshControl?.endRefreshing()
+                            self.tableView.isUserInteractionEnabled = true
                         }
                     })
                 }
@@ -240,6 +246,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         else {
             return self.followingReviews.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Fixes account page bottom cell issue ?????????????????
+        let _ = tableView.dequeueReusableCell(withIdentifier: "movieInfoCell", for: indexPath) as! LikeDislikeCell
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

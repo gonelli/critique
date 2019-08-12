@@ -174,7 +174,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
                             let likers = review.data()["liked"] as! [String]
                             let dislikers = review.data()["disliked"] as! [String]
                             let timestamp = review.data()["timestamp"] as! TimeInterval
-                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp))
+                            reviews.append(Review(imdbID: imdbID, criticID: criticID, likers: likers, dislikers: dislikers, body: body, score: score, timestamp: timestamp, timeSort: true))
                         }
                         usersGotten += 1
                         if usersGotten == following.count {

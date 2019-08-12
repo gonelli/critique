@@ -73,9 +73,11 @@ class FollowsTableViewController: UITableViewController {
             db.collection("users").document(self.user).getDocument { (document, _) in
                 if let following = document?.data()?["following"] as? [String] {
                     if following.count == 0 {
+                        self.tableView.isUserInteractionEnabled = false
                         self.critics = []
                         self.tableView.reloadData()
                         self.tableView.refreshControl?.endRefreshing()
+                        self.tableView.isUserInteractionEnabled = true
                     }
                     var criticsGotten = 0
                     for followed in following {
@@ -83,9 +85,11 @@ class FollowsTableViewController: UITableViewController {
                             critics.append((snapshot?.data()?["name"] as! String, followed))
                             criticsGotten += 1
                             if criticsGotten == following.count {
+                                self.tableView.isUserInteractionEnabled = false
                                 self.critics = critics.sorted(by: <)
                                 self.tableView.reloadData()
                                 self.tableView.refreshControl?.endRefreshing()
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
                     }
@@ -104,16 +108,18 @@ class FollowsTableViewController: UITableViewController {
                         }
                     }
                 }
+                self.tableView.isUserInteractionEnabled = false
                 self.critics = critics.sorted(by: <)
                 self.tableView.reloadData()
                 self.tableView.refreshControl?.endRefreshing()
+                self.tableView.isUserInteractionEnabled = true
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> DiscoveryTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "criticCell", for: indexPath) as! DiscoveryTableViewCell
-        cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0)
+        cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0, uid: critics[indexPath.row].1)
         cell.followLabel.text = ""
         
         // NightNight

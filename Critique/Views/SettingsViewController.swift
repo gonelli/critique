@@ -13,8 +13,11 @@ import FirebaseFirestore
 import InstantSearchClient
 import NightNight
 
-class SettingsViewController: UITableViewController {
+import FirebaseStorage
+
+class SettingsViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var PhotoChangeCell: UITableViewCell!
     @IBOutlet var NameChangeCell: UITableViewCell!
     @IBOutlet var BlockedCell: UITableViewCell!
     @IBOutlet var PublicCell: UITableViewCell!
@@ -27,6 +30,7 @@ class SettingsViewController: UITableViewController {
     
     var db: Firestore!
     let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    let picker = UIImagePickerController()
     let critiqueRed = 0xe12b22
     let nightBgColor = 0x222222
     let nightTextColor = 0xdddddd
@@ -36,9 +40,11 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
+        picker.delegate = self
         
-        BlockedCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         NameChangeCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        PhotoChangeCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        BlockedCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         initializeFirestore()
         
@@ -65,6 +71,11 @@ class SettingsViewController: UITableViewController {
         NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
         NameChangeCell.mixedBackgroundColor = mixedNightBgColor
         NameChangeCell.selectionStyle = .none
+        
+        
+        PhotoChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
+        PhotoChangeCell.mixedBackgroundColor = mixedNightBgColor
+        PhotoChangeCell.selectionStyle = .none
         
         BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
         BlockedCell.mixedBackgroundColor = mixedNightBgColor
@@ -99,6 +110,88 @@ class SettingsViewController: UITableViewController {
         db = Firestore.firestore()
     }
     
+    func libraryButtonPressed() {
+        // whole picture, not going to allow editing before returning
+        picker.allowsEditing = true
+        
+        // set the source to be the Photo Library
+        picker.sourceType = .photoLibrary
+        
+        picker.modalPresentationStyle = .popover
+        present(picker,animated:true,completion:nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // get the selected picture
+        var chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        {
+            chosenImage = img
+            
+        }
+        else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            chosenImage = img
+        }
+
+        
+        self.uploadProfilePhoto(chosenImage: squareImageFromImage(image: chosenImage).resized(toWidth: 50)!)
+        
+        dismiss(animated:true, completion: nil)
+    }
+    
+    func squareImageFromImage(image: UIImage) -> UIImage{
+        let maxSize = max(image.size.width,image.size.height)
+        let squareSize = CGSize.init(width: maxSize, height: maxSize)
+        
+        let dx = (maxSize - image.size.width) / 2.0
+        let dy = (maxSize - image.size.height) / 2.0
+        UIGraphicsBeginImageContext(squareSize)
+        var rect = CGRect.init(x: 0, y: 0, width: maxSize, height: maxSize)
+        
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(UIColor.clear.cgColor)
+        context?.fill(rect)
+        
+        rect = rect.insetBy(dx: dx, dy: dy)
+        image.draw(in: rect, blendMode: CGBlendMode.normal, alpha: 1.0)
+        let squareImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return squareImage!
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated:true,completion:nil)
+    }
+    
+    func uploadProfilePhoto(chosenImage: UIImage) {
+        // Data in memory
+        let data = chosenImage.pngData()!
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        // Create a reference to the file you want to upload
+        let riversRef = storageRef.child("images/\(Auth.auth().currentUser!.uid).jpg")
+        
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            let size = metadata.size
+            // You can also access to download URL after upload.
+            riversRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+            }
+        }
+    }
+    
     // Take action depending on what setting the user pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Change Name
@@ -128,20 +221,20 @@ class SettingsViewController: UITableViewController {
             controller.preferredAction = confirmAction
             present(controller,animated:true,completion:nil)
         }
-            // Blocked
+            // Profile Picture
         else if (indexPath.section == 0 && indexPath.row == 1) {
-            performSegue(withIdentifier: "blockedSegue", sender: self)
+            libraryButtonPressed()
         }
-            // Account Privacy
+            // Blocked
         else if (indexPath.section == 0 && indexPath.row == 2) {
-            changeAccountPrivacy()
+            performSegue(withIdentifier: "blockedSegue", sender: self)
         }
             // Sign Out
         else if (indexPath.section == 1 && indexPath.row == 0) {
             try! Auth.auth().signOut()
             (self.parent?.parent as! UITabBarController).selectedIndex = 0
-            
-            ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+//            ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
             
             
 //

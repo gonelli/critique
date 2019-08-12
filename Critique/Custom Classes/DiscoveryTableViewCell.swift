@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class DiscoveryTableViewCell: UITableViewCell {
     
@@ -15,7 +16,7 @@ class DiscoveryTableViewCell: UITableViewCell {
     @IBOutlet weak var initialLabel: UILabel!
     @IBOutlet weak var initialBGView: UIView!
     
-    func setCell(name: String, followers: Int, following: Int) {
+    func setCell(name: String, followers: Int, following: Int, uid: String) {
         nameLabel.text = name
         followLabel.text = "Followers: \(followers) Following: \(following)"
         initialLabel.text = "\(Array(name.uppercased())[0])"
@@ -28,6 +29,36 @@ class DiscoveryTableViewCell: UITableViewCell {
         // Circles
         initialBGView.layer.cornerRadius = initialBGView.frame.size.width/2.0
         initialBGView.clipsToBounds = true
+
+        getFirebaseImages(uid: uid)
+    }
+    
+    func getFirebaseImages(uid: String) {
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        
+        var testImage = UIImage(named: "disliked")
+        
+        var reference: StorageReference!
+        reference = storage.reference(forURL: "gs://critique-com.appspot.com/images/\(uid).jpg")
+        reference.downloadURL { (url, error) in
+            if url != nil {
+                let data = NSData(contentsOf: url!)
+                testImage = UIImage(data: data! as Data)
+                
+                UIGraphicsBeginImageContext(self.initialBGView.frame.size)
+                testImage?.draw(in: self.initialBGView.bounds)
+                
+                if let image = testImage{
+                    UIGraphicsEndImageContext()
+                    self.initialBGView.backgroundColor = UIColor(patternImage: testImage!)
+                    self.initialLabel.text = ""
+                }else{
+                    UIGraphicsEndImageContext()
+                    debugPrint("Image not available")
+                }
+            }
+        }
     }
     
     // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb

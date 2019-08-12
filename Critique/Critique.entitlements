@@ -4,7 +4,7 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)edu.utexas.critique</string>
+		<string>$(AppIdentifierPrefix)edu.utexas.critiqueapp</string>
 	</array>
 </dict>
 </plist>

@@ -43,8 +43,10 @@ class MessagesListViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tableView.isUserInteractionEnabled = false
         directMessages = []
         tableView.reloadData()
+        self.tableView.isUserInteractionEnabled = true
         getDirectMessages()
         // NightNight exception
         if (NightNight.theme == .night) {
@@ -108,8 +110,15 @@ class MessagesListViewController: UITableViewController {
                     directMessages.append(Chat(chat) { () in
                         syncCount -= 1
                         if syncCount <= 0 {
+                            directMessages.sort() { (chat1, chat2) in
+                                if let time1 = chat1.getTimestamp(), let time2 = chat2.getTimestamp() {
+                                    if time1.timeIntervalSince1970 > time2.timeIntervalSince1970 {
+                                        return true
+                                    }
+                                }
+                                return false
+                            }
                             self.directMessages = directMessages
-                            self.sortDMs()
                         }
                     })
                 }
@@ -165,12 +174,14 @@ class MessagesListViewController: UITableViewController {
             let docRef = self.db.collection("users").document(Auth.auth().currentUser!.uid)
             docRef.getDocument { (document, error) in
                 if error == nil {
+                    self.tableView.isUserInteractionEnabled = false
                     var chats = document!.data()!["myChats"] as! [String]
                     chats.remove(at: chats.firstIndex(of: self.directMessages[editActionsForRowAt.row].chatID)!)
                     docRef.setData(["myChats": chats], merge: true)
                     (tableView.cellForRow(at: editActionsForRowAt) as! ChatTableViewCell).removeListener()
                     self.directMessages.remove(at: editActionsForRowAt.row)
                     tableView.reloadData()
+                    self.tableView.isUserInteractionEnabled = true
                 }
                 else {
                     fatalError(error!.localizedDescription)

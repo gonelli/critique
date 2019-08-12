@@ -37,8 +37,10 @@ class BlockedTableViewController: UITableViewController {
                 var blockList: [(String, String)] = []
                 let blocked = document!.data()!["blocked"] as! [String]
                 if blocked.count == 0 {
+                    self.tableView.isUserInteractionEnabled = false
                     self.blockList = []
                     self.tableView.reloadData()
+                    self.tableView.isUserInteractionEnabled = true
                 }
                 var criticsGotten = 0
                 for blockedCritic in blocked {
@@ -47,8 +49,10 @@ class BlockedTableViewController: UITableViewController {
                             blockList.append((document!.data()!["name"] as! String, blockedCritic))
                             criticsGotten += 1
                             if criticsGotten == blocked.count {
+                                self.tableView.isUserInteractionEnabled = false
                                 self.blockList = blockList.sorted(by: <)
                                 self.tableView.reloadData()
+                                self.tableView.isUserInteractionEnabled = true
                             }
                         }
                         else {
@@ -87,7 +91,7 @@ class BlockedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> DiscoveryTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "blockedCell", for: indexPath) as! DiscoveryTableViewCell
-        cell.setCell(name: blockList[indexPath.row].0, followers: 0, following: 0)
+        cell.setCell(name: blockList[indexPath.row].0, followers: 0, following: 0, uid: blockList[indexPath.row].1)
         cell.followLabel.text = ""
         
         // NightNight
