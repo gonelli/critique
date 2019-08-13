@@ -23,15 +23,15 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     var db: Firestore!
     var loggedIn: Bool! = false
     
-    override func viewDidLoad() {
+    override func viewDidAppear(_ animated: Bool) {
         if (Auth.auth().currentUser != nil) {
             self.loggedIn = true
             self.initializeFirestore()
             self.getReviews()
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        else {
+            reviews = []
+        }
         usleep(100000) // 0.1 sec, buffer time
         self.spin1()
         self.moveName()

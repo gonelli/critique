@@ -59,41 +59,42 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Looking at own profile
-        if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
-            accountID = Auth.auth().currentUser!.uid
-            self.getReviews()
-            self.getFollowNumbers()
-            db.collection("users").document(accountID).getDocument() { (document, error) in
-                if error == nil {
-                    self.accountName = document!.data()!["name"] as! String
-                    self.navigationItem.title = self.accountName
-                }
-                else {
-                    fatalError(error!.localizedDescription)
-                }
-            }
-        }
-            // Looking at another critic's profile
-        else {
-            getReviews()
-            getFollowNumbers()
-            self.navigationItem.title = self.accountName
-            db.collection("users").document(accountID).getDocument() { (document, error) in
-                if error == nil {
-                    let blocked = document!.data()!["blocked"] as! [String]
-                    if !blocked.contains(Auth.auth().currentUser!.uid) {
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
+        if Auth.auth().currentUser != nil {
+            if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
+                accountID = Auth.auth().currentUser!.uid
+                self.getReviews()
+                self.getFollowNumbers()
+                db.collection("users").document(accountID).getDocument() { (document, error) in
+                    if error == nil {
+                        self.accountName = document!.data()!["name"] as! String
+                        self.navigationItem.title = self.accountName
                     }
                     else {
-                        self.navigationItem.rightBarButtonItem = nil
+                        fatalError(error!.localizedDescription)
                     }
                 }
-                else {
-                    fatalError(error!.localizedDescription)
+            }
+            // Looking at another critic's profile
+            else {
+                getReviews()
+                getFollowNumbers()
+                self.navigationItem.title = self.accountName
+                db.collection("users").document(accountID).getDocument() { (document, error) in
+                    if error == nil {
+                        let blocked = document!.data()!["blocked"] as! [String]
+                        if !blocked.contains(Auth.auth().currentUser!.uid) {
+                            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "•••", style: .done, target: self, action: #selector(self.accountAction))
+                        }
+                        else {
+                            self.navigationItem.rightBarButtonItem = nil
+                        }
+                    }
+                    else {
+                        fatalError(error!.localizedDescription)
+                    }
                 }
             }
         }
-        
         //Exception where NightNight doesn't work
         if (NightNight.theme == .night) {
             self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
