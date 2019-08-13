@@ -38,7 +38,6 @@
 		6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDA22E7BD79002117E0 /* Critic.swift */; };
 		633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F7F8B22E8C2D000F746EF /* ChatViewController.swift */; };
 		63ACB6FF22EA4C05008F6A79 /* DiscoveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */; };
-		9DA2E47D22D985D500FFDA61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E47C22D985D500FFDA61 /* README.md */; };
 		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTableViewCell.swift; sourceTree = "<group>"; };
 		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
 		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DA2E47C22D985D500FFDA61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +96,6 @@
 		1ACF975822C197DC001A1B7A = {
 			isa = PBXGroup;
 			children = (
-				9DA2E47C22D985D500FFDA61 /* README.md */,
 				1ACF976322C197DC001A1B7A /* Critique */,
 				1ACF976222C197DC001A1B7A /* Products */,
 				9001164946C0062C676EC24C /* Pods */,
@@ -262,7 +259,6 @@
 			files = (
 				1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */,
 				1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */,
-				9DA2E47D22D985D500FFDA61 /* README.md in Resources */,
 				1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */,
 				55C984BE22FB7C830052EF9E /* Assets.xcassets in Resources */,
 			);
