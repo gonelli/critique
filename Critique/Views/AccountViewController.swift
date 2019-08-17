@@ -59,7 +59,7 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Looking at own profile
-        if Auth.auth().currentUser != nil {c
+        if Auth.auth().currentUser != nil {
             if accountName == "" || accountID == "" || accountID == Auth.auth().currentUser!.uid {
                 accountID = Auth.auth().currentUser!.uid
                 self.getReviews()
