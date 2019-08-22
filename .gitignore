@@ -21,6 +21,7 @@ xcuserdata
 *.xcscmblueprint
 .DS_Store
 Critique/Required/GoogleService-Info.plist
+Config.plist
 
 ## Obj-C/Swift specific
 *.hmap
