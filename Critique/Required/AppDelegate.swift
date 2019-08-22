@@ -18,6 +18,7 @@ import FirebaseStorage
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var keys: Dictionary<String, Any>?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.tintColor = UIColor.red
         let db = Firestore.firestore()
         let storage = Storage.storage()
+        
+        if let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path) as? Dictionary<String, Any>
+        }
+        
         return true
     }
 }

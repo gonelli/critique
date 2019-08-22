@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>algoliaId</key>
+	<string>3PCPRD2BHV</string>
+	<key>algoliaKey</key>
+	<string>e2ab8935cad696d6a4536600d531097b</string>
+	<key>omdbApiKey</key>
+	<string>7cc21a66</string>
+</dict>
+</plist>

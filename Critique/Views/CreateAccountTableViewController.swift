@@ -20,10 +20,17 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var confirmPasswordTF: UITextField!
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    var algoliaId = "noid"
+    var algoliaKey = "nokey"
     
     var db: Firestore!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let keys = appDelegate.keys
+        algoliaId = keys?["algoliaId"] as? String ?? "noid"
+        algoliaKey = keys?["algoliaKey"] as? String ?? "nokey"
         
         usernameTF.delegate = self
         emailTF.delegate = self
@@ -109,7 +116,7 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
                         "blocked": [] as [String],
                         "myChats": [] as [String]
                     ]){ (error) in
-                        let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+                        let client = Client(appID: self.algoliaId, apiKey: self.algoliaKey)
                         client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
                         Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
                     }

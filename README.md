@@ -45,11 +45,13 @@ $ pod install
 $ open Critique.xcworkspace
 ```
 
-4) Configure with personal API key information
+4) Configure with personal API key information in Config.plist
 
-    (Note: There is no config file for this application. All keys are embedded.)
+    (Note: requires a valid OMDb API key and Algolia ID/key combo)
+    
+5) Setup a Firebase project and save the property list file to Critique/Required/GoogleService-Info.plist
 
-5) Compile and run the app in your simulator
+6) Compile and run the app in your simulator
 
 ## Requirements ##
 
@@ -57,7 +59,6 @@ $ open Critique.xcworkspace
 - iOS 12.1
 
 ## Credits ##
-
 
 - [Alamofire][] for network request
 - [Algolia][] for consumer-grade search

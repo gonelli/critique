@@ -29,7 +29,7 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
     @IBOutlet var signOutCell: UITableViewCell!
     
     var db: Firestore!
-    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b")
+    var client : Client!
     let picker = UIImagePickerController()
     let critiqueRed = 0xe12b22
     let nightBgColor = 0x222222
@@ -39,6 +39,13 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let keys = appDelegate.keys
+        let algoliaId = keys?["algoliaId"] as? String ?? "noid"
+        let algoliaKey = keys?["algoliaKey"] as? String ?? "nokey"
+        client = Client(appID: algoliaId, apiKey: algoliaKey) // Algolia client
+        
         self.title = "Settings"
         picker.delegate = self
         

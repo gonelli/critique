@@ -19,10 +19,16 @@ class Movie {
     var outsideGroupEntered: Bool
     let group = DispatchGroup()
     var movieCell: SearchMovieImageCell? = nil
+    var omdbApiKey = "nokey"
 //    let posterGroup = DispatchGroup()
     
     // Initialize object using the IMDB ID
     init (imdbId: String, outsideGroup: DispatchGroup = DispatchGroup(), outsideGroupEntered: Bool = false) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let keys = appDelegate.keys
+        omdbApiKey = keys?["omdbApiKey"] as? String ?? "nokey"
+        
         self.outsideGroupEntered = outsideGroupEntered
         self.outsideGroup = outsideGroup
         self.imdbID = imdbId
@@ -87,7 +93,7 @@ class Movie {
     
     // Fetch a movie's info in JSON format given an IMDB ID
     func getMovieDict(imdbId: String) {
-        if let url = URL(string: "http://www.omdbapi.com/?i=" + imdbId + "&apikey=" + "7cc21a66") {
+        if let url = URL(string: "http://www.omdbapi.com/?i=" + imdbId + "&apikey=" + omdbApiKey) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     if String(data: data, encoding: .utf8) != nil {

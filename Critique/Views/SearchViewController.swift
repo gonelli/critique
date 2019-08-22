@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var critics: [(String, Critic)] = []
     let group = DispatchGroup()
     
-    let client = Client(appID: "3PCPRD2BHV", apiKey: "e2ab8935cad696d6a4536600d531097b") // Algolia client
+    var client : Client!
     let cellIdentifier = "searchResultCell"
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
@@ -33,12 +33,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let nightTextColor = 0xdddddd
     let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
     let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
+    var omdbApiKey = "nokey"
     
     var db: Firestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let keys = appDelegate.keys
+        let algoliaId = keys?["algoliaId"] as? String ?? "noid"
+        let algoliaKey = keys?["algoliaKey"] as? String ?? "nokey"
+        omdbApiKey = keys?["omdbApiKey"] as? String ?? "nokey"
+        client = Client(appID: algoliaId, apiKey: algoliaKey) // Algolia client
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -430,7 +438,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Gets search results for a movie query using the OMDB API
     func getMovieList(movieQuery: String, page: Int = 1) {
-        let unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=7cc21a66" + "&page=" + String(page)
+        var unallowedUrlString = "http://www.omdbapi.com/?s=" + movieQuery + "&apikey=" + self.omdbApiKey
+        unallowedUrlString += "&page=" + String(page)
         let allowedUrlString = unallowedUrlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         if let url = URL(string: allowedUrlString!) {
             URLSession.shared.dataTask(with: url) { data, response, error in

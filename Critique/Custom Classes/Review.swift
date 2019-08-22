@@ -24,8 +24,14 @@ class Review {
     var criticName: String?
     var timestamp: TimeInterval!
     var timeSort: Bool!
+    var omdbApiKey = "nokey"
     
     init(imdbID: String, criticID: String, likers: [String], dislikers: [String], body: String, score: NSNumber, timestamp: TimeInterval, timeSort: Bool) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let keys = appDelegate.keys
+        omdbApiKey = keys?["omdbApiKey"] as? String ?? "nokey"
+        
         self.body = body
         self.score = Double(round(100 * (score as! Double)) / 100)
         self.imdbID = imdbID
@@ -45,7 +51,7 @@ class Review {
             completion(movieData)
         }
         else {
-            if let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID ?? "")&apikey=7cc21a66") {
+            if let url = URL(string: "http://www.omdbapi.com/?i=\(imdbID ?? "")&apikey=" + omdbApiKey) {
                 AF.request(url).responseJSON { (response) in
                     if let json = try! response.result.get() as? [String : Any] {
                         self.movieData = json

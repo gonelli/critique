@@ -20,6 +20,7 @@ xcuserdata
 *.xcuserstate
 *.xcscmblueprint
 .DS_Store
+Critique/Required/GoogleService-Info.plist
 
 ## Obj-C/Swift specific
 *.hmap
