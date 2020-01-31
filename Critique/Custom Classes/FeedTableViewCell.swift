@@ -11,7 +11,6 @@ import Kingfisher
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
-import NightNight
 
 class FeedTableViewCell: UITableViewCell {
     
@@ -81,13 +80,13 @@ class FeedTableViewCell: UITableViewCell {
             let userID = Auth.auth().currentUser?.uid
             if liked.contains(userID ?? "") {
                 self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
             } else if disliked.contains(userID ?? "") {
-                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                 self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
             } else {
-                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
             }
 
         }
@@ -111,8 +110,8 @@ class FeedTableViewCell: UITableViewCell {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                     if let index = liked.firstIndex(of: userID) {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         liked.remove(at: index)
                     }
                 }
@@ -123,7 +122,7 @@ class FeedTableViewCell: UITableViewCell {
                         }
                     }
                     self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                     liked.append(userID)
                 }
                 ref.setData(["liked": liked, "disliked": disliked], merge: true)
@@ -149,8 +148,8 @@ class FeedTableViewCell: UITableViewCell {
                 
                 if disliked.contains(userID) {
                     if let index = disliked.firstIndex(of: userID) {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         disliked.remove(at: index)
                     }
                 }
@@ -160,7 +159,7 @@ class FeedTableViewCell: UITableViewCell {
                             liked.remove(at: index)
                         }
                     }
-                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                     self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
                     disliked.append(userID)
                 }

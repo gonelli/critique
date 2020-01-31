@@ -10,7 +10,6 @@ import UIKit
 import InstantSearchClient
 import FirebaseFirestore
 import FirebaseAuth
-import NightNight
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -29,10 +28,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let movieInfoSegue = "movieInfoSegue"
     let criticProfileSegue = "criticProfileSegue"
     let critiqueRed = 0xe12b22
-    let nightBgColor = 0x222222
-    let nightTextColor = 0xdddddd
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     var omdbApiKey = "nokey"
     
     var db: Firestore!
@@ -63,36 +58,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         discoveryTableView.refreshControl = UIRefreshControl()
         discoveryTableView.refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
         initFirestore()
-        
-        // NIGHT NIGHT
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        segmentedControl.mixedTintColor = MixedColor(normal: critiqueRed, night: nightTextColor)
-        searchBar.mixedBackgroundColor = mixedNightBgColor
-        view.mixedBackgroundColor = mixedNightBgColor
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        discoveryTableView.mixedBackgroundColor = mixedNightBgColor
-        searchBar.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
-        (searchBar.value(forKey: "searchField") as? UITextField)?.mixedTextColor = mixedNightTextColor
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getCritics()
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-            searchBar.keyboardAppearance = .dark
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            searchBar.keyboardAppearance = .default
-        }
     }
     
     func initFirestore() {
@@ -156,10 +125,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 movieCell.movieObject = movieList[row].1
                 movieList[row].1.movieCell = movieCell
                 
-                // NightNight
                 movieCell.selectionStyle = .none
-                movieCell.mixedBackgroundColor = mixedNightBgColor
-                movieCell.titleLabel?.mixedTextColor = mixedNightTextColor
                 return movieCell
             }
             else {
@@ -167,10 +133,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 criticCell.setCell(name: criticList[row].0, followers: 0, following: 0, uid: criticList[row].1)
                 criticCell.followLabel.text = ""
                 
-                // NightNight
                 criticCell.selectionStyle = .none
-                criticCell.mixedBackgroundColor = mixedNightBgColor
-                criticCell.nameLabel?.mixedTextColor = mixedNightTextColor
                 return criticCell
             }
         }
@@ -180,11 +143,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             cell.setCell(name: critic.name!, followers: critic.followers.count, following: critic.following.count, uid: critics[indexPath.row].0)
             
-            // NightNight
             cell.selectionStyle = .none
-            cell.mixedBackgroundColor = mixedNightBgColor
-            cell.nameLabel?.mixedTextColor = mixedNightTextColor
-            
             return cell
         }
     }

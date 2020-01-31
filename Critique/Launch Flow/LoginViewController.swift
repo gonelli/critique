@@ -9,14 +9,11 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
-import NightNight
 
 class LoginViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,43 +24,10 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
-        
-        // NightNight
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        emailField.mixedTextColor = mixedNightTextColor
-        emailField.mixedBackgroundColor = mixedNightBgColor
-        passField.mixedTextColor = mixedNightTextColor
-        passField.mixedBackgroundColor = mixedNightBgColor
-        
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
-        
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
-        tableView.mixedTintColor = MixedColor(normal: UIColor.red, night: UIColor.red)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if(NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-            emailField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
-            emailField.keyboardAppearance = .dark
-            passField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.41, green:0.41, blue:0.42, alpha:1.0)])
-            passField.keyboardAppearance = .dark
-            
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            emailField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
-            emailField.keyboardAppearance = .default
-            passField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)])
-            passField.keyboardAppearance = .default
-        }
     }
     
     // Attempt to sign in after button is pressed
@@ -112,10 +76,6 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.mixedBackgroundColor = mixedNightBgColor
     }
     
     // code to dismiss keyboard when user clicks on background

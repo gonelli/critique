@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
-import NightNight
 
 class FeedTableViewController: UITableViewController {
     
@@ -21,43 +20,17 @@ class FeedTableViewController: UITableViewController {
     var tappedCriticName = ""
     var tappedPosterMovieObject : Movie? = nil
     let expandedReviewSegueID = "expandedReviewSegueID"
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
-    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshView()
         initializeFirestore()
-        
-        // NightNight
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        self.tabBarController!.tabBar.mixedBarTintColor = mixedNightBgColor
-        //        self.tabBarController!.tabBar.mixedBarTintColor = MixedColor(normal: UIColor.white, night: UIColor.black) // Black tab bar
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
-        
-        view.mixedBackgroundColor = mixedNightBgColor
-        tableView.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if Auth.auth().currentUser != nil {
             getReviews()
-        }
-        
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)] // 0xdddddd
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -144,19 +117,11 @@ class FeedTableViewController: UITableViewController {
         cell.criticLabel.addGestureRecognizer(criticTap)
         cell.criticLabel.isUserInteractionEnabled = true
         
-        // NIGHT NIGHT
-        cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
-        cell.likesLabel.mixedTextColor = mixedNightFadedTextColor
-        cell.reviewLabel.mixedTextColor = mixedNightTextColor
-        cell.scoreLabel.mixedTextColor = mixedNightTextColor
-        cell.movieLabel.mixedTextColor = mixedNightTextColor
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.mixedTintColor = mixedNightTextColor
         cell.selectionStyle = .none
         
         if cell.review!.criticID == Auth.auth().currentUser?.uid {
             let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
+//            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
         }
         
         return cell

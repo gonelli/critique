@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import NightNight
 
 class ExpandedReviewTableViewController: UITableViewController {
     
@@ -27,9 +26,6 @@ class ExpandedReviewTableViewController: UITableViewController {
     var movieObject: Movie?
     var tappedCriticID: String?
     var tappedCriticName: String?
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
-    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
     
     var db: Firestore!
     
@@ -63,7 +59,7 @@ class ExpandedReviewTableViewController: UITableViewController {
                 criticTap.criticID = review.criticID
                 if review.criticID == Auth.auth().currentUser!.uid {
                     let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
-                    self.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
+//                    self.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
                 }
                 self.criticLabel.addGestureRecognizer(criticTap)
                 self.criticLabel.isUserInteractionEnabled = true
@@ -81,19 +77,7 @@ class ExpandedReviewTableViewController: UITableViewController {
         posterImage.addGestureRecognizer(tap)
         posterImage.isUserInteractionEnabled = true
         self.posterImage.addSubview(view)
-        
-        // NightNight
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
-        reviewCell.mixedBackgroundColor = mixedNightBgColor
-        reviewCell.mixedTintColor = mixedNightTextColor
-        reviewTextView.mixedBackgroundColor = mixedNightBgColor
-        reviewTextView.mixedTintColor = mixedNightTextColor // borders above and below
-        reviewTextView.mixedTextColor = mixedNightTextColor
-        criticLabel.mixedTextColor = mixedNightFadedTextColor
-        likesLabel.mixedTextColor = mixedNightFadedTextColor
-        scoreLabel.mixedTextColor = mixedNightTextColor
-        movieLabel.mixedTextColor = mixedNightTextColor
-        
+                
         initializeFirestore()
         let movieID = expanedReview!.imdbID ?? "0"
         let criticID = expanedReview!.criticID ?? "0"
@@ -106,13 +90,13 @@ class ExpandedReviewTableViewController: UITableViewController {
                 let userID = Auth.auth().currentUser?.uid
                 if liked.contains(userID ?? "") {
                     self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                 } else if disliked.contains(userID ?? "") {
-                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                     self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
                 } else {
-                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                 }
             } else {
                 fatalError(error!.localizedDescription)
@@ -121,13 +105,6 @@ class ExpandedReviewTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     // If movie poster is pressed, show the movie's info
@@ -183,8 +160,8 @@ class ExpandedReviewTableViewController: UITableViewController {
                 let userID = Auth.auth().currentUser!.uid
                 if liked.contains(userID) {
                     if let index = liked.firstIndex(of: userID) {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         liked.remove(at: index)
                     }
                 }
@@ -195,7 +172,7 @@ class ExpandedReviewTableViewController: UITableViewController {
                         }
                     }
                     self.likeButton.setImage(UIImage(named: "liked"), for: .normal)
-                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                    self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                     liked.append(userID)
                 }
                 ref.setData(["liked": liked, "disliked": disliked], merge: true)
@@ -220,8 +197,8 @@ class ExpandedReviewTableViewController: UITableViewController {
                 
                 if disliked.contains(userID) {
                     if let index = disliked.firstIndex(of: userID) {
-                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
-                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
+//                        self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                        self.dislikeButton.setMixedImage(MixedImage(normal: UIImage(named: "dislike")!, night: UIImage(named: "dislike-white")!), forState: .normal)
                         disliked.remove(at: index)
                     }
                 }
@@ -231,7 +208,7 @@ class ExpandedReviewTableViewController: UITableViewController {
                             liked.remove(at: index)
                         }
                     }
-                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
+//                    self.likeButton.setMixedImage(MixedImage(normal: UIImage(named: "like")!, night: UIImage(named: "like-white")!), forState: .normal)
                     self.dislikeButton.setImage(UIImage(named: "disliked"), for: .normal)
                     disliked.append(userID)
                 }

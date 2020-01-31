@@ -12,7 +12,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import InputBarAccessoryView
-import NightNight
 
 class ChatViewController: MessagesViewController, MessagesDataSource {
     
@@ -20,8 +19,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     var chat: Chat? = nil
     var snapshotListener:ListenerRegistration! = nil
     var incomingName = ""
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     var loaded = false
     
     var current: MockUser {
@@ -127,9 +124,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
             layout.setMessageOutgoingAvatarSize(.zero)
             layout.setMessageIncomingAvatarSize(.zero) // Comment out if you want initials
         }
-        
-        // NightNight
-        messagesCollectionView.mixedBackgroundColor = mixedNightBgColor
     }
     
     func configureMessageInputBar() {
@@ -139,9 +133,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         messageInputBar.sendButton.setTitleColor(.primaryColor, for: .normal)
         messageInputBar.sendButton.setTitleColor(UIColor.primaryColor.withAlphaComponent(0.3), for: .highlighted)
         
-        // NightNight
-        messageInputBar.backgroundView.mixedBackgroundColor = mixedNightBgColor
-        messageInputBar.inputTextView.mixedTextColor = mixedNightTextColor
     }
     
     func insertMessage(_ message: MockMessage) {

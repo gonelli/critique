@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
-import NightNight
 
 class MessagesListViewController: UITableViewController {
     
@@ -21,25 +20,12 @@ class MessagesListViewController: UITableViewController {
         }
     }
     var snapshotListener:ListenerRegistration! = nil
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Messages"
         addRefreshView()
         initializeFirestore()
-        
-        // NightNight
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        if(NightNight.theme == .night) {
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,13 +34,6 @@ class MessagesListViewController: UITableViewController {
         tableView.reloadData()
         self.tableView.isUserInteractionEnabled = true
         getDirectMessages()
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,9 +127,6 @@ class MessagesListViewController: UITableViewController {
         cell.delegate = self
         cell.setListener()
         
-        // NightNight
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.titleLabel.mixedTextColor = mixedNightTextColor
         cell.selectionStyle = .none
         
         return cell

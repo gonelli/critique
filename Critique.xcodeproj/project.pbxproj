@@ -19,12 +19,13 @@
 		1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */; };
 		1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */; };
 		1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */; };
+		3E7769ABA78425E87E5397D1 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC04895F6DBB0132F879A5CA /* Pods_Critique.framework */; };
 		550A563422FB65AC0003AB07 /* SearchMovieImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550A563322FB65AC0003AB07 /* SearchMovieImageCell.swift */; };
+		5527E21623E3D67800222ADE /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5527E21523E3D67800222ADE /* Config.plist */; };
 		552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */; };
 		554D25B923E3AAE400D506C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554D25B823E3AAE400D506C5 /* Login.storyboard */; };
 		554D25BB23E3ABBA00D506C5 /* Bootup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554D25BA23E3ABBA00D506C5 /* Bootup.storyboard */; };
 		554DD2E822ED17B200B4FC6B /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */; };
-		555B0EC7230E4C850082F153 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555B0EC6230E4C850082F153 /* Config.plist */; };
 		55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1A22CBDF56004A70A9 /* SearchViewController.swift */; };
 		55672C1D22CBDF65004A70A9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1C22CBDF65004A70A9 /* AccountViewController.swift */; };
 		55672C1F22CBDF76004A70A9 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */; };
@@ -42,11 +43,9 @@
 		6313EEDC22E7BD7A002117E0 /* Critic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6313EEDA22E7BD79002117E0 /* Critic.swift */; };
 		633F7F8C22E8C2D000F746EF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633F7F8B22E8C2D000F746EF /* ChatViewController.swift */; };
 		63ACB6FF22EA4C05008F6A79 /* DiscoveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */; };
-		FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98718226A4FC2A6382863E41 /* Pods_Critique.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.release.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.release.xcconfig"; sourceTree = "<group>"; };
 		1A4BB77E22D134310027E606 /* ComposeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeTableViewController.swift; sourceTree = "<group>"; };
 		1A4BB78322D15E090027E606 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		1ABA581D22FDE14B00E72317 /* MockUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUser.swift; sourceTree = "<group>"; };
@@ -62,11 +61,11 @@
 		1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		550A563322FB65AC0003AB07 /* SearchMovieImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieImageCell.swift; sourceTree = "<group>"; };
+		5527E21523E3D67800222ADE /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedTableViewController.swift; sourceTree = "<group>"; };
 		554D25B823E3AAE400D506C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Login.storyboard; path = Critique/Login.storyboard; sourceTree = SOURCE_ROOT; };
 		554D25BA23E3ABBA00D506C5 /* Bootup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bootup.storyboard; sourceTree = "<group>"; };
 		554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
-		555B0EC6230E4C850082F153 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		55672C1A22CBDF56004A70A9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		55672C1C22CBDF65004A70A9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		55672C1E22CBDF76004A70A9 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
@@ -86,8 +85,9 @@
 		6313EEDA22E7BD79002117E0 /* Critic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Critic.swift; sourceTree = "<group>"; };
 		633F7F8B22E8C2D000F746EF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		63ACB6FE22EA4C05008F6A79 /* DiscoveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTableViewCell.swift; sourceTree = "<group>"; };
-		6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
-		98718226A4FC2A6382863E41 /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A80A44F97745E40EB307AAA3 /* Pods-Critique.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.release.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.release.xcconfig"; sourceTree = "<group>"; };
+		BF9300094615C23117C8851A /* Pods-Critique.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Critique.debug.xcconfig"; path = "Target Support Files/Pods-Critique/Pods-Critique.debug.xcconfig"; sourceTree = "<group>"; };
+		CC04895F6DBB0132F879A5CA /* Pods_Critique.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Critique.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA75D672B1232927C094ABB4 /* Pods_Critique.framework in Frameworks */,
+				3E7769ABA78425E87E5397D1 /* Pods_Critique.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,11 +107,11 @@
 			children = (
 				55EF80EE23078EA60078DDAF /* README.md */,
 				55EF80EF2307BBC80078DDAF /* LICENSE */,
-				555B0EC6230E4C850082F153 /* Config.plist */,
+				5527E21523E3D67800222ADE /* Config.plist */,
 				1ACF976322C197DC001A1B7A /* Critique */,
 				1ACF976222C197DC001A1B7A /* Products */,
 				9001164946C0062C676EC24C /* Pods */,
-				99AC5A9F8DCA3F3AA5EE0CAA /* Frameworks */,
+				4960A617E3528C0E26CA8840 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +187,14 @@
 			path = Required;
 			sourceTree = "<group>";
 		};
+		4960A617E3528C0E26CA8840 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC04895F6DBB0132F879A5CA /* Pods_Critique.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		55D9B5A723E3C3A2008478E1 /* Launch Flow */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,18 +208,10 @@
 		9001164946C0062C676EC24C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */,
-				15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */,
+				BF9300094615C23117C8851A /* Pods-Critique.debug.xcconfig */,
+				A80A44F97745E40EB307AAA3 /* Pods-Critique.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		99AC5A9F8DCA3F3AA5EE0CAA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				98718226A4FC2A6382863E41 /* Pods_Critique.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,11 +221,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1ACF977322C197DD001A1B7A /* Build configuration list for PBXNativeTarget "Critique" */;
 			buildPhases = (
-				D569A814C159FFFF206438B4 /* [CP] Check Pods Manifest.lock */,
+				DB9E9A0D073C6FFB475B78C8 /* [CP] Check Pods Manifest.lock */,
 				1ACF975D22C197DC001A1B7A /* Sources */,
 				1ACF975E22C197DC001A1B7A /* Frameworks */,
 				1ACF975F22C197DC001A1B7A /* Resources */,
-				3F9DAF41B5E1C324F392EEC7 /* [CP] Embed Pods Frameworks */,
+				0BDA07D4D5641B205CC5C6EA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -283,9 +283,9 @@
 				554D25BB23E3ABBA00D506C5 /* Bootup.storyboard in Resources */,
 				1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */,
 				554D25B923E3AAE400D506C5 /* Login.storyboard in Resources */,
+				5527E21623E3D67800222ADE /* Config.plist in Resources */,
 				1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */,
 				55C984BE22FB7C830052EF9E /* Assets.xcassets in Resources */,
-				555B0EC7230E4C850082F153 /* Config.plist in Resources */,
 				55EF80F02307BBC80078DDAF /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +293,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3F9DAF41B5E1C324F392EEC7 /* [CP] Embed Pods Frameworks */ = {
+		0BDA07D4D5641B205CC5C6EA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,7 +310,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Critique/Pods-Critique-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D569A814C159FFFF206438B4 /* [CP] Check Pods Manifest.lock */ = {
+		DB9E9A0D073C6FFB475B78C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -509,7 +509,7 @@
 		};
 		1ACF977422C197DD001A1B7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FBED3851E689E0F0440A006 /* Pods-Critique.debug.xcconfig */;
+			baseConfigurationReference = BF9300094615C23117C8851A /* Pods-Critique.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Critique/Critique.entitlements;
@@ -530,7 +530,7 @@
 		};
 		1ACF977522C197DD001A1B7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */;
+			baseConfigurationReference = A80A44F97745E40EB307AAA3 /* Pods-Critique.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Critique/Critique.entitlements;

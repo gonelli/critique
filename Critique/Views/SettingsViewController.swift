@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import InstantSearchClient
-import NightNight
 
 import FirebaseStorage
 
@@ -32,10 +31,6 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
     var client : Client!
     let picker = UIImagePickerController()
     let critiqueRed = 0xe12b22
-    let nightBgColor = 0x222222
-    let nightTextColor = 0xdddddd
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,51 +59,11 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
             }
         }
         
-        // NightNight
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
-        tableView.mixedBackgroundColor = MixedColor(normal: 0xefeff4, night: 0x161616)
-        
-        NameChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
-        NameChangeCell.mixedBackgroundColor = mixedNightBgColor
         NameChangeCell.selectionStyle = .none
-        
-        
-        PhotoChangeCell.textLabel?.mixedTextColor = mixedNightTextColor
-        PhotoChangeCell.mixedBackgroundColor = mixedNightBgColor
         PhotoChangeCell.selectionStyle = .none
-        
-        BlockedCell.textLabel?.mixedTextColor = mixedNightTextColor
-        BlockedCell.mixedBackgroundColor = mixedNightBgColor
         BlockedCell.selectionStyle = .none
-        
-        publicLabel.mixedTextColor = mixedNightTextColor
-        PublicCell.mixedBackgroundColor = mixedNightBgColor
         PublicCell.selectionStyle = .none
-        
-        nightModeLabel.mixedTextColor = mixedNightTextColor
-        nightModeCell.mixedBackgroundColor = mixedNightBgColor
         nightModeCell.selectionStyle = .none
-        
-        signOutCell.textLabel?.mixedTextColor = MixedColor(normal: critiqueRed, night: nightTextColor)
-        signOutCell.mixedBackgroundColor = mixedNightBgColor
-        
-        
-        if NightNight.theme == .night {
-            self.nightModeSwitch.setOn(true, animated: false)
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-            
-        }
-        else {
-            self.nightModeSwitch.setOn(false, animated: false)
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     func initializeFirestore() {
@@ -263,13 +218,6 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
     }
     
     @IBAction func nightModeToggled(_ sender: Any) {
-        NightNight.toggleNightTheme()
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     // Store and flip switch

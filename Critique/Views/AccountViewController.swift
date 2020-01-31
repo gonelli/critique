@@ -11,7 +11,6 @@ import FirebaseCore
 import FirebaseFirestore
 import UIKit
 import Foundation
-import NightNight
 
 class AccountViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -31,9 +30,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     let followersSegue = "followersSegue"
     let followingSegue = "followingSegue"
     let accountDM_Segue = "accountDM_Segue"
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
-    let mixedNightFadedTextColor = MixedColor(normal: 0x777777, night: 0xaaaaaa)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +37,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         addRefreshView()
         initializeFirestore()
-        
-        self.navigationController!.navigationBar.mixedBarTintColor = MixedColor(normal: UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0), night: UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0))
-        self.navigationController!.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: .black)
-        if(NightNight.theme == .night) { // Idk but it works to fix statusbar color
-            NightNight.theme = .night
-        }
-        else {
-            NightNight.theme = .normal
-        }
-        view.mixedBackgroundColor = mixedNightBgColor
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        topBarOuterView.mixedBackgroundColor = mixedNightBgColor
     }
     
     // Fill in details of page based on whose Profile it is
@@ -94,18 +78,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                 }
             }
-        }
-        //Exception where NightNight doesn't work
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-            followersButtonOutlet.setTitleColor(UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0), for: .normal)
-            followingButtonOutlet.setTitleColor(UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0), for: .normal)
-            
-        }
-        else {
-            followingButtonOutlet.setTitleColor(UIColor.black, for: .normal)
-            followersButtonOutlet.setTitleColor(UIColor.black, for: .normal)
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -193,19 +165,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.posterImage.addGestureRecognizer(posterTap)
         cell.posterImage.isUserInteractionEnabled = true
         
-        // NIGHT NIGHT
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.criticLabel.mixedTextColor = mixedNightFadedTextColor
-        cell.likesLabel.mixedTextColor = mixedNightFadedTextColor
-        cell.movieLabel.mixedTextColor = mixedNightTextColor
-        cell.reviewLabel.mixedTextColor = mixedNightTextColor
-        cell.reviewLabel.mixedBackgroundColor = mixedNightBgColor
-        cell.scoreLabel.mixedTextColor = mixedNightTextColor
         cell.selectionStyle = .none
         
         if cell.review!.criticID == Auth.auth().currentUser!.uid {
-            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
+//            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:0.7)
+//            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker(by: 25)!, night: critiqueRed.lighter(by: 25)!)
         }
         
         return cell

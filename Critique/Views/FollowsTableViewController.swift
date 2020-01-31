@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
-import NightNight
 
 class FollowsTableViewController: UITableViewController {
     
@@ -17,31 +16,18 @@ class FollowsTableViewController: UITableViewController {
     var lookupType: String = "Following"
     var user: String!
     var critics: [(String, String)] = []
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = lookupType
         addRefreshView()
         initializeFirestore()
-        
-        // NightNight
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        view.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getCritics()
         
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -122,11 +108,7 @@ class FollowsTableViewController: UITableViewController {
         cell.setCell(name: critics[indexPath.row].0, followers: 0, following: 0, uid: critics[indexPath.row].1)
         cell.followLabel.text = ""
         
-        // NightNight
-        cell.selectionStyle = .none
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.nameLabel?.mixedTextColor = mixedNightTextColor
-        
+        cell.selectionStyle = .none        
         return cell
     }
     

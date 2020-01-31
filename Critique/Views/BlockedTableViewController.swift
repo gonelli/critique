@@ -9,14 +9,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
-import NightNight
 
 class BlockedTableViewController: UITableViewController {
     
     var blockList : [(String, String)] = []
     var db: Firestore!
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     // Fetch and populate table with list of blocked users
     override func viewDidLoad() {
@@ -24,9 +21,6 @@ class BlockedTableViewController: UITableViewController {
         initializeFirestore()
         self.navigationItem.title = "Blocked"
         
-        // NightNight
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        view.mixedBackgroundColor = mixedNightBgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,13 +60,6 @@ class BlockedTableViewController: UITableViewController {
             }
         }
         
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        }
     }
     
     func initializeFirestore() {
@@ -94,11 +81,7 @@ class BlockedTableViewController: UITableViewController {
         cell.setCell(name: blockList[indexPath.row].0, followers: 0, following: 0, uid: blockList[indexPath.row].1)
         cell.followLabel.text = ""
         
-        // NightNight
-        cell.selectionStyle = .none
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.nameLabel?.mixedTextColor = mixedNightTextColor
-        
+        cell.selectionStyle = .none        
         return cell
     }
     

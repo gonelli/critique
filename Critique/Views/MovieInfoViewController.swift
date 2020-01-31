@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import SafariServices
-import NightNight
 
 class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SFSafariViewControllerDelegate {
     
@@ -36,10 +35,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     let composeSegue = "composeSegue"
     
     let critiqueRed = 0xe12b22
-    let nightBgColor = 0x222222
-    let nightTextColor = 0xdddddd
-    let mixedNightBgColor = MixedColor(normal: 0xffffff, night: 0x222222)
-    let mixedNightTextColor = MixedColor(normal: 0x000000, night: 0xdddddd)
     
     // Load header - movie details, synopsis, average score, etc.
     override func viewDidLoad() {
@@ -61,15 +56,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         addRefreshView()
         initializeFirestore()
         getReviews()
-        
-        // NIGHT NIGHT
-        view.mixedBackgroundColor = mixedNightBgColor
-        tableView.mixedBackgroundColor = mixedNightBgColor
-        synopsisTextView.mixedBackgroundColor = mixedNightBgColor
-        
-        synopsisTextView.mixedTextColor = MixedColor(normal: 0x000000, night: nightTextColor)
-        scoreLabel.mixedTextColor = MixedColor(normal: 0x000000, night: nightTextColor)
-        segmentedControl.mixedTintColor = MixedColor(normal: critiqueRed, night: nightTextColor)
     }
     
     func initializeFirestore() {
@@ -86,14 +72,6 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else {
             getFollowingReviews()
-        }
-        
-        // NightNight exception
-        if (NightNight.theme == .night) {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)]
-        }
-        else {
-            self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         }
     }
     
@@ -267,19 +245,11 @@ class MovieInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.criticLabel.addGestureRecognizer(criticTap)
         cell.criticLabel.isUserInteractionEnabled = true
         
-        // NIGHT NIGHT
         cell.selectionStyle = .none
-        cell.mixedBackgroundColor = mixedNightBgColor
-        cell.likesContainer.mixedBackgroundColor = mixedNightBgColor
-        
-        cell.criticLabel.mixedTextColor = mixedNightTextColor
-        cell.reviewLabel.mixedTextColor = mixedNightTextColor
-        cell.scoreLabel.mixedTextColor = mixedNightTextColor
-        cell.votesLabel.mixedTextColor = mixedNightTextColor
         
         if (cell.review?.criticID == Auth.auth().currentUser?.uid) {
-            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
-            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
+//            let critiqueRed = UIColor(red:0.88, green:0.17, blue:0.13, alpha:1.0)
+//            cell.criticLabel.mixedTextColor = MixedColor(normal: critiqueRed.darker()!, night: critiqueRed.lighter()!)
         }
         
         return cell
