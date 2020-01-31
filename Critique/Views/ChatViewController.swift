@@ -33,6 +33,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         chat?.getTitle() { title in
             self.title = title
         }
+        
+        //iOS 13 Dark mode fix
+        setupCollectionView()
+        inputStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -349,6 +353,28 @@ extension ChatViewController: MessagesDisplayDelegate {
             
         }
     }
+    
+    private func setupCollectionView() {
+            guard let flowLayout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout else {
+                print("Can't get flowLayout")
+                return
+            }
+            if #available(iOS 13.0, *) {
+                flowLayout.collectionView?.backgroundColor = .systemBackground
+            }
+    }
+    
+    func inputStyle() {
+            if #available(iOS 13.0, *) {
+                messageInputBar.inputTextView.textColor = .label
+                messageInputBar.inputTextView.placeholderLabel.textColor = .secondaryLabel
+                messageInputBar.backgroundView.backgroundColor = .systemBackground
+            } else {
+                messageInputBar.inputTextView.textColor = .black
+                messageInputBar.inputTextView.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 1)
+            }
+    }
+    
     // Source: https://gist.github.com/bendodson/bbb47acb3c31cdb6e87cdec72c63c7eb
     func randomColor(seed: String) -> UIColor {
         

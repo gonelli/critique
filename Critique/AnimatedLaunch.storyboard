@@ -18,6 +18,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Critiquepdf" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JEY-tT-jDW">
                                 <rect key="frame" x="183" y="432" width="145" height="42"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Q41-gS-Ghe"/>
                                     <constraint firstAttribute="width" constant="145" id="t72-Bt-FIs"/>
@@ -25,6 +26,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NameHider" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tYK-DZ-P0h">
                                 <rect key="frame" x="-92" y="389" width="240" height="128"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="BS5-kd-vS7"/>
                                     <constraint firstAttribute="width" constant="239.99999999999994" id="pZM-jc-uze"/>
@@ -45,7 +47,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tYK-DZ-P0h" firstAttribute="centerY" secondItem="vo7-i9-N24" secondAttribute="centerY" id="RRC-Ta-TDA"/>
                             <constraint firstItem="ph5-Uy-GVA" firstAttribute="centerY" secondItem="vo7-i9-N24" secondAttribute="centerY" id="YHh-N3-wBF"/>

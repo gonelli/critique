@@ -32,7 +32,7 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
         else {
             reviews = []
         }
-        usleep(100000) // 0.1 sec, buffer time
+        usleep(500000) // 0.5 sec, buffer time
         self.spin1()
         self.moveName()
         self.movePopcorn()
