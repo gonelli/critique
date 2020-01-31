@@ -9,7 +9,6 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
-import NightNight
 
 import Firebase
 import FirebaseStorage

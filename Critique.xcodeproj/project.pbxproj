@@ -21,6 +21,8 @@
 		1AFF495322D11F5700E06200 /* CreateAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */; };
 		550A563422FB65AC0003AB07 /* SearchMovieImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550A563322FB65AC0003AB07 /* SearchMovieImageCell.swift */; };
 		552D345E22D7CE1100CE8056 /* BlockedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */; };
+		554D25B923E3AAE400D506C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554D25B823E3AAE400D506C5 /* Login.storyboard */; };
+		554D25BB23E3ABBA00D506C5 /* Bootup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554D25BA23E3ABBA00D506C5 /* Bootup.storyboard */; };
 		554DD2E822ED17B200B4FC6B /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */; };
 		555B0EC7230E4C850082F153 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555B0EC6230E4C850082F153 /* Config.plist */; };
 		55672C1B22CBDF56004A70A9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55672C1A22CBDF56004A70A9 /* SearchViewController.swift */; };
@@ -61,6 +63,8 @@
 		1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountTableViewController.swift; sourceTree = "<group>"; };
 		550A563322FB65AC0003AB07 /* SearchMovieImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieImageCell.swift; sourceTree = "<group>"; };
 		552D345D22D7CE1100CE8056 /* BlockedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedTableViewController.swift; sourceTree = "<group>"; };
+		554D25B823E3AAE400D506C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Login.storyboard; path = Critique/Login.storyboard; sourceTree = SOURCE_ROOT; };
+		554D25BA23E3ABBA00D506C5 /* Bootup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bootup.storyboard; sourceTree = "<group>"; };
 		554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		555B0EC6230E4C850082F153 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		55672C1A22CBDF56004A70A9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -123,9 +127,14 @@
 			isa = PBXGroup;
 			children = (
 				630526902301DB2400D45765 /* Critique.entitlements */,
+				55D9B5A723E3C3A2008478E1 /* Launch Flow */,
 				1AFF494922D11D6800E06200 /* Views */,
 				1AFF494A22D11D8C00E06200 /* Custom Classes */,
 				1AFF494B22D11DA200E06200 /* Required */,
+				1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */,
+				554D25BA23E3ABBA00D506C5 /* Bootup.storyboard */,
+				554D25B823E3AAE400D506C5 /* Login.storyboard */,
+				1ACF976822C197DC001A1B7A /* Main.storyboard */,
 			);
 			path = Critique;
 			sourceTree = "<group>";
@@ -133,9 +142,6 @@
 		1AFF494922D11D6800E06200 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */,
-				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
-				1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */,
 				1A4BB78322D15E090027E606 /* FeedTableViewController.swift */,
 				5E31BBFE22D76F6700F38822 /* ExpandedReviewTableViewController.swift */,
 				55672C1A22CBDF56004A70A9 /* SearchViewController.swift */,
@@ -173,14 +179,22 @@
 		1AFF494B22D11DA200E06200 /* Required */ = {
 			isa = PBXGroup;
 			children = (
-				55C984BD22FB7C830052EF9E /* Assets.xcassets */,
-				1ACF976822C197DC001A1B7A /* Main.storyboard */,
-				1ACF976422C197DC001A1B7A /* AppDelegate.swift */,
-				1ACF976D22C197DD001A1B7A /* LaunchScreen.storyboard */,
-				1ACF977022C197DD001A1B7A /* Info.plist */,
 				1AFF494C22D11DB100E06200 /* GoogleService-Info.plist */,
+				55C984BD22FB7C830052EF9E /* Assets.xcassets */,
+				1ACF976422C197DC001A1B7A /* AppDelegate.swift */,
+				1ACF977022C197DD001A1B7A /* Info.plist */,
 			);
 			path = Required;
+			sourceTree = "<group>";
+		};
+		55D9B5A723E3C3A2008478E1 /* Launch Flow */ = {
+			isa = PBXGroup;
+			children = (
+				554DD2E722ED17B200B4FC6B /* LaunchScreen.swift */,
+				55672C2222CBDFD7004A70A9 /* LoginViewController.swift */,
+				1AFF495222D11F5700E06200 /* CreateAccountTableViewController.swift */,
+			);
+			path = "Launch Flow";
 			sourceTree = "<group>";
 		};
 		9001164946C0062C676EC24C /* Pods */ = {
@@ -266,7 +280,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ACF976F22C197DD001A1B7A /* LaunchScreen.storyboard in Resources */,
+				554D25BB23E3ABBA00D506C5 /* Bootup.storyboard in Resources */,
 				1AFF494F22D11E5800E06200 /* GoogleService-Info.plist in Resources */,
+				554D25B923E3AAE400D506C5 /* Login.storyboard in Resources */,
 				1ACF976A22C197DC001A1B7A /* Main.storyboard in Resources */,
 				55C984BE22FB7C830052EF9E /* Assets.xcassets in Resources */,
 				555B0EC7230E4C850082F153 /* Config.plist in Resources */,
@@ -514,6 +530,7 @@
 		};
 		1ACF977522C197DD001A1B7A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C4CCECB444091594416DFB /* Pods-Critique.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Critique/Critique.entitlements;

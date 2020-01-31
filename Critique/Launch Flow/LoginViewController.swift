@@ -70,13 +70,16 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func signInPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: self.emailField.text!, password: self.passField.text!) { (result, error) in
             if error == nil {
-                self.dismiss(animated: true, completion: {
-                    // code for refreshing on sign in
-                    //                        let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
-                    //                        parent.getReviews()
-                    let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
-                    parent.goToFeed()
-                })
+                let storyboard = UIStoryboard(name:"Main", bundle: nil)
+                let vc = storyboard.instantiateInitialViewController()!
+                self.present(vc, animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: {
+//                     code for refreshing on sign in
+//                                            let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+//                                            parent.getReviews()
+//                    let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
+//                    parent.goToFeed()
+//                })
             }
                 // Error while signing in
             else {

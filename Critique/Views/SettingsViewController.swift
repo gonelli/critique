@@ -239,9 +239,13 @@ class SettingsViewController: UITableViewController, UIImagePickerControllerDele
             // Sign Out
         else if (indexPath.section == 1 && indexPath.row == 0) {
             try! Auth.auth().signOut()
-            (self.parent?.parent as! UITabBarController).selectedIndex = 0
-            //UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
-           ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
+            let storyboard = UIStoryboard(name:"Login", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()!
+            self.present(vc, animated: true, completion: nil)
+
+//            (self.parent?.parent as! UITabBarController).selectedIndex = 0
+//            //UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
+//           ((self.parent?.parent as! UITabBarController).selectedViewController as! UINavigationController).dismiss(animated: false, completion: nil)
             
             
 //

@@ -125,7 +125,11 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
                 self.CqInitials.transform = CGAffineTransform.identity
             }, completion: {finished in
                 if (!self.loggedIn) {
-                    self.performSegue(withIdentifier: "BootupLoginSegue", sender: self)
+
+                    let storyboard = UIStoryboard(name:"Login", bundle: nil)
+                    let vc = storyboard.instantiateInitialViewController()!
+                    self.present(vc, animated: true, completion: nil)
+//                    self.performSegue(withIdentifier: "BootupLoginSegue", sender: self)
                 }
                 else {
                     self.goToFeed()
@@ -134,19 +138,21 @@ class LaunchScreen: UIViewController, CAAnimationDelegate {
     }
     
     func goToFeed() {
-        self.performSegue(withIdentifier: "BootupFeedSegue", sender: self)
+        let storyboard = UIStoryboard(name:"Main", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()!
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.Popcorn.isHidden = true
         self.CqInitials.isHidden = true
         
-        if segue.identifier == "BootupFeedSegue" {
-            let tabVC = segue.destination as! UITabBarController
-            let navVC = tabVC.viewControllers![0] as! UINavigationController
-            let feedVC = navVC.topViewController as! FeedTableViewController
-            feedVC.reviews = self.reviews
-        }
+//        if segue.identifier == "BootupFeedSegue" {
+//            let tabVC = segue.destination as! UITabBarController
+//            let navVC = tabVC.viewControllers![0] as! UINavigationController
+//            let feedVC = navVC.topViewController as! FeedTableViewController
+//            feedVC.reviews = self.reviews
+//        }
     }
     
     func initializeFirestore() {

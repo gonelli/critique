@@ -120,12 +120,15 @@ class CreateAccountTableViewController: UITableViewController, UITextFieldDelega
                         client.index(withName: "users").addObject(["name": self.usernameTF.text!, "objectID": user!.user.uid])
                         Auth.auth().signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!)
                     }
-                    
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: {
-                        //                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
-                        let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
-                        parent.goToFeed()
-                    })
+                    let storyboard = UIStoryboard(name:"Main", bundle: nil)
+                    let vc = storyboard.instantiateInitialViewController()!
+                    self.present(vc, animated: true, completion: nil)
+
+//                    self.view.window!.rootViewController?.dismiss(animated: false, completion: {
+//                        //                    let parent = ((UIApplication.shared.keyWindow?.rootViewController as! UITabBarController).viewControllers?.first as! UINavigationController?)?.viewControllers.first as! FeedTableViewController
+//                        let parent = (UIApplication.shared.keyWindow?.rootViewController as! LaunchScreen)
+//                        parent.goToFeed()
+//                    })
                 }
                     // Error on singing up
                 else {

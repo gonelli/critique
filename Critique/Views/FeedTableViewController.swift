@@ -65,7 +65,9 @@ class FeedTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (Auth.auth().currentUser == nil) {
-            self.performSegue(withIdentifier: "feedToSignInSegue", sender: self)
+            let storyboard = UIStoryboard(name:"Login", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()!
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
